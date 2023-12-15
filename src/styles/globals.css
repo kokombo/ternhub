@@ -48,8 +48,6 @@ h4 {
   padding: 14px 16px;
   width: 100%;
   border-radius: 5px;
-  border-color: #c7c7c7;
-  border-width: 1px;
   outline: none;
 }
 
@@ -136,4 +134,12 @@ h4 {
 
 .nav_container {
   @apply flex items-center justify-between py-5 lg:py-[22px] lg:px-[6.94%] px-[5.09%] border-b-[0.8px] border-grey w-full;
+}
+
+.radio_button {
+  @apply w-6 h-6 border-[1px] rounded-[5px] checked:bg-black border-gray rounded appearance-none;
+}
+
+.form_submit_button {
+  @apply mt-[18px] bg-purple hover:bg-blue text-white text-sm lg:text-base font-semibold w-[95px] h-[48px] rounded-[10px] self-end;
 }

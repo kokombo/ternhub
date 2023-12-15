@@ -16,12 +16,11 @@ const UserSchema = new Schema(
 
     password: {
       type: String,
-      required: [true, "Please provide your password"],
+      required: [true, "Please provide your email address"],
     },
 
     profession: {
       type: String,
-      required: [true, "Please select your profession"],
     },
 
     image: {

@@ -28,7 +28,7 @@ const JobSchema = new Schema(
       required: true,
     },
 
-    content: {
+    description: {
       type: String,
       required: true,
     },
@@ -40,16 +40,12 @@ const JobSchema = new Schema(
 
     mode: {
       type: String,
-      enum: ["Remote", "Hybrid", "Onsite"],
+      enum: ["remote", "hybrid", "onsite"],
     },
 
     logo: {
       type: String,
       required: true,
-    },
-
-    keywords: {
-      type: Array,
     },
 
     numberOfViews: {

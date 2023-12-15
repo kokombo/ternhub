@@ -5,5 +5,15 @@ import TrendingJobs from "./trending-jobs/trending-jobs";
 import NavigationBar from "./navigation-bar/navigation-bar";
 import Hero from "./hero/hero";
 import SocialAuths from "./social-auths/social-auths";
+import Sidebar from "./sidebar/sidebar";
 
-export { Blogs, Faqs, Footer, TrendingJobs, NavigationBar, Hero, SocialAuths };
+export {
+  Blogs,
+  Faqs,
+  Footer,
+  TrendingJobs,
+  NavigationBar,
+  Hero,
+  SocialAuths,
+  Sidebar,
+};

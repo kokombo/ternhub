@@ -1,12 +1,15 @@
 "use client";
-
 import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
 
-const NavigationBar = () => {
+type Props = {
+  openSidebar: () => void;
+};
+
+const NavigationBar = (props: Props) => {
   const { data: session } = useSession();
 
   return (
@@ -38,7 +41,11 @@ const NavigationBar = () => {
           <ProfilePicture />
         )}
 
-        <button type="button" onClick={() => {}} className="hidden text-black">
+        <button
+          type="button"
+          onClick={props.openSidebar}
+          className="hidden text-black"
+        >
           <Image src={icons.toggle} alt="toggle icon" height={24} width={24} />
         </button>
       </>

@@ -1,35 +1,40 @@
 "use client";
-import type { Metadata } from "next";
+
 import "../../styles/globals.css";
-
-import { Footer, NavigationBar } from "@/containers";
-import { Provider } from "@/components";
-import { QueryClient, QueryClientProvider } from "react-query";
-
-// export const metadata: Metadata = {
-//   title: "TheTernHub",
-//   description: "Discover amazing tech internship opportunities",
-// };
-
-const queryClient = new QueryClient();
+import { Footer, NavigationBar, Sidebar } from "@/containers";
+import { NextAuthProvider, ReactQueryProvider } from "@/components";
+import { useState } from "react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
+  const openSidebar = () => setSidebarIsOpen(true);
+
+  const closeSidebar = () => setSidebarIsOpen(false);
+
   return (
     <html lang="en">
       <body>
-        <Provider>
-          <QueryClientProvider client={queryClient}>
+        <NextAuthProvider>
+          <ReactQueryProvider>
             <main>
-              <NavigationBar />
+              <NavigationBar openSidebar={openSidebar} />
+              {/* 
+              <Sidebar
+                sidebarIsOpen={sidebarIsOpen}
+                closeSidebar={closeSidebar}
+              /> */}
+
               {children}
+
               <Footer />
             </main>
-          </QueryClientProvider>
-        </Provider>
+          </ReactQueryProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

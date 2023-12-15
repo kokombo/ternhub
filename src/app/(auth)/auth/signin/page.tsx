@@ -1,7 +1,8 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { SubmitButton, AuthCTA, Logo } from "@/components";
+import { Formik, Form, FormikHelpers, Field } from "formik";
+import { SubmitButton, AuthCTA, Logo, InputField } from "@/components";
 import Link from "next/link";
 import * as Yup from "yup";
 import {
@@ -32,6 +33,7 @@ const SignInPage = () => {
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
   > | null>(null);
+
   const [error, setError] = useState<string | null | undefined>(null);
 
   useEffect(() => {
@@ -86,34 +88,14 @@ const SignInPage = () => {
             validationSchema={validationSchema}
           >
             <Form className="flex flex-col gap-8 w-full">
-              <div className="flex flex-col items-start gap-3 ">
-                <label htmlFor="email">Email</label>
+              <InputField label="Email" name="email" id="email" type="text" />
 
-                <Field type="text" name="email" id="email" className="input" />
-
-                <ErrorMessage
-                  name="email"
-                  component="p"
-                  className="text-red text-base"
-                />
-              </div>
-
-              <div className="flex flex-col items-start gap-3 ">
-                <label htmlFor="password">Password</label>
-
-                <Field
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="input"
-                />
-
-                <ErrorMessage
-                  name="password"
-                  component="p"
-                  className="text-red text-base"
-                />
-              </div>
+              <InputField
+                label="Password"
+                name="password"
+                id="password"
+                type="password"
+              />
 
               <Link
                 href={"/forgot-password"}

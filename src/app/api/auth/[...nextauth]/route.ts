@@ -1,11 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 import { connectDatabase } from "@/database/database";
 import User from "@/models/user";
 
-export const handler = NextAuth({
+export const authOptions: AuthOptions = {
   secret: process.env.AUTH_SECRET,
   providers: [
     GoogleProvider({
@@ -40,6 +40,7 @@ export const handler = NextAuth({
   callbacks: {
     async jwt({ user, account, token }) {
       token.id = user.id;
+
       token.accessToken = account?.access_token;
 
       return token;
@@ -99,6 +100,8 @@ export const handler = NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
-});
+};
+
+export const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

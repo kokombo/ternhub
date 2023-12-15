@@ -1,7 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { SubmitButton, AuthCTA, Logo, SubmitFormLoader } from "@/components";
+import { Formik, Form, FormikHelpers } from "formik";
+import {
+  SubmitButton,
+  AuthCTA,
+  Logo,
+  SubmitFormLoader,
+  InputField,
+  SelectField,
+} from "@/components";
 import * as Yup from "yup";
 import {
   getProviders,
@@ -13,8 +20,9 @@ import { SocialAuths } from "@/containers";
 import Image from "next/image";
 import { images } from "@/constants";
 import axios from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
+import { professions } from "@/constants/data";
 
 const userData: UserSignupDataType = {
   email: "",
@@ -36,8 +44,6 @@ const SignUpPage = () => {
     ClientSafeProvider
   > | null>(null);
 
-  const queryClient = useQueryClient();
-
   useEffect(() => {
     const initializeProviders = async () => {
       const response = await getProviders();
@@ -48,8 +54,8 @@ const SignUpPage = () => {
   }, []);
 
   const signupFormRequest = async (formData: UserSignupDataType) => {
-    const res = await axios.post("/api/user", formData);
-    return res;
+    const res = await axios.post("api/user", formData);
+    return res.data;
   };
 
   const { mutateAsync, isLoading, isError, error, isSuccess } =
@@ -61,14 +67,9 @@ const SignUpPage = () => {
   ) => {
     await mutateAsync(values)
       .then(async (res) => {
-        console.log(res.data);
-
         if (isSuccess) {
-          const { email, password } = values;
-
           await signIn("credentials", {
-            email,
-            password,
+            ...values,
             callbackUrl: "/",
             redirect: true,
           });
@@ -103,51 +104,21 @@ const SignUpPage = () => {
             validationSchema={validationSchema}
           >
             <Form className="flex flex-col gap-8 w-full">
-              <div className="flex flex-col items-start gap-3 ">
-                <label htmlFor="email">Email</label>
+              <InputField label="Email" name="email" id="email" type="text" />
 
-                <Field type="text" name="email" id="email" className="input" />
+              <InputField
+                label="Password"
+                name="password"
+                id="password"
+                type="password"
+              />
 
-                <ErrorMessage
-                  name="email"
-                  component="p"
-                  className="text-red text-base"
-                />
-              </div>
-
-              <div className="flex flex-col items-start gap-3 ">
-                <label htmlFor="password">Password</label>
-
-                <Field
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="input"
-                />
-
-                <ErrorMessage
-                  name="password"
-                  component="p"
-                  className="text-red text-base"
-                />
-              </div>
-
-              <div className="flex flex-col items-start gap-3 ">
-                <label htmlFor="profession">Profession</label>
-
-                <Field
-                  type="select"
-                  name="profession"
-                  id="profession"
-                  className="input"
-                />
-
-                <ErrorMessage
-                  name="profession"
-                  component="p"
-                  className="text-red text-base"
-                />
-              </div>
+              <SelectField
+                label="Profession"
+                name="profession"
+                id="profession"
+                data={professions}
+              />
 
               <div className="w-full flex flex-col items-center gap-5">
                 {/* {isError && <p>{error}</p>} */}

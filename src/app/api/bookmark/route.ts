@@ -1,9 +1,10 @@
 import User from "@/models/user";
-import { NextRequest, NextResponse } from "next/server";
-import { useSession } from "next-auth/react";
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
-export const PUT = async (req: NextRequest) => {
-  const { data: session } = useSession();
+export const PUT = async (req: Request, res: Response) => {
+  const session = await getServerSession(authOptions);
 
   const userId = session?.user.id;
 
@@ -43,8 +44,8 @@ export const PUT = async (req: NextRequest) => {
   }
 };
 
-export const Get = async (req: NextRequest) => {
-  const { data: session } = useSession();
+export const Get = async (req: Request) => {
+  const session = await getServerSession(authOptions);
 
   const userId = session?.user.id;
 

@@ -18,18 +18,35 @@ type Error = {
   message: string;
 };
 
-type Job = {
-  id: string;
+type JobForm = {
   title: string;
-  slug: string;
-  location: string;
   company: string;
+  location: string;
+  description: string;
   category: string;
-  content: string;
   site: string;
   mode: string;
   logo: string;
-  keywords: array;
+};
+
+interface Job extends JobForm {
+  id: string;
+  slug: string;
   numberOfViews: number;
   timeStamp: Date;
+}
+
+type BlogForm = {
+  title: string;
+  image: string;
+  content: string;
+  metaDescription: string;
+  author: string;
+  twitter?: string;
+  portfolio?: string;
+  linkedin?: string;
+};
+
+type Profession = {
+  label: string;
 };

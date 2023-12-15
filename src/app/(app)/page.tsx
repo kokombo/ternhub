@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <>
       {session?.user ? (
-        <div></div>
+        <div>
+          <p> {session.user.name} logged in</p>
+        </div>
       ) : (
         <div>
           <Hero />

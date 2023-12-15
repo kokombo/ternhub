@@ -1,9 +1,7 @@
-"use client";
-
 import "../../styles/globals.css";
 import { NextAuthProvider, ReactQueryProvider } from "@/components";
 
-export default function AuthLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
