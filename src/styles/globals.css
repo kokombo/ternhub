@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "FoundersGrotesk";
+  /* src: url("../../public//assets/font/FoundersGrotesk-Regular.otf")
+    format("opentype"); */
+}
+
+#root,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  max-width: 1440px;
+  min-width: 375px;
+  overflow-x: scroll;
+  font-family: "Source Sans 3", sans-serif;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: #141024;
+  font-family: "FoundersGrotesk", sans-serif;
+}
+
+h2 {
+  color: #1c2b33;
+  font-family: "FoundersGrotesk", sans-serif;
+}
+
+h3,
+p {
+  color: #3d3d3d;
+}
+
+h4 {
+  color: #141024;
+}
+
+.input {
+  color: black;
+  padding: 14px 16px;
+  width: 100%;
+  border-radius: 5px;
+  border-color: #c7c7c7;
+  border-width: 1px;
+  outline: none;
+}
+
+/* Tailwind styles */
+.container {
+  @apply sm:px-[6.94%] px-5 min-w-full max-w-full flex flex-col items-center py-11 lg:py-[100px] gap-9 lg:gap-[50px];
+}
+
+.footer {
+  @apply bg-black text-white sm:px-[6.94%] px-5 pt-11 lg:pt-[100px] pb-[22px] lg:pb-[50px] flex flex-col justify-between items-center lg:items-start text-center lg:text-start gap-[30px] lg:gap-[50px];
+}
+
+.hero {
+  @apply py-11 lg:py-[100px] sm:px-[6.94%] px-5 flex flex-col items-center text-center gap-[34px] lg:gap-[46px];
+}
+
+.flex_center {
+  @apply flex flex-col items-center;
+}
+
+.flex_start {
+  @apply flex flex-col items-start;
+}
+
+.button {
+  @apply bg-purple rounded-[10px] text-white text-sm lg:text-base font-semibold hover:bg-blue;
+}
+
+.blue_button {
+  @apply px-6 lg:px-8 py-3 lg:py-4 bg-purple rounded-[10px] text-white text-sm lg:text-base font-semibold hover:bg-blue;
+}
+
+/* .blue_button {
+  @apply .button px-6 lg:px-8 py-3 lg:py-4;
+} */
+
+.apply_button {
+  @apply flex justify-center items-center h-10 lg:h-12  px-6 py-[8px] lg:px-[32px] lg:py-3 lg:text-base text-sm bg-purple rounded-[10px] text-white font-semibold hover:bg-blue;
+}
+
+.save_button {
+  @apply w-[82px] lg:w-[105px] h-10 lg:h-12 lg:text-base text-sm border-purple text-purple hover:border-blue hover:text-blue bg-white border-[2px] rounded-[10px];
+}
+
+.signup_button {
+  @apply px-6 py-2 lg:px-8 lg:py-3 text-sm lg:text-base font-semibold bg-purple hover:bg-blue text-white rounded-[10px];
+}
+
+.landing_page_blog_container {
+  @apply w-full grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6 lg:gap-x-[20px] place-items-center;
+}
+
+.sidebar_wrapper {
+  @apply p-5 fixed top-0 left-0 transition-all z-[100] duration-300 w-full h-full bg-white flex flex-col justify-between;
+}
+
+.landing_page_internships_container {
+  @apply w-full grid place-items-center md:grid-cols-2 sm:grid-cols-1 gap-y-6 gap-x-3 lg:gap-y-[40px] lg:gap-x-[20px];
+}
+
+.active_tab {
+  @apply border-[1px] border-purple border-solid absolute w-full mt-2 md:mt-[10px];
+}
+
+.select {
+  @apply outline-none appearance-none text-purple cursor-pointer text-[14px] md:text-[15px] font-[400] leading-[20px] bg-white;
+}
+
+.select_wrapper {
+  @apply flex items-center gap-[6px] py-[5px] px-2 md:px-3 relative border-[1px] rounded-[5px] border-gray;
+}
+
+.filter_text {
+  @apply text-[14px] md:text-[15px] font-[400] leading-[20px];
+}
+
+.select_container {
+  @apply flex items-center gap-[10px];
+}
+
+.job_tab_link {
+  @apply text-[14px] md:text-[15px] font-[400] leading-[20px];
+}
+
+.nav_container {
+  @apply flex items-center justify-between py-5 lg:py-[22px] lg:px-[6.94%] px-[5.09%] border-b-[0.8px] border-grey w-full;
+}
