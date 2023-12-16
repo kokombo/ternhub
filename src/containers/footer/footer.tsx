@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { NavLinks, Copyright } from "@/components";
+import { useSession } from "next-auth/react";
 
 const Footer = () => {
+  const { status } = useSession();
+
+  if (status === "loading") {
+    return <div></div>;
+  }
+
   return (
     <footer className="footer">
       <div className="flex_center lg:flex-row gap-5 lg:items-start justify-between w-full">

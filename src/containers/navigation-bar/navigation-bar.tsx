@@ -10,7 +10,11 @@ type Props = {
 };
 
 const NavigationBar = (props: Props) => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <div></div>;
+  }
 
   return (
     <nav className="nav_container">

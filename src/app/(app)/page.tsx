@@ -4,9 +4,11 @@ import { Faqs, TrendingJobs, Blogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  console.log(session?.user);
+  if (status === "loading") {
+    return <div></div>;
+  }
 
   return (
     <div>
