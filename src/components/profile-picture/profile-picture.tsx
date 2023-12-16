@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { icons } from "@/constants";
 
 const ProfilePicture = () => {
   const { data: session } = useSession();
@@ -12,6 +13,7 @@ const ProfilePicture = () => {
           src={session.user.image}
           height={48}
           width={48}
+          className="rounded-full object-contain"
         />
       ) : (
         <p className="text-2xl text-white uppercase">

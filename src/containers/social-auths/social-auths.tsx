@@ -20,7 +20,9 @@ const SocialAuths = (props: Props) => {
           .map((provider) => {
             return (
               <SocialAuthFrame
-                onClick={() => signIn(provider.id)}
+                onClick={() =>
+                  signIn(provider.id, { callbackUrl: "/", redirect: true })
+                }
                 key={provider.name}
                 authName={provider.name}
                 label={props.label}

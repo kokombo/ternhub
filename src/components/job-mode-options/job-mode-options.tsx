@@ -5,7 +5,7 @@ type Props = {
 
 const JobModeOptions = (props: Props) => {
   return (
-    <div>
+    <div className="flex flex-col items-start gap-6">
       <legend className="lg:text-lg text-sm tracking-[1%] text-textblack">
         Job Mode *
       </legend>

@@ -6,8 +6,10 @@ import { useSession } from "next-auth/react";
 export default function Home() {
   const { data: session } = useSession();
 
+  console.log(session?.user);
+
   return (
-    <>
+    <div>
       {session?.user ? (
         <div>
           <p> {session.user.name} logged in</p>
@@ -20,6 +22,6 @@ export default function Home() {
           <Faqs />
         </div>
       )}
-    </>
+    </div>
   );
 }

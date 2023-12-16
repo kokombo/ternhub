@@ -46,6 +46,9 @@ const JobForm = (props: Props) => {
 
                 <TextEditor label="Job Description *" name="description" />
 
+                {/* the below div is needed because the React Quill text editor caused an overlap */}
+                <div className="sm:mt-8 mt-14"></div>
+
                 <InputField
                   label="Company Website *"
                   name="site"

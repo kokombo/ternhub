@@ -38,10 +38,12 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async jwt({ user, account, token }) {
-      token.id = user.id;
+    async jwt({ user, account, token, profile }) {
+      if (account) {
+        token.id = profile?.id;
 
-      token.accessToken = account?.access_token;
+        token.accessToken = account?.access_token;
+      }
 
       return token;
     },
@@ -93,7 +95,9 @@ export const authOptions: AuthOptions = {
     },
 
     async redirect({ url, baseUrl }) {
-      return url;
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
   },
 

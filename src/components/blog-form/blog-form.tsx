@@ -38,6 +38,9 @@ const BlogForm = (props: Props) => {
 
                 <TextEditor label="Blog Copy *" name="description" />
 
+                {/* the below div is needed because the React Quill text editor caused an overlap */}
+                <div className="sm:mt-8 mt-14"></div>
+
                 <InputField
                   label="Meta Description*"
                   name="metaDescription"

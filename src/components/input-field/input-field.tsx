@@ -1,4 +1,3 @@
-"use client";
 import { Field, ErrorMessage } from "formik";
 import { useOutline } from "@/utilities/hooks";
 
