@@ -26,6 +26,8 @@ import BlogForm from "./blog-form/blog-form";
 import NextAuthProvider from "./next-auth-provider/next-auth-provider";
 import ReactQueryProvider from "./react-query-provider/react-query-provider";
 import SelectField from "./select-field/select-field";
+import JobsFilter from "./jobs-filter/jobs-filter";
+import JobsPageNavigationLink from "./jobs-page-navigation-link/jobs-page-navigation-link";
 
 export {
   BlogCard,
@@ -56,4 +58,6 @@ export {
   BlogForm,
   ReactQueryProvider,
   SelectField,
+  JobsFilter,
+  JobsPageNavigationLink,
 };

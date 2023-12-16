@@ -6,8 +6,8 @@
 
 @font-face {
   font-family: "FoundersGrotesk";
-  /* src: url("../../public//assets/font/FoundersGrotesk-Regular.otf")
-    format("opentype"); */
+  src: url("../../public//assets/font/FoundersGrotesk-Regular.otf")
+    format("opentype");
 }
 
 #root,
@@ -137,7 +137,7 @@ h4 {
 }
 
 .radio_button {
-  @apply w-6 h-6 border-[1px] rounded-[5px] checked:bg-black border-gray rounded appearance-none;
+  @apply w-6 h-6 border-[1px] rounded-[5px] checked:bg-black border-gray appearance-none;
 }
 
 .form_submit_button {

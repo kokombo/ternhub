@@ -27,7 +27,7 @@ const Footer = () => {
           <NavLinks />
 
           <Link
-            href="/"
+            href="/admin"
             className="hover:text-purple lg:text-base text-sm text-white"
           >
             Admin

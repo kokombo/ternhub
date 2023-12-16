@@ -1,5 +1,4 @@
 "use client";
-
 import "../../styles/globals.css";
 import { NextAuthProvider, ReactQueryProvider } from "@/components";
 

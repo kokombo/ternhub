@@ -5,11 +5,11 @@ const NavLinks = () => {
     <ul className="flex flex-col md:flex-row items-center gap-[38px]">
       <li>
         <Link
-          href={"/internships"}
+          href={"/jobs"}
           aria-label="internships page link"
           className="text-sm lg:text-base tracking-[0.5%] hover:text-purple "
         >
-          Internships
+          Jobs
         </Link>
       </li>
 

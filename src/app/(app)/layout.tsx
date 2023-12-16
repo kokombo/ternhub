@@ -16,7 +16,7 @@ export default function RootLayout({
   const closeSidebar = () => setSidebarIsOpen(false);
 
   return (
-    <html lang="en">
+    <html>
       <body>
         <NextAuthProvider>
           <ReactQueryProvider>

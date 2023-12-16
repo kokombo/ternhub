@@ -43,6 +43,8 @@ export const authOptions: AuthOptions = {
         token.id = profile?.id;
 
         token.accessToken = account?.access_token;
+
+        token.role = profile?.role;
       }
 
       return token;
@@ -52,6 +54,8 @@ export const authOptions: AuthOptions = {
       session.user.id = token.id;
 
       session.user.accessToken = token.accessToken;
+
+      session.user.role = token.role;
 
       return session;
     },

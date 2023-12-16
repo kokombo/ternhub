@@ -6,6 +6,7 @@ import NavigationBar from "./navigation-bar/navigation-bar";
 import Hero from "./hero/hero";
 import SocialAuths from "./social-auths/social-auths";
 import Sidebar from "./sidebar/sidebar";
+import JobsPageHeader from "./jobs-page-header/jobs-page-header";
 
 export {
   Blogs,
@@ -16,4 +17,5 @@ export {
   Hero,
   SocialAuths,
   Sidebar,
+  JobsPageHeader,
 };

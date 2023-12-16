@@ -20,11 +20,11 @@ const NavigationBar = (props: Props) => {
     <nav className="nav_container">
       <Logo />
 
-      <span className="text-greyblack hidden lg:block ">
+      <span className="text-greyblack hidden lg:inline ">
         <NavLinks />
       </span>
 
-      <>
+      <div className="flex items-center gap-[14px]">
         {!session?.user ? (
           <div className="flex items-center gap-[10px] ">
             <Link
@@ -48,11 +48,11 @@ const NavigationBar = (props: Props) => {
         <button
           type="button"
           onClick={props.openSidebar}
-          className="hidden text-black"
+          className="inline md:hidden text-black"
         >
           <Image src={icons.toggle} alt="toggle icon" height={24} width={24} />
         </button>
-      </>
+      </div>
     </nav>
   );
 };
