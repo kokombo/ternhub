@@ -28,7 +28,6 @@ const AddABlog = () => {
     redirect: "/admin/add-blog/preview",
   });
 
-  // key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/add-blog/preview
   const router = useRouter();
 
   const previewBlogRequest = async (blogData: BlogData) => {
