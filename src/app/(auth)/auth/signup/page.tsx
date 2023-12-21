@@ -8,6 +8,7 @@ import {
   SubmitFormLoader,
   InputField,
   SelectField,
+  CustomError,
 } from "@/components";
 import * as Yup from "yup";
 import {
@@ -18,11 +19,12 @@ import {
 import { BuiltInProviderType } from "next-auth/providers/index";
 import { SocialAuths } from "@/containers";
 import Image from "next/image";
-import { images } from "@/constants";
+import { images, icons } from "@/constants";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
+import useShowPassword from "@/utilities/hooks/useShowPassword";
 
 const userData: UserSignupDataType = {
   email: "",
@@ -39,6 +41,8 @@ const validationSchema = Yup.object({
 });
 
 const SignUpPage = () => {
+  const { showPassword, onClickIcon } = useShowPassword();
+
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
@@ -54,32 +58,35 @@ const SignUpPage = () => {
   }, []);
 
   const signupFormRequest = async (formData: UserSignupDataType) => {
-    const res = await axios.post("api/user", formData);
-    return res.data;
+    return await axios.post("api/user", formData);
   };
+
+  let errorResponse: any;
 
   const { mutateAsync, isLoading, isError, error, isSuccess } =
     useMutation(signupFormRequest);
+
+  errorResponse = error;
 
   const createUserAccount = async (
     values: UserSignupDataType,
     onSubmitProps: FormikHelpers<UserSignupDataType>
   ) => {
-    await mutateAsync(values)
-      .then(async (res) => {
-        if (isSuccess) {
-          await signIn("credentials", {
-            ...values,
-            callbackUrl: "/",
-            redirect: true,
-          });
+    await mutateAsync(values);
 
-          onSubmitProps.resetForm();
-        }
-      })
-      .catch((error) => {
-        return error;
+    const email = values.email;
+    const password = values.password;
+
+    if (isSuccess) {
+      await signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+        redirect: true,
       });
+
+      onSubmitProps.resetForm();
+    }
   };
 
   return (
@@ -110,7 +117,11 @@ const SignUpPage = () => {
                 label="Password"
                 name="password"
                 id="password"
-                type="password"
+                type={`${showPassword ? "text" : "password"}`}
+                rightIcon={`${
+                  showPassword ? icons.hidepassword : icons.showpassword
+                }`}
+                onClickRightIcon={onClickIcon}
               />
 
               <SelectField
@@ -121,7 +132,11 @@ const SignUpPage = () => {
               />
 
               <div className="w-full flex flex-col items-center gap-5">
-                {/* {isError && <p>{error}</p>} */}
+                {isError && (
+                  <CustomError
+                    message={errorResponse?.response?.data?.message}
+                  />
+                )}
 
                 <>
                   {isLoading ? (

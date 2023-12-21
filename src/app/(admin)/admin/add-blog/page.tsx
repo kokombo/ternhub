@@ -1,39 +1,61 @@
 "use client";
 import { BlogForm } from "@/components";
-import { FormikErrors } from "formik";
+import { useState } from "react";
+import axios from "axios";
+import { useMutation } from "react-query";
+import { useRouter } from "next/navigation";
 
-const initialFormValues: BlogForm = {
+const initialFormValues: BlogFormType = {
   title: "",
   image: "",
-  content: "",
   metaDescription: "",
-  author: "",
+  author: "Admin",
   twitter: "",
   portfolio: "",
   linkedin: "",
+  category: "",
 };
 
-const validate = (values: BlogForm) => {
-  const errors: FormikErrors<BlogForm> = {};
-
-  if (values.title.length > 40) {
-    errors.title = "maximum length of 40";
-  }
-
-  if (values.metaDescription.length > 30) {
-    errors.metaDescription = "maximum length of 30";
-  }
-};
+interface BlogData extends BlogFormType {
+  content: string;
+}
 
 const AddABlog = () => {
-  const previewBlog = () => {};
+  const [content, setContent] = useState("");
+
+  const router = useRouter();
+
+  const previewBlogRequest = async (blogData: BlogData) => {
+    return await axios.post(
+      `/api/preview?key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/add-blog/preview`,
+      blogData
+    );
+  };
+
+  const { mutateAsync, isLoading, isError, error, isSuccess } =
+    useMutation(previewBlogRequest);
+
+  const previewBlog = async (values: BlogFormType) => {
+    const blogData = { ...values, content };
+
+    await mutateAsync(blogData);
+
+    if (isSuccess) {
+      router.push("/admin/add-blog/preview");
+    }
+  };
 
   return (
     <BlogForm
       initialFormValues={initialFormValues}
       title="Post a Blog"
-      validate={validate}
       submitForm={previewBlog}
+      textEditorValue={content}
+      textEditorOnchange={setContent}
+      isLoading={isLoading}
+      isError={isError}
+      error={error}
+      buttonLabel="Preview Blog"
     />
   );
 };

@@ -22,26 +22,33 @@ const SelectField = (props: Props) => {
         {props.label}
       </label>
 
-      <div
-        onMouseEnter={showOutline}
-        onMouseLeave={closeOutline}
-        className={`${
-          outline ? "border-purple" : "border-gray"
-        } w-full rounded-[5px] border-[1px]`}
-      >
-        <Field name={props.name} id={props.id} className="input" as="select">
-          <option></option>
-          {props.data?.map((item: any, index) => (
-            <option key={index} value={item.label} label={item.label} />
-          ))}
-        </Field>
-      </div>
+      <div className="relative w-full">
+        <div
+          onMouseEnter={showOutline}
+          onMouseLeave={closeOutline}
+          className={`${
+            outline ? "border-purple" : "border-gray"
+          } w-full rounded-[5px] border-[1px]`}
+        >
+          <Field
+            name={props.name}
+            id={props.id}
+            component="select"
+            className="input"
+          >
+            <option></option>
+            {props.data?.map((item: any, index) => (
+              <option key={index} value={item.label} label={item.label} />
+            ))}
+          </Field>
+        </div>
 
-      <ErrorMessage
-        name={props.name}
-        component="p"
-        className="text-red text-base"
-      />
+        <ErrorMessage
+          name={props.name}
+          component="p"
+          className="text-red text-sm absolute mt-1"
+        />
+      </div>
     </div>
   );
 };

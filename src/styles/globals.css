@@ -4,11 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
+/* @font-face {
   font-family: "FoundersGrotesk";
   src: url("../../public//assets/font/FoundersGrotesk-Regular.otf")
     format("opentype");
-}
+} */
 
 #root,
 body {
@@ -17,7 +17,6 @@ body {
   height: 100%;
   width: 100%;
   min-height: 100vh;
-  max-width: 1440px;
   min-width: 375px;
   overflow-x: scroll;
   font-family: "Source Sans 3", sans-serif;
@@ -141,5 +140,45 @@ h4 {
 }
 
 .form_submit_button {
-  @apply mt-[18px] bg-purple hover:bg-blue text-white text-sm lg:text-base font-semibold w-[95px] h-[48px] rounded-[10px] self-end;
+  @apply bg-purple hover:bg-blue text-white text-sm lg:text-base font-semibold rounded-[10px] px-4 py-2 lg:px-6 lg:py-3;
+}
+
+.jobs_page_header_wrapper {
+  @apply flex flex-col items-center gap-[34px] md:gap-[50px];
+}
+
+.admin_segment_navbar {
+  @apply flex items-center justify-between lg:gap-[38px] gap-[18px] py-5 lg:py-[22px] lg:px-[6.94%] px-[5.09%] border-b-[0.8px] border-grey w-full lg:text-base text-sm;
+}
+
+.admin_navlinks_container {
+  @apply md:flex items-center justify-center lg:gap-[38px] gap-[18px] hidden;
+}
+
+.nav_toggle {
+  @apply inline lg:hidden text-black;
+}
+
+.show_sidebar {
+  @apply translate-x-[0];
+}
+
+.hide_sidebar {
+  @apply translate-x-[-100%];
+}
+
+.job_list_grid {
+  @apply grid place-items-center md:grid-cols-2 sm:grid-cols-1 gap-y-3 gap-x-3 lg:gap-y-8 lg:gap-x-8;
+}
+
+.blog_list_grid {
+  @apply grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-6 lg:gap-x-[20px] place-items-center;
+}
+
+.blog_list_header_wrapper {
+  @apply flex flex-col items-center gap-[34px] lg:gap-[46px] text-center lg:pb-[100px] pb-[50px];
+}
+
+.recent_blog_wrapper {
+  @apply lg:mb-[100px] mb-[50px];
 }

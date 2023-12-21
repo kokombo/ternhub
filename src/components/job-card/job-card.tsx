@@ -1,10 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { icons } from "@/constants";
-import JobCompanyLogo from "../job-company-logo/job-company-logo";
-import JobPostDuration from "../job-post-duration/job-post-duration";
+import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";
+import { useSession } from "next-auth/react";
 
-const JobCard = ({ props }: { props: Job }) => {
+const JobCard = ({ props, rootUrl }: { props: JobType; rootUrl: string }) => {
+  const { data: session } = useSession();
+
   return (
     <article className="w-full border-grey gap-[18px] border-[0.8px] h-[212px] p-5 rounded-[10px] flex flex-col justify-between">
       <div className="flex gap-3 ">
@@ -32,14 +35,16 @@ const JobCard = ({ props }: { props: Job }) => {
 
         <div className="flex gap-[14px] ">
           <Link
-            href={`/internship/${props.id}`}
+            href={` ${
+              session?.user ? `${rootUrl}/${props.id}` : "/auth/signin"
+            }`}
             aria-label="link to a job details"
             className="apply_button"
           >
             Apply
           </Link>
 
-          {/* <SaveAJob job={job} /> */}
+          <SaveAJob props={props} />
         </div>
       </div>
     </article>

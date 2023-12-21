@@ -12,10 +12,6 @@ type Props = {
 const NavigationBar = (props: Props) => {
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
-    return <div></div>;
-  }
-
   return (
     <nav className="nav_container">
       <Logo />
@@ -25,30 +21,35 @@ const NavigationBar = (props: Props) => {
       </span>
 
       <div className="flex items-center gap-[14px]">
-        {!session?.user ? (
-          <div className="flex items-center gap-[10px] ">
-            <Link
-              href="/auth/signin"
-              arial-label="Link to the signin page"
-              className="text-base font-semibold text-purple hidden lg:inline"
-            >
-              Log in
-            </Link>
-
-            <StyledLink
-              label="sign up"
-              url="/auth/signup"
-              arialabel="Link to the signup page"
-            />
-          </div>
+        {status === "loading" ? (
+          <div className="h-12 w-12 rounded-full bg-purple"></div>
         ) : (
-          <ProfilePicture />
-        )}
+          <>
+            {session?.user ? (
+              <ProfilePicture />
+            ) : (
+              <div className="flex items-center gap-[10px] ">
+                <Link
+                  href="/auth/signin"
+                  arial-label="Link to the signin page"
+                  className="text-base font-semibold text-purple hidden lg:inline"
+                >
+                  Log in
+                </Link>
 
+                <StyledLink
+                  label="sign up"
+                  url="/auth/signup"
+                  arialabel="Link to the signup page"
+                />
+              </div>
+            )}
+          </>
+        )}
         <button
           type="button"
           onClick={props.openSidebar}
-          className="inline md:hidden text-black"
+          className="nav_toggle"
         >
           <Image src={icons.toggle} alt="toggle icon" height={24} width={24} />
         </button>

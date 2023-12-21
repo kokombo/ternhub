@@ -7,7 +7,7 @@ const Hero = () => {
 
       <Tags />
 
-      <Search />
+      <Search buttonLabel="Search Job" placeholder="Search job title" />
     </section>
   );
 };

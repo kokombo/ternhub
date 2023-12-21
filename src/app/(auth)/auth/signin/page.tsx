@@ -1,8 +1,13 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { Formik, Form, FormikHelpers, Field } from "formik";
-import { SubmitButton, AuthCTA, Logo, InputField } from "@/components";
+import {
+  SubmitButton,
+  AuthCTA,
+  Logo,
+  InputField,
+  CustomError,
+} from "@/components";
 import Link from "next/link";
 import * as Yup from "yup";
 import {
@@ -13,8 +18,9 @@ import {
 import { BuiltInProviderType } from "next-auth/providers/index";
 import { SocialAuths } from "@/containers";
 import Image from "next/image";
-import { images } from "@/constants";
+import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
+import useShowPassword from "@/utilities/hooks/useShowPassword";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -29,6 +35,8 @@ const validationSchema = Yup.object({
 });
 
 const SignInPage = () => {
+  const { showPassword, onClickIcon } = useShowPassword();
+
   const [providers, setProviders] = useState<Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
@@ -94,7 +102,11 @@ const SignInPage = () => {
                 label="Password"
                 name="password"
                 id="password"
-                type="password"
+                type={`${showPassword ? "text" : "password"}`}
+                rightIcon={`${
+                  showPassword ? icons.hidepassword : icons.showpassword
+                }`}
+                onClickRightIcon={onClickIcon}
               />
 
               <Link
@@ -106,7 +118,7 @@ const SignInPage = () => {
               </Link>
 
               <div className="w-full flex flex-col items-center gap-5">
-                {error && <p>{error}</p>}
+                {error && <CustomError message={error} />}
 
                 <SubmitButton label="Log in" />
 

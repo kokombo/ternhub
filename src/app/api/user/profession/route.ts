@@ -1,20 +1,24 @@
 import User from "@/models/user";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { connectDatabase } from "@/database/database";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
-export const PUT = async (req: NextRequest) => {
-  const body = await req.json();
-  const { profession } = body;
+export const PUT = async (req: Request) => {
+  const { profession } = await req.json();
 
-  const id = "placeholder";
+  const session = await getServerSession(authOptions);
+
+  const userId = session?.user.id;
 
   try {
     await connectDatabase();
 
-    const user = await User.findById(id);
+    const user = await User.findById(userId);
 
     if (user) {
       user.profession = profession;
+
       const updatedProfession = await user.save();
 
       return NextResponse.json(updatedProfession);
@@ -23,7 +27,7 @@ export const PUT = async (req: NextRequest) => {
     }
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { icons } from "@/constants";
 
 const ProfilePicture = () => {
   const { data: session } = useSession();

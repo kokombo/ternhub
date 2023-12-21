@@ -1,8 +1,8 @@
 import User from "@/models/user";
 import { connectDatabase } from "@/database/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: Request, res: Response) => {
   const { email, password } = await req.json();
 
   try {
@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Invalid credentials, please check and try again" },
+        { message: "Invalid credentials, please check and try again." },
         { status: 401 }
       );
     } else {
@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
 
       if (!passwordIsCorrect) {
         return NextResponse.json(
-          { message: "Password is incorrect, please check and try again" },
+          { message: "Password is incorrect, please check and try again." },
           { status: 401 }
         );
       } else {
@@ -29,7 +29,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     }
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }

@@ -1,15 +1,21 @@
-import dynamic from "next/dynamic";
 import "quill/dist/quill.snow.css";
-import { Field, ErrorMessage, FieldProps } from "formik";
+import { Dispatch, SetStateAction } from "react";
+import dynamic from "next/dynamic";
+import { useOutline } from "@/utilities/hooks";
 
 type Props = {
   label: string;
   name: string;
+  id: string;
+  value: string;
+  onChange: Dispatch<SetStateAction<string>>;
 };
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const TextEditor = (props: Props) => {
+  const { outline, showOutline, closeOutline } = useOutline();
+
   const modules = {
     toolbar: [
       [{ size: ["small", false, "large", "huge"] }],
@@ -49,32 +55,29 @@ const TextEditor = (props: Props) => {
     <div className="flex flex-col items-start gap-3">
       <label
         htmlFor={props.name}
-        className="lg:text-lg text-sm tracking-[1%] text-textblack"
+        className={`${
+          outline ? "text-purple" : "text-textblack"
+        } lg:text-lg text-base rounded-[5px]`}
       >
         {props.label}
       </label>
 
-      <Field
-        name={props.name}
-        render={({ field }: { field: FieldProps }) => (
-          <ReactQuill
-            {...field}
-            modules={modules}
-            formats={formats}
-            className=" w-[86vw] lg:w-[820px] h-[277px] "
-            theme="snow"
-            placeholder="write the job description here..."
-            // style={{ border: "1px solid green", height: "277px" }}
-          />
-        )}
-        className="mt-3 rounded-[5px] "
-      />
-
-      <ErrorMessage
-        name={props.name}
-        component="p"
-        className="text-red text-base"
-      />
+      <div
+        onMouseEnter={showOutline}
+        onMouseLeave={closeOutline}
+        className="rounded-[5px]"
+      >
+        <ReactQuill
+          value={props.value}
+          onChange={props.onChange}
+          id={props.id}
+          modules={modules}
+          formats={formats}
+          className=" w-[86vw] lg:w-[820px] h-[277px] "
+          theme="snow"
+          placeholder="write the job description here..."
+        />
+      </div>
     </div>
   );
 };

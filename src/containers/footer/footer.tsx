@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="flex_center lg:flex-row gap-5 lg:items-start justify-between w-full">
-        <article className="flex flex-col">
+        <article className="flex flex-col items-center">
           <h3 className="text-[20px] lg:text-[32px] text-white ">TheTernHub</h3>
 
           {/* <Logo /> */}

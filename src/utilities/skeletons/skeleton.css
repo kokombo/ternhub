@@ -1,0 +1,62 @@
+.skeleton {
+  background-color: rgb(199, 199, 199);
+  margin: 0.75rem 0;
+  border-radius: 0.25rem;
+}
+
+.skeleton.recentblogimage {
+  height: 388px;
+  margin-bottom: 1rem;
+}
+.skeleton.body {
+  height: 136px;
+  margin-bottom: 1rem;
+}
+.skeleton.heading {
+  height: 78px;
+}
+.skeleton.tag {
+  height: 0.75rem;
+}
+.skeleton.width-100 {
+  width: 100%;
+}
+.skeleton.width-50 {
+  width: 50%;
+}
+.skeleton.profile-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.skeleton.blog {
+  height: 500px;
+  margin-bottom: 1rem;
+}
+.skeleton.job {
+  height: 295px;
+  margin-bottom: 1rem;
+}
+.skeleton.width-280 {
+  width: 280px;
+}
+
+.skeleton.faq {
+  height: 100;
+  margin-bottom: 1rem;
+}
+
+/* animate-pulse */
+
+@keyframes pulse {
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}

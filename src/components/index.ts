@@ -9,7 +9,7 @@ import NavLinks from "./nav-links/nav-links";
 import Search from "./search/search";
 import SectionHeading from "./section-heading/section-heading";
 import Tags from "./tags/tags";
-import StyledLink from "./link/link";
+import StyledLink from "./styled-link/styled-link";
 import ProfilePicture from "./profile-picture/profile-picture";
 import SubmitButton from "./submit-button/submit-button";
 import AuthCTA from "./auth-cta/auth-cta";
@@ -28,6 +28,23 @@ import ReactQueryProvider from "./react-query-provider/react-query-provider";
 import SelectField from "./select-field/select-field";
 import JobsFilter from "./jobs-filter/jobs-filter";
 import JobsPageNavigationLink from "./jobs-page-navigation-link/jobs-page-navigation-link";
+import JobCompanyLogo from "./job-company-logo/job-company-logo";
+import JobPostDuration from "./job-post-duration/job-post-duration";
+import ApplyToJobButton from "./apply-to-job-button/apply-to-job-button";
+import SaveAJob from "./save-a-job/save-a-job";
+import JobInfopageHeader from "./job-infopage-header/job-infopage-header";
+import JobInfopageBody from "./job-infopage-body/job-infopage-body";
+import FaqForm from "./faq-form/faq-form";
+import CustomError from "./custom-error/custom-error";
+import BlogInfopageBody from "./blog-infopage-body/blog-infopage-body";
+import BlogInfopageHeader from "./blog-infopage-header/blog-infopage-header";
+import Message from "./message/message";
+import BlogReadTime from "./blog-read-time/blog-read-time";
+import BlogsListpageTitle from "./blogs-listpage-title/blogs-listpage-title";
+import RecentBlogCard from "./recent-blog-card/recent-blog-card";
+import AdminToolBox from "./admin-tool-box/admin-tool-box";
+import NotFoundComponent from "./not-found/not-found";
+import ErrorComponent from "./error-component/error-component";
 
 export {
   BlogCard,
@@ -60,4 +77,21 @@ export {
   SelectField,
   JobsFilter,
   JobsPageNavigationLink,
+  JobCompanyLogo,
+  JobPostDuration,
+  ApplyToJobButton,
+  SaveAJob,
+  JobInfopageBody,
+  JobInfopageHeader,
+  FaqForm,
+  CustomError,
+  BlogInfopageBody,
+  BlogInfopageHeader,
+  Message,
+  BlogReadTime,
+  BlogsListpageTitle,
+  RecentBlogCard,
+  AdminToolBox,
+  NotFoundComponent,
+  ErrorComponent,
 };

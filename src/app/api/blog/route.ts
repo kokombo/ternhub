@@ -1,9 +1,9 @@
 import Blog from "@/models/blog";
 import { connectDatabase } from "@/database/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import slugify from "slugify";
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: Request, res: Response) => {
   const body = await req.json();
 
   const { title } = body;
@@ -20,13 +20,13 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     return NextResponse.json(blog);
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }
 };
 
-export const GET = async (req: NextRequest, res: NextResponse) => {
+export const GET = async (req: Request, res: Response) => {
   try {
     await connectDatabase();
 
@@ -35,7 +35,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     return NextResponse.json(allBlogs);
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }

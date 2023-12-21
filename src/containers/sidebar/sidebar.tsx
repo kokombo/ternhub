@@ -19,20 +19,20 @@ const Sidebar = (props: Props) => {
   const { screenSize } = useScreenSize();
 
   useEffect(() => {
-    if (screenSize >= 1026) {
+    if (screenSize && screenSize >= 1024) {
       props.closeSidebar();
     }
   }, [screenSize]);
 
   return (
-    <aside>
-      <div
-        className={` ${
-          props.sidebarIsOpen ? "translate-x-[0]" : "translate-x-[-100%]"
-        } sidebar_wrapper`}
-      >
+    <aside
+      className={` ${
+        props.sidebarIsOpen ? "show_sidebar" : "hide_sidebar"
+      } sidebar_wrapper`}
+    >
+      <div>
         <span className="float-right">
-          <button onClick={props.closeSidebar}>
+          <button type="button" onClick={() => props.closeSidebar()}>
             <Image src={icons.close} alt="toggle icon" height={24} width={24} />
           </button>
         </span>
@@ -40,22 +40,27 @@ const Sidebar = (props: Props) => {
         <div className="py-10 gap-4 flex flex-col">
           <Logo />
 
-          <span className="flex flex-col gap-3 ">
+          <ul className="flex flex-col gap-3 ">
             <li className="list-none">
               <Link
-                href="/internships"
+                href="/jobs"
                 aria-label="internships page link from sidebar"
+                onClick={() => props.closeSidebar()}
               >
                 Internships
               </Link>
             </li>
 
             <li className="list-none">
-              <Link href="/blogs" aria-label="blogs page link from sidebar">
+              <Link
+                href="/blogs"
+                aria-label="blogs page link from sidebar"
+                onClick={() => props.closeSidebar()}
+              >
                 Blogs
               </Link>
             </li>
-          </span>
+          </ul>
         </div>
       </div>
 

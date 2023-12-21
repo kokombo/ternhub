@@ -1,8 +1,8 @@
 import User from "@/models/user";
 import { connectDatabase } from "@/database/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: NextRequest, res: NextResponse) => {
+export const POST = async (req: Request) => {
   const body = await req.json();
   const email = body.email;
 
@@ -23,7 +23,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }

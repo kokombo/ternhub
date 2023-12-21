@@ -1,6 +1,5 @@
-"use client";
 import "../../styles/globals.css";
-import { NextAuthProvider, ReactQueryProvider } from "@/components";
+import { AdminSegmentNavbar } from "@/containers";
 
 export default function AdminLayout({
   children,
@@ -8,14 +7,10 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <NextAuthProvider>
-          <ReactQueryProvider>
-            <main>{children}</main>
-          </ReactQueryProvider>
-        </NextAuthProvider>
-      </body>
-    </html>
+    <section>
+      <AdminSegmentNavbar />
+
+      {children}
+    </section>
   );
 }

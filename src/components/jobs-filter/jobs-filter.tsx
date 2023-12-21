@@ -1,8 +1,19 @@
+"use client";
 import { icons } from "@/constants";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
+import { useRef } from "react";
 
-const JobsFilter = () => {
-  const handleSelect = () => {};
+type Props = {
+  setLocationFilterTerm: Dispatch<SetStateAction<string>>;
+};
+
+const JobsFilter = (props: Props) => {
+  const locationQuery = useRef(null);
+
+  const handleSelect = (e: any) => {
+    props.setLocationFilterTerm(e.target?.value);
+  };
 
   return (
     <div className="flex items-center md:gap-[26px] md:justify-start justify-between w-full">
@@ -28,8 +39,13 @@ const JobsFilter = () => {
         <p className="filter_text">Location: </p>
 
         <div className="select_wrapper ">
-          <select name="location" onChange={handleSelect} className="select">
-            <option value={"all"}>All</option>
+          <select
+            name="location"
+            onChange={handleSelect}
+            className="select"
+            ref={locationQuery}
+          >
+            <option value={["remote", "onsite", "hybrid"]}>All</option>
             <option value={"remote"}>Remote</option>
             <option value={"onsite"}>Onsite</option>
             <option value={"hybrid"}>Hybrid</option>

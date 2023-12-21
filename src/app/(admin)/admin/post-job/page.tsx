@@ -1,43 +1,61 @@
 "use client";
 import { JobForm } from "@/components";
-import { FormikErrors } from "formik";
+import { useState } from "react";
+import { useMutation } from "react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const initialFormValues: JobForm = {
+const initialFormValues: JobFormType = {
   title: "",
   company: "",
   location: "",
-  description: "",
   category: "",
   site: "",
   mode: "",
   logo: "",
+  salary: 0,
 };
 
-const validate = (values: JobForm) => {
-  const errors: FormikErrors<JobForm> = {};
-
-  if (values.title.length > 40) {
-    errors.title = "maximum length of 40";
-  }
-
-  if (values.company.length > 30) {
-    errors.company = "maximum length of 30";
-  }
-
-  if (values.location.length > 25) {
-    errors.location = "maximum length of 25";
-  }
-};
+interface JobData extends JobFormType {
+  description: string;
+}
 
 const PostAJob = () => {
-  const postJob = () => {};
+  const [description, setDescription] = useState("");
+
+  const router = useRouter();
+
+  const previewJobRequest = async (jobData: JobData) => {
+    return await axios.post(
+      `/api/preview?key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/post-job/preview`,
+      jobData
+    );
+  };
+
+  const { mutateAsync, isLoading, isError, error, isSuccess } =
+    useMutation(previewJobRequest);
+
+  const previewJob = async (values: JobFormType) => {
+    const jobData = { ...values, description };
+
+    await mutateAsync(jobData);
+
+    if (isSuccess) {
+      router.push("/admin/post-job/preview");
+    }
+  };
 
   return (
     <JobForm
-      initialFormValues={initialFormValues}
       title="Post a Job"
-      validate={validate}
-      submitForm={postJob}
+      initialFormValues={initialFormValues}
+      submitForm={previewJob}
+      textEditorValue={description}
+      textEditorOnchange={setDescription}
+      isLoading={isLoading}
+      isError={isError}
+      error={error}
+      buttonLabel="Preview Job"
     />
   );
 };

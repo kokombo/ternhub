@@ -3,6 +3,7 @@ import Image from "next/image";
 
 type Props = {
   buttonLabel: string;
+  placeholder: string;
 };
 
 const Search = (props: Props) => {
@@ -17,8 +18,8 @@ const Search = (props: Props) => {
 
         <input
           type="search"
-          placeholder="Search job title"
-          className="w-[139px] h-7 outline-none text-lightGrey"
+          placeholder={props.placeholder}
+          className="w-[180px] h-7 outline-none text-lightGrey"
         />
       </span>
 

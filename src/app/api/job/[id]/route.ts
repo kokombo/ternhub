@@ -1,9 +1,12 @@
 import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import slugify from "slugify";
+import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 
-export const GET = async (req: NextRequest, { params }: { params: Params }) => {
+export const GET = async (req: Request, { params }: { params: Params }) => {
+  validateMongoDBId(params.id);
   try {
     await connectDatabase();
 
@@ -18,36 +21,38 @@ export const GET = async (req: NextRequest, { params }: { params: Params }) => {
     return NextResponse.json(job);
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }
 };
 
-export const PATCH = async (
-  req: NextRequest,
-  { params }: { params: Params }
-) => {
+export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const body = await req.json();
+
+  validateMongoDBId(params.id);
 
   try {
     await connectDatabase();
+
+    if (body.title) {
+      body.slug = slugify(body.title, { lower: true });
+    }
 
     const job = await Job.findByIdAndUpdate(params.id, body, { new: true });
 
     return NextResponse.json(job);
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }
 };
 
-export const DELETE = async (
-  req: NextRequest,
-  { params }: { params: Params }
-) => {
+export const DELETE = async (req: Request, { params }: { params: Params }) => {
+  validateMongoDBId(params.id);
+
   try {
     await connectDatabase();
 
@@ -56,7 +61,7 @@ export const DELETE = async (
     return NextResponse.json({ message: "Job deleted successfully!" });
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Unable to delete, please try again." },
       { status: 500 }
     );
   }

@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { NextResponse } from "next/server";
 
 export const validateMongoDBId = (id: string) => {
   const valid = mongoose.Types.ObjectId.isValid(id);
   if (!valid) {
-    throw new Error("This is not a valid id");
+    return NextResponse.json({ message: "Invalid id" }, { status: 401 });
   }
 };

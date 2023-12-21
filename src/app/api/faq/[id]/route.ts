@@ -1,9 +1,9 @@
 import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
-export const GET = async (req: NextRequest, { params }: { params: Params }) => {
+export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
     await connectDatabase();
 
@@ -15,10 +15,7 @@ export const GET = async (req: NextRequest, { params }: { params: Params }) => {
   }
 };
 
-export const PATCH = async (
-  req: NextRequest,
-  { params }: { params: Params }
-) => {
+export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const body = await req.json();
 
   try {
@@ -29,16 +26,13 @@ export const PATCH = async (
     return NextResponse.json(faq);
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }
 };
 
-export const DELETE = async (
-  req: NextRequest,
-  { params }: { params: Params }
-) => {
+export const DELETE = async (req: Request, { params }: { params: Params }) => {
   try {
     await connectDatabase();
 
@@ -47,7 +41,7 @@ export const DELETE = async (
     return NextResponse.json({ message: "Job deleted successfully!" });
   } catch (error) {
     return NextResponse.json(
-      { message: "Internal server error" },
+      { message: "Unable to delete job, please try again." },
       { status: 500 }
     );
   }

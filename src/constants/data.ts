@@ -9,3 +9,26 @@ export const professions = [
   { label: "Technical Writer" },
   { label: "Cybersecurity Expert" },
 ];
+
+export const jobCategories = [
+  { label: "Frontend Development" },
+  { label: "Backend  Development" },
+  { label: "Fullstack Development" },
+  { label: "Product Design" },
+  { label: "UI/UX" },
+  { label: "Product Management" },
+  { label: "DevOps" },
+  { label: "Technical Writing" },
+  { label: "Cybersecurity" },
+  { label: "Others" },
+];
+
+export const blogCategories = [
+  { label: "General" },
+  { label: "Software Engineering" },
+  { label: "Product Design" },
+  { label: "Product Management" },
+  { label: "DevOps" },
+  { label: "Technical Writing" },
+  { label: "Cybersecurity" },
+];

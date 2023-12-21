@@ -1,7 +1,6 @@
 "use client";
 import "../../styles/globals.css";
 import { Footer, NavigationBar, Sidebar } from "@/containers";
-import { NextAuthProvider, ReactQueryProvider } from "@/components";
 import { useState } from "react";
 
 export default function RootLayout({
@@ -16,25 +15,14 @@ export default function RootLayout({
   const closeSidebar = () => setSidebarIsOpen(false);
 
   return (
-    <html>
-      <body>
-        <NextAuthProvider>
-          <ReactQueryProvider>
-            <main>
-              <NavigationBar openSidebar={openSidebar} />
-              {/* 
-              <Sidebar
-                sidebarIsOpen={sidebarIsOpen}
-                closeSidebar={closeSidebar}
-              /> */}
+    <main className="flex flex-col justify-between min-h-screen">
+      <NavigationBar openSidebar={openSidebar} />
 
-              {children}
+      <Sidebar sidebarIsOpen={sidebarIsOpen} closeSidebar={closeSidebar} />
 
-              <Footer />
-            </main>
-          </ReactQueryProvider>
-        </NextAuthProvider>
-      </body>
-    </html>
+      {children}
+
+      <Footer />
+    </main>
   );
 }

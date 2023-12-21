@@ -1,24 +1,55 @@
-import { Formik, Form } from "formik";
-import { InputField, TextEditor, UploadFile } from "..";
+import { Formik, Form, FormikHelpers } from "formik";
+import {
+  CustomError,
+  InputField,
+  SubmitFormLoader,
+  TextEditor,
+  UploadFile,
+  SelectField,
+} from "..";
+import { Dispatch, SetStateAction } from "react";
+import * as Yup from "yup";
+import { blogCategories } from "@/constants/data";
 
 type Props = {
   title: string;
-  initialFormValues: BlogForm;
-  submitForm: () => void;
-  validate: any;
+  initialFormValues: BlogFormType;
+  submitForm: (
+    values: BlogFormType,
+    onSubmitProps: FormikHelpers<BlogFormType>
+  ) => Promise<void>;
+  textEditorValue: string;
+  textEditorOnchange: Dispatch<SetStateAction<string>>;
+  isLoading: boolean;
+  isError: boolean;
+  error: any;
+  buttonLabel: string;
 };
+
+const validateBlogForm = Yup.object({
+  title: Yup.string()
+    .required("Blog title is required.")
+    .max(79, "Maximum length of 80 characters."),
+  metaDescription: Yup.string()
+    .required("Blog meta description is required.")
+    .max(79, "Maximum length of 80 characters."),
+  author: Yup.string().required("Blog author is required."),
+  image: Yup.string().required("Upload blog cover image."),
+  category: Yup.string().required("Please select blog category."),
+});
 
 const BlogForm = (props: Props) => {
   return (
     <div className="flex flex-col gap-[25px] mx-[6.94%] py-11 lg:py-[50px] items-center text-center">
-      <h1 className="text-[28px] font-medium ">{props.title}</h1>
+      <h1 className="text-[28px] font-medium">{props.title}</h1>
 
       <div>
         <Formik
           initialValues={props.initialFormValues}
           onSubmit={props.submitForm}
-          validate={props.validate}
+          validationSchema={validateBlogForm}
           validateOnMount
+          enableReinitialize
         >
           {(formik) => {
             return (
@@ -28,24 +59,39 @@ const BlogForm = (props: Props) => {
                   name="title"
                   type="text"
                   id="title"
+                  maxLength={80}
                 />
 
                 <UploadFile
-                  name="logo"
-                  label="Upload Cover Imaage"
+                  name="image"
+                  label="Upload A Cover Image *"
                   fileToUpload="cover image"
                 />
 
-                <TextEditor label="Blog Copy *" name="description" />
+                <TextEditor
+                  label="Blog Copy *"
+                  name="content"
+                  id="content"
+                  value={props.textEditorValue}
+                  onChange={props.textEditorOnchange}
+                />
 
                 {/* the below div is needed because the React Quill text editor caused an overlap */}
-                <div className="sm:mt-8 mt-14"></div>
+                <div className="sm:mt-4 mt-8"></div>
 
                 <InputField
                   label="Meta Description*"
                   name="metaDescription"
                   type="text"
                   id="meta"
+                  maxLength={80}
+                />
+
+                <SelectField
+                  label="Blog Category *"
+                  name="category"
+                  id="category"
+                  data={blogCategories}
                 />
 
                 <InputField
@@ -56,33 +102,48 @@ const BlogForm = (props: Props) => {
                 />
 
                 <InputField
-                  label="Twitter URL (optional)"
+                  label="Twitter (optional)"
                   name="twitter"
                   type="text"
                   id="twitter"
+                  placeholder="e.g. @theternhub"
                 />
 
                 <InputField
-                  label="Portfolio URL (optional)"
+                  label="Portfolio (optional)"
                   name="portfolio"
                   type="text"
                   id="portfolio"
+                  placeholder="e.g. www.myportfolio.com"
                 />
 
                 <InputField
-                  label="Linkedin URL (optional)"
+                  label="Linkedin (optional)"
                   name="linkedin"
                   type="text"
                   id="linkedin"
+                  placeholder="e.g. www.linkedin.com/theternhub"
                 />
 
-                <button
-                  type="submit"
-                  disabled={!formik.isValid}
-                  className="form_submit_button "
-                >
-                  Preview Blog
-                </button>
+                <div>
+                  {props.isError && (
+                    <CustomError message={props.error.response.data.message} />
+                  )}
+                </div>
+
+                <div className="flex self-end">
+                  {props.isLoading ? (
+                    <SubmitFormLoader />
+                  ) : (
+                    <button
+                      type="submit"
+                      // disabled={!formik.isValid}
+                      className="form_submit_button "
+                    >
+                      {props.buttonLabel}
+                    </button>
+                  )}
+                </div>
               </Form>
             );
           }}

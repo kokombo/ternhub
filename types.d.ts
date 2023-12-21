@@ -18,35 +18,57 @@ type Error = {
   message: string;
 };
 
-type JobForm = {
+type JobFormType = {
   title: string;
   company: string;
   location: string;
-  description: string;
   category: string;
   site: string;
   mode: string;
   logo: string;
+  salary?: number;
 };
 
-interface Job extends JobForm {
+interface JobType extends JobFormType {
   id: string;
   slug: string;
   numberOfViews: number;
   timeStamp: Date;
+  description: string;
 }
 
-type BlogForm = {
+type BlogFormType = {
   title: string;
   image: string;
-  content: string;
   metaDescription: string;
+  category: string;
   author: string;
   twitter?: string;
   portfolio?: string;
   linkedin?: string;
 };
 
+interface BlogType extends BlogFormType {
+  id: string;
+  slug: string;
+  numberOfViews: number;
+  timeStamp: Date;
+  content: string;
+}
+
 type Profession = {
   label: string;
+};
+
+type FaqFormType = {
+  question: string;
+};
+
+interface FaqType extends FaqFormType {
+  id: string;
+  answer: string;
+}
+
+type Error = {
+  message: string;
 };

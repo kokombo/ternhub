@@ -22,7 +22,7 @@ export const authOptions: AuthOptions = {
       async authorize(credentials, req) {
         const res = await axios.post("/api/signin", credentials);
 
-        const user = res.data;
+        const user = res.data.user;
 
         if (user) {
           return user;
@@ -38,13 +38,13 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
-    async jwt({ account, token, profile }) {
+    async jwt({ account, token, profile, user }) {
       if (account) {
-        token.id = profile?.id;
+        token.id = user?.id;
 
         token.accessToken = account?.access_token;
 
-        token.role = profile?.role;
+        token.role = user?.role;
       }
 
       return token;
@@ -66,7 +66,8 @@ export const authOptions: AuthOptions = {
           await connectDatabase();
 
           const user = await User.findOne({
-            email: credentials?.email,
+            email: credentials.email,
+            password: credentials.password,
           });
 
           if (user) {
@@ -74,7 +75,7 @@ export const authOptions: AuthOptions = {
           }
           return true;
         } catch (error: any) {
-          throw new Error(error);
+          return error;
         }
       }
 
@@ -93,7 +94,7 @@ export const authOptions: AuthOptions = {
           }
           return true;
         } catch (error: any) {
-          throw new Error(error);
+          return error;
         }
       }
     },
