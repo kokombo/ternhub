@@ -23,13 +23,15 @@ interface JobData extends JobFormType {
 const PostAJob = () => {
   const [description, setDescription] = useState("");
 
+  const params = new URLSearchParams({
+    key: process.env.PREVIEW_MODE_SECRET_TOKEN as string,
+    redirect: "/admin/post-job/preview",
+  });
+
   const router = useRouter();
 
   const previewJobRequest = async (jobData: JobData) => {
-    return await axios.post(
-      `/api/preview?key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/post-job/preview`,
-      jobData
-    );
+    return await axios.post(`/api/preview?${params}`, jobData);
   };
 
   const { mutateAsync, isLoading, isError, error, isSuccess } =

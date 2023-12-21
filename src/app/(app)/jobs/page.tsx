@@ -37,7 +37,7 @@ const JobsListPage = () => {
   //   hasPreviousPage,
   // } = useInfiniteQuery("getAllJobs", getJobsRequest);
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const { data, isLoading, isError, error, refetch, isSuccess } = useQuery(
     "fetchJobs",
     fetchJobsRequest,
     {
@@ -47,6 +47,8 @@ const JobsListPage = () => {
       },
     }
   );
+
+  console.log("data", data, "isSuccess", isSuccess, "error", error);
 
   useEffect(() => {
     const refetchDataAfterFilterTermChanges = async () => {

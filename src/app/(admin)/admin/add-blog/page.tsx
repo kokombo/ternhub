@@ -23,13 +23,16 @@ interface BlogData extends BlogFormType {
 const AddABlog = () => {
   const [content, setContent] = useState("");
 
+  const params = new URLSearchParams({
+    key: process.env.PREVIEW_MODE_SECRET_TOKEN as string,
+    redirect: "/admin/add-blog/preview",
+  });
+
+  // key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/add-blog/preview
   const router = useRouter();
 
   const previewBlogRequest = async (blogData: BlogData) => {
-    return await axios.post(
-      `/api/preview?key=${process.env.PREVIEW_MODE_SECRET_TOKEN}&redirect=/admin/add-blog/preview`,
-      blogData
-    );
+    return await axios.post(`/api/preview?${params}`, blogData);
   };
 
   const { mutateAsync, isLoading, isError, error, isSuccess } =

@@ -1,6 +1,6 @@
 "use client";
 import { FaqForm } from "@/components";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,12 +18,20 @@ const AddFaqPage = () => {
 
   const router = useRouter();
 
+  const queryClient = useQueryClient();
+
   const addFaqRequest = async (faqData: FaqData) => {
     return await axios.post("/api/faq", faqData);
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } =
-    useMutation(addFaqRequest);
+  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
+    addFaqRequest,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getAllFaqs");
+      },
+    }
+  );
 
   const submitFAQ = async (values: FaqFormType) => {
     const faqData = { ...values, answer };
