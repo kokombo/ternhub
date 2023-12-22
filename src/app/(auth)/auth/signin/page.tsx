@@ -103,10 +103,9 @@ const SignInPage = () => {
                 name="password"
                 id="password"
                 type={`${showPassword ? "text" : "password"}`}
-                rightIcon={`${
-                  showPassword ? icons.hidepassword : icons.showpassword
-                }`}
-                onClickRightIcon={onClickIcon}
+                setPasswordVisibile={showPassword}
+                togglePasswordIcon={onClickIcon}
+                passwordField={true}
               />
 
               <Link

@@ -1,4 +1,5 @@
 "use client";
+
 import "../../styles/globals.css";
 import { Footer, NavigationBar, Sidebar } from "@/containers";
 import { useState } from "react";

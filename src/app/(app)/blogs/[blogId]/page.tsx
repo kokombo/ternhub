@@ -10,14 +10,20 @@ const BlogPage = () => {
   const router = useRouter();
 
   const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    return await axios.get(`/api/blog/${blogId}`);
+    const res = await axios.get(`/api/blog/${blogId}`);
+    return res.data;
   };
 
   const { data, isLoading, isError, error, refetch } = useQuery(
     "getBlogById",
+
     getBlogByIdRequest,
+
     {
       refetchOnWindowFocus: false,
+
+      retry: 1,
+
       onSuccess: (data) => {
         router.push(`${data?.slug}`);
       },

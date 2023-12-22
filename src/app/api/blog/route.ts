@@ -2,11 +2,29 @@ import Blog from "@/models/blog";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export const POST = async (req: Request, res: Response) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
   const body = await req.json();
 
-  const { title } = body;
+  const { title, content } = body;
+
+  if (!content) {
+    return NextResponse.json(
+      { message: "Blog content not found." },
+      { status: 401 }
+    );
+  }
 
   try {
     await connectDatabase();
@@ -35,7 +53,9 @@ export const GET = async (req: Request, res: Response) => {
     return NextResponse.json(allBlogs);
   } catch (error) {
     return NextResponse.json(
-      { message: "Something went wrong, please try again." },
+      {
+        message: "Something went wrong. Please try again.",
+      },
       { status: 500 }
     );
   }

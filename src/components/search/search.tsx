@@ -1,9 +1,11 @@
 import { icons } from "@/constants";
 import Image from "next/image";
+import { ChangeEventHandler } from "react";
 
 type Props = {
   buttonLabel: string;
   placeholder: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
 const Search = (props: Props) => {
@@ -19,13 +21,14 @@ const Search = (props: Props) => {
         <input
           type="search"
           placeholder={props.placeholder}
-          className="w-[180px] h-7 outline-none text-lightGrey"
+          className="lg:w-[180px] w-[140px] h-7 outline-none text-lightGrey"
+          onChange={props.onChange}
         />
       </span>
 
       <button
         type="button"
-        className="bg-purple text-white px-6 py-2 lg:px-8 lg:py-3 text-sm lg:text-base font-semibold rounded-[10px] hover:bg-blue"
+        className="bg-purple text-white px-6 py-2 lg:px-8 lg:py-3 text-sm  font-semibold rounded-[10px] hover:bg-blue"
       >
         {props.buttonLabel}
       </button>

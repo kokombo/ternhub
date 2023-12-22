@@ -41,6 +41,12 @@ const config: Config = {
       outlineColor: {
         outline: "#5627FF",
       },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
     },
   },
   plugins: [],

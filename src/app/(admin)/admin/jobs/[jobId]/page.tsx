@@ -11,16 +11,28 @@ const AdminJobInfoPage = () => {
   const router = useRouter();
 
   const getJobByIdRequest = async (): Promise<JobType | undefined> => {
-    return await axios.get(`/api/job/${jobId}`);
+    const res = await axios.get(`/api/job/${jobId}`);
+    return res.data;
   };
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const {
+    data: job,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery(
     "getJobById",
+
     getJobByIdRequest,
+
     {
       refetchOnWindowFocus: false,
-      onSuccess: (data) => {
-        router.push(`jobId=${data?.id}&title=${data?.slug}`);
+
+      retry: 1,
+
+      onSuccess: (job) => {
+        router.push(`jobId=${job?.id}&title=${job?.slug}`);
       },
     }
   );
@@ -28,7 +40,7 @@ const AdminJobInfoPage = () => {
   return (
     <div>
       <JobInfopage
-        data={data}
+        data={job}
         isLoading={isLoading}
         isError={isError}
         error={error}

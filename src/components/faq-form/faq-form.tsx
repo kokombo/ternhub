@@ -20,7 +20,7 @@ type Props = {
 
 const FaqForm = (props: Props) => {
   return (
-    <div className="flex flex-col gap-[25px] mx-[6.94%] py-11 lg:py-[50px] items-center text-center">
+    <div className="flex flex-col gap-[25px] mx-[6.94%] py-11 lg:py-[50px] items-center justify-center text-center">
       <h1 className="text-[28px] font-medium">{props.title}</h1>
 
       <div>
@@ -30,12 +30,14 @@ const FaqForm = (props: Props) => {
           enableReinitialize
         >
           <Form className="flex flex-col gap-8">
-            <InputField
-              label="Question"
-              name="question"
-              id="question"
-              type="text"
-            />
+            <div className="w-[86vw] lg:w-[820px]">
+              <InputField
+                label="Question"
+                name="question"
+                id="question"
+                type="text"
+              />
+            </div>
 
             <TextEditor
               label="Answer"
@@ -45,13 +47,12 @@ const FaqForm = (props: Props) => {
               onChange={props.textEditorOnchange}
             />
 
-            {/* the below div is needed because the React Quill text editor caused an overlap */}
-            <div className="sm:mt-3 mt-6"></div>
-
-            <div className="float-left">
-              {props.isError && (
-                <CustomError message={props.error.response.data.message} />
-              )}
+            <div className="sm:mt-8 mt-16 relative flex items-center justify-center w-full">
+              <span className="absolute">
+                {props.isError && (
+                  <CustomError message={props.error?.response?.data?.message} />
+                )}
+              </span>
             </div>
 
             <div className="flex self-end">

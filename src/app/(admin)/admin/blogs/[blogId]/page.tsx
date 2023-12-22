@@ -11,16 +11,28 @@ const AdminBlogInfoPage = () => {
   const router = useRouter();
 
   const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    return await axios.get(`/api/blog/${blogId}`);
+    const res = await axios.get(`/api/blog/${blogId}`);
+    return res.data;
   };
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const {
+    data: blog,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery(
     "getBlogById",
+
     getBlogByIdRequest,
+
     {
       refetchOnWindowFocus: false,
-      onSuccess: (data) => {
-        router.push(`${data?.slug}`);
+
+      retry: 1,
+
+      onSuccess: (blog) => {
+        router.push(`${blog?.slug}`);
       },
     }
   );
@@ -28,7 +40,7 @@ const AdminBlogInfoPage = () => {
   return (
     <div>
       <BlogInfoPage
-        data={data}
+        data={blog}
         isError={isError}
         isLoading={isLoading}
         error={error}

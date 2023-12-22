@@ -23,10 +23,11 @@ type JobFormType = {
   company: string;
   location: string;
   category: string;
-  site: string;
+  site?: string;
   mode: string;
   logo: string;
   salary?: number;
+  email?: string;
 };
 
 interface JobType extends JobFormType {
@@ -71,4 +72,9 @@ interface FaqType extends FaqFormType {
 
 type Error = {
   message: string;
+};
+
+type RadioOption = {
+  value: string;
+  label: string;
 };

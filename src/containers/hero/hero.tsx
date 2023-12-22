@@ -7,7 +7,11 @@ const Hero = () => {
 
       <Tags />
 
-      <Search buttonLabel="Search Job" placeholder="Search job title" />
+      <Search
+        buttonLabel="Search Job"
+        placeholder="Search job title"
+        onChange={() => {}}
+      />
     </section>
   );
 };

@@ -1,54 +1,70 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
 import axios from "axios";
-import { useQuery, useInfiniteQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 
-const JobsListPage = () => {
-  const [locationFilterTerm, setLocationFilterTerm] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+type Data = {
+  jobs: JobType[];
+  numOfJobs: number;
+};
 
+const JobsListPage = () => {
   const router = useRouter();
 
-  const params = new URLSearchParams({
-    location: locationFilterTerm,
-    search: searchTerm,
-  });
+  const [locationFilterTerm, setLocationFilterTerm] = useState("");
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const fetchJobsRequest = async (): Promise<JobType[] | undefined> => {
-    return await axios.get(`/api/job?${params}`);
+  const limit = 40;
+
+  const params = new URLSearchParams();
+
+  if (locationFilterTerm) params.append("location", locationFilterTerm);
+  params.append("page", pageNumber.toString());
+  params.append("limit", limit.toString());
+
+  //This removes location filter and query all jobs.
+  if (locationFilterTerm == "all") params.delete("location");
+
+  const queryStrings = params.toString();
+
+  const fetchJobsRequest = async (): Promise<Data | undefined> => {
+    const res = await axios.get("/api/job?" + queryStrings);
+    return res.data;
   };
 
-  // const {
-  //   isLoading,
-  //   data,
-  //   isError,
-  //   error,
-  //   isFetching,
-  //   isSuccess,
-  //   refetch,
-  //   fetchNextPage,
-  //   isFetchingNextPage,
-  //   fetchPreviousPage,
-  //   isFetchingPreviousPage,
-  //   hasNextPage,
-  //   hasPreviousPage,
-  // } = useInfiniteQuery("getAllJobs", getJobsRequest);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+    isPreviousData,
+  } = useQuery(
+    ["fetchJobs", pageNumber],
 
-  const { data, isLoading, isError, error, refetch, isSuccess } = useQuery(
-    "fetchJobs",
     fetchJobsRequest,
+
     {
       refetchOnWindowFocus: false,
+
+      keepPreviousData: true,
+
+      retry: 1,
+
       onSuccess: () => {
-        router.push(`/jobs?${params}`, undefined);
+        router.push(`/jobs?${queryStrings.replace(`&limit=${limit}`, "")}`);
+      },
+
+      onError: () => {
+        router.push(`/jobs?${queryStrings.replace(`&limit=${limit}`, "")}`);
       },
     }
   );
-
-  console.log("data", data, "isSuccess", isSuccess, "error", error);
 
   useEffect(() => {
     const refetchDataAfterFilterTermChanges = async () => {
@@ -63,13 +79,19 @@ const JobsListPage = () => {
       <JobsFilter setLocationFilterTerm={setLocationFilterTerm} />
 
       <JobsList
-        data={data}
+        data={data?.jobs}
         isLoading={isLoading}
         isError={isError}
         error={error}
         noDataLabel="No search results."
         refetch={refetch}
         rootUrl="/jobs"
+        isFetching={isFetching}
+        isPreviousData={isPreviousData}
+        setPageNumber={setPageNumber}
+        pageNumber={pageNumber}
+        limit={limit}
+        totalCount={data?.numOfJobs as number}
       />
     </div>
   );

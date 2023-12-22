@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700&display=swap");
 
 /* @font-face {
   font-family: "FoundersGrotesk";
@@ -10,7 +10,7 @@
     format("opentype");
 } */
 
-#root,
+:root,
 body {
   margin: 0;
   padding: 0;
@@ -136,7 +136,7 @@ h4 {
 }
 
 .radio_button {
-  @apply w-6 h-6 border-[1px] rounded-[5px] checked:bg-black border-gray appearance-none;
+  @apply w-6 h-6 border-[1px] rounded-[5px] checked:bg-purple border-gray appearance-none;
 }
 
 .form_submit_button {
@@ -181,4 +181,16 @@ h4 {
 
 .recent_blog_wrapper {
   @apply lg:mb-[100px] mb-[50px];
+}
+
+.footer_text_wrapper {
+  @apply flex flex-col items-center lg:flex-row gap-5 lg:items-start justify-between w-full;
+}
+
+.footer_container_1 {
+  @apply flex flex-col lg:items-start items-center;
+}
+
+.float_right {
+  @apply float-right;
 }

@@ -11,7 +11,8 @@ const SaveAJob = ({ props: job }: { props: JobType }) => {
   const bookmarkAJobRequest = async (
     jobId: string
   ): Promise<JobType[] | undefined> => {
-    return await axios.put("/api/bookmark", jobId);
+    const res = await axios.put("/api/bookmark", jobId);
+    return res.data;
   };
 
   const {

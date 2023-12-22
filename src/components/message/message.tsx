@@ -12,7 +12,7 @@ type Props = {
 
 const Message = (props: Props) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-5 py-10">
+    <div className="w-full h-screen flex flex-col items-center justify-center gap-5 ">
       <Image
         src={illustrations.vector}
         alt={`${props.message} vector illustration.`}

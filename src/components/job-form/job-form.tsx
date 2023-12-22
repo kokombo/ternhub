@@ -4,11 +4,11 @@ import { jobCategories } from "@/constants/data";
 import {
   InputField,
   TextEditor,
-  JobModeOptions,
   UploadFile,
   SubmitFormLoader,
   SelectField,
   CustomError,
+  RadioButtonOptions,
 } from "..";
 import { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
@@ -39,11 +39,15 @@ const validateJobForm = Yup.object({
     .required("Company location is required.")
     .max(25, "Maximum length of 25 characters."),
   category: Yup.string().required("Job category is required."),
-  site: Yup.string().required(
-    "Please add the link to the job application page."
-  ),
   mode: Yup.string().required("Please specify job mode."),
+  email: Yup.string().email("Invalid email format."),
 });
+
+const jobModeOptions: RadioOption[] = [
+  { value: "remote", label: "Remote" },
+  { value: "hybrid", label: "Hybrid" },
+  { value: "onsite", label: "Onsite" },
+];
 
 const JobForm = (props: Props) => {
   return (
@@ -104,14 +108,26 @@ const JobForm = (props: Props) => {
                 />
 
                 <InputField
-                  label="Company Website *"
+                  label="Application Url *"
                   name="site"
                   type="text"
                   id="site"
-                  placeholder="e.g. www.theternhub.com/careers/senior-frontend-developer-role"
+                  placeholder="e.g. www.theternhub.com/careers/junior-backend-engineer"
                 />
 
-                <JobModeOptions name="mode" />
+                <InputField
+                  label="Application Email *"
+                  name="email"
+                  type="email"
+                  id="email"
+                  placeholder="Please specify the application email if above is not applicable."
+                />
+
+                <RadioButtonOptions
+                  name="mode"
+                  data={jobModeOptions}
+                  label="Job Mode *"
+                />
 
                 <InputField
                   label="Salary (optional)"
@@ -126,21 +142,21 @@ const JobForm = (props: Props) => {
                   fileToUpload="logo"
                 />
 
-                <div>
-                  {props.isError && (
-                    <CustomError message={props.error.response.data.message} />
-                  )}
+                <div className="flex items-center justify-center relative">
+                  <span className="absolute">
+                    {props.isError && (
+                      <CustomError
+                        message={props.error?.response?.data?.message}
+                      />
+                    )}
+                  </span>
                 </div>
 
                 <div className="flex self-end">
                   {props.isLoading ? (
                     <SubmitFormLoader />
                   ) : (
-                    <button
-                      type="submit"
-                      // disabled={!formik.isValid}
-                      className="form_submit_button"
-                    >
+                    <button type="submit" className="form_submit_button">
                       {props.buttonLabel}
                     </button>
                   )}

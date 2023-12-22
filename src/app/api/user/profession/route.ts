@@ -11,6 +11,12 @@ export const PUT = async (req: Request) => {
 
   const userId = session?.user.id;
 
+  if (!session?.user)
+    return NextResponse.json(
+      { message: "Oops! You cannot perform action." },
+      { status: 401 }
+    );
+
   try {
     await connectDatabase();
 

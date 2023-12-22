@@ -1,10 +1,4 @@
-import {
-  BlogsListpageTitle,
-  RecentBlogCard,
-  BlogCard,
-  Search,
-  Message,
-} from "@/components";
+import { RecentBlogCard, BlogCard, Search, Message } from "@/components";
 import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 import RecentBlogSkeletonLoader from "@/utilities/skeletons/recent-blog-skeleton-loader";
 
@@ -21,24 +15,31 @@ type Props = {
 const BlogsList = (props: Props) => {
   return (
     <div>
-      <section className={`${props.data ? "recent_blog_wrapper" : ""}`}>
-        {props.data && (
+      {/*  Rendering most recent blog post */}
+
+      <section
+        className={`${
+          props.data && props.data.length > 0 ? "recent_blog_wrapper" : ""
+        }`}
+      >
+        {props.data && props.data.length > 0 ? (
           <h2 className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px]">
             Recent Post
           </h2>
-        )}
+        ) : null}
 
         <div>
           {props.isLoading ? (
             <RecentBlogSkeletonLoader />
-          ) : (
-            props.data &&
+          ) : props.data && props.data.length > 0 ? (
             props.data
               .slice(0, 1)
               .map((blog) => <RecentBlogCard key={blog.id} props={blog} />)
-          )}
+          ) : null}
         </div>
       </section>
+
+      {/* Rendering other blog posts*/}
 
       <section>
         {props.data && props.data.length > 1 ? (
@@ -49,7 +50,7 @@ const BlogsList = (props: Props) => {
 
         <div
           className={`w-full ${
-            (props.data && props.data.length > 0) || props.isLoading
+            (props.data && props.data.length > 1) || props.isLoading
               ? "blog_list_grid"
               : "flex items-center justify-center"
           } `}
@@ -63,19 +64,20 @@ const BlogsList = (props: Props) => {
               buttonLabel="Try again"
               onClickButton={async () => await props.refetch()}
             />
-          ) : props.data && props.data.length < 1 ? (
+          ) : props.data && props.data.length === 0 ? (
             <Message message={props.noDataLabel} />
-          ) : (
-            props.data &&
+          ) : props.data && props.data.length > 1 ? (
             props.data
               .slice(1, 11)
               .map((blog) => (
                 <BlogCard key={blog.id} props={blog} rootUrl={props.rootUrl} />
               ))
-          )}
+          ) : null}
         </div>
 
-        {props.data && props.data.length > 11 ? (
+        {/* Rendering infinite load more button  */}
+
+        {props.data && props.data.length > 9 ? (
           <button className="bg-purple hover:bg-blue text-white rounded-[10px] font-semibold lg:text-base text-sm w-[140px] h-12 mt-[50px] self-center">
             Load more
           </button>

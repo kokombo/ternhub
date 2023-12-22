@@ -1,19 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import { NavLinks, Copyright } from "@/components";
 import { useSession } from "next-auth/react";
 
 const Footer = () => {
-  const { status } = useSession();
-
-  if (status === "loading") {
-    return <div></div>;
-  }
+  const { data: session } = useSession();
 
   return (
     <footer className="footer">
-      <div className="flex_center lg:flex-row gap-5 lg:items-start justify-between w-full">
-        <article className="flex flex-col items-center">
-          <h3 className="text-[20px] lg:text-[32px] text-white ">TheTernHub</h3>
+      <div className="footer_text_wrapper">
+        <article className="footer_container_1">
+          <h3 className="text-[20px] lg:text-[32px] text-white">TheTernHub</h3>
 
           {/* <Logo /> */}
 
@@ -25,6 +23,8 @@ const Footer = () => {
 
         <article className="flex flex-col md:flex-row items-center gap-[38px]">
           <NavLinks />
+
+          {/* {session?.user.role === "admin" && } */}
 
           <Link
             href="/admin"

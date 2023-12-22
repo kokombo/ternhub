@@ -6,13 +6,13 @@ export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     if (
-      !req.query.key ||
-      req.query.key !== process.env.PREVIEW_MODE_SECRET_TOKEN
+      req.query.key !== process.env.PREVIEW_MODE_SECRET_TOKEN ||
+      !req.query.redirect
     ) {
       return NextResponse.json({ message: "Invalid token.", status: 401 });
     }
 
-    res.setPreviewData(data);
+    res.setPreviewData(data, { maxAge: 60 * 30 });
 
     const redirectUrl = req.query.redirect as string;
 

@@ -1,6 +1,7 @@
 import { Field, ErrorMessage, FieldProps } from "formik";
 import { useOutline } from "@/utilities/hooks";
 import Image from "next/image";
+import { icons } from "@/constants";
 
 type Props = {
   label: string;
@@ -9,8 +10,9 @@ type Props = {
   id: string;
   maxLength?: number;
   placeholder?: string;
-  rightIcon?: string;
-  onClickRightIcon?: () => void;
+  togglePasswordIcon?: () => void;
+  setPasswordVisibile?: boolean;
+  passwordField?: boolean;
 };
 
 const InputField = (props: Props) => {
@@ -50,18 +52,28 @@ const InputField = (props: Props) => {
           </Field>
 
           <>
-            {props.rightIcon && (
-              <div
-                onClick={props.onClickRightIcon}
+            {props.passwordField && (
+              <button
+                type="button"
+                onClick={props.togglePasswordIcon}
                 className="absolute right-3 top-4 "
               >
-                <Image
-                  src={props.rightIcon}
-                  alt="icon"
-                  height={24}
-                  width={24}
-                />
-              </div>
+                {props.setPasswordVisibile ? (
+                  <Image
+                    src={icons.hidepassword}
+                    alt="password toggle icon"
+                    height={24}
+                    width={24}
+                  />
+                ) : (
+                  <Image
+                    src={icons.showpassword}
+                    alt="password toggle icon"
+                    height={24}
+                    width={24}
+                  />
+                )}
+              </button>
             )}
           </>
         </div>

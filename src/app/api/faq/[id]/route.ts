@@ -2,8 +2,13 @@ import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
+  validateMongoDBId(params.id);
+
   try {
     await connectDatabase();
 
@@ -16,7 +21,18 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 };
 
 export const PATCH = async (req: Request, { params }: { params: Params }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
   const body = await req.json();
+
+  validateMongoDBId(params.id);
 
   try {
     await connectDatabase();
@@ -33,6 +49,17 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
 };
 
 export const DELETE = async (req: Request, { params }: { params: Params }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
+  validateMongoDBId(params.id);
+
   try {
     await connectDatabase();
 

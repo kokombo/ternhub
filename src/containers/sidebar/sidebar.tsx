@@ -31,7 +31,7 @@ const Sidebar = (props: Props) => {
       } sidebar_wrapper`}
     >
       <div>
-        <span className="float-right">
+        <span className="float_right">
           <button type="button" onClick={() => props.closeSidebar()}>
             <Image src={icons.close} alt="toggle icon" height={24} width={24} />
           </button>
@@ -46,8 +46,9 @@ const Sidebar = (props: Props) => {
                 href="/jobs"
                 aria-label="internships page link from sidebar"
                 onClick={() => props.closeSidebar()}
+                className="hover:text-purple"
               >
-                Internships
+                Jobs
               </Link>
             </li>
 
@@ -56,6 +57,7 @@ const Sidebar = (props: Props) => {
                 href="/blogs"
                 aria-label="blogs page link from sidebar"
                 onClick={() => props.closeSidebar()}
+                className="hover:text-purple"
               >
                 Blogs
               </Link>

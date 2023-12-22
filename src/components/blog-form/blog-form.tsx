@@ -29,10 +29,10 @@ type Props = {
 const validateBlogForm = Yup.object({
   title: Yup.string()
     .required("Blog title is required.")
-    .max(79, "Maximum length of 80 characters."),
+    .max(80, "Maximum length of 80 characters."),
   metaDescription: Yup.string()
     .required("Blog meta description is required.")
-    .max(79, "Maximum length of 80 characters."),
+    .max(80, "Maximum length of 80 characters."),
   author: Yup.string().required("Blog author is required."),
   image: Yup.string().required("Upload blog cover image."),
   category: Yup.string().required("Please select blog category."),
@@ -125,21 +125,21 @@ const BlogForm = (props: Props) => {
                   placeholder="e.g. www.linkedin.com/theternhub"
                 />
 
-                <div>
-                  {props.isError && (
-                    <CustomError message={props.error.response.data.message} />
-                  )}
+                <div className="flex items-center justify-center relative">
+                  <span className="absolute">
+                    {props.isError && (
+                      <CustomError
+                        message={props.error?.response?.data?.message}
+                      />
+                    )}
+                  </span>
                 </div>
 
                 <div className="flex self-end">
                   {props.isLoading ? (
                     <SubmitFormLoader />
                   ) : (
-                    <button
-                      type="submit"
-                      // disabled={!formik.isValid}
-                      className="form_submit_button "
-                    >
+                    <button type="submit" className="form_submit_button ">
                       {props.buttonLabel}
                     </button>
                   )}

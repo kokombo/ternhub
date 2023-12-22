@@ -1,7 +1,7 @@
 const ErrorComponent = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-2">
-      <p>Oops! An error occured, try again!</p>
+      <p>Oops! An error occured, please try again!</p>
 
       <button
         type="reset"

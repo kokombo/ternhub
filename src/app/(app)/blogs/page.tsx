@@ -5,12 +5,15 @@ import { BlogsList } from "@/containers";
 
 const BlogListPage = () => {
   const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
-    return await axios.get("/api/blog");
+    const res = await axios.get("/api/blog");
+    return res.data;
   };
 
   const { data, isLoading, isError, error, refetch } = useQuery(
     "fetchBlogs",
+
     fetchBlogsRequest,
+
     {
       refetchOnWindowFocus: false,
     }
@@ -23,7 +26,7 @@ const BlogListPage = () => {
       isError={isError}
       error={error}
       refetch={refetch}
-      noDataLabel="There are no available blogs."
+      noDataLabel="There are no available blogs at this time. Please check back."
       rootUrl="/blogs"
     />
   );

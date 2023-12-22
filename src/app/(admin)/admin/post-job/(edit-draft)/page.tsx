@@ -9,6 +9,8 @@ interface JobData extends JobFormType {
   description: string;
 }
 
+//This is hidden for now till we find a way around using preview mode with App Router
+
 const EditJobAfterPreview = ({ props }: { props: JobData }) => {
   const initialFormValues: JobFormType = {
     title: props.title,
@@ -19,6 +21,7 @@ const EditJobAfterPreview = ({ props }: { props: JobData }) => {
     mode: props.mode,
     logo: props.logo,
     salary: props.salary,
+    email: props.email,
   };
 
   const [description, setDescription] = useState(props.description);
@@ -32,18 +35,19 @@ const EditJobAfterPreview = ({ props }: { props: JobData }) => {
     );
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
-    previewJobAfterEditRequest
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    previewJobAfterEditRequest,
+    {
+      onSuccess: () => {
+        router.push("/admin/post-job/preview");
+      },
+    }
   );
 
   const previewJobAfterEdit = async (values: JobFormType) => {
     const jobData = { ...values, description };
 
     await mutateAsync(jobData);
-
-    if (isSuccess) {
-      router.push("/admin/post-job/preview");
-    }
   };
 
   return (

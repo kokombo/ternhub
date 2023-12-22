@@ -1,4 +1,5 @@
 "use client";
+
 import { NotFoundComponent } from "@/components";
 
 export default function NotFound() {

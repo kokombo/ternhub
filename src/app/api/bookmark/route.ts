@@ -10,9 +10,9 @@ export const GET = async (req: Request) => {
 
   const userId = session?.user.id;
 
-  if (userId) {
+  if (!session?.user) {
     return NextResponse.json(
-      { message: "You cannot perform action." },
+      { message: "Oops! You cannot perform action." },
       { status: 401 }
     );
   }
@@ -38,9 +38,9 @@ export const PUT = async (req: Request) => {
 
   const userId = session?.user.id;
 
-  if (userId) {
+  if (!session?.user) {
     return NextResponse.json(
-      { message: "You cannot perform action." },
+      { message: "Oops! You cannot perform action." },
       { status: 401 }
     );
   }
@@ -83,7 +83,9 @@ export const PUT = async (req: Request) => {
     }
   } catch (error) {
     return NextResponse.json(
-      { message: "Something went wrong, please try again." },
+      {
+        message: "Something went wrong. Please try again.",
+      },
       { status: 500 }
     );
   }

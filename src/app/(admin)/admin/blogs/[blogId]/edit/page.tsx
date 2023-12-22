@@ -9,7 +9,8 @@ const EditBlogInfo = () => {
   const { blogId } = useParams();
 
   const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    return await axios.get(`/api/blog/${blogId}`);
+    const res = await axios.get(`/api/blog/${blogId}`);
+    return res.data;
   };
 
   const { data: blog } = useQuery("getBlogById", getBlogByIdRequest, {

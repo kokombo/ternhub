@@ -4,9 +4,12 @@ import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import slugify from "slugify";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   validateMongoDBId(params.id);
+
   try {
     await connectDatabase();
 
@@ -21,7 +24,10 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
     return NextResponse.json(job);
   } catch (error) {
     return NextResponse.json(
-      { message: "Something went wrong, please try again." },
+      {
+        message:
+          "Something went wrong. We are having issues loading this page.",
+      },
       { status: 500 }
     );
   }
@@ -29,6 +35,15 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 
 export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const body = await req.json();
+
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session?.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
 
   validateMongoDBId(params.id);
 
@@ -51,6 +66,15 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
 };
 
 export const DELETE = async (req: Request, { params }: { params: Params }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session?.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
   validateMongoDBId(params.id);
 
   try {

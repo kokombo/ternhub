@@ -1,10 +1,11 @@
-import { GetServerSideProps } from "next";
 import { JobInfopage } from "@/containers";
 import Link from "next/link";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { SubmitFormLoader } from "@/components";
+
+//This is hidden for now till we find a way around using preview mode with App Router
 
 const PreviewJobBeforePublish = ({ data }: { data: JobType }) => {
   const router = useRouter();
@@ -17,18 +18,18 @@ const PreviewJobBeforePublish = ({ data }: { data: JobType }) => {
     return await axios.post("/api/job", data);
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } =
-    useMutation(publishJobRequest);
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    publishJobRequest,
+    {
+      onSuccess: () => {
+        disablePreviewMode();
 
-  const publishJob = async () => {
-    await mutateAsync(data);
-
-    if (isSuccess) {
-      disablePreviewMode();
-
-      router.push("/admin");
+        router.push("/admin");
+      },
     }
-  };
+  );
+
+  const publishJob = async () => await mutateAsync(data);
 
   return (
     <div>
@@ -60,11 +61,3 @@ const PreviewJobBeforePublish = ({ data }: { data: JobType }) => {
 };
 
 export default PreviewJobBeforePublish;
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   return {
-//     props: {
-//       data: context.previewData,
-//     },
-//   };
-// };

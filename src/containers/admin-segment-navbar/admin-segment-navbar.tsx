@@ -50,7 +50,7 @@ const AdminSegmentNavbar = () => {
       </div>
 
       <Link
-        href="/"
+        href="/jobs"
         aria-label="admin link to exit admin segment for app segment"
         className="bg-purple hover:bg-blue lg:px-8 px-4 py-3 rounded-[10px] text-white font-semibold text-sm lg:text-base text-center"
       >

@@ -7,7 +7,11 @@ const BlogsPageLayout = ({ children }: { children: React.ReactNode }) => {
       <section className="blog_list_header_wrapper">
         <BlogsListpageTitle />
 
-        <Search buttonLabel="Search blog" placeholder="Search blog topic" />
+        <Search
+          buttonLabel="Search blog"
+          placeholder="Search blog topic"
+          onChange={() => {}}
+        />
       </section>
 
       {children}

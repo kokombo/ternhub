@@ -2,7 +2,7 @@
 import { BlogForm } from "@/components";
 import { useState } from "react";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/navigation";
 
 const initialFormValues: BlogFormType = {
@@ -23,41 +23,42 @@ interface BlogData extends BlogFormType {
 const AddABlog = () => {
   const [content, setContent] = useState("");
 
-  const params = new URLSearchParams({
-    key: process.env.PREVIEW_MODE_SECRET_TOKEN as string,
-    redirect: "/admin/add-blog/preview",
-  });
-
   const router = useRouter();
 
-  const previewBlogRequest = async (blogData: BlogData) => {
-    return await axios.post(`/api/preview?${params}`, blogData);
+  const queryClient = useQueryClient();
+
+  const addABlogRequest = async (blogData: BlogData) => {
+    return await axios.post("/api/blog", blogData);
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } =
-    useMutation(previewBlogRequest);
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    addABlogRequest,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetchBlogs");
 
-  const previewBlog = async (values: BlogFormType) => {
+        router.push("/admin/blogs");
+      },
+    }
+  );
+
+  const addABlog = async (values: BlogFormType) => {
     const blogData = { ...values, content };
 
     await mutateAsync(blogData);
-
-    if (isSuccess) {
-      router.push("/admin/add-blog/preview");
-    }
   };
 
   return (
     <BlogForm
       initialFormValues={initialFormValues}
       title="Post a Blog"
-      submitForm={previewBlog}
+      submitForm={addABlog}
       textEditorValue={content}
       textEditorOnchange={setContent}
       isLoading={isLoading}
       isError={isError}
       error={error}
-      buttonLabel="Preview Blog"
+      buttonLabel="Post Blog"
     />
   );
 };

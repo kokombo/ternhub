@@ -5,7 +5,8 @@ import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
 
 const Faqs = () => {
   const fetchFaqsRequest = async (): Promise<FaqType[] | undefined> => {
-    return await axios.get("/api/faq");
+    const res = await axios.get("/api/faq");
+    return res.data;
   };
 
   const {

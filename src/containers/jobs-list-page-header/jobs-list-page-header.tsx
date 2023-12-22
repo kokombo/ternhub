@@ -15,7 +15,11 @@ const JobsListPageHeader = () => {
         </p>
       </article>
 
-      <Search buttonLabel="Find Job" placeholder="Search job title" />
+      <Search
+        buttonLabel="Find Job"
+        placeholder="Search job title"
+        onChange={() => {}}
+      />
     </section>
   );
 };

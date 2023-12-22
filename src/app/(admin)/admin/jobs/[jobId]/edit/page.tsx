@@ -10,7 +10,8 @@ const EditJobInfo = () => {
   const { jobId } = useParams();
 
   const getJobByIdRequest = async (): Promise<JobType | undefined> => {
-    return await axios.get(`/api/job/${jobId}`);
+    const res = await axios.get(`/api/job/${jobId}`);
+    return res.data;
   };
 
   const { data: job } = useQuery("getJobById", getJobByIdRequest, {
