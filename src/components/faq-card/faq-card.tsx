@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import parse from "html-react-parser";
 
 const FaqCard = ({ props }: { props: FaqType }) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -7,8 +8,6 @@ const FaqCard = ({ props }: { props: FaqType }) => {
   const handleClick = () => {
     setShowAnswer((prev) => !prev);
   };
-
-  //use htmlreactparser for answer
 
   return (
     <div
@@ -29,7 +28,9 @@ const FaqCard = ({ props }: { props: FaqType }) => {
             showAnswer ? "translate-y-0" : "translate-y-[100%]"
           } transition-all duration-200`}
         >
-          <p className="lg:text-lg text-sm tracking-[1%]">{props.answer}</p>
+          <p className="lg:text-lg text-sm tracking-[1%]">
+            {parse(props.answer)}
+          </p>
         </div>
       )}
     </div>

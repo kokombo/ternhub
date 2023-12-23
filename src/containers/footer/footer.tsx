@@ -15,7 +15,7 @@ const Footer = () => {
 
           {/* <Logo /> */}
 
-          <p className="max-w-[520px] text-white text-sm lg:text-lg mt-6">
+          <p className="footer_text">
             Explore a world of thrilling internships in the tech industry and
             take the first step towards launching your dream career.
           </p>

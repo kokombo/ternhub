@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
+import { usePathname } from "next/navigation";
 
 type Props = {
   openSidebar: () => void;
@@ -11,6 +12,8 @@ type Props = {
 
 const NavigationBar = (props: Props) => {
   const { data: session, status } = useSession();
+
+  const pathname = usePathname();
 
   return (
     <nav className="nav_container">
@@ -21,31 +24,29 @@ const NavigationBar = (props: Props) => {
       </span>
 
       <div className="flex items-center gap-[14px]">
-        {status === "loading" ? (
-          <div className="h-12 w-12 rounded-full bg-purple"></div>
-        ) : (
-          <>
-            {session?.user ? (
-              <ProfilePicture />
-            ) : (
-              <div className="flex items-center gap-[10px] ">
-                <Link
-                  href="/auth/signin"
-                  arial-label="Link to the signin page"
-                  className="text-base font-semibold text-purple hidden lg:inline"
-                >
-                  Log in
-                </Link>
+        {(status === "loading" && pathname === "/") ||
+        status === "unauthenticated" ? (
+          <div className="flex items-center gap-[10px] ">
+            <Link
+              href="/auth/signin"
+              arial-label="Link to the signin page"
+              className="text-base font-semibold text-purple hidden lg:inline"
+            >
+              Log in
+            </Link>
 
-                <StyledLink
-                  label="sign up"
-                  url="/auth/signup"
-                  arialabel="Link to the signup page"
-                />
-              </div>
-            )}
-          </>
+            <StyledLink
+              label="sign up"
+              url="/auth/signup"
+              arialabel="Link to the signup page"
+            />
+          </div>
+        ) : status === "authenticated" && session?.user ? (
+          <ProfilePicture />
+        ) : (
+          <div className="h-12 w-12 rounded-full bg-purple"></div>
         )}
+
         <button
           type="button"
           onClick={props.openSidebar}

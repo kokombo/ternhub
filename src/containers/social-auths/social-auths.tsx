@@ -1,27 +1,44 @@
+"use client";
 import { SocialAuthFrame } from "@/components";
 import { icons } from "@/constants";
-import { signIn, LiteralUnion, ClientSafeProvider } from "next-auth/react";
+import {
+  signIn,
+  LiteralUnion,
+  ClientSafeProvider,
+  getProviders,
+} from "next-auth/react";
 import { BuiltInProviderType } from "next-auth/providers/index";
+import { useEffect, useState } from "react";
 
 type Props = {
-  providers: Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null;
   label: string;
 };
 
 const SocialAuths = (props: Props) => {
+  const [providers, setProviders] = useState<Record<
+    LiteralUnion<BuiltInProviderType, string>,
+    ClientSafeProvider
+  > | null>(null);
+
+  useEffect(() => {
+    const initializeProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    };
+
+    initializeProviders();
+  }, []);
+
   return (
     <div>
-      {props.providers &&
-        Object.values(props.providers)
+      {providers &&
+        Object.values(providers)
           .filter((provider) => provider.id !== "credentials")
           .map((provider) => {
             return (
               <SocialAuthFrame
                 onClick={() =>
-                  signIn(provider.id, { callbackUrl: "/", redirect: true })
+                  signIn(provider.id, { callbackUrl: "/jobs", redirect: true })
                 }
                 key={provider.name}
                 authName={provider.name}

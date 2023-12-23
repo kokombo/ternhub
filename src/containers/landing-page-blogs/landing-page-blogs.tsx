@@ -5,7 +5,8 @@ import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 
 const LandingPageBlogs = () => {
   const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
-    return await axios.get("/api/blog");
+    const res = await axios.get("/api/blog");
+    return res.data;
   };
 
   const {

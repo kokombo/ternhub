@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -9,15 +8,10 @@ import {
   InputField,
   SelectField,
   CustomError,
+  SocialAuthFrame,
 } from "@/components";
 import * as Yup from "yup";
-import {
-  getProviders,
-  LiteralUnion,
-  ClientSafeProvider,
-} from "next-auth/react";
-import { BuiltInProviderType } from "next-auth/providers/index";
-import { SocialAuths } from "@/containers";
+
 import Image from "next/image";
 import { images, icons } from "@/constants";
 import axios from "axios";
@@ -43,20 +37,6 @@ const validationSchema = Yup.object({
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
 
-  const [providers, setProviders] = useState<Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null>(null);
-
-  useEffect(() => {
-    const initializeProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
-
-    initializeProviders();
-  }, []);
-
   const signupFormRequest = async (formData: UserSignupDataType) => {
     return await axios.post("api/user", formData);
   };
@@ -81,7 +61,7 @@ const SignUpPage = () => {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "/",
+        callbackUrl: "/jobs",
         redirect: true,
       });
 
@@ -97,7 +77,14 @@ const SignUpPage = () => {
         <div className="flex flex-col gap-8">
           <h1>Create an account</h1>
 
-          <SocialAuths providers={providers} label="Sign up with" />
+          <SocialAuthFrame
+            onClick={() =>
+              signIn("google", { callbackUrl: "/jobs", redirect: true })
+            }
+            authName="Google"
+            label="Sign up with"
+            icon={icons.google}
+          />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">
             <hr className="w-full"></hr> or <hr className="w-full"></hr>

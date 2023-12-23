@@ -11,6 +11,8 @@ const BlogsPageLayout = ({ children }: { children: React.ReactNode }) => {
           buttonLabel="Search blog"
           placeholder="Search blog topic"
           onChange={() => {}}
+          value=""
+          onClickSearchButton={() => {}}
         />
       </section>
 

@@ -40,7 +40,7 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
 
   if (!session?.user || session?.user.role !== "admin") {
     return NextResponse.json(
-      { message: "You are not authorized to perform action." },
+      { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
     );
   }
@@ -70,7 +70,7 @@ export const DELETE = async (req: Request, { params }: { params: Params }) => {
 
   if (!session?.user || session?.user.role !== "admin") {
     return NextResponse.json(
-      { message: "You are not authorized to perform action." },
+      { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
     );
   }

@@ -6,6 +6,8 @@ type Props = {
   buttonLabel: string;
   placeholder: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
+  value: string;
+  onClickSearchButton: () => void;
 };
 
 const Search = (props: Props) => {
@@ -23,11 +25,13 @@ const Search = (props: Props) => {
           placeholder={props.placeholder}
           className="lg:w-[180px] w-[140px] h-7 outline-none text-lightGrey"
           onChange={props.onChange}
+          value={props.value}
         />
       </span>
 
       <button
-        type="button"
+        type="submit"
+        onClick={props.onClickSearchButton}
         className="bg-purple text-white px-6 py-2 lg:px-8 lg:py-3 text-sm  font-semibold rounded-[10px] hover:bg-blue"
       >
         {props.buttonLabel}

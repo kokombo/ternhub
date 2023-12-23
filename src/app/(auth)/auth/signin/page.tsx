@@ -1,22 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Formik, Form, FormikHelpers, Field } from "formik";
+import { useState } from "react";
+import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
   AuthCTA,
   Logo,
   InputField,
   CustomError,
+  SocialAuthFrame,
 } from "@/components";
 import Link from "next/link";
 import * as Yup from "yup";
-import {
-  getProviders,
-  LiteralUnion,
-  ClientSafeProvider,
-} from "next-auth/react";
-import { BuiltInProviderType } from "next-auth/providers/index";
-import { SocialAuths } from "@/containers";
 import Image from "next/image";
 import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
@@ -37,21 +31,7 @@ const validationSchema = Yup.object({
 const SignInPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
 
-  const [providers, setProviders] = useState<Record<
-    LiteralUnion<BuiltInProviderType, string>,
-    ClientSafeProvider
-  > | null>(null);
-
   const [error, setError] = useState<string | null | undefined>(null);
-
-  useEffect(() => {
-    const initializeProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
-
-    initializeProviders();
-  }, []);
 
   const signAUserIn = async (
     values: UserLoginDataType,
@@ -59,7 +39,7 @@ const SignInPage = () => {
   ) => {
     await signIn("credentials", {
       ...values,
-      callbackUrl: "/",
+      callbackUrl: "/jobs",
       redirect: true,
     })
       .then((res) => {
@@ -82,7 +62,14 @@ const SignInPage = () => {
         <div className="flex flex-col gap-8">
           <h1>Welcome Back!</h1>
 
-          <SocialAuths providers={providers} label="Log in with" />
+          <SocialAuthFrame
+            onClick={() =>
+              signIn("google", { callbackUrl: "/jobs", redirect: true })
+            }
+            authName="Google"
+            label="Log in with"
+            icon={icons.google}
+          />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">
             <hr className="w-full"></hr> or <hr className="w-full"></hr>

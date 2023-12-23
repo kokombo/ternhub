@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from "date-fns";
 
-const JobPostDuration = ({ props }: { props: Job }) => {
+const JobPostDuration = ({ props }: { props: JobType }) => {
   const timeStamp = props.timeStamp;
 
   let duration;

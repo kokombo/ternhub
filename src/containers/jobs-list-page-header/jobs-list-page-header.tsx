@@ -19,6 +19,8 @@ const JobsListPageHeader = () => {
         buttonLabel="Find Job"
         placeholder="Search job title"
         onChange={() => {}}
+        value=""
+        onClickSearchButton={() => {}}
       />
     </section>
   );

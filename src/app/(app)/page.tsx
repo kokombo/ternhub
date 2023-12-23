@@ -9,11 +9,15 @@ export default function Home() {
 
   const router = useRouter();
 
+  console.log(session?.user);
+
   useEffect(() => {
     if (session?.user) {
       router.replace("/jobs");
     }
   }, [status]);
+
+  if (status === "loading") return <div className="h-[1500px]"></div>;
 
   if (status === "unauthenticated")
     return (

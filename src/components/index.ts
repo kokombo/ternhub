@@ -45,6 +45,7 @@ import AdminToolBox from "./admin-tool-box/admin-tool-box";
 import NotFoundComponent from "./not-found/not-found";
 import ErrorComponent from "./error-component/error-component";
 import RadioButtonOptions from "./radio-button-options/radio-button-options";
+import Loader from "./loader/loader";
 
 export {
   BlogCard,
@@ -94,4 +95,5 @@ export {
   NotFoundComponent,
   ErrorComponent,
   RadioButtonOptions,
+  Loader,
 };

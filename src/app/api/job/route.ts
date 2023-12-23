@@ -108,7 +108,22 @@ export const GET = async (req: NextApiRequest) => {
         );
     }
 
-    const jobs = await result;
+    //search
+
+    let jobs = await result;
+
+    const searchTerm = req.query.search as string;
+
+    if (searchTerm) {
+      jobs = jobs.filter((job) =>
+        job.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      if (jobs.length === 0)
+        return NextResponse.json({
+          message: "There are no jobs that match your search term.",
+        });
+    }
 
     return NextResponse.json({ jobs, numOfJobs: jobs.length });
   } catch (error) {

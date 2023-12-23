@@ -11,6 +11,8 @@ const Hero = () => {
         buttonLabel="Search Job"
         placeholder="Search job title"
         onChange={() => {}}
+        value=""
+        onClickSearchButton={() => {}}
       />
     </section>
   );

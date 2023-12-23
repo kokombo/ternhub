@@ -1,3 +1,5 @@
+import parse from "html-react-parser";
+
 const BlogInfopageBody = ({ props }: { props: BlogType | undefined }) => {
   return (
     <section className="py-10 lg:py-[50px] pb-[50px] lg:pb-[100px]">
@@ -5,7 +7,7 @@ const BlogInfopageBody = ({ props }: { props: BlogType | undefined }) => {
         {props?.title}
       </h1>
 
-      {/* {props.content && <span>{HTMLReactParser(props.content)}</span>} */}
+      {props?.content && <span>{parse(props.content)}</span>}
     </section>
   );
 };

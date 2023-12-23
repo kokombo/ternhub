@@ -194,3 +194,7 @@ h4 {
 .float_right {
   @apply float-right;
 }
+
+.footer_text {
+  @apply max-w-[520px] text-white text-sm lg:text-lg mt-6;
+}
