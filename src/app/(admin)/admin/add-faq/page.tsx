@@ -24,11 +24,13 @@ const AddFaqPage = () => {
     return await axios.post("/api/faq", faqData);
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation(
     addFaqRequest,
     {
       onSuccess: () => {
         queryClient.invalidateQueries("getAllFaqs");
+
+        router.push("/admin");
       },
     }
   );
@@ -37,10 +39,6 @@ const AddFaqPage = () => {
     const faqData = { ...values, answer };
 
     await mutateAsync(faqData);
-
-    if (isSuccess) {
-      router.push("/admin");
-    }
   };
 
   return (

@@ -12,6 +12,7 @@ type UserLoginDataType = {
 
 interface UserSignupDataType extends UserLoginDataType {
   profession: string;
+  name: string;
 }
 
 type Error = {
@@ -25,14 +26,14 @@ type JobFormType = {
   category: string;
   site?: string;
   mode: string;
-  logo: string;
+  logo?: string;
   salary?: number;
   email?: string;
+  slug: string;
 };
 
 interface JobType extends JobFormType {
   id: string;
-  slug: string;
   numberOfViews: number;
   timeStamp: Date;
   description: string;

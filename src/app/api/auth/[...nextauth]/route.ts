@@ -15,20 +15,35 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "email", type: "email" },
-        password: { label: "password", type: "password" },
+        email: {},
+        password: {},
       },
 
       async authorize(credentials, req) {
-        const res = await axios.post("/api/signin", credentials);
+        const email = credentials?.email;
+        const password = credentials?.password;
 
-        const user = res.data.user;
+        return await axios
+          .post("http://localhost:3000/api/signin", {
+            email,
+            password,
+          })
+          .then((res) => {
+            const user = res.data;
 
-        if (user) {
-          return user;
-        } else {
-          return null;
-        }
+            const { _id, ...otherinfo } = user;
+
+            const modifiedUser = { id: _id, ...otherinfo };
+
+            if (user) {
+              return modifiedUser;
+            } else {
+              return null;
+            }
+          })
+          .catch((error) => {
+            throw new Error(error.response.data.message);
+          });
       },
     }),
   ],
@@ -40,11 +55,13 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ account, token, profile, user }) {
       if (account) {
-        token.id = user?.id;
+        token.id = user.id || profile?.id;
 
         token.accessToken = account?.access_token;
 
         token.role = user?.role;
+
+        token.image = profile?.image || (user?.image as string);
       }
 
       return token;
@@ -57,47 +74,29 @@ export const authOptions: AuthOptions = {
 
       session.user.role = token.role;
 
+      session.user.image = token.image;
+
       return session;
     },
 
-    async signIn({ credentials, profile }) {
-      if (credentials) {
-        try {
-          await connectDatabase();
+    // async signIn({ profile, credentials }) {
+    //   try {
+    //     await connectDatabase();
 
-          const user = await User.findOne({
-            email: credentials.email,
-            password: credentials.password,
-          });
+    //     const userExists = await User.findOne({ email: profile?.email });
 
-          if (user) {
-            return user;
-          }
-          return true;
-        } catch (error: any) {
-          return error;
-        }
-      }
-
-      if (profile) {
-        try {
-          await connectDatabase();
-
-          const userExists = await User.findOne({ email: profile.email });
-
-          if (!userExists) {
-            await User.create({
-              email: profile.email,
-              name: profile.name,
-              image: profile.image,
-            });
-          }
-          return true;
-        } catch (error: any) {
-          return error;
-        }
-      }
-    },
+    //     if (!userExists) {
+    //       await User.create({
+    //         email: profile?.email,
+    //         name: profile?.name,
+    //         image: profile?.image,
+    //       });
+    //     }
+    //     return true;
+    //   } catch (error: any) {
+    //     return error;
+    //   }
+    // },
 
     async redirect({ url, baseUrl }) {
       if (url.startsWith("/")) return `${baseUrl}${url}`;

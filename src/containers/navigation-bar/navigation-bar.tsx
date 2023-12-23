@@ -13,6 +13,7 @@ type Props = {
 const NavigationBar = (props: Props) => {
   const { data: session, status } = useSession();
 
+  console.log(session?.user);
   const pathname = usePathname();
 
   return (

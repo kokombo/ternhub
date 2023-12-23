@@ -24,14 +24,14 @@ const Footer = () => {
         <article className="flex flex-col md:flex-row items-center gap-[38px]">
           <NavLinks />
 
-          {/* {session?.user.role === "admin" && } */}
-
-          <Link
-            href="/admin"
-            className="hover:text-purple lg:text-base text-sm text-white"
-          >
-            Admin
-          </Link>
+          {session?.user.role === "admin" && (
+            <Link
+              href="/admin"
+              className="hover:text-purple lg:text-base text-sm text-white"
+            >
+              Admin
+            </Link>
+          )}
         </article>
       </div>
 

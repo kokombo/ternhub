@@ -12,20 +12,22 @@ export const POST = async (req: Request, res: Response) => {
 
     if (!user) {
       return NextResponse.json(
-        { message: "Invalid credentials, please check and try again." },
+        {
+          message: "Oops! Invalid credentials, please check and try again.",
+        },
+        { status: 401 }
+      );
+    }
+
+    const passwordIsCorrect = await user.comparePassword(password);
+
+    if (!passwordIsCorrect) {
+      return NextResponse.json(
+        { message: "Password is incorrect, please check and try again." },
         { status: 401 }
       );
     } else {
-      const passwordIsCorrect = await user.comparePassword(password);
-
-      if (!passwordIsCorrect) {
-        return NextResponse.json(
-          { message: "Password is incorrect, please check and try again." },
-          { status: 401 }
-        );
-      } else {
-        return NextResponse.json({ user }, { status: 200 });
-      }
+      return NextResponse.json(user);
     }
   } catch (error) {
     return NextResponse.json(

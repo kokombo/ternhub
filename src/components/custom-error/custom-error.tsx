@@ -3,7 +3,7 @@ type Props = {
 };
 
 const CustomError = (props: Props) => {
-  return <p className="text-red text-small">{props.message} </p>;
+  return <p className="text-red text-sm">{props.message} </p>;
 };
 
 export default CustomError;

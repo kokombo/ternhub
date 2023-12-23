@@ -2,13 +2,19 @@
 
 import "../../styles/globals.css";
 import { AdminSegmentNavbar } from "@/containers";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  //If there is no session.user, redirect to /. if there is session.user but not an admin, redirect to "/jobs"
+  const router = useRouter();
+
+  const { data: session } = useSession();
+
+  if (!session?.user || session?.user.role !== "admin") return router.push("/");
 
   return (
     <section>

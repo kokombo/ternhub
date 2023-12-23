@@ -74,9 +74,8 @@ const Sidebar = (props: Props) => {
           <button
             type="button"
             onClick={() => {
-              signOut();
+              signOut({ callbackUrl: "/auth/signin" });
               props.closeSidebar();
-              router.push("/");
             }}
             className="signup_button self-center"
           >

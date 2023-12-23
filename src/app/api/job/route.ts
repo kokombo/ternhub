@@ -7,14 +7,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 
 export const POST = async (req: Request, res: Response) => {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
-  if (!session?.user || session.user.role !== "admin") {
-    return NextResponse.json(
-      { message: "Oops! You are not authorized to perform action." },
-      { status: 401 }
-    );
-  }
+  // if (!session?.user || session.user.role !== "admin") {
+  //   return NextResponse.json(
+  //     { message: "Oops! You are not authorized to perform action." },
+  //     { status: 401 }
+  //   );
+  // }
 
   const body = await req.json();
 
@@ -28,9 +28,7 @@ export const POST = async (req: Request, res: Response) => {
       },
       { status: 401 }
     );
-  }
-
-  if (!site && !email) {
+  } else if (!site && !email) {
     return NextResponse.json(
       {
         message: "Please add either the job's application link or apply email.",

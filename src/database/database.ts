@@ -7,6 +7,8 @@ export const connectDatabase = async () => {
     await mongoose.connect(URI, {
       dbName: "ternhub",
     });
+
+    console.log("db connected");
   } catch (error: any) {
     throw new Error(error);
   }

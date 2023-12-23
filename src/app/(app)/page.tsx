@@ -9,7 +9,7 @@ export default function Home() {
 
   const router = useRouter();
 
-  console.log(session?.user);
+  console.log("user", session?.user);
 
   useEffect(() => {
     if (session?.user) {

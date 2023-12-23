@@ -35,17 +35,24 @@ const JobSchema = new Schema(
 
     site: {
       type: String,
-      required: true,
     },
 
     mode: {
       type: String,
-      enum: ["remote", "hybrid", "onsite"],
+      required: true,
+      // enum: ["remote", "hybrid", "onsite"],
+    },
+
+    email: {
+      type: String,
     },
 
     logo: {
       type: String,
-      required: true,
+    },
+
+    salary: {
+      type: Number,
     },
 
     numberOfViews: {
@@ -53,7 +60,7 @@ const JobSchema = new Schema(
       default: 0,
     },
   },
-  { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
+  { timestamps: true }
 );
 
 const Job = models.Job || model("Job", JobSchema);

@@ -27,6 +27,7 @@ const EditJobInfo = () => {
     mode: job?.mode as string,
     logo: job?.logo as string,
     salary: job?.salary as number,
+    slug: job?.slug as string,
   };
 
   const [description, setDescription] = useState(job?.description as string);

@@ -8,6 +8,7 @@ import {
   InputField,
   CustomError,
   SocialAuthFrame,
+  SubmitFormLoader,
 } from "@/components";
 import Link from "next/link";
 import * as Yup from "yup";
@@ -15,6 +16,7 @@ import Image from "next/image";
 import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
+import { useRouter } from "next/navigation";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -31,27 +33,37 @@ const validationSchema = Yup.object({
 const SignInPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null | undefined>(null);
+
+  const router = useRouter();
 
   const signAUserIn = async (
     values: UserLoginDataType,
     onSubmitProps: FormikHelpers<UserLoginDataType>
   ) => {
-    await signIn("credentials", {
-      ...values,
-      callbackUrl: "/jobs",
-      redirect: true,
-    })
-      .then((res) => {
-        if (res?.ok) {
-          onSubmitProps.resetForm();
-        } else {
-          setError(res?.error);
-        }
-      })
-      .catch((error) => {
-        return setError(error || "Something went wrong, please try again!");
+    try {
+      setLoading(true);
+      const res = await signIn("credentials", {
+        ...values,
+        callbackUrl: "/jobs",
+        redirect: false,
       });
+
+      if (res?.ok) {
+        router.push("/jobs");
+
+        onSubmitProps.resetForm();
+      }
+
+      if (res?.error) {
+        setError(res?.error);
+      }
+    } catch (error: any) {
+      return setError(error || "Something went wrong, please try again!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,10 +76,10 @@ const SignInPage = () => {
 
           <SocialAuthFrame
             onClick={() =>
-              signIn("google", { callbackUrl: "/jobs", redirect: true })
+              signIn("google", { callbackUrl: "/jobs", redirect: false })
             }
             authName="Google"
-            label="Log in with"
+            label="Log in"
             icon={icons.google}
           />
 
@@ -103,19 +115,29 @@ const SignInPage = () => {
                 Forgot Password?
               </Link>
 
-              <div className="w-full flex flex-col items-center gap-5">
-                {error && <CustomError message={error} />}
+              <span className="relative flex flex-col items-center">
+                {loading ? (
+                  <SubmitFormLoader />
+                ) : (
+                  <SubmitButton label="Log in" />
+                )}
 
-                <SubmitButton label="Log in" />
-
-                <AuthCTA
-                  url="/auth/signup"
-                  label="Don't have an account?"
-                  cta="Sign up"
-                />
-              </div>
+                {error && (
+                  <span className="absolute bottom-[-28px]">
+                    <CustomError message={error} />
+                  </span>
+                )}
+              </span>
             </Form>
           </Formik>
+        </div>
+
+        <div className="w-full flex flex-col items-center gap-5">
+          <AuthCTA
+            url="/auth/signup"
+            label="Don't have an account?"
+            cta="Sign up"
+          />
         </div>
       </section>
 

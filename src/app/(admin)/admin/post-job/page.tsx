@@ -15,6 +15,7 @@ const initialFormValues: JobFormType = {
   logo: "",
   salary: 0,
   email: "",
+  slug: "",
 };
 
 interface JobData extends JobFormType {
@@ -42,6 +43,8 @@ const PostAJob = () => {
       },
     }
   );
+
+  console.log(error, isLoading);
 
   const postAJob = async (values: JobFormType) => {
     const jobData = { ...values, description };

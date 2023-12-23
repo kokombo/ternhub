@@ -19,31 +19,42 @@ import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
+import { useRouter } from "next/navigation";
 
 const userData: UserSignupDataType = {
   email: "",
   password: "",
   profession: "",
+  name: "",
+};
+
+type Data = {
+  user: User;
 };
 
 const validationSchema = Yup.object({
+  name: Yup.string().required("Please type in your full name."),
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email address is required!"),
-  password: Yup.string().required("Please type in your password!"),
-  profession: Yup.string().required("Please select your profession!"),
+    .email("Please provide a valid email address.")
+    .required("Email address is required."),
+  password: Yup.string().required("Please type in your password."),
 });
 
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
 
-  const signupFormRequest = async (formData: UserSignupDataType) => {
-    return await axios.post("api/user", formData);
+  const router = useRouter();
+
+  const signupFormRequest = async (
+    formData: UserSignupDataType
+  ): Promise<Data | undefined> => {
+    const res = await axios.post("/api/user", formData);
+    return res.data;
   };
 
   let errorResponse: any;
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } =
+  const { mutateAsync, isLoading, isError, error } =
     useMutation(signupFormRequest);
 
   errorResponse = error;
@@ -52,21 +63,25 @@ const SignUpPage = () => {
     values: UserSignupDataType,
     onSubmitProps: FormikHelpers<UserSignupDataType>
   ) => {
-    await mutateAsync(values);
+    await mutateAsync(values, {
+      onSuccess: async () => {
+        const email = values.email;
+        const password = values.password;
 
-    const email = values.email;
-    const password = values.password;
+        await signIn("credentials", {
+          email,
+          password,
+          callbackUrl: "/jobs",
+          redirect: false,
+        }).then((res) => {
+          if (res?.ok) {
+            router.push("/jobs");
+          }
 
-    if (isSuccess) {
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/jobs",
-        redirect: true,
-      });
-
-      onSubmitProps.resetForm();
-    }
+          onSubmitProps.resetForm();
+        });
+      },
+    });
   };
 
   return (
@@ -79,10 +94,10 @@ const SignUpPage = () => {
 
           <SocialAuthFrame
             onClick={() =>
-              signIn("google", { callbackUrl: "/jobs", redirect: true })
+              signIn("google", { callbackUrl: "/jobs", redirect: false })
             }
             authName="Google"
-            label="Sign up with"
+            label="Sign up"
             icon={icons.google}
           />
 
@@ -98,6 +113,8 @@ const SignUpPage = () => {
             validationSchema={validationSchema}
           >
             <Form className="flex flex-col gap-8 w-full">
+              <InputField label="Fullname" name="name" id="name" type="text" />
+
               <InputField label="Email" name="email" id="email" type="text" />
 
               <InputField
