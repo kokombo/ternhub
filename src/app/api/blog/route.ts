@@ -30,7 +30,12 @@ export const POST = async (req: Request) => {
   const uploadedImageResponse = await cloudinary.v2.uploader.upload(image, {
     folder: "blog_images",
     resource_type: "image",
+    quality_analysis: true,
   });
+
+  if (image) {
+    body.image = uploadedImageResponse.secure_url;
+  }
 
   try {
     await connectDatabase();
@@ -39,10 +44,9 @@ export const POST = async (req: Request) => {
       body.slug = slugify(title, { lower: true });
     }
 
-    const blog = await Blog.create({
-      ...body,
-      image: uploadedImageResponse.secure_url,
-    });
+    console.log("body", body);
+
+    const blog = await Blog.create({ ...body });
 
     return NextResponse.json(blog);
   } catch (error) {

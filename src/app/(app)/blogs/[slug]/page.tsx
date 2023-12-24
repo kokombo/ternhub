@@ -26,13 +26,15 @@ const BlogPage = () => {
   );
 
   return (
-    <BlogInfoPage
-      data={data}
-      isError={isError}
-      isLoading={isLoading}
-      error={error}
-      refetch={refetch}
-    />
+    <div className="w-full py-11 lg:py-[100px] sm:px-[6.94%] px-5 gap-[60px] lg:gap-[100px]">
+      <BlogInfoPage
+        data={data}
+        isError={isError}
+        isLoading={isLoading}
+        error={error}
+        refetch={refetch}
+      />
+    </div>
   );
 };
 

@@ -21,9 +21,8 @@ const RadioButtonOptions = (props: Props) => {
       </legend>
 
       <div className="relative w-full">
-        <Field
-          name={props.name}
-          render={({ field }: { field: FieldProps }) => (
+        <Field name={props.name}>
+          {({ field, meta, form }: FieldProps) => (
             <div className="flex gap-10" {...field}>
               {props.data.map((option, index) => {
                 return (
@@ -47,7 +46,7 @@ const RadioButtonOptions = (props: Props) => {
               })}
             </div>
           )}
-        />
+        </Field>
 
         <ErrorMessage
           name={props.name}

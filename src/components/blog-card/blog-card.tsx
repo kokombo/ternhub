@@ -11,6 +11,10 @@ const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
         <Image
           src={props.image}
           alt={props.title}
+          width={100}
+          height={100}
+          layout="responsive"
+          quality={100}
           className="h-full w-full rounded-t-[10px]"
           loading="lazy"
         />

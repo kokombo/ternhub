@@ -40,9 +40,7 @@ const JobsList = (props: Props) => {
             onClickButton={async () => await props.refetch()}
           />
         ) : props.data && props.data.length < 1 ? (
-          <div className="flex items-center justify-center">
-            <Message message={props.noDataLabel} />
-          </div>
+          <Message message={props.noDataLabel} />
         ) : (
           props.data?.map((job) => (
             <JobCard props={job} key={job._id} rootUrl={props.rootUrl} />

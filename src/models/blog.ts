@@ -18,17 +18,23 @@ const BlogSchema = new Schema(
       required: true,
     },
 
+    metaDescription: {
+      type: String,
+      required: true,
+    },
+
     content: {
       type: String,
       required: true,
     },
 
-    image: {},
+    image: {
+      type: String,
+    },
 
     author: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      default: "Admin",
+      type: String,
+      default: "admin",
     },
 
     keywords: {

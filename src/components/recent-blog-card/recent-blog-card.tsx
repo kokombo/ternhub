@@ -5,14 +5,19 @@ import Image from "next/image";
 const RecentBlogCard = ({ props }: { props: BlogType }) => {
   return (
     <article
-      key={props.id}
+      key={props._id}
       className="flex md:flex-row flex-col md:items-center items-start gap-4"
     >
       <div className="h-[388px] lg:w-[564px] w-full rounded-l-[10px] bg-grey ">
         <Image
           src={props.image}
           alt={props.title}
-          className="h-full w-full lg:rounded-l-[10px]"
+          width={100}
+          height={100}
+          loading="lazy"
+          layout="responsive"
+          quality={100}
+          className="h-[388px] lg:w-[564px] object-contain lg:rounded-l-[10px]"
         />
       </div>
 
@@ -29,7 +34,9 @@ const RecentBlogCard = ({ props }: { props: BlogType }) => {
           </p>
           <p className="text-sm text-lightGrey">|</p>
 
-          <p className="text-lightGrey">{props.timeStamp.toLocaleString()}</p>
+          <p className="text-lightGrey">
+            {new Date(props?.createdAt).toLocaleDateString()}
+          </p>
         </article>
 
         <article className="my-8">

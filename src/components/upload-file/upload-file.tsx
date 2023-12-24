@@ -28,10 +28,26 @@ const UploadFile = (props: Props) => {
           return (
             <label>
               <input
-                {...field}
                 type="file"
                 accept="image/*"
                 className="hidden"
+                value=""
+                name={props.name}
+                id={props.name}
+                onChange={(e) => {
+                  const fileReader = new FileReader();
+
+                  // if (e.target.files)
+                  //   form.setFieldValue(props.name, e.target.files[0]);
+
+                  fileReader.onload = () => {
+                    if (fileReader.readyState === 2) {
+                      form.setFieldValue(props.name, fileReader.result);
+                    }
+                  };
+                  if (e.target.files)
+                    fileReader.readAsDataURL(e.target.files[0]);
+                }}
               />
 
               <div

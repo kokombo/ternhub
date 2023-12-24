@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { BlogsList } from "@/containers";
+import { BlogsListpageTitle, Search } from "@/components";
 
 const BlogListPage = () => {
   const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
@@ -16,19 +17,35 @@ const BlogListPage = () => {
 
     {
       refetchOnWindowFocus: false,
+
+      staleTime: 60 * 60 * 1000,
     }
   );
 
   return (
-    <BlogsList
-      data={data}
-      isLoading={isLoading}
-      isError={isError}
-      error={error}
-      refetch={refetch}
-      noDataLabel="There are no available blogs at this time. Please check back."
-      rootUrl="/blogs"
-    />
+    <div className="flex flex-col py-11 lg:py-[100px] sm:px-[6.94%] px-5 w-full">
+      <section className="blog_list_header_wrapper">
+        <BlogsListpageTitle />
+
+        <Search
+          buttonLabel="Search blog"
+          placeholder="Search blog topic"
+          onChange={() => {}}
+          value=""
+          onClickSearchButton={() => {}}
+        />
+      </section>
+
+      <BlogsList
+        data={data}
+        isLoading={isLoading}
+        isError={isError}
+        error={error}
+        refetch={refetch}
+        noDataLabel="There are no available blogs at this time. Please check back."
+        rootUrl="/blogs"
+      />
+    </div>
   );
 };
 

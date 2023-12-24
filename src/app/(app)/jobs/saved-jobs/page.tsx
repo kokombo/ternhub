@@ -20,6 +20,8 @@ const SavedJobsPage = () => {
     refetch,
   } = useQuery("getUserSavedJobs", getUserSavedJobsRequest, {
     refetchOnWindowFocus: false,
+
+    retry: 1,
   });
 
   if (error) errorResponse = error;
@@ -33,7 +35,7 @@ const SavedJobsPage = () => {
       } `}
     >
       {isLoading ? (
-        [...Array(10)].map((_, index) => <JobSkeletonLoader key={index} />)
+        [...Array(6)].map((_, index) => <JobSkeletonLoader key={index} />)
       ) : isError ? (
         <Message
           message={errorResponse.response?.data?.message}
@@ -42,12 +44,10 @@ const SavedJobsPage = () => {
           onClickButton={async () => await refetch()}
         />
       ) : savedJobs && savedJobs.length < 1 ? (
-        <div className="flex items-center justify-center h-48">
-          <Message message="There are no saved jobs." />
-        </div>
+        <Message message="There are no saved jobs." />
       ) : (
         savedJobs?.map((job) => (
-          <JobCard props={job} key={job.id} rootUrl="/" />
+          <JobCard props={job} key={job._id} rootUrl="/" />
         ))
       )}
     </div>

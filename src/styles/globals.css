@@ -206,3 +206,7 @@ h4 {
 .singlejobpage_container {
   @apply w-full flex flex-col py-11 lg:py-[100px] sm:px-[6.94%] px-5 gap-[60px] lg:gap-[100px];
 }
+
+.bloginfopage_header_container {
+  @apply flex flex-col items-center w-full lg:w-[820px];
+}

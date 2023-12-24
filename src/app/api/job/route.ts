@@ -39,13 +39,14 @@ export const POST = async (req: Request) => {
     );
   }
 
-  let uploadedImageResponse;
+  const uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
+    folder: "company_logos",
+    resource_type: "image",
+    quality_analysis: true,
+  });
 
   if (logo) {
-    uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
-      folder: "company_logos",
-      resource_type: "image",
-    });
+    body.logo = uploadedImageResponse.secure_url;
   }
 
   try {
@@ -55,10 +56,7 @@ export const POST = async (req: Request) => {
       body.slug = slugify(title, { lower: true });
     }
 
-    const job = await Job.create({
-      ...body,
-      logo: uploadedImageResponse?.secure_url,
-    });
+    const job = await Job.create({ ...body });
 
     return NextResponse.json(job);
   } catch (error) {
