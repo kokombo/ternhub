@@ -3,7 +3,7 @@ import Link from "next/link";
 const AdminSegmentNavbar = () => {
   return (
     <nav className="admin_segment_navbar">
-      <Link href="." className="hover:text-purple">
+      <Link href="/admin" className="hover:text-purple">
         Dashboard
       </Link>
 

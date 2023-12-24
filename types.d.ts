@@ -41,7 +41,7 @@ interface JobType extends JobFormType {
 
 type BlogFormType = {
   title: string;
-  image: string;
+  image?: string;
   metaDescription: string;
   category: string;
   author: string;
@@ -78,4 +78,9 @@ type Error = {
 type RadioOption = {
   value: string;
   label: string;
+};
+
+type ImageInfo = {
+  originalName: string;
+  buffer: Buffer;
 };

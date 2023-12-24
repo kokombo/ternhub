@@ -1,4 +1,5 @@
 "use client";
+import { Loader } from "@/components";
 import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -17,7 +18,7 @@ export default function Home() {
     }
   }, [status]);
 
-  if (status === "loading") return <div className="h-[1500px]"></div>;
+  if (status === "loading") return <Loader />;
 
   if (status === "unauthenticated")
     return (

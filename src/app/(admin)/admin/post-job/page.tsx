@@ -33,7 +33,7 @@ const PostAJob = () => {
     return await axios.post("/api/job", jobData);
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
     postAJobRequest,
     {
       onSuccess: () => {
@@ -44,9 +44,11 @@ const PostAJob = () => {
     }
   );
 
-  console.log(error, isLoading);
+  console.log(error, isLoading, "isError", isError, "isSuccess", isSuccess);
 
   const postAJob = async (values: JobFormType) => {
+    console.log(values);
+
     const jobData = { ...values, description };
 
     await mutateAsync(jobData);

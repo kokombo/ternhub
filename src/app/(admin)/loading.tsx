@@ -1,5 +1,8 @@
+"use client";
+
+import { Loader } from "@/components";
 const Loading = () => {
-  return <div className="min-h-screen"></div>;
+  return <Loader />;
 };
 
 export default Loading;

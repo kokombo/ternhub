@@ -40,7 +40,6 @@ const JobSchema = new Schema(
     mode: {
       type: String,
       required: true,
-      // enum: ["remote", "hybrid", "onsite"],
     },
 
     email: {

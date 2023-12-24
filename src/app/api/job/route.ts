@@ -2,23 +2,23 @@ import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
-import { NextApiRequest } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import cloudinary from "@/utilities/general/cloudinary";
 
-export const POST = async (req: Request, res: Response) => {
-  // const session = await getServerSession(authOptions);
+export const POST = async (req: Request) => {
+  const session = await getServerSession(authOptions);
 
-  // if (!session?.user || session.user.role !== "admin") {
-  //   return NextResponse.json(
-  //     { message: "Oops! You are not authorized to perform action." },
-  //     { status: 401 }
-  //   );
-  // }
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
 
   const body = await req.json();
 
-  const { title, site, email, description } = body;
+  const { logo, site, email, description, title } = body;
 
   if (!description) {
     return NextResponse.json(
@@ -28,13 +28,24 @@ export const POST = async (req: Request, res: Response) => {
       },
       { status: 401 }
     );
-  } else if (!site && !email) {
+  }
+
+  if (!site && !email) {
     return NextResponse.json(
       {
         message: "Please add either the job's application link or apply email.",
       },
       { status: 401 }
     );
+  }
+
+  let uploadedImageResponse;
+
+  if (logo) {
+    uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
+      folder: "company_logos",
+      resource_type: "image",
+    });
   }
 
   try {
@@ -44,7 +55,10 @@ export const POST = async (req: Request, res: Response) => {
       body.slug = slugify(title, { lower: true });
     }
 
-    const job = await Job.create({ ...body });
+    const job = await Job.create({
+      ...body,
+      logo: uploadedImageResponse?.secure_url,
+    });
 
     return NextResponse.json(job);
   } catch (error) {
@@ -55,19 +69,22 @@ export const POST = async (req: Request, res: Response) => {
   }
 };
 
-export const GET = async (req: NextApiRequest) => {
+export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
     //Filtering job results
 
-    let queryObject = { ...req.query };
+    const { searchParams } = new URL(req.url);
 
-    const excludeFields = ["sort", "page", "limit", "fields"];
+    const excludeFields = ["page", "sort", "limit", "fields"];
 
-    excludeFields.forEach((item) => delete queryObject[item]);
+    excludeFields.forEach((item) => searchParams.delete(item));
 
-    let numericQuery = JSON.stringify(queryObject);
+    let numericQuery = JSON.stringify(Object.fromEntries(searchParams));
+
+    console.log("searchparam", searchParams);
+    console.log("numericquery", numericQuery);
 
     numericQuery = numericQuery.replace(
       /\b(gte|gt|lte|lt|eq)\b/g,
@@ -78,8 +95,10 @@ export const GET = async (req: NextApiRequest) => {
 
     //Sorting job results
 
-    if (req.query.sort) {
-      const sortBy = req.query.sort as string;
+    const sort = searchParams.get("sort");
+
+    if (sort) {
+      const sortBy = sort;
 
       result = result.sort({ [sortBy]: "desc" });
     } else {
@@ -88,15 +107,21 @@ export const GET = async (req: NextApiRequest) => {
 
     //pagination
 
-    const page = Number(req.query.page);
+    const queryPage = searchParams.get("page");
 
-    const limit = Number(req.query.limit);
+    const limitQuery = searchParams.get("limit");
+
+    const page = Number(queryPage);
+
+    const limit = Number(limitQuery);
 
     const skip = (page - 1) * limit;
 
     result = result.skip(skip).limit(limit);
 
-    if (req.query.page) {
+    console.log();
+
+    if (page) {
       const jobCount = await Job.countDocuments();
 
       if (skip >= jobCount)
@@ -106,15 +131,15 @@ export const GET = async (req: NextApiRequest) => {
         );
     }
 
-    //search
-
     let jobs = await result;
 
-    const searchTerm = req.query.search as string;
+    //search
 
-    if (searchTerm) {
+    const searchQuery = searchParams.get("search");
+
+    if (searchQuery) {
       jobs = jobs.filter((job) =>
-        job.title.toLowerCase().includes(searchTerm.toLowerCase())
+        job.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
       if (jobs.length === 0)

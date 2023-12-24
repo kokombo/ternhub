@@ -4,8 +4,9 @@ import { NextResponse } from "next/server";
 import slugify from "slugify";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
+import cloudinary from "@/utilities/general/cloudinary";
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: Request) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user || session.user.role !== "admin") {
@@ -17,7 +18,7 @@ export const POST = async (req: Request, res: Response) => {
 
   const body = await req.json();
 
-  const { title, content } = body;
+  const { image, title, content } = body;
 
   if (!content) {
     return NextResponse.json(
@@ -26,6 +27,11 @@ export const POST = async (req: Request, res: Response) => {
     );
   }
 
+  const uploadedImageResponse = await cloudinary.v2.uploader.upload(image, {
+    folder: "blog_images",
+    resource_type: "image",
+  });
+
   try {
     await connectDatabase();
 
@@ -33,7 +39,10 @@ export const POST = async (req: Request, res: Response) => {
       body.slug = slugify(title, { lower: true });
     }
 
-    const blog = await Blog.create({ ...body });
+    const blog = await Blog.create({
+      ...body,
+      image: uploadedImageResponse.secure_url,
+    });
 
     return NextResponse.json(blog);
   } catch (error) {

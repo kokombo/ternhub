@@ -1,7 +1,19 @@
+import { ThreeDots } from "react-loader-spinner";
+
 const Loader = () => {
   return (
-    <div className="h-screen absolute top-0 left-0 bottom-0 right-0 opacity-20 bg-purple flex items-center justify-center">
-      <p>Loading......</p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-2">
+      <p>Ternhub loading...</p>
+
+      <ThreeDots
+        height="56"
+        width="80"
+        radius="9"
+        color="#5627FF"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        visible={true}
+      />
     </div>
   );
 };

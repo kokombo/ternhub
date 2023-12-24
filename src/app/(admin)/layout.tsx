@@ -1,9 +1,11 @@
 "use client";
 
+import { Loader } from "@/components";
 import "../../styles/globals.css";
 import { AdminSegmentNavbar } from "@/containers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AdminLayout({
   children,
@@ -12,15 +14,20 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  if (!session?.user || session?.user.role !== "admin") return router.push("/");
+  useEffect(() => {
+    if (status === "authenticated" && session?.user.role !== "admin")
+      return router.push("/");
+  }, [status]);
 
-  return (
-    <section>
-      <AdminSegmentNavbar />
+  if (status === "loading") return <Loader />;
 
-      {children}
-    </section>
-  );
+  if (status === "authenticated" && session?.user.role == "admin")
+    return (
+      <section>
+        <AdminSegmentNavbar />
+        {children}
+      </section>
+    );
 }

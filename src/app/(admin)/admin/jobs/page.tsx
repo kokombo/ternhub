@@ -52,6 +52,8 @@ const AdminJobsListPage = () => {
     }
   );
 
+  console.log("isErrorB", isError, "dataB", data, "errorB", error);
+
   return (
     <div className="py-11 lg:py-[50px] sm:px-[6.94%] px-5 flex flex-col gap-[25px]">
       <h1 className="text-[28px] font-medium self-center">Manage All Jobs</h1>
