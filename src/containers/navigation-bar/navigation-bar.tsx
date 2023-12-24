@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
-import { usePathname } from "next/navigation";
 
 type Props = {
   openSidebar: () => void;
@@ -13,8 +12,7 @@ type Props = {
 const NavigationBar = (props: Props) => {
   const { data: session, status } = useSession();
 
-  console.log(session?.user);
-  const pathname = usePathname();
+  if (status === "loading") return <div></div>;
 
   return (
     <nav className="nav_container">
@@ -25,8 +23,9 @@ const NavigationBar = (props: Props) => {
       </span>
 
       <div className="flex items-center gap-[14px]">
-        {(status === "loading" && pathname === "/") ||
-        status === "unauthenticated" ? (
+        {status === "authenticated" ? (
+          <ProfilePicture />
+        ) : (
           <div className="flex items-center gap-[10px] ">
             <Link
               href="/auth/signin"
@@ -42,10 +41,6 @@ const NavigationBar = (props: Props) => {
               arialabel="Link to the signup page"
             />
           </div>
-        ) : status === "authenticated" && session?.user ? (
-          <ProfilePicture />
-        ) : (
-          <div className="h-12 w-12 rounded-full bg-purple"></div>
         )}
 
         <button

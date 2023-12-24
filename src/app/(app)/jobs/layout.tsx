@@ -1,20 +1,22 @@
 "use client";
 import { JobsListPageHeader } from "@/containers";
-import { JobsPageNavigationLink } from "@/components";
+import { JobsPageNavigationLink, Loader } from "@/components";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 const JobsPageLayout = ({ children }: { children: React.ReactNode }) => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   const router = useRouter();
 
   useEffect(() => {
-    if (!session?.user) {
+    if (status === "unauthenticated") {
       router.replace("/");
     }
   }, [status]);
+
+  if (status === "loading") return <Loader />;
 
   if (status === "authenticated")
     return (

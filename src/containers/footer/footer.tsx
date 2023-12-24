@@ -5,7 +5,9 @@ import { NavLinks, Copyright } from "@/components";
 import { useSession } from "next-auth/react";
 
 const Footer = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <div></div>;
 
   return (
     <footer className="footer">

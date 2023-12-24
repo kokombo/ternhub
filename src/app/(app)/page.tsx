@@ -10,10 +10,8 @@ export default function Home() {
 
   const router = useRouter();
 
-  console.log("user", session?.user);
-
   useEffect(() => {
-    if (session?.user) {
+    if (status === "authenticated") {
       router.replace("/jobs");
     }
   }, [status]);

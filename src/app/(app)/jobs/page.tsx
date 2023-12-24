@@ -22,12 +22,12 @@ const JobsListPage = () => {
 
   const params = new URLSearchParams();
 
-  if (locationFilterTerm) params.append("location", locationFilterTerm);
+  if (locationFilterTerm) params.append("mode", locationFilterTerm);
   params.append("page", pageNumber.toString());
   params.append("limit", limit.toString());
 
   //This removes location filter and query all jobs.
-  if (locationFilterTerm == "all") params.delete("location");
+  if (locationFilterTerm == "all") params.delete("mode");
 
   const queryStrings = params.toString();
 
@@ -85,7 +85,7 @@ const JobsListPage = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No search results."
+        noDataLabel="No results matches your query."
         refetch={refetch}
         rootUrl="/jobs"
         isFetching={isFetching}

@@ -20,7 +20,7 @@ type Props = {
 
 const JobsList = (props: Props) => {
   return (
-    <section className="flex flex-col items-center gap-8 w-full">
+    <section className="flex flex-col items-center gap-8 w-full h-full">
       {/* Rendering jobs list*/}
 
       <div
@@ -40,7 +40,7 @@ const JobsList = (props: Props) => {
             onClickButton={async () => await props.refetch()}
           />
         ) : props.data && props.data.length < 1 ? (
-          <div className="flex items-center justify-center h-48">
+          <div className="flex items-center justify-center">
             <Message message={props.noDataLabel} />
           </div>
         ) : (

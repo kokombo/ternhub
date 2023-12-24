@@ -17,8 +17,8 @@ export default function AdminLayout({
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (status === "authenticated" && session?.user.role !== "admin")
-      return router.push("/");
+    if (status === "unauthenticated" || session?.user.role !== "admin")
+      router.push("/");
   }, [status]);
 
   if (status === "loading") return <Loader />;
