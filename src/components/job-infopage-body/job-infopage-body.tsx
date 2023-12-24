@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { ApplyToJobButton } from "@/components";
 
 const JobInfopageBody = ({ props }: { props: JobType | undefined }) => {
@@ -7,9 +8,11 @@ const JobInfopageBody = ({ props }: { props: JobType | undefined }) => {
         Job Description
       </h1>
 
-      <span className="font-sans text-base lg:text-lg font-[400] text-greyblack">
-        {/* {HTMLReactParser(props.description)} */}
-      </span>
+      {props?.description && (
+        <span className="font-sans text-base lg:text-lg font-[400] text-greyblack">
+          {parse(props.description)}
+        </span>
+      )}
 
       <ApplyToJobButton props={props} />
     </section>

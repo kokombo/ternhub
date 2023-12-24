@@ -22,6 +22,8 @@ const AdminBlogsListPage = () => {
 
     {
       refetchOnWindowFocus: false,
+
+      staleTime: 60 * 60 * 1000,
     }
   );
 

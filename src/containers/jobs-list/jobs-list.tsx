@@ -45,7 +45,7 @@ const JobsList = (props: Props) => {
           </div>
         ) : (
           props.data?.map((job) => (
-            <JobCard props={job} key={job.id} rootUrl={props.rootUrl} />
+            <JobCard props={job} key={job._id} rootUrl={props.rootUrl} />
           ))
         )}
       </div>

@@ -1,20 +1,20 @@
 import { formatDistanceToNow } from "date-fns";
 
 const JobPostDuration = ({ props }: { props: JobType }) => {
-  const timeStamp = props.timeStamp;
+  const timeStamp = props.createdAt;
 
   let duration;
 
-  const date = timeStamp;
+  const time = new Date(props.createdAt);
 
   if (timeStamp) {
-    const timePeriod = formatDistanceToNow(date);
+    const timePeriod = formatDistanceToNow(time, { addSuffix: true });
     duration = timePeriod?.replace("about", "");
   }
 
   return (
     <p className="text-green text-sm lg:text-base tracking-[1%] ">
-      Posted {duration} ago
+      Posted {duration}
     </p>
   );
 };

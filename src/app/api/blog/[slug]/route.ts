@@ -8,15 +8,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
-  validateMongoDBId(params.id);
-
   try {
     await connectDatabase();
 
-    const blog = await Blog.findById(params.id);
+    const blog = await Blog.findOne({ slug: params.slug });
 
-    await Blog.findByIdAndUpdate(
-      params.id,
+    await Blog.findOneAndUpdate(
+      { slug: params.slug },
       { $inc: { numberOfViews: 1 } },
       { new: true }
     );
@@ -45,16 +43,18 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
     );
   }
 
-  validateMongoDBId(params.id);
-
   try {
     await connectDatabase();
 
     if (body.title) {
-      body.slug = slugify(body.title, { lower: true });
+      body.slug = slugify(body.title, {
+        lower: true,
+        strict: true,
+        trim: true,
+      });
     }
 
-    const blog = await Blog.findByIdAndUpdate(params.id, body, {
+    const blog = await Blog.findOneAndUpdate({ slug: params.slug }, body, {
       new: true,
     });
 
@@ -77,12 +77,10 @@ export const DELETE = async (req: Request, { params }: { params: Params }) => {
     );
   }
 
-  validateMongoDBId(params.id);
-
   try {
     await connectDatabase();
 
-    await Blog.findByIdAndDelete(params.id);
+    await Blog.findOneAndDelete({ slug: params.slug });
 
     return NextResponse.json({ message: "Job deleted successfully!" });
   } catch (error) {

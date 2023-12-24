@@ -23,7 +23,7 @@ const JobPage = () => {
   } = useQuery("getJobById", getJobByIdRequest, {
     refetchOnWindowFocus: false,
     onSuccess: (job) => {
-      router.push(`jobId=${job?.id}&title=${job?.slug}`);
+      // router.push(`jobId=${job?._id}&title=${job?.slug}`);
     },
   });
 

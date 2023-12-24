@@ -1,32 +1,27 @@
 "use client";
+
 import { BlogInfoPage } from "@/containers";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
 
 const BlogPage = () => {
-  const { blogId } = useParams();
+  const { slug } = useParams();
 
-  const router = useRouter();
-
-  const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    const res = await axios.get(`/api/blog/${blogId}`);
+  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
+    const res = await axios.get(`/api/blog/${slug}`);
     return res.data;
   };
 
   const { data, isLoading, isError, error, refetch } = useQuery(
-    "getBlogById",
+    "getBlogBySlug",
 
-    getBlogByIdRequest,
+    getBlogBySlugRequest,
 
     {
       refetchOnWindowFocus: false,
 
       retry: 1,
-
-      onSuccess: (data) => {
-        router.push(`${data?.slug}`);
-      },
     }
   );
 

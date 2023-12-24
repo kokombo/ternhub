@@ -32,7 +32,7 @@ const AdminJobInfoPage = () => {
       retry: 1,
 
       onSuccess: (job) => {
-        router.push(`jobId=${job?.id}&title=${job?.slug}`);
+        // router.push(`/admin/job/`, undefined);
       },
     }
   );

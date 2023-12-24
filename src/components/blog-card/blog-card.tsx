@@ -3,6 +3,8 @@ import Link from "next/link";
 import { BlogReadTime } from "..";
 
 const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
+  const postCreationDate = new Date(props.createdAt).toLocaleDateString();
+
   return (
     <article className="max-w-[400px] sm:max-w-[295px] border-grey border-[0.8px] rounded-[10px]">
       <div className="h-[300px] w-full bg-grey">
@@ -30,7 +32,7 @@ const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
           <span className="text-[10px] text-lightGrey">|</span>
 
           <p className="text-sm lg:text-base text-lightGrey tracking-[1%]">
-            {props.timeStamp.toLocaleString()}
+            {postCreationDate}
           </p>
 
           <span className="text-[10px] text-lightGrey">|</span>
@@ -44,7 +46,7 @@ const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
 
         <div className="flex items-center gap-[9px] text-green hover:text-deepgreen ">
           <Link
-            href={`${rootUrl}/${props.id}`}
+            href={`${rootUrl}/${props._id}`}
             aria-label="link to read blog"
             className="text-base font-semibold"
           >

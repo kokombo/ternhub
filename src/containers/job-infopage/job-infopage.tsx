@@ -1,4 +1,9 @@
-import { JobInfopageHeader, JobInfopageBody, Message } from "@/components";
+import {
+  JobInfopageHeader,
+  JobInfopageBody,
+  Message,
+  Loader,
+} from "@/components";
 
 type Props = {
   data: JobType | undefined;
@@ -10,9 +15,13 @@ type Props = {
 
 const JobInfopage = (props: Props) => {
   return (
-    <>
+    <div
+      className={`${
+        props.isError && props.isLoading ? "flex_center justify-center" : ""
+      }`}
+    >
       {props.isLoading ? (
-        <div className="min-h-screen"></div>
+        <Loader />
       ) : props.isError ? (
         <Message
           message={props.error?.response?.data?.message}
@@ -21,13 +30,15 @@ const JobInfopage = (props: Props) => {
           buttonLabel="Try again"
         />
       ) : (
-        <div>
-          <JobInfopageHeader props={props.data} />
+        <div className="singlejobpage_container ">
+          <div className="jobinfo_wrapper">
+            <JobInfopageHeader props={props.data} />
 
-          <JobInfopageBody props={props.data} />
+            <JobInfopageBody props={props.data} />
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -3,12 +3,14 @@ import Link from "next/link";
 const ApplyToJobButton = ({ props }: { props: JobType | undefined }) => {
   let applyLink;
 
-  if (props?.site.includes("https://")) {
-    applyLink = props?.site.replace("https://", "");
-  } else if (props?.site.includes("http://")) {
-    applyLink = props.site.replace("http://", "");
-  } else {
-    applyLink = props?.site;
+  if (props?.site) {
+    if (props.site.includes("https://")) {
+      applyLink = props.site.replace("https://", "");
+    } else if (props.site.includes("http://")) {
+      applyLink = props.site.replace("http://", "");
+    } else {
+      applyLink = props.site;
+    }
   }
 
   return (

@@ -54,6 +54,8 @@ const JobsListPage = () => {
 
       keepPreviousData: true,
 
+      staleTime: 10 * 60 * 1000,
+
       retry: 1,
 
       onSuccess: () => {

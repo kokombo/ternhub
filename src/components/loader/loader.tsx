@@ -3,7 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 const Loader = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-2">
-      <p>Ternhub loading...</p>
+      <p>Ternhub is loading...</p>
 
       <ThreeDots
         height="56"

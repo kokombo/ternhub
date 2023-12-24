@@ -6,12 +6,12 @@ import { BlogInfoPage } from "@/containers";
 import { AdminToolBox } from "@/components";
 
 const AdminBlogInfoPage = () => {
-  const { blogId } = useParams();
+  const { slug } = useParams();
 
   const router = useRouter();
 
-  const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    const res = await axios.get(`/api/blog/${blogId}`);
+  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
+    const res = await axios.get(`/api/blog/${slug}`);
     return res.data;
   };
 
@@ -22,18 +22,14 @@ const AdminBlogInfoPage = () => {
     error,
     refetch,
   } = useQuery(
-    "getBlogById",
+    "getBlogBySlug",
 
-    getBlogByIdRequest,
+    getBlogBySlugRequest,
 
     {
       refetchOnWindowFocus: false,
 
       retry: 1,
-
-      onSuccess: (blog) => {
-        router.push(`${blog?.slug}`);
-      },
     }
   );
 

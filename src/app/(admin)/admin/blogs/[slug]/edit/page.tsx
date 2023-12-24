@@ -6,14 +6,14 @@ import axios from "axios";
 import { useQuery } from "react-query";
 
 const EditBlogInfo = () => {
-  const { blogId } = useParams();
+  const { slug } = useParams();
 
-  const getBlogByIdRequest = async (): Promise<BlogType | undefined> => {
-    const res = await axios.get(`/api/blog/${blogId}`);
+  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
+    const res = await axios.get(`/api/blog/${slug}`);
     return res.data;
   };
 
-  const { data: blog } = useQuery("getBlogById", getBlogByIdRequest, {
+  const { data: blog } = useQuery("getBlogBySlug", getBlogBySlugRequest, {
     refetchOnWindowFocus: false,
   });
 
@@ -31,8 +31,6 @@ const EditBlogInfo = () => {
   const [content, setContent] = useState(blog?.content as string);
 
   const previewBlog = async () => {};
-
-  //If user role is not admin, redirect user to the app segment home
 
   return (
     <BlogForm

@@ -33,15 +33,15 @@ type JobFormType = {
 };
 
 interface JobType extends JobFormType {
-  id: string;
+  _id: string;
   numberOfViews: number;
-  timeStamp: Date;
+  createdAt: Date;
   description: string;
 }
 
 type BlogFormType = {
   title: string;
-  image?: string;
+  image: string;
   metaDescription: string;
   category: string;
   author: string;
@@ -51,10 +51,10 @@ type BlogFormType = {
 };
 
 interface BlogType extends BlogFormType {
-  id: string;
+  _id: string;
   slug: string;
   numberOfViews: number;
-  timeStamp: Date;
+  createdAt: Date;
   content: string;
 }
 
@@ -67,7 +67,7 @@ type FaqFormType = {
 };
 
 interface FaqType extends FaqFormType {
-  id: string;
+  _id: string;
   answer: string;
 }
 

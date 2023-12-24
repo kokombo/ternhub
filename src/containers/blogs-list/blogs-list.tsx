@@ -34,7 +34,7 @@ const BlogsList = (props: Props) => {
           ) : props.data && props.data.length > 0 ? (
             props.data
               .slice(0, 1)
-              .map((blog) => <RecentBlogCard key={blog.id} props={blog} />)
+              .map((blog) => <RecentBlogCard key={blog._id} props={blog} />)
           ) : null}
         </div>
       </section>
@@ -70,7 +70,7 @@ const BlogsList = (props: Props) => {
             props.data
               .slice(1, 11)
               .map((blog) => (
-                <BlogCard key={blog.id} props={blog} rootUrl={props.rootUrl} />
+                <BlogCard key={blog._id} props={blog} rootUrl={props.rootUrl} />
               ))
           ) : null}
         </div>

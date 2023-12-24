@@ -83,9 +83,6 @@ export const GET = async (req: Request) => {
 
     let numericQuery = JSON.stringify(Object.fromEntries(searchParams));
 
-    console.log("searchparam", searchParams);
-    console.log("numericquery", numericQuery);
-
     numericQuery = numericQuery.replace(
       /\b(gte|gt|lte|lt|eq)\b/g,
       (match) => `$${match}`
@@ -119,16 +116,15 @@ export const GET = async (req: Request) => {
 
     result = result.skip(skip).limit(limit);
 
-    console.log();
-
     if (page) {
       const jobCount = await Job.countDocuments();
 
-      if (skip >= jobCount)
+      if (skip >= jobCount) {
         return NextResponse.json(
           { message: "Oops! This page does not exist." },
           { status: 401 }
         );
+      }
     }
 
     let jobs = await result;

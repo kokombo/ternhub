@@ -198,3 +198,11 @@ h4 {
 .footer_text {
   @apply max-w-[520px] text-white text-sm lg:text-lg mt-6;
 }
+
+.jobinfo_wrapper {
+  @apply flex flex-col gap-[60px];
+}
+
+.singlejobpage_container {
+  @apply w-full flex flex-col py-11 lg:py-[100px] sm:px-[6.94%] px-5 gap-[60px] lg:gap-[100px];
+}

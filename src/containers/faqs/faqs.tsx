@@ -27,7 +27,7 @@ const Faqs = () => {
       <div className="grid grid-cols-1 gap-10">
         {isLoading || isError
           ? [...Array(4)].map((_, index) => <FaqSkeletonLoader key={index} />)
-          : faqs && faqs.map((faq) => <FaqCard key={faq.id} props={faq} />)}
+          : faqs && faqs.map((faq) => <FaqCard key={faq._id} props={faq} />)}
       </div>
     </section>
   );

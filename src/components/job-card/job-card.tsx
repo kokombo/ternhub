@@ -36,7 +36,7 @@ const JobCard = ({ props, rootUrl }: { props: JobType; rootUrl: string }) => {
         <div className="flex gap-[14px] ">
           <Link
             href={` ${
-              session?.user ? `${rootUrl}/${props.id}` : "/auth/signin"
+              session?.user ? `${rootUrl}/${props._id}` : "/auth/signin"
             }`}
             aria-label="link to a job details"
             className="apply_button"

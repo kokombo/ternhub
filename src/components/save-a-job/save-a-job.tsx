@@ -27,10 +27,10 @@ const SaveAJob = ({ props: job }: { props: JobType }) => {
   });
 
   const bookmarkAndUnbookmarkAJob = () => {
-    mutate(job.id);
+    mutate(job._id);
   };
 
-  const alreadyBookmarkedJobsIds = userSavedJobs?.map((job) => job.id);
+  const alreadyBookmarkedJobsIds = userSavedJobs?.map((job) => job._id);
 
   return (
     <button
@@ -39,7 +39,7 @@ const SaveAJob = ({ props: job }: { props: JobType }) => {
       className="save_button"
       onClick={bookmarkAndUnbookmarkAJob}
     >
-      {!session?.user || !alreadyBookmarkedJobsIds?.includes(job.id)
+      {!session?.user || !alreadyBookmarkedJobsIds?.includes(job._id)
         ? "Save"
         : "Remove"}
     </button>
