@@ -2,18 +2,17 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./containers/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  jit: true,
   safelist: ["outline-purple, text-red"],
   theme: {
-    fontFamily: {
-      sans: ["Source Sans 3", "sans-serif"],
-      grotesk: ["FoundersGrotesk", "sans-serif"],
-    },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+      },
       colors: {
         blue: "#2F00D7",
         white: "#FFFFFF",
@@ -48,6 +47,9 @@ const config: Config = {
         xl: "1280px",
       },
     },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 };
