@@ -3,16 +3,16 @@ import { readingTime } from "reading-time-estimator";
 
 const BlogInfopageHeader = ({ props }: { props: BlogType | undefined }) => {
   return (
-    <section className="bloginfopage_header_container">
+    <section className="flex flex-col items-center w-full lg:w-[820px]">
       <Image
         src={props?.image as string}
         alt={props?.title as string}
         height={100}
         width={100}
-        layout="fixed"
+        layout="responsive"
         loading="eager"
         priority={true}
-        className="h-[323px] md:w-full sm:h-[400px] object-contain rounded-[10px]"
+        className="rounded-[10px] lg:h-[400px] lg:w-[600px] md:w-full md:h-[323px]"
       />
 
       <article className="flex justify-between gap-3 items-center w-full mt-5 lg:mt-[50px] lg:px-[45px] text-sm lg:text-2xl tracking-[1%] font-[400]">

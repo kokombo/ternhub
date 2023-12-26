@@ -3,7 +3,8 @@ import { useQuery } from "react-query";
 
 export const getBlogBySlug = (slug: string | string[]) => {
   const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
-    return await axios.get(`/api/blog/${slug}`);
+    const res = await axios.get(`/api/blog/${slug}`);
+    return res.data;
   };
 
   const {

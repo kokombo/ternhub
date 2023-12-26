@@ -1,9 +1,10 @@
 import parse from "html-react-parser";
+import { Grotesk } from "@/app/font";
 
 const BlogInfopageBody = ({ props }: { props: BlogType | undefined }) => {
   return (
-    <section className="py-10 lg:py-[50px] pb-[50px] lg:pb-[100px]">
-      <h1 className="mb-6 lg:mb-[50px] text-2xl lg:text-[40px] ">
+    <section className="flex flex-col lg:gap-[50px] gap-6">
+      <h1 className="text-2xl lg:text-[40px]" style={Grotesk.style}>
         {props?.title}
       </h1>
 

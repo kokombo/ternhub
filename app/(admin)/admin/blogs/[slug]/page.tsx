@@ -10,6 +10,8 @@ const AdminBlogInfoPage = () => {
 
   const { blog, isLoading, isError, error, refetch } = getBlogBySlug(slug);
 
+  console.log(blog)
+
   return (
     <div>
       <BlogInfoPage
