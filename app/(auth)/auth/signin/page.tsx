@@ -124,7 +124,7 @@ const SignInPage = () => {
 
                 {error && (
                   <span className="absolute bottom-[-28px]">
-                    <CustomError message={error} />
+                    <CustomError message={error} loading={loading} />
                   </span>
                 )}
               </span>
@@ -147,6 +147,9 @@ const SignInPage = () => {
           alt="login page image"
           className="object-cover h-full w-full"
           placeholder="blur"
+          loading="eager"
+          priority={true}
+          quality={100}
         />
       </section>
     </div>

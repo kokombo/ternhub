@@ -50,7 +50,10 @@ const FaqForm = (props: Props) => {
             <div className="sm:mt-8 mt-16 relative flex items-center justify-center w-full">
               <span className="absolute">
                 {props.isError && (
-                  <CustomError message={props.error?.response?.data?.message} />
+                  <CustomError
+                    message={props.error?.response?.data?.message}
+                    loading={props.isLoading}
+                  />
                 )}
               </span>
             </div>

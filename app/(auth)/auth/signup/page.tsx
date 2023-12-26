@@ -138,6 +138,7 @@ const SignUpPage = () => {
                 {isError && (
                   <CustomError
                     message={errorResponse?.response?.data?.message}
+                    loading={isLoading}
                   />
                 )}
 
@@ -148,15 +149,17 @@ const SignUpPage = () => {
                     <SubmitButton label="Sign up" />
                   )}
                 </>
-
-                <AuthCTA
-                  url="/auth/signin"
-                  label="Already have an account?"
-                  cta="Log in"
-                />
               </div>
             </Form>
           </Formik>
+        </div>
+
+        <div className="w-full flex flex-col items-center gap-5">
+          <AuthCTA
+            url="/auth/signin"
+            label="Already have an account?"
+            cta="Log in"
+          />
         </div>
       </section>
 
@@ -166,6 +169,9 @@ const SignUpPage = () => {
           alt="signup page image"
           className="object-cover h-full w-full"
           placeholder="blur"
+          loading="eager"
+          priority={true}
+          quality={100}
         />
       </section>
     </div>

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BlogReadTime } from "..";
-import { Grotesk, Sans } from "../../app/font";
+import { Grotesk } from "../../app/font";
+import { BsArrowRight } from "react-icons/bs";
 
 const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
   const postCreationDate = new Date(props.createdAt).toDateString();
@@ -61,7 +62,9 @@ const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {
             Read more
           </Link>
 
-          <span className="text-2xl">{/* <BsArrowRight /> */}</span>
+          <span className="text-2xl">
+            <BsArrowRight />
+          </span>
         </div>
       </div>
     </article>

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import parse from "html-react-parser";
+import { BiMinus, BiPlus } from "react-icons/bi";
 
 const FaqCard = ({ props }: { props: FaqType }) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -19,7 +20,7 @@ const FaqCard = ({ props }: { props: FaqType }) => {
           {props.question}
         </h4>
 
-        {/* <button type="button">{showAnswer ? <BiMinus /> : <BiPlus />}</button> */}
+        <button type="button">{showAnswer ? <BiMinus /> : <BiPlus />}</button>
       </div>
 
       {showAnswer && (

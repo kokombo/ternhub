@@ -1,15 +1,17 @@
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Grotesk, Sans } from "../../app/font";
+import { useSession } from "next-auth/react";
 
 const NavLinks = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <ul className="flex flex-col md:flex-row items-center gap-[38px]">
       <li>
         <Link
-          href={"/jobs"}
+          href={`${session?.user ? "/jobs" : "/auth/signin"}`}
           aria-label="internships page link"
           className={`${
             pathname.includes("/jobs") ? "text-purple" : ""

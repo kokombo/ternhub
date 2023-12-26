@@ -6,8 +6,8 @@ const Loader = () => {
       <p>Ternhub is loading...</p>
 
       <ThreeDots
-        height="56"
-        width="80"
+        height="70"
+        width="90"
         radius="9"
         color="#5627FF"
         ariaLabel="three-dots-loading"

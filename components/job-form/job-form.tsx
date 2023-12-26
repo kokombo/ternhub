@@ -147,6 +147,7 @@ const JobForm = (props: Props) => {
                     {props.isError && (
                       <CustomError
                         message={props.error?.response?.data?.message}
+                        loading={props.isLoading}
                       />
                     )}
                   </span>

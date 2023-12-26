@@ -1,9 +1,15 @@
+"use client";
+import { useState, useEffect } from "react";
+
 type Props = {
   message: string;
+  loading?: boolean;
 };
 
 const CustomError = (props: Props) => {
-  return <p className="text-red text-sm">{props.message} </p>;
+  return (
+    <>{!props.loading && <p className="text-red text-sm">{props.message}</p>}</>
+  );
 };
 
 export default CustomError;

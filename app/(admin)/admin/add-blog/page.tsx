@@ -50,8 +50,6 @@ const AddABlog = () => {
     await mutateAsync(blogData);
   };
 
-  console.log("blogData", data);
-
   return (
     <BlogForm
       initialFormValues={initialFormValues}
