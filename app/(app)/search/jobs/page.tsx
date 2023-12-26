@@ -6,6 +6,9 @@ import { JobsList } from "@/containers";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { StateType } from "@/redux-toolkit/store";
+import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
 
 type Data = {
   jobs: JobType[];
@@ -14,7 +17,10 @@ type Data = {
 
 const JobsSearchResults = () => {
   const router = useRouter();
-  let searchTerm = "Frontend developer";
+
+  const dispatch = useDispatch();
+
+  const { jobSearchTerm } = useSelector((store: StateType) => store.search);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [locationFilterTerm, setLocationFilterTerm] = useState("");
@@ -23,11 +29,11 @@ const JobsSearchResults = () => {
 
   const params = new URLSearchParams();
 
-  if (locationFilterTerm) params.append("location", locationFilterTerm);
-  if (searchTerm) params.append("search", searchTerm.toLocaleLowerCase());
+  if (jobSearchTerm) params.append("search", jobSearchTerm);
+  if (locationFilterTerm) params.append("mode", locationFilterTerm);
   params.append("page", pageNumber.toString());
   params.append("limit", limit.toString());
-  if (locationFilterTerm == "all") params.delete("location");
+  if (locationFilterTerm == "all") params.delete("mode");
 
   const queryStrings = params.toString();
 
@@ -55,6 +61,8 @@ const JobsSearchResults = () => {
       keepPreviousData: true,
 
       retry: 1,
+
+      staleTime: 10 * 60 * 1000,
 
       onSuccess: () => {
         router.push(
@@ -84,14 +92,14 @@ const JobsSearchResults = () => {
 
   return (
     <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-[44px] md:gap-[64px]">
-      <div className="flex flex-col lg:flex-row items-center gap-4">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4">
         <JobsFilter setLocationFilterTerm={setLocationFilterTerm} />
 
         <Search
           buttonLabel="Search"
           placeholder=""
-          onChange={() => {}}
-          value={searchTerm}
+          onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
+          value={jobSearchTerm}
           onClickSearchButton={async () => await refetch()}
         />
       </div>
@@ -101,7 +109,7 @@ const JobsSearchResults = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No search results."
+        noDataLabel="There are no available jobs that match your query."
         refetch={refetch}
         rootUrl="/jobs"
         isFetching={isFetching}

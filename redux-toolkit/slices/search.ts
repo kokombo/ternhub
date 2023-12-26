@@ -15,8 +15,11 @@ const searchSlice = createSlice({
     setJobSearchTerm: (state, action) => {
       state.jobSearchTerm = action.payload;
     },
+    clearJobSearchTerm: (state, action) => {
+      state.jobSearchTerm = "";
+    },
   },
 });
 
-export const { setJobSearchTerm } = searchSlice.actions;
+export const { setJobSearchTerm, clearJobSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;

@@ -13,7 +13,7 @@ const JobsFilter = (props: Props) => {
   };
 
   return (
-    <div className="flex items-center md:gap-[26px] md:justify-start justify-between w-full">
+    <div className="flex items-center lg:gap-[26px] lg:justify-start justify-between w-full">
       <div className="select_container">
         <p className="filter_text">Sort by:</p>
 

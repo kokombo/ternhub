@@ -1,7 +1,18 @@
+"use client";
 import { Search } from "@/components";
 import { Grotesk } from "@/app/font";
+import { useSelector, useDispatch } from "react-redux";
+import { StateType } from "@/redux-toolkit/store";
+import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
+import { useRouter } from "next/navigation";
 
 const JobsListPageHeader = () => {
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+
+  const { jobSearchTerm } = useSelector((store: StateType) => store.search);
+
   return (
     <section className="jobs_page_header_wrapper">
       <article className="flex flex-col items-center text-center gap-[18px] md:gap-6">
@@ -22,9 +33,9 @@ const JobsListPageHeader = () => {
       <Search
         buttonLabel="Find Job"
         placeholder="Search job title"
-        onChange={() => {}}
-        value=""
-        onClickSearchButton={() => {}}
+        onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
+        value={jobSearchTerm}
+        onClickSearchButton={() => router.push("/search/jobs")}
       />
     </section>
   );

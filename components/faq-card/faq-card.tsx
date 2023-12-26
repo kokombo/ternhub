@@ -4,7 +4,7 @@ import { useState } from "react";
 import parse from "html-react-parser";
 import { BiMinus, BiPlus } from "react-icons/bi";
 
-const FaqCard = ({ props }: { props: FaqType }) => {
+const FaqCard = ({ props: faq }: { props: FaqType }) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const handleClick = () => {
@@ -18,7 +18,7 @@ const FaqCard = ({ props }: { props: FaqType }) => {
     >
       <div className="flex justify-between">
         <h4 className="text-lg font-semibold tracking-[1%] text-textblack ">
-          {props.question}
+          {faq.question}
         </h4>
 
         <button type="button">{showAnswer ? <BiMinus /> : <BiPlus />}</button>
@@ -31,7 +31,7 @@ const FaqCard = ({ props }: { props: FaqType }) => {
           } transition-all duration-200`}
         >
           <p className="text-lg font-normal tracking-[1%] text-greyblack">
-            {parse(props.answer)}
+            {parse(faq.answer)}
           </p>
         </div>
       )}

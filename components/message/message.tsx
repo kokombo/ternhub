@@ -12,11 +12,11 @@ type Props = {
 
 const Message = (props: Props) => {
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center gap-5 ">
+    <div className="w-full h-screen flex flex-col items-center gap-5 pt-5">
       <Image
         src={illustrations.vector}
         alt={`${props.message} vector illustration.`}
-        className="w-full h-96 object-contain"
+        className="w-full h-80 object-contain"
         priority
       />
 

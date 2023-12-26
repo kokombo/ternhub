@@ -71,11 +71,13 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    //Filtering job results
-
     const { searchParams } = new URL(req.url);
 
-    const excludeFields = ["page", "sort", "limit", "fields"];
+    let result;
+
+    //Filtering job results
+
+    const excludeFields = ["page", "sort", "limit", "fields", "search"];
 
     excludeFields.forEach((item) => searchParams.delete(item));
 
@@ -86,7 +88,17 @@ export const GET = async (req: Request) => {
       (match) => `$${match}`
     );
 
-    let result = Job.find(JSON.parse(numericQuery));
+    result = Job.find(JSON.parse(numericQuery));
+
+    //Search
+
+    const searchQuery = searchParams.get("search");
+
+    if (searchQuery) {
+      let searchQueryToDatabase = { $text: { $search: searchQuery } };
+
+      result = result.find(searchQueryToDatabase);
+    }
 
     //Sorting job results
 
@@ -126,21 +138,6 @@ export const GET = async (req: Request) => {
     }
 
     let jobs = await result;
-
-    //search
-
-    const searchQuery = searchParams.get("search");
-
-    if (searchQuery) {
-      jobs = jobs.filter((job) =>
-        job.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-
-      if (jobs.length === 0)
-        return NextResponse.json({
-          message: "There are no jobs that match your search term.",
-        });
-    }
 
     return NextResponse.json({ jobs, numOfJobs: jobs.length });
   } catch (error) {

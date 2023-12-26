@@ -19,38 +19,36 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
-  console.log("J", props.isLoading, props.isFetching);
-
   return (
-    <section className="flex flex-col items-center gap-8 w-full h-full">
+    <section className="flex flex-col items-center gap-8 ">
       {/* Rendering jobs list*/}
 
-      <div
-        className={`w-full ${
-          (props.data && props.data.length > 0) ||
-          props.isLoading ||
-          props.isFetching
-            ? "job_list_grid"
-            : "flex items-center justify-center"
-        } `}
-      >
-        {props.isLoading || props.isFetching ? (
-          [...Array(10)].map((_, index) => <JobSkeletonLoader key={index} />)
-        ) : props.isError ? (
+      {props.isLoading || props.isFetching ? (
+        <div className="job_list_grid w-full">
+          {[...Array(10)].map((_, index) => (
+            <JobSkeletonLoader key={index} />
+          ))}
+        </div>
+      ) : props.isError ? (
+        <div className="flex_center w-full">
           <Message
             message={props.error?.response?.data?.message}
             isError={props.isError}
             buttonLabel="Try again"
             onClickButton={async () => await props.refetch()}
           />
-        ) : props.data && props.data.length < 1 ? (
+        </div>
+      ) : props.data && props.data.length < 1 ? (
+        <div className="flex_center w-full">
           <Message message={props.noDataLabel} />
-        ) : (
-          props.data?.map((job) => (
+        </div>
+      ) : (
+        <div className="job_list_grid w-full">
+          {props.data?.map((job) => (
             <JobCard props={job} key={job._id} rootUrl={props.rootUrl} />
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/*  Rendering pagination buttons */}
 

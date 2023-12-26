@@ -16,6 +16,7 @@ const NavLinks = () => {
           className={`${
             pathname.includes("/jobs") ? "text-purple" : ""
           } text-sm lg:text-base tracking-[0.5%]`}
+          prefetch={false}
         >
           Jobs
         </Link>
@@ -28,6 +29,7 @@ const NavLinks = () => {
           className={`${
             pathname.includes("/blogs") ? "text-purple" : ""
           } text-sm lg:text-base tracking-[0.5%] font-sans `}
+          prefetch={false}
         >
           Blogs
         </Link>

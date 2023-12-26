@@ -16,12 +16,12 @@ const JobInfopageHeader = ({ props: job }: { props: JobType | undefined }) => {
             <JobCompanyLogo props={job} />
 
             <p className="text-xl lg:text-2xl tracking-[1%] font-[400] ">
-              {job?.company}
+              {job.company}
             </p>
           </article>
 
           <h2 className="text-[22px] lg:text-[28px] font-[600] tracking-[1%] text-center">
-            {job?.title}
+            {job.title}
           </h2>
 
           <article className="flex items-center gap-4 lg:gap-5 lg:text-base text-[14px] font-[400] tracking-[1%] ">
@@ -33,12 +33,12 @@ const JobInfopageHeader = ({ props: job }: { props: JobType | undefined }) => {
                 width={24}
               />
 
-              <p className="text-lightGrey capitalize ">{job?.location} </p>
+              <p className="text-lightGrey capitalize ">{job.location} </p>
             </article>
 
-            <p className="text-lightGrey capitalize">{job?.mode} </p>
+            <p className="text-lightGrey capitalize">{job.mode} </p>
 
-            <JobPostDuration createdAt={job?.createdAt} color="text-green" />
+            <JobPostDuration createdAt={job.createdAt} color="text-green" />
           </article>
 
           <div className="flex items-center gap-[14px]">
