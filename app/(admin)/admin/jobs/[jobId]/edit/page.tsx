@@ -1,22 +1,14 @@
 "use client";
-import { JobForm } from "../../../../../../components";
+import { JobForm } from "@/components";
 import { FormikHelpers } from "formik";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const EditJobInfo = () => {
   const { jobId } = useParams();
 
-  const getJobByIdRequest = async (): Promise<JobType | undefined> => {
-    const res = await axios.get(`/api/job/${jobId}`);
-    return res.data;
-  };
-
-  const { data: job } = useQuery("getJobById", getJobByIdRequest, {
-    refetchOnWindowFocus: false,
-  });
+  const { job } = getJobById(jobId);
 
   const initialFormValues: JobFormType = {
     title: job?.title as string,

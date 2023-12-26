@@ -1,10 +1,10 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";
 import { useSession } from "next-auth/react";
-import { Grotesk } from "../../app/font";
 
 const JobCard = ({ props, rootUrl }: { props: JobType; rootUrl: string }) => {
   const { data: session } = useSession();
@@ -45,7 +45,7 @@ const JobCard = ({ props, rootUrl }: { props: JobType; rootUrl: string }) => {
             Apply
           </Link>
 
-          <SaveAJob props={props} />
+          <SaveAJob job={props} />
         </div>
       </div>
     </article>

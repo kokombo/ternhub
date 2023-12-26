@@ -1,8 +1,9 @@
 "use client";
-import { SectionHeading, StyledLink, JobCard } from "../../components";
+
+import { SectionHeading, StyledLink, JobCard } from "@/components";
 import { useQuery } from "react-query";
 import axios from "axios";
-import JobSkeletonLoader from "../../utilities/skeletons/job-skeleton-loader";
+import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { useSession } from "next-auth/react";
 
 type Data = {
@@ -18,15 +19,11 @@ const TrendingJobs = () => {
     return res.data;
   };
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
-    "fetchJobs",
-    fetchJobsRequest,
-    {
-      refetchOnWindowFocus: false,
+  const { data, isLoading, isError } = useQuery("fetchJobs", fetchJobsRequest, {
+    refetchOnWindowFocus: false,
 
-      staleTime: 60 * 60 * 60 * 1000,
-    }
-  );
+    staleTime: 60 * 60 * 60 * 1000,
+  });
 
   return (
     <section className="container">

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { JobsFilter, Search } from "../../../../components";
-import { JobsList } from "../../../../containers";
+import { JobsFilter, Search } from "@/components";
+import { JobsList } from "@/containers";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";

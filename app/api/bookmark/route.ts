@@ -1,9 +1,9 @@
-import User from "../../../models/user";
+import User from "@/models/user";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../utilities";
-import { connectDatabase } from "../../../database/database";
-import { validateMongoDBId } from "../../../utilities/general/validateMongoDBId";
+import { authOptions } from "@/utilities";
+import { connectDatabase } from "@/database/database";
+import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 
 export const GET = async (req: Request) => {
   const session = await getServerSession(authOptions);
@@ -45,7 +45,7 @@ export const PUT = async (req: Request) => {
     );
   }
 
-  const { jobId } = await req.json();
+  const jobId = await req.json();
 
   validateMongoDBId(jobId);
 
@@ -55,7 +55,7 @@ export const PUT = async (req: Request) => {
     const user = await User.findById(userId);
 
     const alreadyBookmarked = user.savedJobs.find(
-      (id: string) => id.toString() === jobId.toString()
+      (_id: string) => _id.toString() === jobId.toString()
     );
 
     if (alreadyBookmarked) {
@@ -67,9 +67,13 @@ export const PUT = async (req: Request) => {
         },
 
         { new: true }
-      ).populate("savedJobs");
+      );
 
-      return NextResponse.json(user.savedJobs);
+      const userAgain = await User.findById(userId).populate("savedJobs");
+
+      const userSavedJobs = userAgain.savedJobs;
+
+      return NextResponse.json(userSavedJobs);
     } else {
       const user = await User.findByIdAndUpdate(
         userId,
@@ -77,15 +81,17 @@ export const PUT = async (req: Request) => {
         { $push: { savedJobs: jobId } },
 
         { new: true }
-      ).populate("savedJobs");
+      );
 
-      return NextResponse.json(user.savedJobs);
+      const userAgain = await User.findById(userId).populate("savedJobs");
+
+      const userSavedJobs = userAgain.savedJobs;
+
+      return NextResponse.json(userSavedJobs);
     }
   } catch (error) {
     return NextResponse.json(
-      {
-        message: "Something went wrong. Please try again.",
-      },
+      { message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

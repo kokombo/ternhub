@@ -1,5 +1,5 @@
 "use client";
-import { FaqForm } from "../../../../components";
+import { FaqForm } from "@/components";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";

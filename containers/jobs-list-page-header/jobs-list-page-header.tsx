@@ -1,5 +1,5 @@
-import { Search } from "../../components";
-import { Grotesk } from "../../app/font";
+import { Search } from "@/components";
+import { Grotesk } from "@/app/font";
 
 const JobsListPageHeader = () => {
   return (

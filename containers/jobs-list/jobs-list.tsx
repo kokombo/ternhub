@@ -1,5 +1,5 @@
-import { JobCard, Message } from "../../components";
-import JobSkeletonLoader from "../../utilities/skeletons/job-skeleton-loader";
+import { JobCard, Message } from "@/components";
+import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {

@@ -1,7 +1,7 @@
-import { RecentBlogCard, BlogCard, Search, Message } from "../../components";
-import BlogSkeletonLoader from "../../utilities/skeletons/blog-skeleton-loader";
-import RecentBlogSkeletonLoader from "../../utilities/skeletons/recent-blog-skeleton-loader";
-import { Grotesk } from "../../app/font";
+import { RecentBlogCard, BlogCard, Search, Message } from "@/components";
+import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
+import RecentBlogSkeletonLoader from "@/utilities/skeletons/recent-blog-skeleton-loader";
+import { Grotesk } from "@/app/font";
 
 type Props = {
   data: BlogType[] | undefined;

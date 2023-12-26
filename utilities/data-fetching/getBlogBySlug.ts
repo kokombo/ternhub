@@ -6,14 +6,21 @@ export const getBlogBySlug = (slug: string | string[]) => {
     return await axios.get(`/api/blog/${slug}`);
   };
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const {
+    data: blog,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery(
     "getBlogBySlug",
 
     getBlogBySlugRequest,
+
     {
       refetchOnWindowFocus: false,
     }
   );
 
-  return { data, isLoading, error, isError, refetch };
+  return { blog, isLoading, error, isError, refetch };
 };

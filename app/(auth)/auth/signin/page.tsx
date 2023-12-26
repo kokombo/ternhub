@@ -9,13 +9,13 @@ import {
   CustomError,
   SocialAuthFrame,
   SubmitFormLoader,
-} from "../../../../components";
+} from "@/components";
 import Link from "next/link";
 import * as Yup from "yup";
 import Image from "next/image";
-import { icons, images } from "../../../../constants";
+import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
-import useShowPassword from "../../../../utilities/hooks/useShowPassword";
+import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 
 const userLoginData: UserLoginDataType = {

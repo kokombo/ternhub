@@ -3,7 +3,7 @@ import {
   JobInfopageBody,
   Message,
   Loader,
-} from "../../components";
+} from "@/components";
 
 type Props = {
   data: JobType | undefined;

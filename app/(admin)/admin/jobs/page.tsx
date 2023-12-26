@@ -1,21 +1,15 @@
 "use client";
-import { JobsList } from "../../../../containers";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 
-type Data = {
-  jobs: JobType[];
-  numOfJobs: number;
-};
+import { JobsList } from "@/containers";
+import { useState } from "react";
+import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 
 const AdminJobsListPage = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const limit = 40;
+  const limit: number = 40;
 
-  const router = useRouter();
+  const baseUrl: string = "/admin/";
 
   const params = new URLSearchParams();
 
@@ -23,12 +17,6 @@ const AdminJobsListPage = () => {
   params.append("limit", limit.toString());
 
   const queryStrings = params.toString();
-
-  const fetchJobsRequest = async (): Promise<Data | undefined> => {
-    const res = await axios.get("/api/job?" + queryStrings);
-    return res.data;
-  };
-
   const {
     data,
     isLoading,
@@ -37,22 +25,7 @@ const AdminJobsListPage = () => {
     refetch,
     isFetching,
     isPreviousData,
-  } = useQuery(
-    ["fetchJobs", pageNumber],
-
-    fetchJobsRequest,
-    {
-      refetchOnWindowFocus: false,
-
-      keepPreviousData: true,
-
-      staleTime: 10 * 60 * 1000,
-
-      onSuccess: () => {
-        router.push(`/admin/jobs?page=${pageNumber}`, undefined);
-      },
-    }
-  );
+  } = getAllJobs(pageNumber, queryStrings, limit, baseUrl);
 
   return (
     <div className="py-11 lg:py-[50px] sm:px-[6.94%] px-5 flex flex-col gap-[25px]">

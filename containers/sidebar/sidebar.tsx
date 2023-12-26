@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { Logo } from "../../components";
+import { Logo } from "@/components";
 import { useSession, signOut } from "next-auth/react";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 import Link from "next/link";
 import { useEffect } from "react";
-import { useScreenSize } from "../../utilities/hooks";
+import { useScreenSize } from "@/utilities/hooks";
 import { useRouter } from "next/navigation";
 
 type Props = {

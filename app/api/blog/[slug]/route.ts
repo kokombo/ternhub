@@ -1,11 +1,10 @@
-import Blog from "../../../../models/blog";
-import { connectDatabase } from "../../../../database/database";
+import Blog from "@/models/blog";
+import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import slugify from "slugify";
-import { validateMongoDBId } from "../../../../utilities/general/validateMongoDBId";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../utilities";
+import { authOptions } from "@/utilities";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   try {

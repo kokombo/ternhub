@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BlogReadTime } from "..";
-import { Grotesk } from "../../app/font";
 import { BsArrowRight } from "react-icons/bs";
 
 const BlogCard = ({ props, rootUrl }: { props: BlogType; rootUrl: string }) => {

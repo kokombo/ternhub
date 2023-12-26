@@ -1,5 +1,5 @@
 "use client";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 

@@ -1,34 +1,17 @@
 "use client";
-
-import { BlogInfoPage } from "../../../../containers";
+import { BlogInfoPage } from "@/containers";
 import { useParams } from "next/navigation";
-import axios from "axios";
-import { useQuery } from "react-query";
+import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 
 const BlogPage = () => {
   const { slug } = useParams();
 
-  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
-    const res = await axios.get(`/api/blog/${slug}`);
-    return res.data;
-  };
-
-  const { data, isLoading, isError, error, refetch } = useQuery(
-    "getBlogBySlug",
-
-    getBlogBySlugRequest,
-
-    {
-      refetchOnWindowFocus: false,
-
-      retry: 1,
-    }
-  );
+  const { blog, isError, isLoading, error, refetch } = getBlogBySlug(slug);
 
   return (
     <div>
       <BlogInfoPage
-        data={data}
+        data={blog}
         isError={isError}
         isLoading={isLoading}
         error={error}

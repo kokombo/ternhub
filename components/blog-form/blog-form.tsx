@@ -9,7 +9,7 @@ import {
 } from "..";
 import { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
-import { blogCategories } from "../../constants/data";
+import { blogCategories } from "@/constants/data";
 
 type Props = {
   title: string;

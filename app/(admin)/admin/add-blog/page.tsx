@@ -1,5 +1,6 @@
 "use client";
-import { BlogForm } from "../../../../components";
+
+import { BlogForm } from "@/components";
 import { useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";

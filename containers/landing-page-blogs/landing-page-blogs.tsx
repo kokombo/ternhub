@@ -1,7 +1,7 @@
-import { SectionHeading, BlogCard, StyledLink } from "../../components";
+import { SectionHeading, BlogCard, StyledLink } from "@/components";
 import axios from "axios";
 import { useQuery } from "react-query";
-import BlogSkeletonLoader from "../../utilities/skeletons/blog-skeleton-loader";
+import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 
 const LandingPageBlogs = () => {
   const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {

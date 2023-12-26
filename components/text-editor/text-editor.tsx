@@ -1,7 +1,7 @@
 import "quill/dist/quill.snow.css";
 import { Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
-import { useOutline } from "../../utilities/hooks";
+import { useOutline } from "@/utilities/hooks";
 
 type Props = {
   label: string;

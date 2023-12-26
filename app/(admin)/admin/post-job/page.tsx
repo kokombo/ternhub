@@ -1,5 +1,6 @@
 "use client";
-import { JobForm } from "../../../../components";
+
+import { JobForm } from "@/components";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";

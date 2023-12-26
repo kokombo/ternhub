@@ -1,10 +1,10 @@
-import Faq from "../../../../models/faq";
-import { connectDatabase } from "../../../../database/database";
+import Faq from "@/models/faq";
+import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../utilities";
-import { validateMongoDBId } from "../../../../utilities/general/validateMongoDBId";
+import { authOptions } from "@/utilities";
+import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   validateMongoDBId(params.id);

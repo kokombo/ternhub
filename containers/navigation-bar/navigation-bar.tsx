@@ -1,9 +1,9 @@
 "use client";
-import { Logo, NavLinks, StyledLink, ProfilePicture } from "../../components";
+import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 
 type Props = {
   openSidebar: () => void;

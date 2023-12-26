@@ -1,21 +1,13 @@
 "use client";
-import { BlogForm } from "../../../../../../components";
+import { BlogForm } from "@/components";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import axios from "axios";
-import { useQuery } from "react-query";
+import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 
 const EditBlogInfo = () => {
   const { slug } = useParams();
 
-  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
-    const res = await axios.get(`/api/blog/${slug}`);
-    return res.data;
-  };
-
-  const { data: blog } = useQuery("getBlogBySlug", getBlogBySlugRequest, {
-    refetchOnWindowFocus: false,
-  });
+  const { blog } = getBlogBySlug(slug);
 
   const initialFormValues: BlogFormType = {
     title: blog?.title as string,

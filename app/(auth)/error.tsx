@@ -1,5 +1,6 @@
 "use client";
-import { ErrorComponent } from "../../components";
+
+import { ErrorComponent } from "@/components";
 
 const Error = () => {
   return <ErrorComponent />;

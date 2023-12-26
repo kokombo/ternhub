@@ -1,8 +1,4 @@
-import {
-  BlogInfopageHeader,
-  BlogInfopageBody,
-  Message,
-} from "../../components";
+import { BlogInfopageHeader, BlogInfopageBody, Message } from "@/components";
 
 type Props = {
   data: BlogType | undefined;

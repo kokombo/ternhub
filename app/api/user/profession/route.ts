@@ -1,8 +1,8 @@
-import User from "../../../../models/user";
+import User from "@/models/user";
 import { NextResponse } from "next/server";
-import { connectDatabase } from "../../../../database/database";
+import { connectDatabase } from "@/database/database";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../../utilities";
+import { authOptions } from "@/utilities";
 
 export const PUT = async (req: Request) => {
   const { profession } = await req.json();

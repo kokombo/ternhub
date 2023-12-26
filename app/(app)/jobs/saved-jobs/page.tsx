@@ -1,28 +1,13 @@
 "use client";
-import { useQuery } from "react-query";
-import axios from "axios";
-import JobSkeletonLoader from "../../../../utilities/skeletons/job-skeleton-loader";
-import { Message, JobCard } from "../../../../components";
+
+import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
+import { Message, JobCard } from "@/components";
+import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 
 const SavedJobsPage = () => {
-  const getUserSavedJobsRequest = async (): Promise<JobType[] | undefined> => {
-    const res = await axios.get("/api/bookmark");
-    return res.data;
-  };
-
   let errorResponse: any;
 
-  const {
-    data: savedJobs,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useQuery("getUserSavedJobs", getUserSavedJobsRequest, {
-    refetchOnWindowFocus: false,
-
-    retry: 1,
-  });
+  const { savedJobs, isError, isLoading, error, refetch } = getUserSavedJobs();
 
   if (error) errorResponse = error;
 
@@ -46,7 +31,8 @@ const SavedJobsPage = () => {
       ) : savedJobs && savedJobs.length < 1 ? (
         <Message message="There are no saved jobs." />
       ) : (
-        savedJobs?.map((job) => (
+        savedJobs &&
+        savedJobs.map((job) => (
           <JobCard props={job} key={job._id} rootUrl="/" />
         ))
       )}

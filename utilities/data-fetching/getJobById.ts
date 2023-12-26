@@ -6,7 +6,13 @@ export const getJobById = (jobId: string | string[]) => {
     return await axios.get(`/api/job/${jobId}`);
   };
 
-  const { data, isLoading, isError, error, refetch } = useQuery(
+  const {
+    data: job,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useQuery(
     "getJobById",
 
     getJobByIdRequest,
@@ -16,5 +22,5 @@ export const getJobById = (jobId: string | string[]) => {
     }
   );
 
-  return { data, isLoading, isError, error, refetch };
+  return { job, isLoading, isError, error, refetch };
 };

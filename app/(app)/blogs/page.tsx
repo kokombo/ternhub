@@ -1,28 +1,12 @@
 "use client";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { BlogsList } from "../../../containers";
-import { BlogsListpageTitle, Search } from "../../../components";
+
+import { BlogsList } from "@/containers";
+import { BlogsListpageTitle, Search } from "@/components";
+
+import { getAllBlogs } from "../../../utilities/data-fetching/getAllBlogs";
 
 const BlogListPage = () => {
-  const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
-    const res = await axios.get("/api/blog");
-    return res.data;
-  };
-
-  const { data, isLoading, isError, error, refetch } = useQuery(
-    "fetchBlogs",
-
-    fetchBlogsRequest,
-
-    {
-      refetchOnWindowFocus: false,
-
-      staleTime: 60 * 60 * 1000,
-    }
-  );
-
-  console.log(isError, isLoading, data, error);
+  const { blogs, isLoading, isError, error, refetch } = getAllBlogs();
 
   return (
     <div className="flex flex-col py-11 lg:py-[100px] sm:px-[6.94%] px-5 w-full">
@@ -39,7 +23,7 @@ const BlogListPage = () => {
       </section>
 
       <BlogsList
-        data={data}
+        data={blogs}
         isLoading={isLoading}
         isError={isError}
         error={error}

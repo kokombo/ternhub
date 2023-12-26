@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BlogReadTime, JobPostDuration } from "..";
 import Image from "next/image";
-import { Grotesk } from "../../app/font";
+import { Grotesk } from "@/app/font";
 
 const RecentBlogCard = ({ props }: { props: BlogType }) => {
   return (

@@ -1,7 +1,7 @@
-import { SectionHeading, FaqCard } from "../../components";
+import { SectionHeading, FaqCard } from "@/components";
 import { useQuery } from "react-query";
 import axios from "axios";
-import FaqSkeletonLoader from "../../utilities/skeletons/faq-skeleton-loader";
+import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
 
 const Faqs = () => {
   const fetchFaqsRequest = async (): Promise<FaqType[] | undefined> => {

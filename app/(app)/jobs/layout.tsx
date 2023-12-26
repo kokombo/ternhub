@@ -1,7 +1,8 @@
 "use client";
+
 import "../../../styles/globals.css";
-import { JobsListPageHeader } from "../../../containers";
-import { JobsPageNavigationLink, Loader } from "../../../components";
+import { JobsListPageHeader } from "@/containers";
+import { JobsPageNavigationLink, Loader } from "@/components";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";

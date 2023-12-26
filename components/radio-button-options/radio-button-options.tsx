@@ -1,5 +1,5 @@
 import { Field, FieldProps, ErrorMessage } from "formik";
-import { useOutline } from "../../utilities/hooks";
+import { useOutline } from "@/utilities/hooks";
 
 type Props = {
   name: string;

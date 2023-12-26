@@ -1,43 +1,27 @@
 "use client";
-import axios from "axios";
-import { useMutation, useQueryClient } from "react-query";
-import { useSession } from "next-auth/react";
 
-const SaveAJob = ({ props: job }: { props: JobType }) => {
+import { useSession } from "next-auth/react";
+import { useSelector } from "react-redux";
+import { StateType } from "@/redux-toolkit/store";
+import { bookmarkAJob } from "@/utilities/data-fetching/bookmarkAJob";
+
+const SaveAJob = ({ job }: { job: JobType }) => {
   const { data: session } = useSession();
 
-  const queryClient = useQueryClient();
+  const { userSavedJobs } = useSelector((store: StateType) => store.job);
 
-  const bookmarkAJobRequest = async (
-    jobId: string
-  ): Promise<JobType[] | undefined> => {
-    const res = await axios.put("/api/bookmark", jobId);
-    return res.data;
-  };
+  const { bookmarkAndUnbookmarkAJobFunction, error, isError } = bookmarkAJob(
+    job._id
+  );
 
-  const {
-    mutate,
-    data: userSavedJobs,
-    isError,
-    error,
-  } = useMutation(bookmarkAJobRequest, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getUserSavedJobs");
-    },
-  });
-
-  const bookmarkAndUnbookmarkAJob = () => {
-    mutate(job._id);
-  };
-
-  const alreadyBookmarkedJobsIds = userSavedJobs?.map((job) => job._id);
+  const alreadyBookmarkedJobsIds = userSavedJobs?.map((eachJob) => eachJob._id);
 
   return (
     <button
       type="button"
       aria-label="button to save or bookmark a job"
       className="save_button"
-      onClick={bookmarkAndUnbookmarkAJob}
+      onClick={bookmarkAndUnbookmarkAJobFunction}
     >
       {!session?.user || !alreadyBookmarkedJobsIds?.includes(job._id)
         ? "Save"

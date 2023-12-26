@@ -1,7 +1,7 @@
 import { Field, ErrorMessage, FieldProps } from "formik";
-import { useOutline } from "../../utilities/hooks";
+import { useOutline } from "@/utilities/hooks";
 import Image from "next/image";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 
 type Props = {
   label: string;

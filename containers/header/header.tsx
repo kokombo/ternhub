@@ -1,4 +1,4 @@
-import Hero from "../hero/hero";
+import { Hero } from "..";
 
 const Header = () => {
   return (

@@ -1,4 +1,4 @@
-import { illustrations } from "../../constants";
+import { illustrations } from "@/constants";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { Loader } from "../../components";
-import "../../styles/globals.css";
-import { AdminSegmentNavbar } from "../../containers";
+import { Loader } from "@/components";
+import "@/styles/globals.css";
+import { AdminSegmentNavbar } from "@/containers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

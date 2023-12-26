@@ -1,8 +1,10 @@
 "use client";
 
 import "../styles/globals.css";
-import { NextAuthProvider, ReactQueryProvider } from "../components";
-import { Grotesk, Sans } from "./font";
+import { NextAuthProvider, ReactQueryProvider } from "@/components";
+import { Sans } from "./font";
+import { Provider } from "react-redux";
+import { store } from "@/redux-toolkit/store";
 
 export default function RootLayout({
   children,
@@ -14,7 +16,9 @@ export default function RootLayout({
       <body>
         <main className={Sans.className}>
           <NextAuthProvider>
-            <ReactQueryProvider>{children}</ReactQueryProvider>
+            <Provider store={store}>
+              <ReactQueryProvider>{children}</ReactQueryProvider>
+            </Provider>
           </NextAuthProvider>
         </main>
       </body>

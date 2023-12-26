@@ -1,4 +1,4 @@
-import { HeroTitle, Tags, Search } from "../../components";
+import { HeroTitle, Tags, Search } from "@/components";
 
 const Hero = () => {
   return (

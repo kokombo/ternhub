@@ -1,41 +1,14 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { JobInfopage } from "../../../../../containers";
-import { AdminToolBox } from "../../../../../components";
+
+import { useParams } from "next/navigation";
+import { JobInfopage } from "@/containers";
+import { AdminToolBox } from "@/components";
+import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const AdminJobInfoPage = () => {
   const { jobId } = useParams();
 
-  const router = useRouter();
-
-  const getJobByIdRequest = async (): Promise<JobType | undefined> => {
-    const res = await axios.get(`/api/job/${jobId}`);
-    return res.data;
-  };
-
-  const {
-    data: job,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useQuery(
-    "getJobById",
-
-    getJobByIdRequest,
-
-    {
-      refetchOnWindowFocus: false,
-
-      retry: 1,
-
-      onSuccess: (job) => {
-        // router.push(`/admin/job/`, undefined);
-      },
-    }
-  );
+  const { job, isLoading, isError, error, refetch } = getJobById(jobId);
 
   return (
     <div>

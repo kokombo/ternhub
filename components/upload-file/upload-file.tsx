@@ -1,7 +1,7 @@
 import { Field, FieldProps } from "formik";
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 import Image from "next/image";
-import { useOutline } from "../../utilities/hooks";
+import { useOutline } from "@/utilities/hooks";
 
 type Props = {
   name: string;

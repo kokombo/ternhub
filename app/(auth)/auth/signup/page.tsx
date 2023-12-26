@@ -1,4 +1,5 @@
 "use client";
+
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -9,16 +10,15 @@ import {
   SelectField,
   CustomError,
   SocialAuthFrame,
-} from "../../../../components";
+} from "@/components";
 import * as Yup from "yup";
-
 import Image from "next/image";
-import { images, icons } from "../../../../constants";
+import { images, icons } from "@/constants";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
-import { professions } from "../../../../constants/data";
-import useShowPassword from "../../../../utilities/hooks/useShowPassword";
+import { professions } from "@/constants/data";
+import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 
 const userData: UserSignupDataType = {

@@ -1,4 +1,4 @@
-import { Grotesk } from "../../app/font";
+import { Grotesk } from "@/app/font";
 
 type Props = {
   heading: string;

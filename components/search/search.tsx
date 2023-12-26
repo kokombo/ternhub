@@ -1,4 +1,4 @@
-import { icons } from "../../constants";
+import { icons } from "@/constants";
 import Image from "next/image";
 import { ChangeEventHandler } from "react";
 
