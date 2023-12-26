@@ -7,13 +7,11 @@ const BlogInfopageHeader = ({ props }: { props: BlogType | undefined }) => {
       <Image
         src={props?.image as string}
         alt={props?.title as string}
-        height={400}
+        height={100}
         width={100}
-        layout="responsive"
+        layout="fixed"
         loading="eager"
         priority={true}
-        placeholder="blur"
-        style={{ objectFit: "contain" }}
         className="h-[323px] md:w-full sm:h-[400px] object-contain rounded-[10px]"
       />
 

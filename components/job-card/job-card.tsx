@@ -32,7 +32,7 @@ const JobCard = ({ props, rootUrl }: { props: JobType; rootUrl: string }) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <JobPostDuration props={props} />
+        <JobPostDuration createdAt={props.createdAt} color="text-green" />
 
         <div className="flex gap-[14px] ">
           <Link

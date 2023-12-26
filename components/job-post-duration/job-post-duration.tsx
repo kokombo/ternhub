@@ -1,12 +1,16 @@
 import { formatDistanceToNow } from "date-fns";
 
-const JobPostDuration = ({ props }: { props: JobType | undefined }) => {
-  const timeStamp = props?.createdAt;
-
+const JobPostDuration = ({
+  createdAt,
+  color,
+}: {
+  createdAt: Date | undefined;
+  color: string;
+}) => {
   let duration;
 
-  if (timeStamp) {
-    const time = new Date(timeStamp);
+  if (createdAt) {
+    const time = new Date(createdAt);
 
     const timePeriod = formatDistanceToNow(time, { addSuffix: true });
 
@@ -14,7 +18,7 @@ const JobPostDuration = ({ props }: { props: JobType | undefined }) => {
   }
 
   return (
-    <p className="text-green text-sm lg:text-base tracking-[1%] ">
+    <p className={`${color} text-sm lg:text-base tracking-[1%] `}>
       Posted {duration}
     </p>
   );

@@ -30,6 +30,7 @@ const LandingPageBlogs = () => {
         {isLoading || isError
           ? [...Array(4)].map((_, index) => <BlogSkeletonLoader key={index} />)
           : blogs &&
+            blogs.length > 1 &&
             blogs
               .slice(0, 4)
               .map((blog) => (
@@ -38,7 +39,7 @@ const LandingPageBlogs = () => {
       </div>
 
       <StyledLink
-        label="View More Blogs"
+        label="View more blogs"
         arialabel="Landing page link to all blogs page"
         url="/blogs"
         extraClasses="self-center blue_button"

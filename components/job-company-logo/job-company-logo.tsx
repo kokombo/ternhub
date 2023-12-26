@@ -7,14 +7,11 @@ const JobCompanyLogo = ({ props }: { props: JobType | undefined }) => {
         <Image
           src={props.logo}
           alt={`${props?.company} logo`}
-          height={32}
-          width={32}
-          layout="responsive"
-          loading="eager"
-          placeholder="blur"
-          style={{ objectFit: "contain" }}
-          className="rounded"
-          // className="w-[21.33px] h-[21.33px] lg:w-[32px] lg:h-[32px] rounded"
+          height={100}
+          width={100}
+          layout="fixed"
+          loading="lazy"
+          className="w-[21.33px] h-[21.33px] lg:w-[32px] lg:h-[32px] rounded object-contain"
         />
       ) : (
         <p className="font-bold text-2xl md:text-3xl">

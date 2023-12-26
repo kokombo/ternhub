@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BlogReadTime } from "..";
+import { BlogReadTime, JobPostDuration } from "..";
 import Image from "next/image";
 import { Grotesk } from "../../app/font";
 
@@ -16,9 +16,9 @@ const RecentBlogCard = ({ props }: { props: BlogType }) => {
           width={100}
           height={100}
           loading="lazy"
-          layout="responsive"
+          layout="fixed"
           quality={100}
-          className="h-[388px] lg:w-[564px] object-contain lg:rounded-l-[10px]"
+          className="h-full w-full lg:rounded-l-[10px]"
         />
       </div>
 
@@ -38,9 +38,12 @@ const RecentBlogCard = ({ props }: { props: BlogType }) => {
           </p>
           <p className="text-sm text-lightGrey">|</p>
 
-          <p className="text-lightGrey">
-            {new Date(props?.createdAt).toLocaleDateString()}
-          </p>
+          <span className="text-lightGrey">
+            <JobPostDuration
+              createdAt={props.createdAt}
+              color="text-greytext"
+            />
+          </span>
         </article>
 
         <article className="my-8">

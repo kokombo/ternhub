@@ -19,13 +19,17 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
+  console.log("J", props.isLoading, props.isFetching);
+
   return (
     <section className="flex flex-col items-center gap-8 w-full h-full">
       {/* Rendering jobs list*/}
 
       <div
         className={`w-full ${
-          (props.data && props.data.length > 0) || props.isLoading
+          (props.data && props.data.length > 0) ||
+          props.isLoading ||
+          props.isFetching
             ? "job_list_grid"
             : "flex items-center justify-center"
         } `}

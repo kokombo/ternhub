@@ -29,7 +29,7 @@ const FaqCard = ({ props }: { props: FaqType }) => {
             showAnswer ? "translate-y-0" : "translate-y-[100%]"
           } transition-all duration-200`}
         >
-          <p className="lg:text-lg text-sm tracking-[1%] text-greyblack">
+          <p className="text-lg font-normal tracking-[1%] text-greyblack">
             {parse(props.answer)}
           </p>
         </div>

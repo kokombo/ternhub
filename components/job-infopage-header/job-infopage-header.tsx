@@ -36,7 +36,7 @@ const JobInfopageHeader = ({ props }: { props: JobType | undefined }) => {
 
         <p className="text-lightGrey capitalize">{props?.mode} </p>
 
-        <JobPostDuration props={props} />
+        <JobPostDuration createdAt={props?.createdAt} color="text-green" />
       </article>
 
       <div className="flex items-center gap-[14px]">

@@ -9,7 +9,12 @@ const BlogReadTime = ({
 }) => {
   const result = readingTime(props.content);
 
-  return <p className={`text-lightGrey ${className} `}> {result.text}</p>;
+  return (
+    <p className={`text-lightGrey ${className} `}>
+      {" "}
+      {result.text.replace("less than", "")}
+    </p>
+  );
 };
 
 export default BlogReadTime;

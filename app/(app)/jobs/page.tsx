@@ -77,7 +77,7 @@ const JobsListPage = () => {
   }, [locationFilterTerm, refetch]);
 
   return (
-    <div className="flex flex-col items-start w-full gap-[44px] md:gap-[64px]">
+    <div className="flex flex-col w-full gap-[44px] md:gap-[64px]">
       <JobsFilter setLocationFilterTerm={setLocationFilterTerm} />
 
       <JobsList
