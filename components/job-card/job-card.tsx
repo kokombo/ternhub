@@ -23,7 +23,9 @@ const JobCard = ({
         <article className="capitalize tracking-[1%] flex_start gap-1">
           <p className="text-sm lg:text-base text-greyblack">{job.company}</p>
 
-          <p className="text-base lg:text-lg font-[800]">{job.title}</p>
+          <p className="text-base lg:text-lg font-semibold text-textblack">
+            {job.title}
+          </p>
         </article>
       </div>
 

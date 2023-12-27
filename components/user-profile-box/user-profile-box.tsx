@@ -2,6 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { UploadProfilePicture } from "..";
 
 const UserProfileBox = () => {
   const { data: session } = useSession();
@@ -10,7 +11,7 @@ const UserProfileBox = () => {
     <div>
       <p>{session?.user.name} </p>
 
-      <div>Upload profile picture </div>
+      <UploadProfilePicture />
 
       <div>View profile picture </div>
 

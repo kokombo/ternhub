@@ -147,7 +147,7 @@ h4 {
 }
 
 .job_list_grid {
-  @apply grid place-items-center md:grid-cols-2 sm:grid-cols-1 gap-y-6 gap-x-3 lg:gap-y-10 lg:gap-x-8;
+  @apply grid place-items-center md:grid-cols-2 sm:grid-cols-1 gap-y-6 gap-x-3 lg:gap-y-10 lg:gap-x-5;
 }
 
 .blog_list_grid {
