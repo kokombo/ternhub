@@ -39,13 +39,13 @@ export const POST = async (req: Request) => {
     );
   }
 
-  const uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
-    folder: "company_logos",
-    resource_type: "image",
-    quality_analysis: true,
-  });
-
   if (logo) {
+    const uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
+      folder: "company_logos",
+      resource_type: "image",
+      quality_analysis: true,
+    });
+
     body.logo = uploadedImageResponse.secure_url;
   }
 

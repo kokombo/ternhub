@@ -2,8 +2,7 @@
 
 import { BlogsList } from "@/containers";
 import { BlogsListpageTitle, Search } from "@/components";
-
-import { getAllBlogs } from "../../../utilities/data-fetching/getAllBlogs";
+import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 const BlogListPage = () => {
   const { blogs, isLoading, isError, error, refetch } = getAllBlogs();
@@ -19,6 +18,8 @@ const BlogListPage = () => {
           onChange={() => {}}
           value=""
           onClickSearchButton={() => {}}
+          lgFrameWidth="458px"
+          lgInputWidth="245px"
         />
       </section>
 

@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
+import { usePathname } from "next/navigation";
 
 type Props = {
   openSidebar: () => void;
 };
 
 const NavigationBar = (props: Props) => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
+
+  const pathname = usePathname();
 
   if (status === "loading") return <div></div>;
 
@@ -18,9 +21,11 @@ const NavigationBar = (props: Props) => {
     <nav className="nav_container">
       <Logo />
 
-      <span className="text-greyblack hidden lg:inline ">
-        <NavLinks />
-      </span>
+      {pathname === "/search/jobs" ? null : (
+        <span className="text-greyblack hidden lg:inline ">
+          <NavLinks />
+        </span>
+      )}
 
       <div className="flex items-center gap-[14px]">
         {status === "authenticated" ? (

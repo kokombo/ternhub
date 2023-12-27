@@ -15,72 +15,66 @@ type Props = {
 
 const BlogsList = (props: Props) => {
   return (
-    <div>
+    <>
       {/*  Rendering most recent blog post */}
 
-      <section
-        className={`${
-          props.data && props.data.length > 0 ? "recent_blog_wrapper" : ""
-        }`}
-      >
-        {props.data && props.data.length > 0 ? (
-          <h2
-            className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500px]"
-            style={Grotesk.style}
-          >
-            Recent Post
-          </h2>
-        ) : null}
+      <section>
+        {props.isLoading ? (
+          <RecentBlogSkeletonLoader />
+        ) : props.data && props.data.length > 0 ? (
+          <div className="recent_blog_wrapper">
+            <h2
+              className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500px]"
+              style={Grotesk.style}
+            >
+              Recent Post
+            </h2>
 
-        <div>
-          {props.isLoading ? (
-            <RecentBlogSkeletonLoader />
-          ) : props.data && props.data.length > 0 ? (
-            props.data
-              .slice(0, 1)
-              .map((blog) => <RecentBlogCard key={blog._id} props={blog} />)
-          ) : null}
-        </div>
+            {props.data.slice(0, 1).map((blog) => (
+              <RecentBlogCard key={blog._id} props={blog} />
+            ))}
+          </div>
+        ) : null}
       </section>
 
-      {/* Rendering other blog posts*/}
-
       <section>
-        {props.data && props.data.length > 1 ? (
-          <h2
-            className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
-            style={Grotesk.style}
-          >
-            Must Read Blogs
-          </h2>
-        ) : null}
+        {/* Rendering other blog posts*/}
 
-        <div
-          className={`w-full ${
-            (props.data && props.data.length > 1) || props.isLoading
-              ? "blog_list_grid"
-              : "flex items-center justify-center"
-          } `}
-        >
+        <>
           {props.isLoading ? (
-            [...Array(8)].map((_, index) => <BlogSkeletonLoader key={index} />)
+            <div className="w-full blog_list_grid">
+              {[...Array(8)].map((_, index) => (
+                <BlogSkeletonLoader key={index} />
+              ))}
+            </div>
           ) : props.isError ? (
-            <Message
-              message={props.error?.response?.data?.message}
-              isError={props.isError}
-              buttonLabel="Try again"
-              onClickButton={async () => await props.refetch()}
-            />
+            <div className="flex items-center justify-center">
+              <Message
+                message={props.error?.response?.data?.message}
+                isError={props.isError}
+                buttonLabel="Try again"
+                onClickButton={async () => await props.refetch()}
+              />
+            </div>
           ) : props.data && props.data.length === 0 ? (
-            <Message message={props.noDataLabel} />
+            <div className="flex items-center justify-center">
+              <Message message={props.noDataLabel} />
+            </div>
           ) : props.data && props.data.length > 1 ? (
-            props.data
-              .slice(1, 11)
-              .map((blog) => (
+            <div className="w-full blog_list_grid">
+              <h2
+                className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
+                style={Grotesk.style}
+              >
+                Must Read Blogs
+              </h2>
+
+              {props.data.slice(1, 11).map((blog) => (
                 <BlogCard key={blog._id} props={blog} rootUrl={props.rootUrl} />
-              ))
+              ))}
+            </div>
           ) : null}
-        </div>
+        </>
 
         {/* Rendering infinite load more button  */}
 
@@ -90,7 +84,7 @@ const BlogsList = (props: Props) => {
           </button>
         ) : null}
       </section>
-    </div>
+    </>
   );
 };
 

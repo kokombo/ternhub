@@ -1,23 +1,9 @@
 import { SectionHeading, FaqCard } from "@/components";
-import { useQuery } from "react-query";
-import axios from "axios";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
+import { getAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 
 const Faqs = () => {
-  const fetchFaqsRequest = async (): Promise<FaqType[] | undefined> => {
-    const res = await axios.get("/api/faq");
-    return res.data;
-  };
-
-  const {
-    data: faqs,
-    isLoading,
-    isError,
-  } = useQuery("getAllFaqs", fetchFaqsRequest, {
-    refetchOnWindowFocus: false,
-
-    staleTime: 60 * 60 * 60 * 1000,
-  });
+  const { faqs, isLoading, isError } = getAllFaqs();
 
   return (
     <section className="container bg-background">

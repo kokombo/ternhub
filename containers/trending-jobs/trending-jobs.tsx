@@ -14,16 +14,20 @@ type Data = {
 const TrendingJobs = () => {
   const { data: session } = useSession();
 
-  const fetchJobsRequest = async (): Promise<Data | undefined> => {
+  const fetchTrendingJobsRequest = async (): Promise<Data | undefined> => {
     const res = await axios.get("/api/job");
     return res.data;
   };
 
-  const { data, isLoading, isError } = useQuery("fetchJobs", fetchJobsRequest, {
-    refetchOnWindowFocus: false,
+  const { data, isLoading, isError } = useQuery(
+    "fetchTrendingJobs",
+    fetchTrendingJobsRequest,
+    {
+      refetchOnWindowFocus: false,
 
-    staleTime: 60 * 60 * 60 * 1000,
-  });
+      staleTime: 60 * 60 * 60 * 1000,
+    }
+  );
 
   return (
     <section className="container">

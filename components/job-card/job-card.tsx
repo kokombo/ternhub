@@ -51,7 +51,7 @@ const JobCard = ({
             Apply
           </Link>
 
-          <SaveAJob job={job} />
+          <SaveAJob props={job} />
         </div>
       </div>
     </article>

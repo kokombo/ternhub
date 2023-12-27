@@ -10,7 +10,7 @@ const JobsListPage = () => {
   const [locationFilterTerm, setLocationFilterTerm] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
 
-  const limit: number = 40;
+  const limit = 40;
 
   const params = new URLSearchParams();
 
@@ -52,7 +52,7 @@ const JobsListPage = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No results matches your query."
+        noDataLabel="No job matches your query."
         refetch={refetch}
         rootUrl="/jobs"
         isFetching={isFetching}

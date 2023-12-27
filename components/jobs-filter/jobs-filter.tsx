@@ -1,16 +1,15 @@
 "use client";
 import { icons } from "@/constants";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, ChangeEvent } from "react";
 
 type Props = {
   setLocationFilterTerm: Dispatch<SetStateAction<string>>;
 };
 
 const JobsFilter = (props: Props) => {
-  const handleSelect = (e: any) => {
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) =>
     props.setLocationFilterTerm(e.target?.value);
-  };
 
   return (
     <div className="flex items-center lg:gap-[26px] lg:justify-start justify-between w-full">

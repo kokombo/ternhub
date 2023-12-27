@@ -27,13 +27,13 @@ export const POST = async (req: Request) => {
     );
   }
 
-  const uploadedImageResponse = await cloudinary.v2.uploader.upload(image, {
-    folder: "blog_images",
-    resource_type: "image",
-    quality_analysis: true,
-  });
-
   if (image) {
+    const uploadedImageResponse = await cloudinary.v2.uploader.upload(image, {
+      folder: "blog_images",
+      resource_type: "image",
+      quality_analysis: true,
+    });
+
     body.image = uploadedImageResponse.secure_url;
   }
 
@@ -43,8 +43,6 @@ export const POST = async (req: Request) => {
     if (title) {
       body.slug = slugify(title, { lower: true });
     }
-
-    console.log("body", body);
 
     const blog = await Blog.create({ ...body });
 
@@ -67,7 +65,7 @@ export const GET = async (req: Request, res: Response) => {
   } catch (error) {
     return NextResponse.json(
       {
-        message: "Something went wrong. Please try again.",
+        message: "Something went wrong, please try again.",
       },
       { status: 500 }
     );

@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
         const password = credentials?.password;
 
         return await axios
-          .post("http://localhost:3000/api/signin", {
+          .post(`${process.env.NEXTAUTH_URL}/api/signin`, {
             email,
             password,
           })
@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
             }
           })
           .catch((error) => {
-            throw new Error(error.response.data.message);
+            throw new Error(error?.response?.data?.message);
           });
       },
     }),

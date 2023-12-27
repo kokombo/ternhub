@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { bookmarkAJob } from "@/utilities/data-fetching/bookmarkAJob";
 
-const SaveAJob = ({ job }: { job: JobType }) => {
+const SaveAJob = ({ props: job }: { props: JobType }) => {
   const { data: session } = useSession();
 
   const { userSavedJobs } = useSelector((store: StateType) => store.job);

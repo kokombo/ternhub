@@ -1,23 +1,9 @@
 import { SectionHeading, BlogCard, StyledLink } from "@/components";
-import axios from "axios";
-import { useQuery } from "react-query";
 import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
+import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 const LandingPageBlogs = () => {
-  const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
-    const res = await axios.get("/api/blog");
-    return res.data;
-  };
-
-  const {
-    data: blogs,
-    isLoading,
-    isError,
-  } = useQuery("fetchBlogs", fetchBlogsRequest, {
-    refetchOnWindowFocus: false,
-
-    staleTime: 60 * 60 * 60 * 1000,
-  });
+  const { blogs, isLoading, isError } = getAllBlogs();
 
   return (
     <section className="container">

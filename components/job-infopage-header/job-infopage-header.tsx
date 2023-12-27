@@ -44,7 +44,7 @@ const JobInfopageHeader = ({ props: job }: { props: JobType | undefined }) => {
           <div className="flex items-center gap-[14px]">
             <ApplyToJobButton props={job} />
 
-            <SaveAJob job={job} />
+            <SaveAJob props={job} />
           </div>
         </section>
       )}

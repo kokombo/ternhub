@@ -8,6 +8,7 @@ const Logo = () => {
     <Link
       href={session?.user ? "/jobs" : "/"}
       className="text-[20px] lg:text-[32px] text-purple"
+      prefetch={false}
     >
       TheTernHub
     </Link>

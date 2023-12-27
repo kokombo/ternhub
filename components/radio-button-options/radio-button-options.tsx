@@ -40,7 +40,7 @@ const RadioButtonOptions = (props: Props) => {
                       className="radio_button "
                     />
 
-                    <label htmlFor="remote">{option.label} </label>
+                    <label htmlFor={option.value}>{option.label} </label>
                   </span>
                 );
               })}

@@ -1,13 +1,13 @@
 import { readingTime } from "reading-time-estimator";
 
 const BlogReadTime = ({
-  props,
+  props: blog,
   className,
 }: {
   props: BlogType;
   className: string;
 }) => {
-  const result = readingTime(props.content);
+  const result = readingTime(blog?.content);
 
   return (
     <p className={`text-lightGrey ${className} `}>

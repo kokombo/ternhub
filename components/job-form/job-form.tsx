@@ -1,6 +1,6 @@
 "use client";
 import { Formik, Form, FormikHelpers } from "formik";
-import { jobCategories } from "../../constants/data";
+import { jobCategories } from "@/constants/data";
 import {
   InputField,
   TextEditor,

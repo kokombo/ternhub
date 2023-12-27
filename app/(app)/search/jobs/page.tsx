@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
+import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 
 type Data = {
   jobs: JobType[];
@@ -20,7 +21,7 @@ const JobsSearchResults = () => {
 
   const dispatch = useDispatch();
 
-  const { jobSearchTerm } = useSelector((store: StateType) => store.search);
+  const { jobSearchTerm } = useSelector((state: StateType) => state.search);
 
   const [pageNumber, setPageNumber] = useState(1);
   const [locationFilterTerm, setLocationFilterTerm] = useState("");
@@ -36,6 +37,8 @@ const JobsSearchResults = () => {
   if (locationFilterTerm == "all") params.delete("mode");
 
   const queryStrings = params.toString();
+
+  getUserSavedJobs();
 
   const fetchJobsInSearchRequest = async (): Promise<Data | undefined> => {
     const res = await axios.get("/api/job?" + queryStrings);
@@ -101,6 +104,8 @@ const JobsSearchResults = () => {
           onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
           value={jobSearchTerm}
           onClickSearchButton={async () => await refetch()}
+          lgFrameWidth="556px"
+          lgInputWidth="300px"
         />
       </div>
 

@@ -61,14 +61,14 @@ const InputField = (props: Props) => {
                 {props.setPasswordVisibile ? (
                   <Image
                     src={icons.hidepassword}
-                    alt="password toggle icon"
+                    alt="hide password icon"
                     height={24}
                     width={24}
                   />
                 ) : (
                   <Image
                     src={icons.showpassword}
-                    alt="password toggle icon"
+                    alt="show password icon"
                     height={24}
                     width={24}
                   />

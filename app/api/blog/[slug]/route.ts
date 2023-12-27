@@ -81,7 +81,10 @@ export const DELETE = async (req: Request, { params }: { params: Params }) => {
 
     await Blog.findOneAndDelete({ slug: params.slug });
 
-    return NextResponse.json({ message: "Job deleted successfully!" });
+    return NextResponse.json(
+      { message: "Job deleted successfully!" },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "Unable to delete, please try again." },
