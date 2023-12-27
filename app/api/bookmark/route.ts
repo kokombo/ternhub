@@ -8,7 +8,7 @@ import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 export const GET = async (req: Request) => {
   const session = await getServerSession(authOptions);
 
-  const userId = session?.user.id;
+  const userId = session?.user?.id;
 
   if (!session?.user) {
     return NextResponse.json(
@@ -36,7 +36,7 @@ export const GET = async (req: Request) => {
 export const PUT = async (req: Request) => {
   const session = await getServerSession(authOptions);
 
-  const userId = session?.user.id;
+  const userId = session?.user?.id;
 
   if (!session?.user) {
     return NextResponse.json(

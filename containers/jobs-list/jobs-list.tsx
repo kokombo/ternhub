@@ -71,7 +71,7 @@ const JobsList = (props: Props) => {
           Math.round(props.pageNumber * props.limit) <= props.totalCount ? (
             <button
               type="button"
-              onClick={() => props.setPageNumber((prev) => prev + 1)}
+              onClick={() => props.setPageNumber((prev) => prev + 1)} //call refetch here also.
             >
               Next
             </button>

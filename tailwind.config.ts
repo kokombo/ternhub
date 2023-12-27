@@ -7,7 +7,9 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["outline-purple, text-red, lg:w-[556px] lg:w-[300px] "],
+  safelist: [
+    "outline-purple, text-red, lg:w-[556px] lg:w-[300px] lg:w-[250px] lg:w-[458px]",
+  ],
   theme: {
     extend: {
       fontFamily: {

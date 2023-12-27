@@ -13,13 +13,13 @@ const BlogListPage = () => {
         <BlogsListpageTitle />
 
         <Search
-          buttonLabel="Search blog"
-          placeholder="Search blog topic"
+          buttonLabel="Search"
+          placeholder="Search blog"
           onChange={() => {}}
           value=""
           onClickSearchButton={() => {}}
           lgFrameWidth="458px"
-          lgInputWidth="245px"
+          lgInputWidth="250px"
         />
       </section>
 

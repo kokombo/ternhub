@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, ChangeEvent } from "react";
 
 type Props = {
   setLocationFilterTerm: Dispatch<SetStateAction<string>>;
+  locationFilterTerm: string;
 };
 
 const JobsFilter = (props: Props) => {
@@ -35,7 +36,12 @@ const JobsFilter = (props: Props) => {
         <p className="filter_text">Location: </p>
 
         <div className="select_wrapper ">
-          <select name="location" onChange={handleSelect} className="select">
+          <select
+            name="location"
+            value={props.locationFilterTerm}
+            onChange={handleSelect}
+            className="select"
+          >
             <option value={"all"}>All</option>
             <option value={"remote"}>Remote</option>
             <option value={"onsite"}>Onsite</option>

@@ -46,6 +46,7 @@ import NotFoundComponent from "./not-found/not-found";
 import ErrorComponent from "./error-component/error-component";
 import RadioButtonOptions from "./radio-button-options/radio-button-options";
 import Loader from "./loader/loader";
+import UploadProfilePicture from "./upload-profile-picture/upload-profile-picture";
 
 export {
   BlogCard,
@@ -96,4 +97,5 @@ export {
   ErrorComponent,
   RadioButtonOptions,
   Loader,
+  UploadProfilePicture,
 };

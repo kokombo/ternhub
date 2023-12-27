@@ -28,19 +28,13 @@ const JobsPageLayout = ({ children }: { children: React.ReactNode }) => {
 
   if (status === "authenticated")
     return (
-      <div
-        className={`${
-          displaySharedLayout
-            ? "py-11 lg:py-[100px] sm:px-[6.94%] px-5 flex flex-col gap-[44px] md:gap-[64px]"
-            : null
-        }`}
-      >
+      <div className="py-11 lg:py-[100px] sm:px-[6.94%] px-5 flex flex-col gap-6 md:gap-11">
         {displaySharedLayout && (
-          <>
+          <div className="flex flex-col gap-11 md:gap-16">
             <JobsListPageHeader />
 
             <JobsPageNavigationLink />
-          </>
+          </div>
         )}
 
         {children}

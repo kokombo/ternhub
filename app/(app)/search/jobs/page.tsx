@@ -6,10 +6,11 @@ import { JobsList } from "@/containers";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
-import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
 import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
+import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
+import { v4 as uuidv4 } from "uuid";
 
 type Data = {
   jobs: JobType[];
@@ -19,21 +20,38 @@ type Data = {
 const JobsSearchResults = () => {
   const router = useRouter();
 
-  const dispatch = useDispatch();
+  const {
+    pageFromLocalStorage,
+    locationTermFromLocalStorage,
+    searchTermFromLocalStorage,
+  } = valuesFromLocalStorage("userQueriesInSearch");
 
-  const { jobSearchTerm } = useSelector((state: StateType) => state.search);
+  const { jobSearchTerm } = useSelector((state: StateType) => state.search); //From global state
 
-  const [pageNumber, setPageNumber] = useState(1);
-  const [locationFilterTerm, setLocationFilterTerm] = useState("");
+  const [pageNumber, setPageNumber] = useState(pageFromLocalStorage || 1);
+
+  const [locationFilterTerm, setLocationFilterTerm] = useState(
+    locationTermFromLocalStorage || ""
+  );
+
+  const [searchTerm, setSearchTerm] = useState(
+    jobSearchTerm || searchTermFromLocalStorage
+  );
 
   const limit = 40;
 
+  const search_id = uuidv4();
+
   const params = new URLSearchParams();
 
-  if (jobSearchTerm) params.append("search", jobSearchTerm);
+  if (searchTerm) params.append("search", searchTerm);
+
   if (locationFilterTerm) params.append("mode", locationFilterTerm);
+
   params.append("page", pageNumber.toString());
+
   params.append("limit", limit.toString());
+
   if (locationFilterTerm == "all") params.delete("mode");
 
   const queryStrings = params.toString();
@@ -44,6 +62,10 @@ const JobsSearchResults = () => {
     const res = await axios.get("/api/job?" + queryStrings);
     return res.data;
   };
+
+  const urlWithQueryStrings = `/search/jobs?${queryStrings
+    .replace(`&limit=${limit}`, "")
+    .replace("search", "query")}&ref_ctx_id=${search_id}`;
 
   const {
     data,
@@ -68,19 +90,11 @@ const JobsSearchResults = () => {
       staleTime: 10 * 60 * 1000,
 
       onSuccess: () => {
-        router.push(
-          `/search/jobs?${queryStrings
-            .replace(`&limit=${limit}`, "")
-            .replace("search", "query")}`
-        );
+        router.push(urlWithQueryStrings);
       },
 
       onError: () => {
-        router.push(
-          `/search/jobs?${queryStrings
-            .replace(`&limit=${limit}`, "")
-            .replace("search", "query")}`
-        );
+        router.push(urlWithQueryStrings);
       },
     }
   );
@@ -93,19 +107,36 @@ const JobsSearchResults = () => {
     refetchDataAfterLocationFilterTermChanges();
   }, [locationFilterTerm, refetch]);
 
+  //Storing a user's search queries in local storage to ensure persistence after page reload.
+  const userSearchQueriesArray = [
+    { key: "searchTerm", value: searchTerm },
+    { key: "pageNumber", value: pageNumber },
+    { key: "locationFilterTerm", value: locationFilterTerm },
+  ];
+
+  useEffect(() => {
+    localStorage.setItem(
+      "userQueriesInSearch",
+      JSON.stringify(userSearchQueriesArray)
+    );
+  }, [searchTerm, pageNumber, locationFilterTerm]);
+
   return (
-    <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-[44px] md:gap-[64px]">
-      <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4">
-        <JobsFilter setLocationFilterTerm={setLocationFilterTerm} />
+    <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-6 md:gap-11">
+      <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4 sticky w-full top-0 left-0 bg-white z-[100] py-5">
+        <JobsFilter
+          setLocationFilterTerm={setLocationFilterTerm}
+          locationFilterTerm={locationFilterTerm}
+        />
 
         <Search
           buttonLabel="Search"
           placeholder=""
-          onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
-          value={jobSearchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
           onClickSearchButton={async () => await refetch()}
           lgFrameWidth="556px"
-          lgInputWidth="300px"
+          lgInputWidth="250px"
         />
       </div>
 
@@ -116,7 +147,7 @@ const JobsSearchResults = () => {
         error={error}
         noDataLabel="There are no available jobs that match your query."
         refetch={refetch}
-        rootUrl="/jobs"
+        rootUrl="/search/jobs"
         isFetching={isFetching}
         isPreviousData={isPreviousData}
         setPageNumber={setPageNumber}
