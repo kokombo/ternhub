@@ -1,7 +1,7 @@
 "use client";
 
 const Admin = () => {
-  return <div>Admin</div>;
+  return <div>Adminn</div>;
 };
 
 export default Admin;
