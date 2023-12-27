@@ -73,32 +73,22 @@ export const GET = async (req: Request) => {
 
     const { searchParams } = new URL(req.url);
 
-    let result;
+    const queryObject = Object.fromEntries(searchParams);
 
     //Filtering job results
 
     const excludeFields = ["page", "sort", "limit", "fields", "search"];
 
-    excludeFields.forEach((item) => searchParams.delete(item));
+    excludeFields.forEach((item) => delete queryObject[item]);
 
-    let numericQuery = JSON.stringify(Object.fromEntries(searchParams));
+    let numericQuery = JSON.stringify(queryObject);
 
     numericQuery = numericQuery.replace(
       /\b(gte|gt|lte|lt|eq)\b/g,
       (match) => `$${match}`
     );
 
-    result = Job.find(JSON.parse(numericQuery));
-
-    //Search
-
-    const searchQuery = searchParams.get("search");
-
-    if (searchQuery) {
-      let searchQueryToDatabase = { $text: { $search: searchQuery } };
-
-      result = result.find(searchQueryToDatabase);
-    }
+    let result = Job.find(JSON.parse(numericQuery));
 
     //Sorting job results
 
@@ -135,6 +125,16 @@ export const GET = async (req: Request) => {
           { status: 401 }
         );
       }
+    }
+
+    //Search
+
+    const searchQuery = searchParams.get("search");
+
+    if (searchQuery) {
+      let queryToDatabase = { $text: { $search: searchQuery } };
+
+      result = result.find(queryToDatabase);
     }
 
     let jobs = await result;

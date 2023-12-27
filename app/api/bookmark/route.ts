@@ -12,7 +12,7 @@ export const GET = async (req: Request) => {
 
   if (!session?.user) {
     return NextResponse.json(
-      { message: "Oops! You cannot perform action." },
+      { message: "Oops! You cannot perform action. Please sign in" },
       { status: 401 }
     );
   }
