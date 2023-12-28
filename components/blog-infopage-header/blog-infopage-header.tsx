@@ -18,6 +18,10 @@ const BlogInfopageHeader = ({
               width={100}
               loading="eager"
               priority
+              style={{
+                width: "inherit",
+                height: "inherit",
+              }}
               className="rounded-[10px] w-full h-full"
             />
           </div>
