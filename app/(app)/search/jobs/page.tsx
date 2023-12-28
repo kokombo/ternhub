@@ -25,7 +25,9 @@ const JobsSearchResults = () => {
     searchTermFromLocalStorage,
   } = valuesFromLocalStorage("userQueriesInSearch");
 
-  const { jobSearchTerm } = useSelector((state: StateType) => state.search); //From global state
+  const { jobSearchTerm: newJobSearchTerm } = useSelector(
+    (state: StateType) => state.search
+  ); //From global state manager
 
   const [pageNumber, setPageNumber] = useState(pageFromLocalStorage || 1);
 
@@ -34,7 +36,7 @@ const JobsSearchResults = () => {
   );
 
   const [searchTerm, setSearchTerm] = useState(
-    jobSearchTerm || searchTermFromLocalStorage
+    newJobSearchTerm || searchTermFromLocalStorage
   );
 
   const limit = 14;
@@ -124,7 +126,11 @@ const JobsSearchResults = () => {
           placeholder=""
           onChange={(e) => setSearchTerm(e.target.value)}
           value={searchTerm}
-          onClickSearchButton={async () => await refetch()}
+          onClickSearchButton={async () => {
+            localStorage.removeItem("userQueriesInSearch");
+
+            await refetch();
+          }}
           lgFrameWidth="556px"
           lgInputWidth="250px"
         />

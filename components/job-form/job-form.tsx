@@ -31,15 +31,16 @@ type Props = {
 const validateJobForm = Yup.object({
   title: Yup.string()
     .required("Job title is required.")
-    .max(40, "Maximum length of 40 characters."),
+    .max(50, "Maximum length of 50 characters."),
   company: Yup.string()
     .required("Company name is required.")
-    .max(30, "Maximum length of 30 characters."),
+    .max(40, "Maximum length of 40 characters."),
   location: Yup.string()
     .required("Company location is required.")
-    .max(25, "Maximum length of 25 characters."),
+    .max(30, "Maximum length of 30 characters."),
   category: Yup.string().required("Job category is required."),
   mode: Yup.string().required("Please specify job mode."),
+  type: Yup.string().required("Please specify job type."),
   email: Yup.string().email("Invalid email format."),
 });
 
@@ -47,6 +48,11 @@ const jobModeOptions: RadioOption[] = [
   { value: "remote", label: "Remote" },
   { value: "hybrid", label: "Hybrid" },
   { value: "onsite", label: "Onsite" },
+];
+
+const jobTypeOptions: RadioOption[] = [
+  { value: "full-time", label: "Full-time" },
+  { value: "part-time", label: "Part-time" },
 ];
 
 const JobForm = (props: Props) => {
@@ -70,7 +76,7 @@ const JobForm = (props: Props) => {
                   name="title"
                   type="text"
                   id="title"
-                  maxLength={40}
+                  maxLength={50}
                 />
 
                 <InputField
@@ -78,7 +84,7 @@ const JobForm = (props: Props) => {
                   name="company"
                   type="text"
                   id="company"
-                  maxLength={30}
+                  maxLength={40}
                 />
 
                 <InputField
@@ -86,7 +92,7 @@ const JobForm = (props: Props) => {
                   name="location"
                   type="text"
                   id="location"
-                  maxLength={25}
+                  maxLength={30}
                 />
 
                 <TextEditor
@@ -129,6 +135,12 @@ const JobForm = (props: Props) => {
                   label="Job Mode *"
                 />
 
+                <RadioButtonOptions
+                  name="type"
+                  data={jobTypeOptions}
+                  label="Job Type *"
+                />
+
                 <InputField
                   label="Salary (optional)"
                   name="salary"
@@ -155,7 +167,9 @@ const JobForm = (props: Props) => {
 
                 <div className="flex self-end">
                   {props.isLoading ? (
-                    <SubmitFormLoader />
+                    <div className="w-40 h-[56px]">
+                      <SubmitFormLoader />
+                    </div>
                   ) : (
                     <button type="submit" className="form_submit_button">
                       {props.buttonLabel}

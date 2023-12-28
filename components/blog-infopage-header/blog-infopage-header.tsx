@@ -10,16 +10,18 @@ const BlogInfopageHeader = ({
     <>
       {blog && (
         <section className="flex flex-col items-center w-full lg:w-[820px]">
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            height={100}
-            width={100}
-            layout="responsive"
-            loading="eager"
-            priority={true}
-            className="rounded-[10px] lg:h-[400px] lg:w-[600px] md:w-full md:h-[323px]"
-          />
+          <div className="lg:h-[400px] lg:w-[600px] md:w-full md:h-[323px] rounded-[10px]">
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              height={100}
+              width={100}
+              loading="eager"
+              priority
+              fill
+              className="rounded-[10px] "
+            />
+          </div>
 
           <article className="flex justify-between gap-3 items-center w-full mt-5 lg:mt-[50px] lg:px-[45px] text-sm lg:text-2xl tracking-[1%] font-[400]">
             <p className="text-lightGrey">

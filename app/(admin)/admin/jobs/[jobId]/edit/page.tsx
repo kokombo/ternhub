@@ -1,4 +1,5 @@
 "use client";
+
 import { JobForm } from "@/components";
 import { FormikHelpers } from "formik";
 import { useState } from "react";
@@ -20,6 +21,7 @@ const EditJobInfo = () => {
     logo: job?.logo as string,
     salary: job?.salary as number,
     slug: job?.slug as string,
+    type: job?.type as string,
   };
 
   const [description, setDescription] = useState(job?.description as string);
@@ -28,8 +30,6 @@ const EditJobInfo = () => {
     values: JobFormType,
     onSubmitProps: FormikHelpers<JobFormType>
   ) => {};
-
-  //If user role is not admin, redirect user to the app segment home
 
   return (
     <JobForm

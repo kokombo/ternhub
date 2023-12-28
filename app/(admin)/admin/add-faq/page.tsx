@@ -26,9 +26,10 @@ const AddFaqPage = () => {
 
   const { mutateAsync, isLoading, isError, error } = useMutation(
     addFaqRequest,
+
     {
       onSuccess: () => {
-        queryClient.invalidateQueries("getAllFaqs");
+        queryClient.refetchQueries("getAllFaqs");
 
         router.push("/admin");
       },

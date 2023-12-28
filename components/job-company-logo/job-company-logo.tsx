@@ -9,7 +9,6 @@ const JobCompanyLogo = ({ props: job }: { props: JobType | undefined }) => {
           alt={`${job?.company} logo`}
           height={100}
           width={100}
-          layout="fixed"
           loading="lazy"
           quality={100}
           className="w-[21.33px] h-[21.33px] lg:w-[32px] lg:h-[32px] rounded object-contain"

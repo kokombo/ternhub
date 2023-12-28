@@ -32,7 +32,7 @@ const AddABlog = () => {
     return await axios.post("/api/blog", blogData);
   };
 
-  const { mutateAsync, isLoading, isError, error, data } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation(
     addABlogRequest,
     {
       onSuccess: () => {
@@ -45,8 +45,6 @@ const AddABlog = () => {
 
   const addABlog = async (values: BlogFormType) => {
     const blogData = { ...values, content };
-
-    console.log(blogData);
 
     await mutateAsync(blogData);
   };

@@ -20,6 +20,8 @@ export const getJobById = (jobId: string | string[]) => {
 
     {
       refetchOnWindowFocus: false,
+
+      keepPreviousData: false,
     }
   );
 

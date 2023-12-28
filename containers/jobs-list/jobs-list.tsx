@@ -1,6 +1,5 @@
 import { JobCard, Message } from "@/components";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
-import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -20,8 +19,6 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
-  console.log(props.data);
-
   return (
     <section className="flex flex-col items-center justify-between min-h-screen  ">
       {props.isLoading || props.isFetching ? (

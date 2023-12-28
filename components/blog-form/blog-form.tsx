@@ -138,7 +138,10 @@ const BlogForm = (props: Props) => {
 
                 <div className="flex self-end">
                   {props.isLoading ? (
-                    <SubmitFormLoader />
+                    <div className="w-40 h-[56px]">
+                      {" "}
+                      <SubmitFormLoader />
+                    </div>
                   ) : (
                     <button type="submit" className="form_submit_button ">
                       {props.buttonLabel}

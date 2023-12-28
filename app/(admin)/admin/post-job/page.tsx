@@ -17,6 +17,7 @@ const initialFormValues: JobFormType = {
   salary: 0,
   email: "",
   slug: "",
+  type: "",
 };
 
 interface JobData extends JobFormType {
@@ -34,7 +35,7 @@ const PostAJob = () => {
     return await axios.post("/api/job", jobData);
   };
 
-  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation(
     postAJobRequest,
     {
       onSuccess: () => {
@@ -44,8 +45,6 @@ const PostAJob = () => {
       },
     }
   );
-
-  console.log(error, isLoading, "isError", isError, "isSuccess", isSuccess);
 
   const postAJob = async (values: JobFormType) => {
     console.log(values);

@@ -42,6 +42,11 @@ const JobSchema = new Schema(
       required: true,
     },
 
+    type: {
+      type: Number,
+      required: true,
+    },
+
     email: {
       type: String,
     },

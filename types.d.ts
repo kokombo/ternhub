@@ -30,6 +30,7 @@ type JobFormType = {
   salary?: number;
   email?: string;
   slug: string;
+  type: string;
 };
 
 interface JobType extends JobFormType {
