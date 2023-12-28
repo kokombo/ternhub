@@ -14,14 +14,13 @@ const BlogCard = ({
 
   return (
     <article className="max-w-[400px] sm:max-w-[295px] border-grey border-[0.8px] rounded-[10px]">
-      <div className="h-[300px] w-full bg-grey rounded-t-[10px]">
+      <div className="h-[300px] w-full bg-grey rounded-t-[10px] relative block">
         <Image
           src={job.image}
           alt={job.title}
-          width={100}
-          height={100}
           quality={100}
-          className="rounded-t-[10px] h-[300px] w-full"
+          fill
+          className="rounded-t-[10px] object-fill"
           loading="lazy"
         />
       </div>

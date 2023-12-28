@@ -10,7 +10,7 @@ const BlogInfopageHeader = ({
     <>
       {blog && (
         <section className="flex_center w-full lg:w-[820px]">
-          <div className="h-[400px] lg:w-[600px] w-full relative block rounded-[10px]">
+          <div className="h-[353px] lg:w-[600px] w-full relative block rounded-[10px]">
             <Image
               src={blog.image}
               alt={blog.title}

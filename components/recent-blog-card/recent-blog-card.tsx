@@ -9,16 +9,14 @@ const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
       key={blog._id}
       className="flex md:flex-row flex-col md:items-center items-start gap-4"
     >
-      <div className="h-[388px] lg:w-[564px] w-full rounded-l-[10px] bg-grey ">
+      <div className="h-[388px] lg:w-[564px] w-full rounded-l-[10px] bg-grey relative block">
         <Image
           src={blog.image}
           alt={blog.title}
-          width={100}
-          height={100}
+          fill
           loading="lazy"
-          layout="fixed"
           quality={100}
-          className="h-full w-full lg:rounded-l-[10px]"
+          className="lg:rounded-l-[10px]"
         />
       </div>
 
