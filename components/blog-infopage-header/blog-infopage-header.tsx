@@ -9,8 +9,8 @@ const BlogInfopageHeader = ({
   return (
     <>
       {blog && (
-        <section className="flex flex-col items-center w-full lg:w-[820px]">
-          <div className="lg:h-[400px] lg:w-[600px] md:w-full md:h-[323px] rounded-[10px]">
+        <section className="flex_center w-full lg:w-[820px]">
+          <div className="h-[323px] md:w-full sm:h-[400px]">
             <Image
               src={blog.image}
               alt={blog.title}
@@ -18,7 +18,7 @@ const BlogInfopageHeader = ({
               width={100}
               loading="eager"
               priority
-              className="rounded-[10px] "
+              className="rounded-[10px] w-full h-full"
             />
           </div>
 
@@ -30,7 +30,7 @@ const BlogInfopageHeader = ({
             <article className="text-lightGrey text-sm">|</article>
 
             <p className="text-lightGrey">
-              {new Date(blog.createdAt).toLocaleDateString()}
+              {new Date(blog.createdAt).toDateString()}
             </p>
 
             <p className="text-lightGrey">
