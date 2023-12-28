@@ -187,7 +187,7 @@ h4 {
 }
 
 .singlejobpage_container {
-  @apply w-full flex flex-col py-[50px] lg:py-[100px] sm:px-[6.94%] px-5 gap-[60px] lg:gap-[100px];
+  @apply w-full flex flex-col gap-[60px] lg:gap-[100px];
 }
 
 .bloginfopage_header_container {

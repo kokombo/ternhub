@@ -50,7 +50,7 @@ const JobCard = ({
             aria-label="link to a job details"
             className="apply_button"
           >
-            Apply
+            View
           </Link>
 
           <SaveAJob props={job} />
