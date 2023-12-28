@@ -43,6 +43,8 @@ const SignInPage = () => {
     values: UserLoginDataType,
     onSubmitProps: FormikHelpers<UserLoginDataType>
   ) => {
+    console.log(values);
+
     try {
       setLoading(true);
       const res = await signIn("credentials", {

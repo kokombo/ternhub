@@ -5,10 +5,12 @@ import { NextResponse } from "next/server";
 export const POST = async (req: Request, res: Response) => {
   const { email, password } = await req.json();
 
+  const refinedEmail = email.toLowerCase();
+
   try {
     await connectDatabase();
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: refinedEmail });
 
     if (!user) {
       return NextResponse.json(

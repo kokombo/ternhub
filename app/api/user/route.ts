@@ -8,10 +8,12 @@ export const POST = async (req: Request) => {
   const body = await req.json();
   const email = body.email;
 
+  const refinedEmail = email.toLowerCase();
+
   try {
     await connectDatabase();
 
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email: refinedEmail });
 
     if (userExists) {
       return NextResponse.json(
@@ -20,7 +22,7 @@ export const POST = async (req: Request) => {
       );
     }
 
-    const user = await User.create({ ...body });
+    const user = await User.create({ ...body, email: refinedEmail });
 
     return NextResponse.json({ user }, { status: 200 });
   } catch (error) {

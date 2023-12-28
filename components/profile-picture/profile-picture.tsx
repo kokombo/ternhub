@@ -12,6 +12,7 @@ const ProfilePicture = () => {
           src={session.user.image}
           height={48}
           width={48}
+          style={{ width: "auto", height: "auto" }}
           className="rounded-full object-contain"
         />
       ) : (
