@@ -17,6 +17,7 @@ const BlogInfopageHeader = ({
               height={100}
               width={100}
               loading="eager"
+              quality={100}
               priority
               style={{
                 width: "inherit",
