@@ -38,7 +38,7 @@ const JobsSearchResults = () => {
     jobSearchTerm || searchTermFromLocalStorage
   );
 
-  const limit = 40;
+  const limit = 14;
 
   const search_id = uuidv4();
 
@@ -58,14 +58,17 @@ const JobsSearchResults = () => {
 
   getUserSavedJobs();
 
-  const fetchJobsInSearchRequest = async (): Promise<Data | undefined> => {
-    const res = await axios.get("/api/job?" + queryStrings);
-    return res.data;
-  };
-
   const urlWithQueryStrings = `/search/jobs?${queryStrings
     .replace(`&limit=${limit}`, "")
     .replace("search", "query")}&ref_ctx_id=${search_id}`;
+
+  const fetchJobsInSearchRequest = async (): Promise<Data | undefined> => {
+    router.push(urlWithQueryStrings);
+
+    const res = await axios.get("/api/job?" + queryStrings);
+
+    return res.data;
+  };
 
   const {
     data,
@@ -86,16 +89,6 @@ const JobsSearchResults = () => {
       keepPreviousData: true,
 
       retry: 1,
-
-      staleTime: 10 * 60 * 1000,
-
-      onSuccess: () => {
-        router.push(urlWithQueryStrings);
-      },
-
-      onError: () => {
-        router.push(urlWithQueryStrings);
-      },
     }
   );
 

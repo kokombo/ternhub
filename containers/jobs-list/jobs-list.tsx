@@ -1,5 +1,6 @@
 import { JobCard, Message } from "@/components";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
+import Link from "next/link";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -19,10 +20,10 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
-  return (
-    <section className="flex flex-col items-center gap-8 ">
-      {/* Rendering jobs list*/}
+  console.log(props.data);
 
+  return (
+    <section className="flex flex-col items-center justify-between min-h-screen  ">
       {props.isLoading || props.isFetching ? (
         <div className="job_list_grid w-full">
           {[...Array(10)].map((_, index) => (
@@ -43,7 +44,7 @@ const JobsList = (props: Props) => {
           <Message message={props.noDataLabel} />
         </div>
       ) : (
-        <div className="job_list_grid w-full">
+        <div className="job_list_grid w-full ">
           {props.data?.map((job) => (
             <JobCard props={job} key={job._id} rootUrl={props.rootUrl} />
           ))}
@@ -52,32 +53,41 @@ const JobsList = (props: Props) => {
 
       {/*  Rendering pagination buttons */}
 
-      {props.data && props.data.length > props.limit ? (
-        <div className="flex items-center gap-2">
-          {props?.pageNumber <= 1 ? null : (
-            <button
-              type="button"
-              onClick={() =>
-                props.setPageNumber((prev) => Math.max(prev - 1, 1))
-              }
-            >
-              Prev
-            </button>
-          )}
+      <div className="flex items-center gap-4 mt-10 lg:mt-14">
+        {props?.pageNumber <= 1 ? null : (
+          <button
+            type="button"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-          <span>Page: {props?.pageNumber}</span>
+              props.setPageNumber((prev) => Math.max(prev - 1, 1));
+            }}
+          >
+            Prev
+          </button>
+        )}
 
-          {!props.isPreviousData &&
-          Math.round(props.pageNumber * props.limit) <= props.totalCount ? (
-            <button
-              type="button"
-              onClick={() => props.setPageNumber((prev) => prev + 1)} //call refetch here also.
-            >
-              Next
-            </button>
-          ) : null}
-        </div>
-      ) : null}
+        {props.data && (
+          <span className="font-semibold text-base ">
+            Page: {props?.pageNumber}
+          </span>
+        )}
+
+        {!props.isPreviousData &&
+        Math.round(props.pageNumber * props.limit) <= props.totalCount ? (
+          <button
+            type="button"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+              props.setPageNumber((prev) => prev + 1);
+            }}
+            className=""
+          >
+            <a>Next</a>
+          </button>
+        ) : null}
+      </div>
     </section>
   );
 };

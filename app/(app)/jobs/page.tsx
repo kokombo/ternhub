@@ -17,7 +17,7 @@ const JobsListPage = () => {
 
   const [pageNumber, setPageNumber] = useState(pageFromLocalStorage || 1);
 
-  const limit = 40;
+  const limit = 10;
 
   const params = new URLSearchParams();
 

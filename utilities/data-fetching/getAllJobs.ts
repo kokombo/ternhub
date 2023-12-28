@@ -20,7 +20,12 @@ export const getAllJobs = (
   const dispatch = useDispatch();
 
   const fetchJobsRequest = async (): Promise<Data | undefined> => {
+    router.push(
+      `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
+    );
+
     const res = await axios.get("/api/job?" + queryStrings);
+
     return res.data;
   };
 
@@ -42,22 +47,10 @@ export const getAllJobs = (
 
       keepPreviousData: true,
 
-      staleTime: 10 * 60 * 1000,
-
       retry: 1,
 
       onSuccess: (data) => {
         dispatch(setAllJobs(data?.jobs));
-
-        router.push(
-          `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
-        );
-      },
-
-      onError: () => {
-        router.push(
-          `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
-        );
       },
     }
   );

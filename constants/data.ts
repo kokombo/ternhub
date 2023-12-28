@@ -20,6 +20,7 @@ export const jobCategories = [
   { label: "DevOps" },
   { label: "Technical Writing" },
   { label: "Cybersecurity" },
+  { label: "Mobile Development" },
   { label: "Others" },
 ];
 
