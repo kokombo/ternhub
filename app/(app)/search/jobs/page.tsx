@@ -114,7 +114,7 @@ const JobsSearchResults = () => {
   }, [searchTerm, pageNumber, locationFilterTerm]);
 
   return (
-    <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-6 md:gap-11">
+    <div className="py-6 md:py-11 sm:px-[6.94%] px-5 flex flex-col gap-6 md:gap-11 w-full">
       <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4 sticky w-full top-0 left-0 bg-white z-[100] py-5">
         <JobsFilter
           setLocationFilterTerm={setLocationFilterTerm}
