@@ -61,17 +61,22 @@ const BlogsList = (props: Props) => {
               <Message message={props.noDataLabel} />
             </div>
           ) : props.data && props.data.length > 1 ? (
-            <div className="w-full blog_list_grid">
+            <div>
               <h2
                 className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
                 style={Grotesk.style}
               >
                 Must Read Blogs
               </h2>
-
-              {props.data.slice(1, 11).map((blog) => (
-                <BlogCard key={blog._id} props={blog} rootUrl={props.rootUrl} />
-              ))}
+              <div className="w-full blog_list_grid">
+                {props.data.slice(1, 11).map((blog) => (
+                  <BlogCard
+                    key={blog._id}
+                    props={blog}
+                    rootUrl={props.rootUrl}
+                  />
+                ))}
+              </div>
             </div>
           ) : null}
         </>
