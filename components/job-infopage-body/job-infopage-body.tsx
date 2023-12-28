@@ -10,7 +10,7 @@ const JobInfopageBody = ({ props: job }: { props: JobType | undefined }) => {
             Job Description
           </h1>
 
-          <span className="font-sans text-base lg:text-lg font-[400] text-greyblack">
+          <span className="font-sans text-base lg:text-lg leading-9 lg:leading-10 text-greyblack ">
             {parse(job.description)}
           </span>
 
