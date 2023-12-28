@@ -4,6 +4,7 @@ import {
   Message,
   Loader,
 } from "@/components";
+import { RelatedJobs } from "..";
 
 type Props = {
   data: JobType | undefined;
@@ -15,20 +16,20 @@ type Props = {
 
 const JobInfopage = (props: Props) => {
   return (
-    <div
-      className={`${
-        props.isError && props.isLoading ? "flex_center justify-center" : ""
-      }`}
-    >
+    <>
       {props.isLoading ? (
-        <Loader />
+        <div className="flex_center justify-center">
+          <Loader />
+        </div>
       ) : props.isError ? (
-        <Message
-          message={props.error?.response?.data?.message}
-          isError={props.isError}
-          onClickButton={async () => await props.refetch()}
-          buttonLabel="Try again"
-        />
+        <div className="flex_center justify-center">
+          <Message
+            message={props.error?.response?.data?.message}
+            isError={props.isError}
+            onClickButton={async () => await props.refetch()}
+            buttonLabel="Try again"
+          />
+        </div>
       ) : (
         <div className="singlejobpage_container ">
           <div className="jobinfo_wrapper">
@@ -36,9 +37,11 @@ const JobInfopage = (props: Props) => {
 
             <JobInfopageBody props={props.data} />
           </div>
+
+          {/* <RelatedJobs/> */}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

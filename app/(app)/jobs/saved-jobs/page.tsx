@@ -33,7 +33,7 @@ const SavedJobsPage = () => {
       ) : (
         savedJobs &&
         savedJobs.map((job) => (
-          <JobCard props={job} key={job._id} rootUrl="/" />
+          <JobCard props={job} key={job._id} rootUrl="/jobs" />
         ))
       )}
     </div>

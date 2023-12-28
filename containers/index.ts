@@ -12,6 +12,7 @@ import JobInfopage from "./job-infopage/job-infopage";
 import BlogInfoPage from "./blog-infopage/blog-infopage";
 import JobsList from "./jobs-list/jobs-list";
 import BlogsList from "./blogs-list/blogs-list";
+import RelatedJobs from "./related-jobs/related-jobs";
 
 export {
   LandingPageBlogs,
@@ -28,4 +29,5 @@ export {
   BlogInfoPage,
   JobsList,
   BlogsList,
+  RelatedJobs,
 };

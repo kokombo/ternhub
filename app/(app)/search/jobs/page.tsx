@@ -39,7 +39,7 @@ const JobsSearchResults = () => {
     newJobSearchTerm || searchTermFromLocalStorage
   );
 
-  const limit = 14;
+  const limit = 40;
 
   const search_id = uuidv4();
 
