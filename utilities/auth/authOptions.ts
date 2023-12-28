@@ -3,6 +3,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 
+const nextAuthUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXTAUTH_URL
+    : process.env.NEXTAUTH_LOCAL_URL;
+
 export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
   providers: [
@@ -22,7 +27,7 @@ export const authOptions: NextAuthOptions = {
         const password = credentials?.password;
 
         return await axios
-          .post(`${process.env.NEXTAUTH_URL}/api/signin`, {
+          .post(`${nextAuthUrl}/api/signin`, {
             email,
             password,
           })
