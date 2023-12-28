@@ -36,7 +36,9 @@ const SelectField = (props: Props) => {
               >
                 <option></option>
                 {props.data?.map((item: any, index) => (
-                  <option key={index} value={item.label} label={item.label} />
+                  <option key={index} value={item.label}>
+                    {item.label}
+                  </option>
                 ))}
               </select>
             );
