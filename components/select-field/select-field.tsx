@@ -23,7 +23,7 @@ const SelectField = (props: Props) => {
       </label>
 
       <div className="relative w-full">
-        {/* <Field name={props.name} id={props.id}>
+        <Field name={props.name} id={props.id}>
           {({ field, form, meta }: FieldProps) => {
             return (
               <select
@@ -41,7 +41,7 @@ const SelectField = (props: Props) => {
               </select>
             );
           }}
-        </Field> */}
+        </Field>
 
         <ErrorMessage
           name={props.name}
