@@ -32,6 +32,7 @@ export const POST = async (req: Request) => {
       folder: "blog_images",
       resource_type: "image",
       quality_analysis: true,
+      format: "png",
     });
 
     body.image = uploadedImageResponse.secure_url;

@@ -10,7 +10,9 @@ const BlogInfopageBody = ({ props: job }: { props: BlogType | undefined }) => {
             {job.title}
           </h1>
 
-          <span>{parse(job.content)}</span>
+          <span className="text-base lg:text-lg leading-9 lg:leading-10">
+            {parse(job.content)}
+          </span>
         </section>
       )}
     </>
