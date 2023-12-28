@@ -18,7 +18,6 @@ const BlogInfopageHeader = ({
               width={100}
               loading="eager"
               priority
-              fill
               className="rounded-[10px] "
             />
           </div>
