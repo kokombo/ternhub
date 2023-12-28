@@ -111,6 +111,7 @@ const SignUpPage = () => {
             initialValues={userData}
             onSubmit={createUserAccount}
             validationSchema={validationSchema}
+            validateOnBlur={false}
           >
             <Form className="flex flex-col gap-8 w-full">
               <InputField label="Fullname" name="name" id="name" type="text" />

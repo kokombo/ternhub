@@ -11,11 +11,17 @@ type Data = {
   numOfJobs: number;
 };
 
+const limit = 30;
+
+const params = new URLSearchParams();
+
+params.append("limit", limit.toString());
+
 const TrendingJobs = () => {
   const { data: session } = useSession();
 
   const fetchTrendingJobsRequest = async (): Promise<Data | undefined> => {
-    const res = await axios.get("/api/job");
+    const res = await axios.get("/api/job?" + params.toString());
     return res.data;
   };
 
@@ -25,7 +31,7 @@ const TrendingJobs = () => {
     {
       refetchOnWindowFocus: false,
 
-      staleTime: 60 * 60 * 60 * 1000,
+      staleTime: 60 * 60 * 1000,
     }
   );
 
@@ -41,11 +47,9 @@ const TrendingJobs = () => {
           ? [...Array(10)].map((_, index) => <JobSkeletonLoader key={index} />)
           : data?.jobs &&
             data.jobs.length > 1 &&
-            data.jobs
-              .slice(0, 30)
-              .map((job) => (
-                <JobCard props={job} key={job._id} rootUrl={"/jobs"} />
-              ))}
+            data.jobs.map((job) => (
+              <JobCard props={job} key={job._id} rootUrl={"/jobs"} />
+            ))}
       </div>
 
       <StyledLink
