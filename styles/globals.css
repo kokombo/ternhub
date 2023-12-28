@@ -79,7 +79,7 @@ h4 {
 }
 
 .sidebar_wrapper {
-  @apply p-5 fixed top-0 left-0 transition-all z-[100] duration-300 w-full h-full bg-white flex flex-col justify-between;
+  @apply p-5 fixed top-0 left-0 transition-all z-[1000] duration-300 w-full h-full bg-white flex flex-col justify-between;
 }
 
 .landing_page_internships_container {

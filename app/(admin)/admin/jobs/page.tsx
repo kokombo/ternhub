@@ -7,7 +7,7 @@ import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 const AdminJobsListPage = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const limit: number = 40;
+  const limit: number = 14;
 
   const baseUrl: string = "/admin/";
 

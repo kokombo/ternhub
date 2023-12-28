@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
-import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { v4 as uuidv4 } from "uuid";
 
@@ -55,8 +54,6 @@ const JobsSearchResults = () => {
   if (locationFilterTerm == "all") params.delete("mode");
 
   const queryStrings = params.toString();
-
-  getUserSavedJobs();
 
   const urlWithQueryStrings = `/search/jobs?${queryStrings
     .replace(`&limit=${limit}`, "")

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
-import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 
@@ -17,7 +16,7 @@ const JobsListPage = () => {
 
   const [pageNumber, setPageNumber] = useState(pageFromLocalStorage || 1);
 
-  const limit = 10;
+  const limit = 14;
 
   const params = new URLSearchParams();
 
@@ -32,8 +31,6 @@ const JobsListPage = () => {
   const queryStrings = params.toString();
 
   const baseUrl = "/";
-
-  getUserSavedJobs();
 
   const {
     data,
