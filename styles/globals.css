@@ -59,7 +59,7 @@ h4 {
 }
 
 .blue_button {
-  @apply px-6 py-3 lg:px-8  lg:py-4 bg-purple rounded-[10px] text-white text-sm lg:text-base font-semibold hover:bg-blue;
+  @apply px-6 py-3 lg:px-8 lg:py-4 bg-purple rounded-[10px] text-white text-sm lg:text-base font-semibold hover:bg-blue;
 }
 
 .apply_button {

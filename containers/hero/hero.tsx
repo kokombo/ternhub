@@ -18,7 +18,7 @@ const Hero = () => {
       <Tags />
 
       <Search
-        buttonLabel="Find Job"
+        buttonLabel="Find"
         placeholder="Search job title"
         onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
         value={jobSearchTerm}

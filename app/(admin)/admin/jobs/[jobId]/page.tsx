@@ -12,6 +12,13 @@ const AdminJobInfoPage = () => {
 
   return (
     <div>
+      <AdminToolBox
+        editButtonLabel="Edit Job"
+        editButtonUrl={`/admin/jobs/${jobId}/edit`}
+        deleteButtonLabel="Delete Job"
+        deleteButtonOnclick={() => {}}
+      />
+
       <JobInfopage
         data={job}
         isLoading={isLoading}

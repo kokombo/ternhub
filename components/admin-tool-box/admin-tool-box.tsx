@@ -17,7 +17,7 @@ const AdminToolBox = (props: Props) => {
         prefetch={false}
       />
 
-      <button onClick={props.deleteButtonOnclick}>
+      <button onClick={props.deleteButtonOnclick} className="blue_button">
         {props.deleteButtonLabel}
       </button>
     </div>
