@@ -21,7 +21,6 @@ const BlogCard = ({
           width={100}
           height={100}
           quality={100}
-          fill={true}
           className="rounded-t-[10px] h-full w-full"
           loading="lazy"
         />
