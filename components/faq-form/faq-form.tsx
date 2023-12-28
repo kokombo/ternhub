@@ -29,6 +29,7 @@ const FaqForm = (props: Props) => {
           initialValues={props.initialValues}
           onSubmit={props.submitForm}
           enableReinitialize
+          validateOnBlur={false}
         >
           <Form className="flex flex-col gap-8">
             <div className="w-[86vw] lg:w-[820px]">

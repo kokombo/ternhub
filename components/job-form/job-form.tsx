@@ -65,8 +65,8 @@ const JobForm = (props: Props) => {
           initialValues={props.initialFormValues}
           onSubmit={props.submitForm}
           validationSchema={validateJobForm}
-          validateOnMount
           enableReinitialize
+          validateOnBlur={false}
         >
           {(formik) => {
             return (

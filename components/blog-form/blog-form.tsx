@@ -48,8 +48,8 @@ const BlogForm = (props: Props) => {
           initialValues={props.initialFormValues}
           onSubmit={props.submitForm}
           validationSchema={validateBlogForm}
-          validateOnMount
           enableReinitialize
+          validateOnBlur={false}
         >
           {(formik) => {
             return (

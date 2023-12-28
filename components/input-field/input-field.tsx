@@ -37,7 +37,7 @@ const InputField = (props: Props) => {
             outline ? "border-purple" : "border-gray"
           } rounded-[5px] border-[1px]`}
         >
-          <Field name={props.name} id={props.id}>
+          <Field name={props.name} id={props.id} validateOnBlur={false}>
             {({ field, form, meta }: FieldProps) => {
               return (
                 <input
