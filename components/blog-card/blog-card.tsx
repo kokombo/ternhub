@@ -26,7 +26,7 @@ const BlogCard = ({
         />
       </div>
 
-      <div className=" lg:h-[300px] p-[10px] flex_start gap-2">
+      <div className=" lg:h-[300px] p-5 flex_start gap-2">
         <p className="text-purple text-base font-normal">{job.category}</p>
 
         <h4 className="text-[22px] h-16 lg:text-2xl tracking-[1%] font-semibold capitalize flex-wrap overflow-hidden">
