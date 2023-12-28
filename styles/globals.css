@@ -103,7 +103,7 @@ h4 {
 }
 
 .select_field {
-  @apply w-full px-4 py-[14px] outline-none h-[52px] bg-white rounded-[5px] border-[1px];
+  @apply w-full px-4 py-[14px] outline-none h-[52px] bg-white relative rounded-[5px] border-[1px];
 }
 
 .select_container {

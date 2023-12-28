@@ -36,12 +36,7 @@ const SelectField = (props: Props) => {
               >
                 <option></option>
                 {props.data?.map((item: any, index) => (
-                  <option
-                    key={index}
-                    value={item.label}
-                    label={item.label}
-                    className="text-base text-white"
-                  />
+                  <option key={index} value={item.label} label={item.label} />
                 ))}
               </select>
             );
