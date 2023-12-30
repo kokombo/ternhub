@@ -20,7 +20,10 @@ const JobInfopage = (props: Props) => {
   const { allJobs } = useSelector((state: StateType) => state.job);
 
   const relatedJobs = allJobs
-    .filter((job) => job.category === props.data?.category)
+    .filter(
+      (job) =>
+        job._id !== props.data?._id && job.category === props.data?.category
+    )
     .slice(0, 4);
 
   return (

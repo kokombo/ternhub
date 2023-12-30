@@ -9,8 +9,8 @@ type Props = {
 const RelatedJobs = (props: Props) => {
   return (
     <>
-      {props.relatedJobs && (
-        <section className="flex flex-col lg:gap-[42px] gap-[28px]">
+      {props.relatedJobs && props?.relatedJobs.length > 0 ? (
+        <section className="flex flex-col lg:gap-[42px] gap-[28px] ">
           <div className="flex items-center justify-between">
             <h3
               className="text-xl lg:text-[28px] font-[500] text-textblack"
@@ -29,11 +29,11 @@ const RelatedJobs = (props: Props) => {
 
           <div className="job_list_grid w-full">
             {props.relatedJobs.slice(0, 4).map((job) => (
-              <JobCard key={job._id} props={job} rootUrl="/" />
+              <JobCard key={job._id} props={job} rootUrl="/jobs" />
             ))}
           </div>
         </section>
-      )}
+      ) : null}
     </>
   );
 };
