@@ -1,3 +1,5 @@
+"use client";
+
 import { getValueByKeyInArray } from "./getValueByKeyInArray";
 
 const getUserQueriesFromLocalStorage = (storageName: string) => {
@@ -13,7 +15,7 @@ const getUserQueriesFromLocalStorage = (storageName: string) => {
 };
 
 export const valuesFromLocalStorage = (storageName: string) => {
-  const queryArrayFromLocalStorage =
+  const queryArrayFromLocalStorage: any[] =
     getUserQueriesFromLocalStorage(storageName);
 
   const pageFromLocalStorage = getValueByKeyInArray(

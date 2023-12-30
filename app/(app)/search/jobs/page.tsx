@@ -16,14 +16,14 @@ type Data = {
   numOfJobs: number;
 };
 
+const {
+  pageFromLocalStorage,
+  locationTermFromLocalStorage,
+  searchTermFromLocalStorage,
+} = valuesFromLocalStorage("userQueriesInSearch");
+
 const JobsSearchResults = () => {
   const router = useRouter();
-
-  const {
-    pageFromLocalStorage,
-    locationTermFromLocalStorage,
-    searchTermFromLocalStorage,
-  } = valuesFromLocalStorage("userQueriesInSearch");
 
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
