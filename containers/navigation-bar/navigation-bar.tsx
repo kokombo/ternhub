@@ -21,7 +21,7 @@ const NavigationBar = (props: Props) => {
     <nav className="nav_container">
       <Logo />
 
-      {pathname === "/search/jobs" ? null : (
+      {pathname.includes("/search") ? null : (
         <span className="text-greyblack hidden lg:inline ">
           <NavLinks />
         </span>
