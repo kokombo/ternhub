@@ -13,7 +13,7 @@ const RelatedJobs = (props: Props) => {
         <section className="flex flex-col lg:gap-[42px] gap-[28px]">
           <div className="flex items-center justify-between">
             <h3
-              className="text-xl lg:text-[28px] font-[500] text-textblack "
+              className="text-xl lg:text-[28px] font-[500] text-textblack"
               style={Grotesk.style}
             >
               Related Jobs
@@ -21,7 +21,7 @@ const RelatedJobs = (props: Props) => {
 
             <Link
               href="/jobs"
-              className="text-purple text-base lg:text-lg font-semibold "
+              className="text-purple text-base lg:text-lg font-semibold"
             >
               See all jobs
             </Link>
