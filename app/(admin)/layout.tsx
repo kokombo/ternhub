@@ -1,6 +1,5 @@
 "use client";
 
-import { Loader } from "@/components";
 import "@/styles/globals.css";
 import { AdminSegmentNavbar } from "@/containers";
 import { useSession } from "next-auth/react";
@@ -23,8 +22,6 @@ export default function AdminLayout({
     )
       router.push("/");
   }, [status, session?.user, router]);
-
-  if (status === "loading") return <Loader />;
 
   if (status === "authenticated" && session?.user.role == "admin")
     return (

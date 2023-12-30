@@ -2,7 +2,7 @@
 
 import "@/styles/globals.css";
 import { JobsListPageHeader } from "@/containers";
-import { JobsPageNavigationLink, Loader } from "@/components";
+import { JobsPageNavigationLink } from "@/components";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
@@ -23,8 +23,6 @@ const JobsPageLayout = ({ children }: { children: React.ReactNode }) => {
       router.replace("/");
     }
   }, [status, router]);
-
-  if (status === "loading") return <Loader />;
 
   if (status === "authenticated")
     return (
