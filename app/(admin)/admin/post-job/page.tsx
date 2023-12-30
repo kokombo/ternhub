@@ -44,8 +44,6 @@ const PostAJob = () => {
   );
 
   const postAJob = async (values: JobFormType) => {
-    console.log(values);
-
     const jobData = { ...values, description };
 
     await mutateAsync(jobData);

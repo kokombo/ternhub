@@ -43,7 +43,7 @@ const JobSchema = new Schema(
     },
 
     type: {
-      type: Number,
+      type: String,
       required: true,
     },
 

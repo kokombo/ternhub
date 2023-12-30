@@ -10,7 +10,7 @@ const initialFormValues: BlogFormType = {
   title: "",
   image: "",
   metaDescription: "",
-  author: "admin",
+  author: "Admin",
   twitter: "",
   portfolio: "",
   linkedin: "",

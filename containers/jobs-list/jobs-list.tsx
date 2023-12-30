@@ -64,11 +64,11 @@ const JobsList = (props: Props) => {
           </button>
         )}
 
-        {props.data && (
+        {props.data && props.data.length > 0 ? (
           <span className="font-semibold text-base ">
             Page: {props?.pageNumber}
           </span>
-        )}
+        ) : null}
 
         {!props.isPreviousData &&
         Math.round(props.pageNumber * props.limit) <= props.totalCount ? (
