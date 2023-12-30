@@ -32,14 +32,15 @@ const FaqForm = (props: Props) => {
           validateOnBlur={false}
         >
           <Form className="flex flex-col gap-8">
-            <div className="w-[86vw] lg:w-[820px]">
-              <InputField
-                label="Question"
-                name="question"
-                id="question"
-                type="text"
-              />
-            </div>
+            {/* <div className="w-[86vw] lg:w-[820px]">
+
+            </div> */}
+            <InputField
+              label="Question"
+              name="question"
+              id="question"
+              type="text"
+            />
 
             <TextEditor
               label="Answer"
@@ -47,9 +48,10 @@ const FaqForm = (props: Props) => {
               id="answer"
               value={props.textEditorValue}
               onChange={props.textEditorOnchange}
+              lgWidth={600}
             />
 
-            <div className="sm:mt-8 mt-16 relative flex items-center justify-center w-full">
+            <div className="sm:mt-14 mt-16 relative flex items-center justify-center w-full">
               <span className="absolute">
                 {props.isError && (
                   <CustomError

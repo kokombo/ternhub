@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@tiptap/pm": "^2.1.13",
+    "@tiptap/react": "^2.1.13",
+    "@tiptap/starter-kit": "^2.1.13",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.1",

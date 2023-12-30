@@ -9,10 +9,6 @@ const initialValues: FaqFormType = {
   question: "",
 };
 
-interface FaqData extends FaqFormType {
-  answer: string;
-}
-
 const AddFaqPage = () => {
   const [answer, setAnswer] = useState("");
 
@@ -31,7 +27,7 @@ const AddFaqPage = () => {
       onSuccess: () => {
         queryClient.refetchQueries("getAllFaqs");
 
-        router.push("/admin");
+        router.push("/admin/faqs");
       },
     }
   );

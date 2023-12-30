@@ -1,11 +1,19 @@
 "use client";
+
 import { BlogForm } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const EditBlogInfo = () => {
   const { slug } = useParams();
+
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
 
   const { blog } = getBlogBySlug(slug);
 
@@ -20,9 +28,33 @@ const EditBlogInfo = () => {
     category: blog?.category as string,
   };
 
-  const [content, setContent] = useState(blog?.content as string);
+  const [content, setContent] = useState("");
 
-  const previewBlog = async () => {};
+  useEffect(() => {
+    setContent(blog?.content as string);
+  }, [slug]);
+
+  const updateBlogRequest = async (newBlogData: BlogData) => {
+    return await axios.patch(`/api/blog/${slug}`, newBlogData);
+  };
+
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    updateBlogRequest,
+
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetchBlogs");
+
+        router.push("/admin/blogs");
+      },
+    }
+  );
+
+  const previewBlog = async (values: BlogFormType) => {
+    const newBlogData = { ...values, content };
+
+    await mutateAsync(newBlogData);
+  };
 
   return (
     <BlogForm
@@ -31,10 +63,10 @@ const EditBlogInfo = () => {
       submitForm={previewBlog}
       textEditorValue={content}
       textEditorOnchange={setContent}
-      isLoading={false}
-      isError={false}
-      error={"A"}
-      buttonLabel="Preview Update"
+      isLoading={isLoading}
+      isError={isError}
+      error={error}
+      buttonLabel="Update Blog"
     />
   );
 };

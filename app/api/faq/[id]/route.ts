@@ -7,6 +7,15 @@ import { authOptions } from "@/utilities";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
   validateMongoDBId(params.id);
 
   try {
@@ -16,7 +25,10 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 
     return NextResponse.json(faq);
   } catch (error) {
-    return NextResponse.json({ message: error });
+    return NextResponse.json(
+      { message: "Something went wrong, please try again." },
+      { status: 500 }
+    );
   }
 };
 
@@ -31,6 +43,15 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
   }
 
   const body = await req.json();
+
+  const { question, answer } = body;
+
+  if (!question || !answer) {
+    return NextResponse.json(
+      { message: "Question and answer input is required." },
+      { status: 401 }
+    );
+  }
 
   validateMongoDBId(params.id);
 

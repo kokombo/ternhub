@@ -13,6 +13,7 @@ export const getJobById = (jobId: string | string[]) => {
     isError,
     error,
     refetch,
+    isSuccess,
   } = useQuery(
     "getJobById",
 
@@ -22,8 +23,10 @@ export const getJobById = (jobId: string | string[]) => {
       refetchOnWindowFocus: false,
 
       keepPreviousData: false,
+
+      retry: 1,
     }
   );
 
-  return { job, isLoading, isError, error, refetch };
+  return { job, isLoading, isError, error, refetch, isSuccess };
 };

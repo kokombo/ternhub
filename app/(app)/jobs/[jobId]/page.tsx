@@ -1,4 +1,5 @@
 "use client";
+
 import { JobInfopage } from "@/containers";
 import { useParams } from "next/navigation";
 import { getJobById } from "@/utilities/data-fetching/getJobById";

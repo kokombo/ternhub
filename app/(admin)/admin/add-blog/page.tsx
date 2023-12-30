@@ -17,10 +17,6 @@ const initialFormValues: BlogFormType = {
   category: "",
 };
 
-interface BlogData extends BlogFormType {
-  content: string;
-}
-
 const AddABlog = () => {
   const [content, setContent] = useState("");
 

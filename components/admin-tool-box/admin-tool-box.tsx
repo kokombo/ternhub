@@ -9,12 +9,13 @@ type Props = {
 
 const AdminToolBox = (props: Props) => {
   return (
-    <div className="flex gap-6 items-center justify-center">
+    <div className="flex gap-12 items-center justify-center">
       <StyledLink
         url={props.editButtonUrl}
         label={props.editButtonLabel}
         arialabel={props.editButtonLabel}
         prefetch={false}
+        extraClasses="blue_button"
       />
 
       <button onClick={props.deleteButtonOnclick} className="blue_button">

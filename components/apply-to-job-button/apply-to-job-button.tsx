@@ -1,15 +1,15 @@
 import Link from "next/link";
 
-const ApplyToJobButton = ({ props }: { props: JobType | undefined }) => {
+const ApplyToJobButton = ({ props: job }: { props: JobType | undefined }) => {
   let applyLink;
 
-  if (props?.site) {
-    if (props.site.includes("https://")) {
-      applyLink = props.site.replace("https://", "");
-    } else if (props.site.includes("http://")) {
-      applyLink = props.site.replace("http://", "");
+  if (job?.site) {
+    if (job.site.includes("https://")) {
+      applyLink = job.site.replace("https://", "");
+    } else if (job.site.includes("http://")) {
+      applyLink = job.site.replace("http://", "");
     } else {
-      applyLink = props.site;
+      applyLink = job.site;
     }
   }
 

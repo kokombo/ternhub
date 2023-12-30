@@ -15,7 +15,14 @@ const Faqs = () => {
       <div className="grid grid-cols-1 lg:gap-10 gap-6 w-full place-items-center max-w-[630px]">
         {isLoading || isError
           ? [...Array(4)].map((_, index) => <FaqSkeletonLoader key={index} />)
-          : faqs && faqs.map((faq) => <FaqCard key={faq._id} props={faq} />)}
+          : faqs &&
+            faqs.map((faq) => (
+              <FaqCard
+                key={faq._id}
+                props={faq}
+                onClickFaqEditButton={() => {}}
+              />
+            ))}
       </div>
     </section>
   );

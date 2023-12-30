@@ -25,6 +25,7 @@ const config: Config = {
         green: "#048640",
         deepgreen: "#00632D",
         red: "#CE0A0A",
+        modalblack: "rgba(0, 0, 0, 0.5)",
       },
       boxShadow: {
         box: "rgba(0, 0, 0, 0.35) 0px 5px 15px;",

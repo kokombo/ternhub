@@ -11,7 +11,7 @@ const AdminJobInfoPage = () => {
   const { job, isLoading, isError, error, refetch } = getJobById(jobId);
 
   return (
-    <div>
+    <div className="py-11 sm:px-[6.94%] px-5 ">
       <AdminToolBox
         editButtonLabel="Edit Job"
         editButtonUrl={`/admin/jobs/${jobId}/edit`}

@@ -13,6 +13,7 @@ export const getBlogBySlug = (slug: string | string[]) => {
     isError,
     error,
     refetch,
+    isSuccess,
   } = useQuery(
     "getBlogBySlug",
 
@@ -25,5 +26,5 @@ export const getBlogBySlug = (slug: string | string[]) => {
     }
   );
 
-  return { blog, isLoading, error, isError, refetch };
+  return { blog, isLoading, error, isError, refetch, isSuccess };
 };

@@ -3,7 +3,7 @@ import { Logo } from "..";
 
 const Loader = () => {
   return (
-    <div className="h-screen flex flex-col items-center lg:pt-[200px] gap-2 lg:justify-normal justify-center">
+    <div className="h-screen flex flex-col items-center lg:pt-[200px] gap-2">
       <div className="flex flex-col items-center gap-[2px] jus ">
         <Logo />
         <p>is loading...</p>

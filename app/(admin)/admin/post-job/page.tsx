@@ -20,10 +20,6 @@ const initialFormValues: JobFormType = {
   type: "",
 };
 
-interface JobData extends JobFormType {
-  description: string;
-}
-
 const PostAJob = () => {
   const [description, setDescription] = useState("");
 
@@ -37,6 +33,7 @@ const PostAJob = () => {
 
   const { mutateAsync, isLoading, isError, error } = useMutation(
     postAJobRequest,
+
     {
       onSuccess: () => {
         queryClient.invalidateQueries("fetchJobs");

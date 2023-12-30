@@ -10,10 +10,15 @@ const AdminBlogInfoPage = () => {
 
   const { blog, isLoading, isError, error, refetch } = getBlogBySlug(slug);
 
-  console.log(blog)
-
   return (
-    <div>
+    <div className="py-11 sm:px-[6.94%] px-5 ">
+      <AdminToolBox
+        editButtonLabel="Edit Blog"
+        editButtonUrl={`/admin/blogs/${slug}/edit`}
+        deleteButtonLabel="Delete Blogs"
+        deleteButtonOnclick={() => {}}
+      />
+
       <BlogInfoPage
         data={blog}
         isError={isError}

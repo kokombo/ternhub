@@ -33,6 +33,10 @@ type JobFormType = {
   type: string;
 };
 
+interface JobData extends JobFormType {
+  description: string;
+}
+
 interface JobType extends JobFormType {
   _id: string;
   numberOfViews: number;
@@ -51,6 +55,10 @@ type BlogFormType = {
   linkedin?: string;
 };
 
+interface BlogData extends BlogFormType {
+  content: string;
+}
+
 interface BlogType extends BlogFormType {
   _id: string;
   slug: string;
@@ -66,6 +74,10 @@ type Profession = {
 type FaqFormType = {
   question: string;
 };
+
+interface FaqData extends FaqFormType {
+  answer: string;
+}
 
 interface FaqType extends FaqFormType {
   _id: string;

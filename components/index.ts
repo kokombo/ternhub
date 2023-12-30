@@ -47,6 +47,9 @@ import ErrorComponent from "./error-component/error-component";
 import RadioButtonOptions from "./radio-button-options/radio-button-options";
 import Loader from "./loader/loader";
 import UploadProfilePicture from "./upload-profile-picture/upload-profile-picture";
+import UniversalModal from "./universal-modal/universal-modal";
+import TailSpinLoader from "./tail-spin-loader/tail-spin-loader";
+import TipTapEditor from "./tiptap-editor/tiptap-editor";
 
 export {
   BlogCard,
@@ -98,4 +101,7 @@ export {
   RadioButtonOptions,
   Loader,
   UploadProfilePicture,
+  UniversalModal,
+  TailSpinLoader,
+  TipTapEditor,
 };

@@ -74,6 +74,7 @@ const BlogForm = (props: Props) => {
                   id="content"
                   value={props.textEditorValue}
                   onChange={props.textEditorOnchange}
+                  lgWidth={820}
                 />
 
                 {/* the below div is needed because the React Quill text editor caused an overlap */}

@@ -8,6 +8,7 @@ type Props = {
   name: string;
   id: string;
   value: string;
+  lgWidth: number;
   onChange: Dispatch<SetStateAction<string>>;
 };
 
@@ -73,7 +74,7 @@ const TextEditor = (props: Props) => {
           id={props.id}
           modules={modules}
           formats={formats}
-          className=" w-[86vw] lg:w-[820px] h-[277px] "
+          className={`h-[277px] w-[86vw] lg:w-[${props.lgWidth}px]`}
           theme="snow"
           placeholder="write the job description here..."
         />

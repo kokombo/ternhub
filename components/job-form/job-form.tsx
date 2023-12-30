@@ -101,6 +101,7 @@ const JobForm = (props: Props) => {
                   id="description"
                   value={props.textEditorValue}
                   onChange={props.textEditorOnchange}
+                  lgWidth={820}
                 />
 
                 {/* the below div is needed because the React Quill text editor caused an overlap */}

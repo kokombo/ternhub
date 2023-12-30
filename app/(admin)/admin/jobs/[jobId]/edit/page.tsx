@@ -1,15 +1,32 @@
 "use client";
 
-import { JobForm } from "@/components";
+import { JobForm, Message } from "@/components";
 import { FormikHelpers } from "formik";
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { getJobById } from "@/utilities/data-fetching/getJobById";
+import { useMutation, useQueryClient } from "react-query";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const EditJobInfo = () => {
   const { jobId } = useParams();
 
-  const { job } = getJobById(jobId);
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  let jobByIdErrorRes: any;
+
+  const {
+    job,
+    isError: isJobByIdError,
+    isLoading: isJobByIdLoading,
+    refetch: refetchJobById,
+    error: jobByIdError,
+  } = getJobById(jobId);
+
+  if (isJobByIdError) jobByIdErrorRes = jobByIdError;
 
   const initialFormValues: JobFormType = {
     title: job?.title as string,
@@ -26,23 +43,55 @@ const EditJobInfo = () => {
 
   const [description, setDescription] = useState(job?.description as string);
 
-  const updateJob = async (
-    values: JobFormType,
-    onSubmitProps: FormikHelpers<JobFormType>
-  ) => {};
+  const updateJobRequest = async (newJobData: JobData) => {
+    return await axios.patch(`/api/job/${jobId}`, newJobData);
+  };
+
+  const { mutateAsync, isLoading, isError, error } = useMutation(
+    updateJobRequest,
+
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("fetchJobs");
+
+        router.push("/admin/jobs");
+      },
+    }
+  );
+
+  const updateJob = async (values: JobFormType) => {
+    const newJobData = { ...values, description };
+
+    await mutateAsync(newJobData);
+  };
 
   return (
-    <JobForm
-      initialFormValues={initialFormValues}
-      title="Update Job Info"
-      submitForm={updateJob}
-      textEditorValue={description}
-      textEditorOnchange={setDescription}
-      isLoading={false}
-      isError={false}
-      error={"AA"}
-      buttonLabel="Preview Update"
-    />
+    <div>
+      {isJobByIdLoading ? (
+        <div className="h-screen"></div>
+      ) : isJobByIdError ? (
+        <div className="flex_center w-full">
+          <Message
+            message={jobByIdErrorRes?.response?.data?.message}
+            isError={isJobByIdError}
+            buttonLabel="Try again"
+            onClickButton={async () => await refetchJobById()}
+          />
+        </div>
+      ) : (
+        <JobForm
+          initialFormValues={initialFormValues}
+          title="Update Job Info"
+          submitForm={updateJob}
+          textEditorValue={description}
+          textEditorOnchange={setDescription}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          buttonLabel="Update Job"
+        />
+      )}
+    </div>
   );
 };
 
