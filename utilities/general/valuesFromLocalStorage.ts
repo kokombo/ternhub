@@ -3,14 +3,16 @@
 import { getValueByKeyInArray } from "./getValueByKeyInArray";
 
 const getUserQueriesFromLocalStorage = (storageName: string) => {
-  const storedUserQueries = localStorage.getItem(`${storageName}`);
+  if (typeof window !== "undefined") {
+    const storedUserQueries = localStorage.getItem(`${storageName}`);
 
-  if (storedUserQueries) {
-    const storedKeyValueArrays = JSON.parse(storedUserQueries);
+    if (storedUserQueries) {
+      const storedKeyValueArrays = JSON.parse(storedUserQueries);
 
-    return storedKeyValueArrays;
-  } else {
-    return null;
+      return storedKeyValueArrays;
+    } else {
+      return null;
+    }
   }
 };
 
