@@ -19,7 +19,6 @@ import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
-import { useRouter } from "next/navigation";
 
 const userData: UserSignupDataType = {
   email: "",
@@ -43,8 +42,6 @@ const validationSchema = Yup.object({
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
 
-  const router = useRouter();
-
   const signupFormRequest = async (
     formData: UserSignupDataType
   ): Promise<Data | undefined> => {
@@ -57,7 +54,7 @@ const SignUpPage = () => {
   const { mutateAsync, isLoading, isError, error } =
     useMutation(signupFormRequest);
 
-  errorResponse = error;
+  if (error) errorResponse = error;
 
   const createUserAccount = async (
     values: UserSignupDataType,
@@ -73,11 +70,7 @@ const SignUpPage = () => {
           password,
           callbackUrl: "/jobs",
           redirect: false,
-        }).then((res) => {
-          if (res?.ok) {
-            router.push("/jobs");
-          }
-
+        }).then(() => {
           onSubmitProps.resetForm();
         });
       },

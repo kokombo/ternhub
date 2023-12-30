@@ -8,14 +8,14 @@ type Props = {
   onChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
   onClickSearchButton: () => void;
-  lgFrameWidth: string;
-  lgInputWidth: string;
+  lgFrameWidth: number;
+  lgInputWidth: number;
 };
 
 const Search = (props: Props) => {
   return (
     <div
-      className={`w-full md:w-[353px] h-[64px] lg:w-[556px] lg:h-[72px] max-w-full flex items-center justify-between border-[0.8px] border-grey px-4 py-3 rounded-[10px] hover:border-purple hover:border-[1px] `}
+      className={`w-full h-[64px] md:w-[500px] lg:w-[${props.lgFrameWidth}px] lg:h-[72px] max-w-full flex items-center justify-between border-[0.8px] border-grey px-4 py-3 rounded-[10px] hover:border-purple hover:border-[1px] `}
     >
       <span className="flex items-center gap-3 ">
         <Image
@@ -27,7 +27,7 @@ const Search = (props: Props) => {
         <input
           type="search"
           placeholder={props.placeholder}
-          className={`lg:w-[${props.lgInputWidth}] w-full h-7 outline-none text-lightGrey`}
+          className={`lg:w-[${props.lgInputWidth}px] md:w-[300px] min-w-full h-7 outline-none text-lightGrey`}
           onChange={props.onChange}
           value={props.value}
           name={props.value}

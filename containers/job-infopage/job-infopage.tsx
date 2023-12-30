@@ -5,6 +5,8 @@ import {
   Loader,
 } from "@/components";
 import { RelatedJobs } from "..";
+import { useSelector } from "react-redux";
+import { StateType } from "@/redux-toolkit/store";
 
 type Props = {
   data: JobType | undefined;
@@ -15,6 +17,12 @@ type Props = {
 };
 
 const JobInfopage = (props: Props) => {
+  const { allJobs } = useSelector((state: StateType) => state.job);
+
+  const relatedJobs = allJobs
+    .filter((job) => job.category === props.data?.category)
+    .slice(0, 4);
+
   return (
     <>
       {props.isLoading ? (
@@ -38,7 +46,7 @@ const JobInfopage = (props: Props) => {
             <JobInfopageBody props={props.data} />
           </div>
 
-          {/* <RelatedJobs/> */}
+          <RelatedJobs relatedJobs={relatedJobs} />
         </div>
       )}
     </>

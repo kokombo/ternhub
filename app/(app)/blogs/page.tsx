@@ -18,8 +18,8 @@ const BlogListPage = () => {
           onChange={() => {}}
           value=""
           onClickSearchButton={() => {}}
-          lgFrameWidth="458px"
-          lgInputWidth="250px"
+          lgFrameWidth={458}
+          lgInputWidth={250}
         />
       </section>
 

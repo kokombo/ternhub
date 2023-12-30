@@ -23,8 +23,8 @@ const Hero = () => {
         onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
         value={jobSearchTerm}
         onClickSearchButton={() => router.push("/search/jobs")}
-        lgFrameWidth="458px"
-        lgInputWidth="250px"
+        lgFrameWidth={458}
+        lgInputWidth={250}
       />
     </section>
   );

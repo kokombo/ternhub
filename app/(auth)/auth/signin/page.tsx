@@ -16,7 +16,6 @@ import Image from "next/image";
 import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
-import { useRouter } from "next/navigation";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -37,8 +36,6 @@ const SignInPage = () => {
 
   const [error, setError] = useState<string | null | undefined>(null);
 
-  const router = useRouter();
-
   const signAUserIn = async (
     values: UserLoginDataType,
     onSubmitProps: FormikHelpers<UserLoginDataType>
@@ -54,8 +51,6 @@ const SignInPage = () => {
       });
 
       if (res?.ok) {
-        router.push("/jobs");
-
         onSubmitProps.resetForm();
       }
 

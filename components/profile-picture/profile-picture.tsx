@@ -7,14 +7,16 @@ const ProfilePicture = () => {
   return (
     <div className="h-12 w-12 rounded-full bg-purple flex items-center justify-center">
       {session?.user?.image ? (
-        <Image
-          alt="profile picture"
-          src={session.user.image}
-          height={48}
-          width={48}
-          style={{ width: "auto", height: "auto" }}
-          className="rounded-full object-contain"
-        />
+        <span className="block relative h-full w-full">
+          <Image
+            alt="profile picture"
+            src={session.user.image}
+            fill
+            className="rounded-full object-cover"
+            quality={100}
+            sizes="100vw"
+          />
+        </span>
       ) : (
         <p className="text-2xl text-white uppercase">
           {session?.user?.name?.substring(0, 1)}

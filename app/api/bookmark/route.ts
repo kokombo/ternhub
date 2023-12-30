@@ -12,7 +12,7 @@ export const GET = async (req: Request) => {
 
   if (!session?.user) {
     return NextResponse.json(
-      { message: "Oops! You cannot perform action. Please sign in" },
+      { message: "Oops! Please sign in to perform action." },
       { status: 401 }
     );
   }
@@ -40,7 +40,7 @@ export const PUT = async (req: Request) => {
 
   if (!session?.user) {
     return NextResponse.json(
-      { message: "Oops! You cannot perform action." },
+      { message: "Oops! Please sign in to perform action." },
       { status: 401 }
     );
   }
@@ -69,9 +69,11 @@ export const PUT = async (req: Request) => {
         { new: true }
       );
 
-      const userAgain = await User.findById(userId).populate("savedJobs");
+      const userWithSavedJobsPopulated = await User.findById(userId).populate(
+        "savedJobs"
+      );
 
-      const userSavedJobs = userAgain.savedJobs;
+      const userSavedJobs = userWithSavedJobsPopulated.savedJobs;
 
       return NextResponse.json(userSavedJobs);
     } else {
@@ -83,9 +85,11 @@ export const PUT = async (req: Request) => {
         { new: true }
       );
 
-      const userAgain = await User.findById(userId).populate("savedJobs");
+      const userWithSavedJobsPopulated = await User.findById(userId).populate(
+        "savedJobs"
+      );
 
-      const userSavedJobs = userAgain.savedJobs;
+      const userSavedJobs = userWithSavedJobsPopulated.savedJobs;
 
       return NextResponse.json(userSavedJobs);
     }

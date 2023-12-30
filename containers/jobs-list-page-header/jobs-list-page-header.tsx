@@ -36,8 +36,8 @@ const JobsListPageHeader = () => {
         onChange={(e) => dispatch(setJobSearchTerm(e.target.value))}
         value={jobSearchTerm}
         onClickSearchButton={() => router.push("/search/jobs")}
-        lgFrameWidth="556px"
-        lgInputWidth="300px"
+        lgFrameWidth={556}
+        lgInputWidth={300}
       />
     </section>
   );
