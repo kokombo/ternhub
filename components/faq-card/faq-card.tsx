@@ -23,14 +23,18 @@ const FaqCard = ({
     setShowAnswer((prev) => !prev);
   };
 
+  const showEditIcon = Boolean(
+    pathname === "/admin/faqs" && session?.user.role === "admin"
+  );
+
   return (
-    <div className="flex items-start gap-1">
+    <div className={`${showEditIcon ? "flex items-start gap-1" : ""}`}>
       <div
         onClick={showAndHideAsnwer}
         className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-[629px] max-w-full p-6"
       >
         <div className="flex justify-between">
-          <h4 className="text-lg font-semibold tracking-[1%] text-textblack ">
+          <h4 className="text-lg font-semibold tracking-[1%] text-textblack flex-wrap">
             {faq.question}
           </h4>
 
@@ -43,14 +47,14 @@ const FaqCard = ({
               showAnswer ? "translate-y-0" : "translate-y-[100%]"
             } transition-all duration-200`}
           >
-            <p className="text-sm lg:text-lg font-normal tracking-[1%] text-greyblack">
+            <p className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
               {parse(faq.answer)}
             </p>
           </div>
         )}
       </div>
 
-      {pathname === "/admin/faqs" && session?.user.role === "admin" ? (
+      {showEditIcon ? (
         <button
           type="button"
           onClick={() => onClickFaqEditButton(faq._id)}
