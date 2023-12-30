@@ -28,10 +28,14 @@ const FaqCard = ({
   );
 
   return (
-    <div className={`${showEditIcon ? "flex items-start gap-1" : ""}`}>
+    <div
+      className={`${
+        showEditIcon ? "flex items-start gap-1" : ""
+      } w-[629px] max-w-full `}
+    >
       <div
         onClick={showAndHideAsnwer}
-        className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-[629px] max-w-full p-6"
+        className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-full p-6"
       >
         <div className="flex justify-between">
           <h4 className="text-lg font-semibold tracking-[1%] text-textblack flex-wrap">

@@ -3,7 +3,8 @@
 import { Loader } from "@/components";
 
 const Loading = () => {
-  return <Loader />;
+  return <div></div>;
+  // return <Loader />;
 };
 
 export default Loading;
