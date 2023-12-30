@@ -1,21 +1,5 @@
-This is a Next.js project bootstrapped with create-next-app.
-
-## Getting Started
-
-First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+TernHub is a job sourcing platform built with Next, TypeScript, MongoDB, and several other techs. It is a platform for newbies in the tech space to access manually sourced internship opportunties, junior roles, and tech events.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
