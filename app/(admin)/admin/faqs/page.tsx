@@ -27,7 +27,9 @@ const AdminAllFaqsPage = () => {
   return (
     <>
       {modalVisible && (
-        <UniversalModal children={<UpdateFaq faqId={currentFaqId} />} />
+        <UniversalModal>
+          <UpdateFaq faqId={currentFaqId} />
+        </UniversalModal>
       )}
 
       <div className="flex items-center justify-center w-full py-11 lg:py-[100px]">

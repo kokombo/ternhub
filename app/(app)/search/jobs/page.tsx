@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
 import axios from "axios";
@@ -100,18 +100,20 @@ const JobsSearchResults = () => {
   }, [locationFilterTerm, refetch]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
-  const userSearchQueriesArray = [
-    { key: "searchTerm", value: searchTerm },
-    { key: "pageNumber", value: pageNumber },
-    { key: "locationFilterTerm", value: locationFilterTerm },
-  ];
+  const userSearchQueriesArray = useMemo(() => {
+    return [
+      { key: "searchTerm", value: searchTerm },
+      { key: "pageNumber", value: pageNumber },
+      { key: "locationFilterTerm", value: locationFilterTerm },
+    ];
+  }, [searchTerm, pageNumber, locationFilterTerm]);
 
   useEffect(() => {
     localStorage.setItem(
       "userQueriesInSearch",
       JSON.stringify(userSearchQueriesArray)
     );
-  }, [searchTerm, pageNumber, locationFilterTerm]);
+  }, [userSearchQueriesArray]);
 
   return (
     <div className="py-6 md:py-11 sm:px-[6.94%] px-5 flex flex-col gap-6 md:gap-11 w-full">

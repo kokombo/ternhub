@@ -32,7 +32,7 @@ const EditBlogInfo = () => {
 
   useEffect(() => {
     setContent(blog?.content as string);
-  }, [slug]);
+  }, [blog?.content]);
 
   const updateBlogRequest = async (newBlogData: BlogData) => {
     return await axios.patch(`/api/blog/${slug}`, newBlogData);

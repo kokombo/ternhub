@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
@@ -51,17 +51,19 @@ const JobsListPage = () => {
   }, [locationFilterTerm, refetch]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
-  const userSearchQueriesArray = [
-    { key: "pageNumber", value: pageNumber },
-    { key: "locationFilterTerm", value: locationFilterTerm },
-  ];
+  const userSearchQueriesArray = useMemo(() => {
+    return [
+      { key: "pageNumber", value: pageNumber },
+      { key: "locationFilterTerm", value: locationFilterTerm },
+    ];
+  }, [pageNumber, locationFilterTerm]);
 
   useEffect(() => {
     localStorage.setItem(
       "userQueriesInJobsPage",
       JSON.stringify(userSearchQueriesArray)
     );
-  }, [pageNumber, locationFilterTerm]);
+  }, [userSearchQueriesArray]);
 
   return (
     <div className="flex flex-col w-full gap-6 md:gap-11">
