@@ -16,7 +16,6 @@ import AuthCTA from "./auth-cta/auth-cta";
 import SocialAuthFrame from "./social-auth-frame/social-auth-frame";
 import ButtonLoader from "./button-loader/button-loader";
 import SubmitFormLoader from "./submit-form-loader/submit-form-loader";
-import InputFieldError from "./input-field-error/input-field-error";
 import InputField from "./input-field/input-field";
 import TextEditor from "./text-editor/text-editor";
 import JobForm from "./job-form/job-form";
@@ -71,7 +70,6 @@ export {
   SocialAuthFrame,
   ButtonLoader,
   SubmitFormLoader,
-  InputFieldError,
   InputField,
   TextEditor,
   JobForm,

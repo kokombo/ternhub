@@ -14,11 +14,14 @@ const AdminToolBox = (props: Props) => {
         url={props.editButtonUrl}
         label={props.editButtonLabel}
         arialabel={props.editButtonLabel}
-        prefetch={false}
         extraClasses="blue_button"
       />
 
-      <button onClick={props.deleteButtonOnclick} className="blue_button">
+      <button
+        type="button"
+        onClick={props.deleteButtonOnclick}
+        className="blue_button"
+      >
         {props.deleteButtonLabel}
       </button>
     </div>

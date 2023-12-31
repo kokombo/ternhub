@@ -2,12 +2,7 @@
 import { TipTapEditor } from "@/components";
 
 const Admin = () => {
-  return (
-    <div>
-      Adminn
-      {/* <TipTapEditor /> */}
-    </div>
-  );
+  return <div>Adminn</div>;
 };
 
 export default Admin;

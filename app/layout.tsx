@@ -6,6 +6,7 @@ import { Sans } from "./font";
 import { Provider } from "react-redux";
 import { store } from "@/redux-toolkit/store";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 export default function RootLayout({
   children,
@@ -29,11 +30,7 @@ export default function RootLayout({
               <ReactQueryProvider>
                 {children}
 
-                <ToastContainer
-                  position="top-center"
-                  autoClose={5000}
-                  theme="colored"
-                />
+                <ToastContainer autoClose={5000} theme="colored" />
               </ReactQueryProvider>
             </Provider>
           </NextAuthProvider>

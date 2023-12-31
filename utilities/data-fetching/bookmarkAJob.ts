@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useMutation, useQueryClient } from "react-query";
+import { toast } from "react-toastify";
 
 export const bookmarkAJob = (jobId: string) => {
   const queryClient = useQueryClient();
@@ -15,7 +16,15 @@ export const bookmarkAJob = (jobId: string) => {
     onSuccess: () => {
       queryClient.refetchQueries("getUserSavedJobs");
     },
+
+    onError: (error: any) => {
+      toast.error(`${error?.response?.data?.message}`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    },
   });
+
+  console.log(error);
 
   const bookmarkAndUnbookmarkAJobFunction = async () => {
     await mutateAsync(jobId);

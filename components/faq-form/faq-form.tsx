@@ -24,7 +24,7 @@ const FaqForm = (props: Props) => {
     <div className="flex flex-col gap-[25px] mx-[6.94%] py-11 lg:py-[50px] items-center justify-center text-center">
       <h1 className="text-[28px] font-medium">{props.title}</h1>
 
-      <div>
+      <span>
         <Formik
           initialValues={props.initialValues}
           onSubmit={props.submitForm}
@@ -32,9 +32,6 @@ const FaqForm = (props: Props) => {
           validateOnBlur={false}
         >
           <Form className="flex flex-col gap-8">
-            {/* <div className="w-[86vw] lg:w-[820px]">
-
-            </div> */}
             <InputField
               label="Question"
               name="question"
@@ -75,7 +72,7 @@ const FaqForm = (props: Props) => {
             </div>
           </Form>
         </Formik>
-      </div>
+      </span>
     </div>
   );
 };

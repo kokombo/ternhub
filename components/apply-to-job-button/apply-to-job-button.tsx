@@ -14,14 +14,14 @@ const ApplyToJobButton = ({ props: job }: { props: JobType | undefined }) => {
   }
 
   return (
-    <button
-      type="button"
-      className="h-10 px-6 py-[8px] lg:px-[32px] lg:py-3 lg:h-12 lg:text-base text-sm bg-purple rounded-[10px] text-white font-semibold hover:bg-blue"
+    <Link
+      href={`https://${applyLink}`}
+      aria-label="Llink to a job's application page."
+      target="_href"
+      className="apply_button"
     >
-      <Link href={`https://${applyLink}`} target="_href">
-        Apply
-      </Link>
-    </button>
+      Apply
+    </Link>
   );
 };
 

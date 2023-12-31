@@ -19,7 +19,7 @@ const FaqCard = ({
 
   const { data: session } = useSession();
 
-  const showAndHideAsnwer = () => {
+  const showAndHideAnswer = () => {
     setShowAnswer((prev) => !prev);
   };
 
@@ -34,7 +34,7 @@ const FaqCard = ({
       } w-[629px] max-w-full `}
     >
       <div
-        onClick={showAndHideAsnwer}
+        onClick={showAndHideAnswer}
         className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-full p-6"
       >
         <div className="flex justify-between">
@@ -58,7 +58,7 @@ const FaqCard = ({
         )}
       </div>
 
-      {showEditIcon ? (
+      {showEditIcon && (
         <button
           type="button"
           onClick={() => onClickFaqEditButton(faq._id)}
@@ -66,7 +66,7 @@ const FaqCard = ({
         >
           <BiEdit />
         </button>
-      ) : null}
+      )}
     </div>
   );
 };
