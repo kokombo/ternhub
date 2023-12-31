@@ -30,7 +30,11 @@ export default function RootLayout({
               <ReactQueryProvider>
                 {children}
 
-                <ToastContainer autoClose={5000} theme="colored" />
+                <ToastContainer
+                  autoClose={5000}
+                  theme="colored"
+                  className="toast_message"
+                />
               </ReactQueryProvider>
             </Provider>
           </NextAuthProvider>

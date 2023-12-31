@@ -24,7 +24,7 @@ const BlogsList = (props: Props) => {
         ) : props.data && props.data.length > 0 ? (
           <div className="recent_blog_wrapper">
             <h2
-              className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500px]"
+              className="text-xl lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
               style={Grotesk.style}
             >
               Recent Post
@@ -63,7 +63,7 @@ const BlogsList = (props: Props) => {
           ) : props.data && props.data.length > 1 ? (
             <div>
               <h2
-                className="lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
+                className="text-xl lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
                 style={Grotesk.style}
               >
                 Must Read Blogs

@@ -26,11 +26,18 @@ h4 {
 }
 
 .input {
-  color: black;
+  color: #141024;
   padding: 14px 16px;
   width: 100%;
   border-radius: 5px;
   outline: none;
+}
+
+.toast_message {
+  font-size: 12px;
+  height: 15px;
+  color: #141024;
+  width: 70vw;
 }
 
 /* Tailwind styles */
