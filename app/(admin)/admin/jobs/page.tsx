@@ -3,6 +3,7 @@
 import { JobsList } from "@/containers";
 import { useState } from "react";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
+import { illustrations } from "@/constants";
 
 const AdminJobsListPage = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -36,7 +37,7 @@ const AdminJobsListPage = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No search results."
+        noDataLabel="No job found for your search. Try a new search or use the category filter to see available jobs."
         refetch={refetch}
         rootUrl="/admin/jobs"
         isFetching={isFetching}
@@ -45,6 +46,7 @@ const AdminJobsListPage = () => {
         pageNumber={pageNumber}
         limit={limit}
         totalCount={data?.numOfJobs as number}
+        noDataIllustration={illustrations.no_search_result}
       />
     </div>
   );

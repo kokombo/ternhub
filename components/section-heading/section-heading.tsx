@@ -1,4 +1,4 @@
-import { Grotesk } from "@/app/font";
+import { GroteskNormal } from "@/app/font";
 
 type Props = {
   heading: string;
@@ -10,7 +10,7 @@ const SectionHeading = (props: Props) => {
     <article className="flex flex-col text-center lg:gap-5 gap-[18px] ">
       <h2
         className="text-2xl lg:text-[40px] lg:leading-[56px] tracking-[0.5%] text-textblack"
-        style={Grotesk.style}
+        style={GroteskNormal.style}
       >
         {props.heading}
       </h2>

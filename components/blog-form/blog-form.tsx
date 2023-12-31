@@ -29,10 +29,10 @@ type Props = {
 const validateBlogForm = Yup.object({
   title: Yup.string()
     .required("Blog title is required.")
-    .max(80, "Maximum length of 80 characters."),
+    .max(100, "Maximum length of 100 characters."),
   metaDescription: Yup.string()
     .required("Blog meta description is required.")
-    .max(100, "Maximum length of 100 characters."),
+    .max(150, "Maximum length of 150 characters."),
   author: Yup.string().required("Blog author is required."),
   image: Yup.string().required("Upload blog cover image."),
   category: Yup.string().required("Please select blog category."),
@@ -59,7 +59,7 @@ const BlogForm = (props: Props) => {
                   name="title"
                   type="text"
                   id="title"
-                  maxLength={80}
+                  maxLength={100}
                 />
 
                 <UploadFile
@@ -85,7 +85,7 @@ const BlogForm = (props: Props) => {
                   name="metaDescription"
                   type="text"
                   id="meta"
-                  maxLength={100}
+                  maxLength={150}
                 />
 
                 <SelectField

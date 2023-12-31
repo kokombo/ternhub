@@ -1,4 +1,3 @@
-import { illustrations } from "@/constants";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 
@@ -7,20 +6,25 @@ type Props = {
   buttonLabel?: string;
   onClickButton?: () => void;
   isError?: boolean;
-  vector?: string | StaticImport;
+  illustration: string | StaticImport;
 };
 
 const Message = (props: Props) => {
   return (
-    <div className="w-full h-screen flex flex-col items-center gap-5 pt-5">
-      <Image
-        src={illustrations.vector}
-        alt={`${props.message} vector illustration.`}
-        className="w-full h-80 object-contain"
-        priority
-      />
+    <div className="w-full h-screen flex flex-col items-center pt-32 gap-5  max-w-[80vw] ">
+      <div className="block relative h-40 w-40">
+        <Image
+          src={props.illustration}
+          alt={`${props.message} vector illustration.`}
+          className=" object-contain"
+          priority
+          fill
+        />
+      </div>
 
-      <p className="text-textblack text-base">{props.message}</p>
+      <p className="text-greyblack text-lg text-center font-semibold">
+        {props.message}
+      </p>
 
       {props.isError && (
         <button

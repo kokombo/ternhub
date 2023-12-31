@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BlogReadTime, JobPostDuration } from "..";
 import Image from "next/image";
-import { Grotesk } from "@/app/font";
+import { GroteskNormal } from "@/app/font";
 
 const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
   return (
@@ -24,7 +24,7 @@ const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
         <article>
           <h1
             className="text-[30px] lg:text-[40px] tracking-[0.5%] font-normal text-textblack max-w-[617px]"
-            style={Grotesk.style}
+            style={GroteskNormal.style}
           >
             {blog.title}
           </h1>

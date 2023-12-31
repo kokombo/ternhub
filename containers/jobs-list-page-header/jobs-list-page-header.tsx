@@ -1,6 +1,6 @@
 "use client";
 import { Search } from "@/components";
-import { Grotesk } from "@/app/font";
+import { GroteskNormal } from "@/app/font";
 import { useSelector, useDispatch } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
@@ -18,13 +18,13 @@ const JobsListPageHeader = () => {
       <article className="flex flex-col items-center text-center gap-[18px] md:gap-6">
         <h1
           className="text-[34px] leading-[41px] lg:text-[68px] lg:leading-[82px]"
-          style={Grotesk.style}
+          style={GroteskNormal.style}
         >
           Explore Tech <span className="text-purple">Internships</span>{" "}
           Opportunities
         </h1>
 
-        <h2 className="text-lg lg:text-2xl font-sans text-greyblack">
+        <h2 className="text-lg lg:text-2xl font-sans text-greyblack font-normal">
           Recommendations are based on your profile, job preferences and
           activities on TheTernHub
         </h2>

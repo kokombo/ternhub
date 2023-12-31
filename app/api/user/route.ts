@@ -22,7 +22,11 @@ export const POST = async (req: Request) => {
       );
     }
 
-    const user = await User.create({ ...body, email: refinedEmail });
+    const user = await User.create({
+      ...body,
+      email: refinedEmail,
+      authMethod: "credentials",
+    });
 
     return NextResponse.json({ user }, { status: 200 });
   } catch (error) {

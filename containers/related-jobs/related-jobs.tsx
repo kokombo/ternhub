@@ -1,6 +1,6 @@
 import { JobCard } from "@/components";
 import Link from "next/link";
-import { Grotesk } from "@/app/font";
+import { GroteskBold } from "@/app/font";
 
 type Props = {
   relatedJobs: JobType[] | undefined;
@@ -14,7 +14,7 @@ const RelatedJobs = (props: Props) => {
           <div className="flex items-center justify-between">
             <h3
               className="text-xl lg:text-[28px] font-[500] text-textblack"
-              style={Grotesk.style}
+              style={GroteskBold.style}
             >
               Related Jobs
             </h3>

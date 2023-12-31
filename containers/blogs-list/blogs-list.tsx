@@ -1,7 +1,8 @@
 import { RecentBlogCard, BlogCard, Search, Message } from "@/components";
 import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 import RecentBlogSkeletonLoader from "@/utilities/skeletons/recent-blog-skeleton-loader";
-import { Grotesk } from "@/app/font";
+import { GroteskBold } from "@/app/font";
+import { illustrations } from "@/constants";
 
 type Props = {
   data: BlogType[] | undefined;
@@ -25,7 +26,7 @@ const BlogsList = (props: Props) => {
           <div className="recent_blog_wrapper">
             <h2
               className="text-xl lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
-              style={Grotesk.style}
+              style={GroteskBold.style}
             >
               Recent Post
             </h2>
@@ -54,17 +55,21 @@ const BlogsList = (props: Props) => {
                 isError={props.isError}
                 buttonLabel="Try again"
                 onClickButton={async () => await props.refetch()}
+                illustration={illustrations.error_2}
               />
             </div>
           ) : props.data && props.data.length === 0 ? (
             <div className="flex items-center justify-center">
-              <Message message={props.noDataLabel} />
+              <Message
+                message={props.noDataLabel}
+                illustration={illustrations.no_saved_jobs}
+              />
             </div>
           ) : props.data && props.data.length > 1 ? (
             <div>
               <h2
                 className="text-xl lg:text-[28px] self-start text-textblack mb-[15px] lg:mb-[50px] font-[500]"
-                style={Grotesk.style}
+                style={GroteskBold.style}
               >
                 Must Read Blogs
               </h2>

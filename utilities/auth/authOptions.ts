@@ -65,6 +65,9 @@ export const authOptions: NextAuthOptions = {
         token.role = accountUser.role;
 
         token.image = profile?.image || accountUser.image;
+
+        token.emailVerified =
+          profile?.email_verified || accountUser.emailVerified;
       }
 
       return token;
@@ -79,11 +82,17 @@ export const authOptions: NextAuthOptions = {
 
       session.user.image = token.image;
 
+      session.user.emailVerified = token.emailVerified;
+
       return session;
     },
 
     async signIn({ profile, credentials, account }) {
-      if (account?.provider === "google") {
+      if (account?.provider === "credentials") {
+        await connectDatabase();
+
+        await User.findOne({ email: credentials?.email });
+      } else {
         await connectDatabase();
 
         const userExists = await User.findOne({ email: profile?.email });
@@ -95,14 +104,11 @@ export const authOptions: NextAuthOptions = {
             image: profile?.image,
             password: uuidv4(),
             role: profile?.role,
+            authMethod: account?.provider,
           });
         }
       }
 
-      if (account?.provider === "credentials") {
-        await connectDatabase();
-        await User.findOne({ email: credentials?.email });
-      }
       return true;
     },
 

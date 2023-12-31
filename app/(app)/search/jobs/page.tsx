@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { v4 as uuidv4 } from "uuid";
+import { illustrations } from "@/constants";
 
 type Data = {
   jobs: JobType[];
@@ -143,7 +144,7 @@ const JobsSearchResults = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="There are no available jobs that match your query."
+        noDataLabel="No job found for your search. Try a new search or use the category filter to see available jobs."
         refetch={refetch}
         rootUrl="/search/jobs"
         isFetching={isFetching}
@@ -152,6 +153,7 @@ const JobsSearchResults = () => {
         pageNumber={pageNumber}
         limit={limit}
         totalCount={data?.numOfJobs as number}
+        noDataIllustration={illustrations.no_search_result}
       />
     </div>
   );

@@ -8,12 +8,15 @@ declare module "next-auth" {
       id?: string;
       accessToken?: string;
       role?: string;
+      emailVerified?: boolean;
+      authMethod?: string;
     } & DefaultSession["user"];
   }
 
   interface Profile {
     id?: string;
     role?: string;
+    email_verified?: boolean;
   }
 
   interface User {
@@ -27,5 +30,7 @@ declare module "next-auth/jwt" {
     accessToken?: string;
     role?: string;
     image?: string;
+    emailVerified?: boolean;
+    authMethod?: string;
   }
 }

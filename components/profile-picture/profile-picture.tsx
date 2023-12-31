@@ -14,7 +14,7 @@ const ProfilePicture = () => {
             fill
             className="rounded-full object-cover"
             quality={100}
-            sizes="100vw"
+            sizes="100vw 80vw"
           />
         </span>
       ) : (

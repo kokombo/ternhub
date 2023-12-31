@@ -5,6 +5,7 @@ import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
+import { illustrations } from "@/constants";
 
 const JobsListPage = () => {
   const { pageFromLocalStorage, locationTermFromLocalStorage } =
@@ -79,7 +80,7 @@ const JobsListPage = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No job matches your query."
+        noDataLabel="No job found for your search. Try a new search or use the category filter to see available jobs."
         refetch={refetch}
         rootUrl="/jobs"
         isFetching={isFetching}
@@ -88,6 +89,7 @@ const JobsListPage = () => {
         pageNumber={pageNumber}
         limit={limit}
         totalCount={data?.numOfJobs as number}
+        noDataIllustration={illustrations.no_search_result}
       />
     </div>
   );

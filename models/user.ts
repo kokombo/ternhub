@@ -23,7 +23,18 @@ const UserSchema = new Schema(
       type: String,
     },
 
-    image: {},
+    image: {
+      type: String,
+    },
+
+    authMethod: {
+      type: String,
+    },
+
+    emailVerified: {
+      type: Boolean,
+      default: false,
+    },
 
     role: {
       type: String,

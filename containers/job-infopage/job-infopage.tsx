@@ -7,6 +7,7 @@ import {
 import { RelatedJobs } from "..";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
+import { illustrations } from "@/constants";
 
 type Props = {
   data: JobType | undefined;
@@ -29,9 +30,7 @@ const JobInfopage = (props: Props) => {
   return (
     <>
       {props.isLoading ? (
-        <div className="flex_center justify-center">
-          <Loader />
-        </div>
+        <div className="min-h-screen"></div>
       ) : props.isError ? (
         <div className="flex_center justify-center">
           <Message
@@ -39,6 +38,7 @@ const JobInfopage = (props: Props) => {
             isError={props.isError}
             onClickButton={async () => await props.refetch()}
             buttonLabel="Try again"
+            illustration={illustrations.error_2}
           />
         </div>
       ) : (

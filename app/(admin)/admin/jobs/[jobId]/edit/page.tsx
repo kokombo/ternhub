@@ -8,6 +8,7 @@ import { getJobById } from "@/utilities/data-fetching/getJobById";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { illustrations } from "@/constants";
 
 const EditJobInfo = () => {
   const { jobId } = useParams();
@@ -76,6 +77,7 @@ const EditJobInfo = () => {
             isError={isJobByIdError}
             buttonLabel="Try again"
             onClickButton={async () => await refetchJobById()}
+            illustration={illustrations.error_2}
           />
         </div>
       ) : (

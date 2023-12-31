@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 
-const Grotesk = localFont({
+const GroteskNormal = localFont({
   src: [
     {
       path: "../public/assets/font/FoundersGrotesk-Regular.otf",
@@ -18,4 +18,13 @@ const Sans = localFont({
   ],
 });
 
-export { Grotesk, Sans };
+const GroteskBold = localFont({
+  src: [
+    {
+      path: "../public/assets/font/FoundersGrotesk-Bold.otf",
+      style: "bold",
+    },
+  ],
+});
+
+export { GroteskNormal, Sans, GroteskBold };

@@ -1,4 +1,5 @@
 import { BlogInfopageHeader, BlogInfopageBody, Message } from "@/components";
+import { illustrations } from "@/constants";
 
 type Props = {
   data: BlogType | undefined;
@@ -19,6 +20,7 @@ const BlogInfoPage = (props: Props) => {
           isError={props.isError}
           onClickButton={async () => await props.refetch()}
           buttonLabel="Try again"
+          illustration={illustrations.error_2}
         />
       ) : (
         <div className="py-6 lg:py-[60px] sm:px-[6.94%] px-5 flex_center lg:gap-[75px] gap-10">

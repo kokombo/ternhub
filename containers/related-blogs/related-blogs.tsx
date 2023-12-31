@@ -1,5 +1,5 @@
 import { BlogCard } from "@/components";
-import { Grotesk } from "@/app/font";
+import { GroteskBold } from "@/app/font";
 
 type Props = {
   relatedBlogs: BlogType[] | undefined;
@@ -10,7 +10,7 @@ const RelatedBlogs = (props: Props) => {
     <>
       {props.relatedBlogs && (
         <section className="flex_center gap-6 lg:gap-[50px]">
-          <h2 className="text-[28px] font-medium " style={Grotesk.style}>
+          <h2 className="text-[28px] font-medium " style={GroteskBold.style}>
             Related Blogs
           </h2>
 

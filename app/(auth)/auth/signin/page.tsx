@@ -17,6 +17,7 @@ import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
+import { GroteskNormal } from "@/app/font";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -74,7 +75,9 @@ const SignInPage = () => {
         <Logo />
 
         <div className="flex flex-col gap-8">
-          <h1>Welcome Back!</h1>
+          <h1 className="text-2xl lg:text-[40px]" style={GroteskNormal.style}>
+            Welcome back!
+          </h1>
 
           <SocialAuthFrame
             onClick={() =>

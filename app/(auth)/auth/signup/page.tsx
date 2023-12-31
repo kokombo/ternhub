@@ -20,6 +20,7 @@ import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
+import { GroteskNormal } from "@/app/font";
 
 const userData: UserSignupDataType = {
   email: "",
@@ -90,7 +91,9 @@ const SignUpPage = () => {
         <Logo />
 
         <div className="flex flex-col gap-8">
-          <h1>Create an account</h1>
+          <h1 className="text-2xl lg:text-[40px]" style={GroteskNormal.style}>
+            Create an account
+          </h1>
 
           <SocialAuthFrame
             onClick={() =>

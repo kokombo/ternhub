@@ -3,6 +3,7 @@
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Message, JobCard } from "@/components";
 import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
+import { illustrations } from "@/constants";
 
 const SavedJobsPage = () => {
   let errorResponse: any;
@@ -27,9 +28,13 @@ const SavedJobsPage = () => {
           isError={isError}
           buttonLabel="Try again"
           onClickButton={async () => await refetch()}
+          illustration={illustrations.error_2}
         />
       ) : savedJobs && savedJobs.length < 1 ? (
-        <Message message="There are no saved jobs." />
+        <Message
+          message="Keep track of jobs you're interested in. Press the save button on a job card to save it for later."
+          illustration={illustrations.no_saved_jobs}
+        />
       ) : (
         savedJobs &&
         savedJobs.map((job) => (

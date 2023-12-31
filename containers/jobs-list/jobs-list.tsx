@@ -1,5 +1,7 @@
 import { JobCard, Message } from "@/components";
+import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
@@ -16,6 +18,7 @@ type Props = {
   pageNumber: number;
   limit: number;
   totalCount: number;
+  noDataIllustration: string | StaticImport;
 };
 
 const JobsList = (props: Props) => {
@@ -34,11 +37,15 @@ const JobsList = (props: Props) => {
             isError={props.isError}
             buttonLabel="Try again"
             onClickButton={async () => await props.refetch()}
+            illustration={illustrations.error_2}
           />
         </div>
       ) : props.data && props.data.length < 1 ? (
         <div className="flex_center w-full">
-          <Message message={props.noDataLabel} />
+          <Message
+            message={props.noDataLabel}
+            illustration={props.noDataIllustration}
+          />
         </div>
       ) : (
         <div className="job_list_grid w-full ">
