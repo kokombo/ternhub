@@ -41,7 +41,9 @@ const Sidebar = (props: Props) => {
         </span>
 
         <div className="py-10 gap-4 flex flex-col">
-          <Logo />
+          <div onClick={() => props.closeSidebar()}>
+            <Logo />
+          </div>
 
           <ul className="flex flex-col gap-3 ">
             <li className="list-none">
