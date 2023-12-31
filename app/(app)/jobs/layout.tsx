@@ -8,7 +8,9 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 const JobsPageLayout = ({ children }: { children: React.ReactNode }) => {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+
+  console.log("user", session?.user);
 
   const router = useRouter();
 

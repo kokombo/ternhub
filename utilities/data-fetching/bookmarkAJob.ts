@@ -24,8 +24,6 @@ export const bookmarkAJob = (jobId: string) => {
     },
   });
 
-  console.log(error);
-
   const bookmarkAndUnbookmarkAJobFunction = async () => {
     await mutateAsync(jobId);
   };
