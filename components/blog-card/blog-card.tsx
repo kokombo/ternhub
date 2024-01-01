@@ -2,22 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import { BlogReadTime } from "..";
 import { BsArrowRight } from "react-icons/bs";
+import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useRouter } from "next/navigation";
 
 const BlogCard = ({
-  props: job,
+  props: blog,
   rootUrl,
 }: {
   props: BlogType;
   rootUrl: string;
 }) => {
-  const postCreationDate = new Date(job.createdAt).toDateString();
+  const router = useRouter();
+
+  const postCreationDate = new Date(blog.createdAt).toDateString();
+
+  const { isLoading } = getBlogBySlug(blog.slug);
+
+  const showBlogDetails = () => {
+    if (!isLoading) {
+      router.push(`${rootUrl}/${blog.slug}`);
+    }
+  };
 
   return (
     <article className="max-w-[400px] sm:max-w-[295px] border-grey border-[0.8px] rounded-[10px]">
       <div className="h-[300px] w-full bg-grey rounded-t-[10px] relative block">
         <Image
-          src={job.image}
-          alt={job.title}
+          src={blog.image}
+          alt={blog.title}
           quality={100}
           fill
           className="rounded-t-[10px] object-fill"
@@ -26,15 +38,15 @@ const BlogCard = ({
       </div>
 
       <div className=" lg:h-[300px] p-[10px] flex_start gap-2">
-        <p className="text-purple text-base font-normal">{job.category}</p>
+        <p className="text-purple text-base font-normal">{blog.category}</p>
 
         <h4 className="text-[22px] h-16 leading-8 lg:text-2xl tracking-[1%] font-semibold capitalize flex-wrap overflow-hidden text-textblack">
-          {job.title}
+          {blog.title}
         </h4>
 
         <p className="text-sm capitalize">
           <span className="text-lightGrey">By </span>
-          {job.author}
+          {blog.author}
         </p>
 
         <article className="flex justify-center gap-1">
@@ -44,21 +56,22 @@ const BlogCard = ({
 
           <span className="text-sm text-lightGrey">|</span>
 
-          <BlogReadTime props={job} className="text-sm" />
+          <BlogReadTime props={blog} className="text-sm" />
         </article>
 
         <p className="text-sm lg:text-base tracking-[1%] my-1 lg:h-[84px] h-[44px] flex-wrap overflow-hidden font-normal">
-          {job.metaDescription}...
+          {blog.metaDescription}...
         </p>
 
         <div className="flex items-center gap-[9px] text-green hover:text-deepgreen ">
-          <Link
-            href={`${rootUrl}/${job.slug}`}
-            aria-label="link to read blog"
+          <button
+            type="button"
+            onClick={showBlogDetails}
+            aria-label="button to navigate to blog details page"
             className="text-base font-semibold"
           >
             Read more
-          </Link>
+          </button>
 
           <span className="text-2xl">
             <BsArrowRight />

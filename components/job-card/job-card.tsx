@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const JobCard = ({
   props: job,
@@ -15,6 +18,24 @@ const JobCard = ({
   rootUrl: string;
 }) => {
   const { data: session } = useSession();
+
+  const router = useRouter();
+
+  const { isLoading } = getJobById(job._id);
+
+  const viewJobDetails = () => {
+    if (!session?.user) {
+      router.push("/auth/signin");
+
+      toast.error("Please sign in to continue using TernHub.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      if (!isLoading) {
+        router.push(`${rootUrl}/${job._id}`);
+      }
+    }
+  };
 
   return (
     <article className="w-full border-grey gap-[18px] border-[0.8px] h-[212px] p-5 rounded-[10px] flex flex-col justify-between">
@@ -49,22 +70,14 @@ const JobCard = ({
         <JobPostDuration createdAt={job.createdAt} color="text-green" />
 
         <div className="flex gap-[14px] ">
-          <Link
-            href={` ${
-              session?.user ? `${rootUrl}/${job._id}` : "/auth/signin"
-            }`}
-            onClick={() =>
-              session?.user
-                ? undefined
-                : toast.error("Please sign in to continue using TernHub.", {
-                    position: toast.POSITION.TOP_RIGHT,
-                  })
-            }
-            aria-label="link to a job details"
+          <button
+            type="button"
+            onClick={viewJobDetails}
+            aria-label="button to view a job details"
             className="apply_button"
           >
             View
-          </Link>
+          </button>
 
           <SaveAJob props={job} />
         </div>

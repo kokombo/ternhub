@@ -14,7 +14,7 @@ export const getFaqById = (faqId: string | string[]) => {
     error,
     isSuccess,
   } = useQuery(
-    "getFaqById",
+    ["getFaqById", faqId],
 
     getFaqByIdRequest,
 

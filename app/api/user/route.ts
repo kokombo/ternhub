@@ -7,6 +7,7 @@ import validate from "deep-email-validator";
 
 export const POST = async (req: Request) => {
   const body = await req.json();
+
   const email = body.email;
 
   const refinedEmail = email.toLowerCase();

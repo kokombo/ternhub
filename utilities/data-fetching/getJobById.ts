@@ -15,7 +15,7 @@ export const getJobById = (jobId: string | string[]) => {
     refetch,
     isSuccess,
   } = useQuery(
-    "getJobById",
+    ["getJobById", jobId],
 
     getJobByIdRequest,
 
@@ -23,8 +23,6 @@ export const getJobById = (jobId: string | string[]) => {
       refetchOnWindowFocus: false,
 
       retry: 1,
-
-      cacheTime: 0,
     }
   );
 

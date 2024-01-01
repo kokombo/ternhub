@@ -33,9 +33,7 @@ const JobInfopage = (props: Props) => {
   return (
     <>
       {props.isLoading ? (
-        <div className="min-h-screen flex items-center justify-center">
-          <RotatingSquareLoader />
-        </div>
+        <div className="min-h-screen"></div>
       ) : props.isError ? (
         <div className="flex_center justify-center">
           <Message

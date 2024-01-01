@@ -15,14 +15,12 @@ export const getBlogBySlug = (slug: string | string[]) => {
     refetch,
     isSuccess,
   } = useQuery(
-    "getBlogBySlug",
+    ["getBlogBySlug", slug],
 
     getBlogBySlugRequest,
 
     {
       refetchOnWindowFocus: false,
-
-      cacheTime: 0,
     }
   );
 
