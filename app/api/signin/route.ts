@@ -25,7 +25,7 @@ export const POST = async (req: Request, res: Response) => {
 
     if (!passwordIsCorrect) {
       return NextResponse.json(
-        { message: "Password is incorrect, please check and try again." },
+        { message: "Invalid password, please check and try again." },
         { status: 401 }
       );
     } else {

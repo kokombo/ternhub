@@ -3,12 +3,22 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
+import validate from "deep-email-validator";
 
 export const POST = async (req: Request) => {
   const body = await req.json();
   const email = body.email;
 
   const refinedEmail = email.toLowerCase();
+
+  const emailValid = await validate(email);
+
+  if (!emailValid) {
+    return NextResponse.json(
+      { message: "Please provide a valid email address." },
+      { status: 401 }
+    );
+  }
 
   try {
     await connectDatabase();
