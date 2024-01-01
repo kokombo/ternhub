@@ -3,7 +3,9 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
-import validate from "deep-email-validator";
+import emailValidator from "node-email-verifier";
+import { sendEmail } from "@/utilities/auth/sendEmail";
+import crypto from "node:crypto";
 
 export const POST = async (req: Request) => {
   const body = await req.json();
@@ -12,7 +14,7 @@ export const POST = async (req: Request) => {
 
   const refinedEmail = email.toLowerCase();
 
-  const emailValid = await validate(email);
+  const emailValid = await emailValidator(email);
 
   if (!emailValid) {
     return NextResponse.json(
@@ -39,7 +41,24 @@ export const POST = async (req: Request) => {
       authMethod: "credentials",
     });
 
-    return NextResponse.json({ user }, { status: 200 });
+    const token = crypto.randomBytes(32).toString("hex");
+
+    const data: EmailInfoType = {
+      from: "TheTernHub",
+      to: email,
+      text: "Verify your email address",
+      subject: "Email verification link - TheTernHub",
+      html: `Hi ${user.name}, follow this link to verify your email address. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" >Verify Email</a>`,
+    };
+
+    console.log("B");
+
+    sendEmail(data);
+
+    return NextResponse.json({
+      message:
+        "An Email verification link has been sent to your email address.",
+    });
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong, please try again." },

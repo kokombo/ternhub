@@ -1,3 +1,5 @@
+declare module "node-email-verifier";
+
 type User = {
   id: string;
   name: string;
@@ -96,4 +98,12 @@ type RadioOption = {
 type ImageInfo = {
   originalName: string;
   buffer: Buffer;
+};
+
+type EmailInfoType = {
+  from: string;
+  to: string | string[];
+  subject: string;
+  text: string;
+  html: string;
 };

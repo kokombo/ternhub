@@ -1,5 +1,6 @@
 import { Schema, model, models } from "mongoose";
 import bcrypt from "bcrypt";
+import crypto from "node:crypto";
 
 const UserSchema = new Schema(
   {
@@ -50,6 +51,10 @@ const UserSchema = new Schema(
     passwordResetToken: String,
 
     passwordResetExpires: Date,
+
+    emailVerificationToken: String,
+
+    emailVerificationTokenExpires: Date,
   },
   {
     timestamps: true,
@@ -67,6 +72,19 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.methods.comparePassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.createEmailVerificationToken = async function () {
+  const emailToken = crypto.randomBytes(32).toString("hex");
+
+  this.emailVerificationToken = crypto
+    .createHash("sha256")
+    .update(emailToken)
+    .digest("hex");
+
+  this.emailVerificationTokenExpires = Date.now() + 30 * 60 * 1000; //Email verification expires token/link in 30 minutes.
+
+  return emailToken;
 };
 
 const User = models.User || model("User", UserSchema);

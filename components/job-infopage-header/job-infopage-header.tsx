@@ -15,7 +15,7 @@ const JobInfopageHeader = ({ props: job }: { props: JobType | undefined }) => {
           <article className="flex items-center gap-4">
             <JobCompanyLogo props={job} />
 
-            <p className="text-xl lg:text-2xl tracking-[1%] font-[400] ">
+            <p className="text-xl lg:text-2xl tracking-[1%] font-[400] text-center">
               {job.company}
             </p>
           </article>

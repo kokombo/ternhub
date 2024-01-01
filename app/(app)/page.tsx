@@ -3,21 +3,19 @@
 import { Loader } from "@/components";
 import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
   const { status } = useSession();
 
-  const router = useRouter();
-
   useEffect(() => {
     if (status === "authenticated") {
-      router.replace("/jobs");
+      redirect("/jobs");
     }
-  }, [status, router]);
+  }, [status, redirect]);
 
-  if (status === "loading") <div className="min-h-screen"></div>;
+  if (status === "loading") return <Loader />;
 
   if (status === "unauthenticated")
     return (
