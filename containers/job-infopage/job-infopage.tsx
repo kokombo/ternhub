@@ -3,6 +3,9 @@ import {
   JobInfopageBody,
   Message,
   Loader,
+  RotatingSquareLoader,
+  RotatingLinesLoader,
+  ColorRingLoader,
 } from "@/components";
 import { RelatedJobs } from "..";
 import { useSelector } from "react-redux";
@@ -30,7 +33,9 @@ const JobInfopage = (props: Props) => {
   return (
     <>
       {props.isLoading ? (
-        <div className="min-h-screen"></div>
+        <div className="min-h-screen flex items-center justify-center">
+          <RotatingSquareLoader />
+        </div>
       ) : props.isError ? (
         <div className="flex_center justify-center">
           <Message

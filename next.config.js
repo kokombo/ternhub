@@ -13,6 +13,18 @@ const nextConfig = {
       },
     ],
   },
+
+  headers: () => [
+    {
+      source: "/jobs/:id",
+      headers: [
+        {
+          key: "Cache-Control",
+          value: "no-store",
+        },
+      ],
+    },
+  ],
 };
 
 module.exports = nextConfig;

@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
 type Data = {
   jobs: JobType[];
@@ -52,7 +53,15 @@ const TrendingJobs = () => {
         label="See more jobs"
         arialabel="Link to navigate to all jobs page from the landing page."
         url={`${session?.user ? "/jobs" : "/auth/signin"}`}
+        onClick={() =>
+          session?.user
+            ? undefined
+            : toast.error("Please sign in to continue using TernHub.", {
+                position: toast.POSITION.TOP_RIGHT,
+              })
+        }
         extraClasses="self-center blue_button"
+        prefetch={true}
       />
     </section>
   );

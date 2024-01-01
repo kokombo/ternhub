@@ -22,9 +22,9 @@ export const getJobById = (jobId: string | string[]) => {
     {
       refetchOnWindowFocus: false,
 
-      keepPreviousData: false,
-
       retry: 1,
+
+      cacheTime: 0,
     }
   );
 

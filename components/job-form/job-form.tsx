@@ -53,6 +53,7 @@ const jobModeOptions: RadioOption[] = [
 const jobTypeOptions: RadioOption[] = [
   { value: "full-time", label: "Full-time" },
   { value: "part-time", label: "Part-time" },
+  { value: "contract", label: "Contract" },
 ];
 
 const JobForm = (props: Props) => {

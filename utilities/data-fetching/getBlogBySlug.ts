@@ -22,7 +22,7 @@ export const getBlogBySlug = (slug: string | string[]) => {
     {
       refetchOnWindowFocus: false,
 
-      keepPreviousData: false,
+      cacheTime: 0,
     }
   );
 

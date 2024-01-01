@@ -6,6 +6,7 @@ type Props = {
   arialabel: string;
   prefetch?: boolean;
   extraClasses?: string;
+  onClick?: () => void;
 };
 
 const StyledLink = (props: Props) => {
@@ -15,6 +16,7 @@ const StyledLink = (props: Props) => {
       aria-label={props.arialabel}
       className={`${props.extraClasses}`}
       prefetch={props.prefetch}
+      onClick={props.onClick}
     >
       {props.label}
     </Link>

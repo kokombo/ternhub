@@ -1,4 +1,5 @@
 "use client";
+
 import { TipTapEditor } from "@/components";
 
 const Admin = () => {

@@ -49,6 +49,10 @@ import UploadProfilePicture from "./upload-profile-picture/upload-profile-pictur
 import UniversalModal from "./universal-modal/universal-modal";
 import TailSpinLoader from "./tail-spin-loader/tail-spin-loader";
 import TipTapEditor from "./tiptap-editor/tiptap-editor";
+import BarsLoader from "./bars-loader.tsx/bars-loader";
+import ColorRingLoader from "./color-ring-loader/color-ring-loader";
+import RotatingLinesLoader from "./rotating-lines-loader/rotating-lines-loader";
+import RotatingSquareLoader from "./rotating-square-loader/rotating-square-loader";
 
 export {
   BlogCard,
@@ -102,4 +106,8 @@ export {
   UniversalModal,
   TailSpinLoader,
   TipTapEditor,
+  BarsLoader,
+  RotatingLinesLoader,
+  RotatingSquareLoader,
+  ColorRingLoader,
 };
