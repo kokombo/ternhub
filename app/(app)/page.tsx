@@ -17,7 +17,7 @@ export default function Home() {
     }
   }, [status, router]);
 
-  if (status === "loading") return <Loader />;
+  if (status === "loading") <div className="min-h-screen"></div>;
 
   if (status === "unauthenticated")
     return (
