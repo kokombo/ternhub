@@ -16,6 +16,8 @@ type Props = {
 const JobInfopage = (props: Props) => {
   const { allJobs } = useSelector((state: StateType) => state.job);
 
+  console.log(allJobs);
+
   const relatedJobs = allJobs
     .filter(
       (job) =>

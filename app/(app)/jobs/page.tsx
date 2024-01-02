@@ -12,7 +12,7 @@ const {
   jobModeTermFromLocalStorage,
   jobTypeTermFromLocalStorage,
   jobCategoryTermFromLocalStorage,
-} = valuesFromLocalStorage("userQueriesInJobsPage");
+} = valuesFromLocalStorage("userQueriesInJobsPage"); //Retrieving user's filter queries stored in logal storage
 
 const JobsListPage = () => {
   const initialQueryTerms = {
@@ -65,6 +65,7 @@ const JobsListPage = () => {
     isPreviousData,
   } = getAllJobs(pageNumber, queryStrings, limit, baseUrl);
 
+  //Onchange handler for filter terms.
   const filterTermOnchange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setQueryTerms((prev) => ({

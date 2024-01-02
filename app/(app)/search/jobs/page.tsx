@@ -23,12 +23,12 @@ const {
   searchTermFromLocalStorage,
   jobTypeTermFromLocalStorage,
   jobCategoryTermFromLocalStorage,
-} = valuesFromLocalStorage("userQueriesInSearch");
+} = valuesFromLocalStorage("userQueriesInSearch"); //Retrieving user's search/filter queries stored in logal storage
 
 const JobsSearchResults = () => {
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
-  ); //From global state manager - Redux Tookit
+  ); //From global state manager - Redux Toolkit
 
   const initialQueryTerms = {
     searchTerm: newJobSearchTerm || searchTermFromLocalStorage,
@@ -110,6 +110,7 @@ const JobsSearchResults = () => {
     }
   );
 
+  //Onchange handler for filter terms.
   const onChangeFilterTerm = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setQueryTerms((prev) => ({
