@@ -20,24 +20,36 @@ export const valuesFromLocalStorage = (storageName: string) => {
   const queryArrayFromLocalStorage: any[] =
     getUserQueriesFromLocalStorage(storageName);
 
-  const pageFromLocalStorage = getValueByKeyInArray(
+  const pageFromLocalStorage: number = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "pageNumber"
   );
 
-  const locationTermFromLocalStorage = getValueByKeyInArray(
+  const jobModeTermFromLocalStorage: string = getValueByKeyInArray(
     queryArrayFromLocalStorage,
-    "locationFilterTerm"
+    "jobModeFilterTerm"
   );
 
-  const searchTermFromLocalStorage = getValueByKeyInArray(
+  const jobTypeTermFromLocalStorage: string = getValueByKeyInArray(
+    queryArrayFromLocalStorage,
+    "jobTypeFilterTerm"
+  );
+
+  const searchTermFromLocalStorage: string = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "searchTerm"
   );
 
+  const jobCategoryTermFromLocalStorage: string = getValueByKeyInArray(
+    queryArrayFromLocalStorage,
+    "jobCategoryFilterTerm"
+  );
+
   return {
     pageFromLocalStorage,
-    locationTermFromLocalStorage,
+    jobModeTermFromLocalStorage,
     searchTermFromLocalStorage,
+    jobTypeTermFromLocalStorage,
+    jobCategoryTermFromLocalStorage,
   };
 };

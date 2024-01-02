@@ -30,7 +30,7 @@ const Search = (props: Props) => {
           className={`lg:w-[${props.lgInputWidth}px] md:w-[300px] min-w-full h-7 outline-none text-lightGrey`}
           onChange={props.onChange}
           value={props.value}
-          name={props.value}
+          name="searchTerm"
           id={props.value}
         />
       </span>

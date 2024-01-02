@@ -33,7 +33,9 @@ const validateBlogForm = Yup.object({
   metaDescription: Yup.string()
     .required("Blog meta description is required.")
     .max(150, "Maximum length of 150 characters."),
-  author: Yup.string().required("Blog author is required."),
+  author: Yup.object().shape({
+    name: Yup.string().required("Blog author is required."),
+  }),
   image: Yup.string().required("Upload blog cover image."),
   category: Yup.string().required("Please select blog category."),
 });
@@ -97,14 +99,14 @@ const BlogForm = (props: Props) => {
 
                 <InputField
                   label="Author *"
-                  name="author"
+                  name="author.name"
                   type="text"
-                  id="author"
+                  id="name"
                 />
 
                 <InputField
                   label="Twitter (optional)"
-                  name="twitter"
+                  name="author.twitter"
                   type="text"
                   id="twitter"
                   placeholder="e.g. @theternhub"
@@ -112,7 +114,7 @@ const BlogForm = (props: Props) => {
 
                 <InputField
                   label="Portfolio (optional)"
-                  name="portfolio"
+                  name="author.portfolio"
                   type="text"
                   id="portfolio"
                   placeholder="e.g. www.myportfolio.com"
@@ -120,7 +122,7 @@ const BlogForm = (props: Props) => {
 
                 <InputField
                   label="Linkedin (optional)"
-                  name="linkedin"
+                  name="author.linkedin"
                   type="text"
                   id="linkedin"
                   placeholder="e.g. www.linkedin.com/theternhub"

@@ -1,7 +1,9 @@
 "use client";
 
+import { BarsLoader } from "@/components";
+
 const Loading = () => {
-  return <div className="min-h-screen"></div>;
+  return <BarsLoader />;
 };
 
 export default Loading;

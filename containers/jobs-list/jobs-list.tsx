@@ -2,7 +2,6 @@ import { JobCard, Message } from "@/components";
 import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   data: JobType[] | undefined;
@@ -13,12 +12,13 @@ type Props = {
   refetch?: any;
   rootUrl: string;
   isFetching: boolean;
-  setPageNumber: Dispatch<SetStateAction<number>>;
   isPreviousData: boolean;
   pageNumber: number;
   limit: number;
   totalCount: number;
   noDataIllustration: string | StaticImport;
+  onClickNextButton: () => void;
+  onClickPrevButton: () => void;
 };
 
 const JobsList = (props: Props) => {
@@ -64,7 +64,7 @@ const JobsList = (props: Props) => {
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-              props.setPageNumber((prev) => Math.max(prev - 1, 1));
+              props.onClickPrevButton();
             }}
           >
             Prev
@@ -84,11 +84,11 @@ const JobsList = (props: Props) => {
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 
-              props.setPageNumber((prev) => prev + 1);
+              props.onClickNextButton();
             }}
             className=""
           >
-            <a>Next</a>
+            Next
           </button>
         ) : null}
       </div>

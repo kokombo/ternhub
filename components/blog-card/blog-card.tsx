@@ -46,7 +46,7 @@ const BlogCard = ({
 
         <p className="text-sm capitalize">
           <span className="text-lightGrey">By </span>
-          {blog.author}
+          {blog.author.name}
         </p>
 
         <article className="flex justify-center gap-1">

@@ -2,8 +2,17 @@ import Link from "next/link";
 import { BlogReadTime, JobPostDuration } from "..";
 import Image from "next/image";
 import { GroteskNormal } from "@/app/font";
+import { useRouter } from "next/navigation";
 
-const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
+const RecentBlogCard = ({
+  props: blog,
+  rootUrl,
+}: {
+  props: BlogType;
+  rootUrl: string;
+}) => {
+  const router = useRouter();
+
   return (
     <article
       key={blog._id}
@@ -32,7 +41,7 @@ const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
 
         <article className="flex items-center lg:gap-[46px] gap-1 lg:text-2xl text-base my-6">
           <p>
-            <span className="text-lightGrey">By</span> {blog.author}
+            <span className="text-lightGrey">By</span> {blog.author.name}
           </p>
           <p className="text-sm text-lightGrey">|</p>
 
@@ -42,12 +51,13 @@ const RecentBlogCard = ({ props: blog }: { props: BlogType }) => {
         </article>
 
         <article className="my-8">
-          <Link
-            href={`/blogs/${blog.slug}`}
+          <button
+            type="button"
+            onClick={() => router.push(`${rootUrl}/${blog.slug}`)}
             className="px-8 py-3 bg-purple hover:bg-blue rounded-[10px] text-white text-base font-semibold"
           >
             Read more
-          </Link>
+          </button>
         </article>
 
         <div className="border-grey border-[0.01px] w-full"></div>

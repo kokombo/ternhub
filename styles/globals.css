@@ -106,7 +106,7 @@ h4 {
 }
 
 .filter_text {
-  @apply text-[14px] md:text-[15px] font-[400] leading-[20px];
+  @apply text-[14px] md:text-[15px] font-[400] leading-[20px] capitalize;
 }
 
 .select_field {

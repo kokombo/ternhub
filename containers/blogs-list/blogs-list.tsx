@@ -32,7 +32,11 @@ const BlogsList = (props: Props) => {
             </h2>
 
             {props.data.slice(0, 1).map((blog) => (
-              <RecentBlogCard key={blog._id} props={blog} />
+              <RecentBlogCard
+                key={blog._id}
+                props={blog}
+                rootUrl={props.rootUrl}
+              />
             ))}
           </div>
         ) : null}

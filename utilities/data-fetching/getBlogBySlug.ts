@@ -21,6 +21,8 @@ export const getBlogBySlug = (slug: string | string[]) => {
 
     {
       refetchOnWindowFocus: false,
+
+      retry: 0,
     }
   );
 

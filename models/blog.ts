@@ -33,8 +33,22 @@ const BlogSchema = new Schema(
     },
 
     author: {
-      type: String,
-      default: "admin",
+      name: {
+        type: String,
+        default: "admin",
+      },
+
+      twitter: {
+        type: String,
+      },
+
+      portfolio: {
+        type: String,
+      },
+
+      linkedin: {
+        type: String,
+      },
     },
 
     keywords: {

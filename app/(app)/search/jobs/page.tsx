@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, ChangeEvent } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
 import axios from "axios";
@@ -19,28 +19,38 @@ type Data = {
 
 const {
   pageFromLocalStorage,
-  locationTermFromLocalStorage,
+  jobModeTermFromLocalStorage,
   searchTermFromLocalStorage,
+  jobTypeTermFromLocalStorage,
+  jobCategoryTermFromLocalStorage,
 } = valuesFromLocalStorage("userQueriesInSearch");
 
 const JobsSearchResults = () => {
-  const router = useRouter();
-
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
-  ); //From global state manager
+  ); //From global state manager - Redux Tookit
 
-  const [pageNumber, setPageNumber] = useState(pageFromLocalStorage || 1);
+  const initialQueryTerms = {
+    searchTerm: newJobSearchTerm || searchTermFromLocalStorage,
+    jobModeFilterTerm: jobModeTermFromLocalStorage || "",
+    jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
+    pageNumber: pageFromLocalStorage || 1,
+    limit: 40,
+    jobCategoryFilterTerm: jobCategoryTermFromLocalStorage || "",
+  };
 
-  const [locationFilterTerm, setLocationFilterTerm] = useState(
-    locationTermFromLocalStorage || ""
-  );
+  const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
 
-  const [searchTerm, setSearchTerm] = useState(
-    newJobSearchTerm || searchTermFromLocalStorage
-  );
+  const {
+    jobModeFilterTerm,
+    jobTypeFilterTerm,
+    pageNumber,
+    limit,
+    searchTerm,
+    jobCategoryFilterTerm,
+  } = queryTerms;
 
-  const limit = 40;
+  const router = useRouter();
 
   const search_id = uuidv4();
 
@@ -48,13 +58,21 @@ const JobsSearchResults = () => {
 
   if (searchTerm) params.append("search", searchTerm);
 
-  if (locationFilterTerm) params.append("mode", locationFilterTerm);
+  if (jobModeFilterTerm) params.append("mode", jobModeFilterTerm);
+
+  if (jobTypeFilterTerm) params.append("type", jobTypeFilterTerm);
+
+  if (jobCategoryFilterTerm) params.append("type", jobCategoryFilterTerm);
 
   params.append("page", pageNumber.toString());
 
   params.append("limit", limit.toString());
 
-  if (locationFilterTerm == "all") params.delete("mode");
+  if (jobModeFilterTerm == "all") params.delete("mode");
+
+  if (jobTypeFilterTerm == "all") params.delete("type");
+
+  if (jobCategoryFilterTerm == "all") params.delete("category");
 
   const queryStrings = params.toString();
 
@@ -92,22 +110,38 @@ const JobsSearchResults = () => {
     }
   );
 
+  const onChangeFilterTerm = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setQueryTerms((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   useEffect(() => {
     const refetchDataAfterLocationFilterTermChanges = async () => {
       await refetch();
     };
 
     refetchDataAfterLocationFilterTermChanges();
-  }, [locationFilterTerm, refetch]);
+  }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
   const userSearchQueriesArray = useMemo(() => {
     return [
       { key: "searchTerm", value: searchTerm },
       { key: "pageNumber", value: pageNumber },
-      { key: "locationFilterTerm", value: locationFilterTerm },
+      { key: "jobModeFilterTerm", value: jobModeFilterTerm },
+      { key: "jobTypeFilterTerm", value: jobTypeFilterTerm },
+      { key: "jobCategoryFilterTerm", value: jobCategoryFilterTerm },
     ];
-  }, [searchTerm, pageNumber, locationFilterTerm]);
+  }, [
+    searchTerm,
+    pageNumber,
+    jobModeFilterTerm,
+    jobTypeFilterTerm,
+    jobCategoryFilterTerm,
+  ]);
 
   useEffect(() => {
     localStorage.setItem(
@@ -120,14 +154,20 @@ const JobsSearchResults = () => {
     <div className="py-6 md:py-11 sm:px-[6.94%] px-5 flex flex-col gap-4 lg:gap-6 md:gap-11 w-full">
       <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4 sticky w-full top-0 left-0 bg-white z-[100] py-3">
         <JobsFilter
-          setLocationFilterTerm={setLocationFilterTerm}
-          locationFilterTerm={locationFilterTerm}
+          onchangeJobModeFilterTerm={onChangeFilterTerm}
+          jobModeFilterTerm={jobModeFilterTerm}
+          jobTypeFilterTerm={jobTypeFilterTerm}
+          onchangeJobTypeFilterTerm={onChangeFilterTerm}
+          jobCategoryFilterTerm={jobCategoryFilterTerm}
+          onChangeJobCategoryFilterTerm={onChangeFilterTerm}
         />
 
         <Search
           buttonLabel="Search"
           placeholder=""
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) =>
+            setQueryTerms((prev) => ({ ...prev, searchTerm: e.target.value }))
+          }
           value={searchTerm}
           onClickSearchButton={async () => {
             localStorage.removeItem("userQueriesInSearch");
@@ -149,11 +189,22 @@ const JobsSearchResults = () => {
         rootUrl="/search/jobs"
         isFetching={isFetching}
         isPreviousData={isPreviousData}
-        setPageNumber={setPageNumber}
         pageNumber={pageNumber}
         limit={limit}
         totalCount={data?.numOfJobs as number}
         noDataIllustration={illustrations.no_search_result}
+        onClickPrevButton={() =>
+          setQueryTerms((prev) => ({
+            ...prev,
+            pageNumber: Math.max(prev.pageNumber - 1, 1),
+          }))
+        }
+        onClickNextButton={() =>
+          setQueryTerms((prev) => ({
+            ...prev,
+            pageNumber: prev.pageNumber + 1,
+          }))
+        }
       />
     </div>
   );

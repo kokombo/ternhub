@@ -10,10 +10,12 @@ const initialFormValues: BlogFormType = {
   title: "",
   image: "",
   metaDescription: "",
-  author: "Admin",
-  twitter: "",
-  portfolio: "",
-  linkedin: "",
+  author: {
+    name: "Admin",
+    twitter: "",
+    portfolio: "",
+    linkedin: "",
+  },
   category: "",
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader } from "@/components";
+import { BarsLoader } from "@/components";
 import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -13,9 +13,9 @@ export default function Home() {
     if (status === "authenticated") {
       redirect("/jobs");
     }
-  }, [status, redirect]);
+  }, [status]);
 
-  if (status === "loading") return <Loader />;
+  if (status === "loading") return <BarsLoader />;
 
   if (status === "unauthenticated")
     return (

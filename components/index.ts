@@ -53,6 +53,7 @@ import BarsLoader from "./bars-loader.tsx/bars-loader";
 import ColorRingLoader from "./color-ring-loader/color-ring-loader";
 import RotatingLinesLoader from "./rotating-lines-loader/rotating-lines-loader";
 import RotatingSquareLoader from "./rotating-square-loader/rotating-square-loader";
+import FilterSelect from "./filter-select/filter-select";
 
 export {
   BlogCard,
@@ -110,4 +111,5 @@ export {
   RotatingLinesLoader,
   RotatingSquareLoader,
   ColorRingLoader,
+  FilterSelect,
 };

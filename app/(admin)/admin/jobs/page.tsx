@@ -6,11 +6,16 @@ import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { illustrations } from "@/constants";
 
 const AdminJobsListPage = () => {
-  const [pageNumber, setPageNumber] = useState(1);
+  const initialQueryTerms = {
+    pageNumber: 1,
+    limit: 14,
+  };
 
-  const limit: number = 14;
+  const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
 
-  const baseUrl: string = "/admin/";
+  const { pageNumber, limit } = queryTerms;
+
+  const baseUrl = "/admin/";
 
   const params = new URLSearchParams();
 
@@ -28,6 +33,8 @@ const AdminJobsListPage = () => {
     isPreviousData,
   } = getAllJobs(pageNumber, queryStrings, limit, baseUrl);
 
+  console.log("e", error);
+
   return (
     <div className="py-11 lg:py-[50px] sm:px-[6.94%] px-5 flex flex-col gap-[25px]">
       <h1 className="text-[28px] font-medium self-center">Manage All Jobs</h1>
@@ -42,11 +49,22 @@ const AdminJobsListPage = () => {
         rootUrl="/admin/jobs"
         isFetching={isFetching}
         isPreviousData={isPreviousData}
-        setPageNumber={setPageNumber}
         pageNumber={pageNumber}
         limit={limit}
         totalCount={data?.numOfJobs as number}
         noDataIllustration={illustrations.no_search_result}
+        onClickPrevButton={() =>
+          setQueryTerms((prev) => ({
+            ...prev,
+            pageNumber: Math.max(prev.pageNumber - 1, 1),
+          }))
+        }
+        onClickNextButton={() =>
+          setQueryTerms((prev) => ({
+            ...prev,
+            pageNumber: prev.pageNumber + 1,
+          }))
+        }
       />
     </div>
   );

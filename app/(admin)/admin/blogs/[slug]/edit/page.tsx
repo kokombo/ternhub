@@ -21,10 +21,13 @@ const EditBlogInfo = () => {
     title: blog?.title as string,
     image: blog?.image as string,
     metaDescription: blog?.metaDescription as string,
-    author: blog?.author as string,
-    twitter: blog?.title as string,
-    portfolio: blog?.portfolio as string,
-    linkedin: blog?.linkedin as string,
+    author: {
+      name: blog?.author.name as string,
+      twitter: blog?.author.twitter as string,
+      portfolio: blog?.author.portfolio as string,
+      linkedin: blog?.author.linkedin as string,
+    },
+  
     category: blog?.category as string,
   };
 

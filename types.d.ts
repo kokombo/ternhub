@@ -51,10 +51,12 @@ type BlogFormType = {
   image: string;
   metaDescription: string;
   category: string;
-  author: string;
-  twitter?: string;
-  portfolio?: string;
-  linkedin?: string;
+  author: {
+    name: string;
+    twitter?: string;
+    portfolio?: string;
+    linkedin?: string;
+  };
 };
 
 interface BlogData extends BlogFormType {

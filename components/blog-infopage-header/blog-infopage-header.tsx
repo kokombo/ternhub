@@ -24,7 +24,7 @@ const BlogInfopageHeader = ({
 
           <article className="flex justify-between gap-3 items-center w-full mt-5 lg:mt-[50px] lg:px-[45px] text-sm lg:text-2xl tracking-[1%] font-[400] ">
             <p className="text-lightGrey">
-              By <span className="text-textblack ">{blog.author}</span>
+              By <span className="text-textblack ">{blog.author.name}</span>
             </p>
 
             <article className="text-lightGrey text-sm">|</article>

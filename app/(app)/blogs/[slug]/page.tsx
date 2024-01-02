@@ -1,4 +1,5 @@
 "use client";
+
 import { BlogInfoPage } from "@/containers";
 import { useParams } from "next/navigation";
 import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";

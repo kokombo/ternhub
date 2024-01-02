@@ -5,8 +5,8 @@ const BarsLoader = () => {
     <div className="h-screen flex items-center justify-center">
       <Bars
         visible={true}
-        height="100"
-        width="100"
+        height="50"
+        width="50"
         color="#5627FF"
         ariaLabel="tail-spin-loading"
       />
