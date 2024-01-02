@@ -1,5 +1,8 @@
 import { BlogInfopageHeader, BlogInfopageBody, Message } from "@/components";
 import { illustrations } from "@/constants";
+import RelatedBlogs from "../related-blogs/related-blogs";
+
+import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 type Props = {
   data: BlogType | undefined;
@@ -10,6 +13,15 @@ type Props = {
 };
 
 const BlogInfoPage = (props: Props) => {
+  const { blogs } = getAllBlogs();
+
+  const relatedBlogs = blogs
+    ?.filter(
+      (blog) =>
+        blog._id !== props.data?._id && blog.category === props.data?.category
+    )
+    .slice(0, 4);
+
   return (
     <>
       {props.isLoading ? (
@@ -27,6 +39,8 @@ const BlogInfoPage = (props: Props) => {
           <BlogInfopageHeader props={props.data} />
 
           <BlogInfopageBody props={props.data} />
+
+          <RelatedBlogs relatedBlogs={relatedBlogs} />
         </div>
       )}
     </>

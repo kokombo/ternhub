@@ -1,16 +1,9 @@
-import {
-  JobInfopageHeader,
-  JobInfopageBody,
-  Message,
-  Loader,
-  RotatingSquareLoader,
-  RotatingLinesLoader,
-  ColorRingLoader,
-} from "@/components";
+import { JobInfopageHeader, JobInfopageBody, Message } from "@/components";
 import { RelatedJobs } from "..";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { illustrations } from "@/constants";
+import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 
 type Props = {
   data: JobType | undefined;

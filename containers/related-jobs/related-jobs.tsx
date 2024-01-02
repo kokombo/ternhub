@@ -9,7 +9,7 @@ type Props = {
 const RelatedJobs = (props: Props) => {
   return (
     <>
-      {props.relatedJobs && props?.relatedJobs.length > 0 ? (
+      {props.relatedJobs ? (
         <section className="flex flex-col lg:gap-[42px] gap-[28px] ">
           <div className="flex items-center justify-between">
             <h3
