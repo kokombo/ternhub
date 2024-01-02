@@ -16,7 +16,7 @@ const SavedJobsPage = () => {
     <div
       className={`w-full ${
         (savedJobs && savedJobs.length > 0) || isLoading
-          ? "job_list_grid min-h-screen"
+          ? "job_list_grid"
           : "flex items-center justify-center"
       } `}
     >
