@@ -32,6 +32,7 @@ const Search = (props: Props) => {
           value={props.value}
           name="searchTerm"
           id={props.value}
+          autoComplete="off"
         />
       </span>
 

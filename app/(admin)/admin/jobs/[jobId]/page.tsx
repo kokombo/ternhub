@@ -11,13 +11,15 @@ const AdminJobInfoPage = () => {
   const { job, isLoading, isError, error, refetch } = getJobById(jobId);
 
   return (
-    <div className="py-11 sm:px-[6.94%] px-5 ">
-      <AdminToolBox
-        editButtonLabel="Edit Job"
-        editButtonUrl={`/admin/jobs/${jobId}/edit`}
-        deleteButtonLabel="Delete Job"
-        deleteButtonOnclick={() => {}}
-      />
+    <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-4">
+      <div className="flex flex-start">
+        <AdminToolBox
+          editButtonLabel="Edit Job"
+          editButtonUrl={`/admin/jobs/${jobId}/edit`}
+          deleteButtonLabel="Delete Job"
+          deleteButtonOnclick={() => {}}
+        />
+      </div>
 
       <JobInfopage
         data={job}
