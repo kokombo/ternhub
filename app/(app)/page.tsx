@@ -9,7 +9,7 @@ export default function Home() {
   const { status } = useSession();
 
   if (status === "loading") {
-    return <Loader />;
+    return <div className="min-h-screen"></div>;
   } else if (status === "authenticated") {
     redirect("/jobs");
   } else {
