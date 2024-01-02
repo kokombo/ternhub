@@ -45,13 +45,21 @@ const jobCategoryOptions = [
 
 const JobsFilter = (props: Props) => {
   return (
-    <div className="flex items-center lg:gap-[26px] lg:justify-start gap-3  w-full flex-wrap">
+    <div className="flex items-center lg:gap-[26px] lg:justify-start gap-3 w-full flex-wrap">
       <FilterSelect
         data={sortByOptions}
         value=""
         onChange={() => {}}
         label="Sort by"
         name=""
+      />
+
+      <FilterSelect
+        data={jobCategoryOptions}
+        value={props.jobCategoryFilterTerm}
+        onChange={props.onChangeJobCategoryFilterTerm}
+        label="Category"
+        name="jobCategoryFilterTerm"
       />
 
       <FilterSelect
@@ -68,14 +76,6 @@ const JobsFilter = (props: Props) => {
         onChange={props.onchangeJobTypeFilterTerm}
         label="Type"
         name="jobTypeFilterTerm"
-      />
-
-      <FilterSelect
-        data={jobCategoryOptions}
-        value={props.jobCategoryFilterTerm}
-        onChange={props.onChangeJobCategoryFilterTerm}
-        label="Category"
-        name="jobCategoryFilterTerm"
       />
     </div>
   );
