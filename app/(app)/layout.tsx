@@ -16,14 +16,14 @@ export default function RootLayout({
   const closeSidebar = () => setSidebarIsOpen(false);
 
   return (
-    <main className="flex flex-col justify-between min-h-screen">
+    <div className="flex flex-col justify-between">
       <NavigationBar openSidebar={openSidebar} />
 
       <Sidebar sidebarIsOpen={sidebarIsOpen} closeSidebar={closeSidebar} />
 
-      {children}
+      <div className="min-h-screen">{children}</div>
 
       <Footer />
-    </main>
+    </div>
   );
 }

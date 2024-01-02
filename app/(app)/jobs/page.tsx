@@ -116,7 +116,7 @@ const JobsListPage = () => {
         isLoading={isLoading}
         isError={isError}
         error={error}
-        noDataLabel="No job found for your search. Try a new search or use the category filter to see available jobs."
+        noDataLabel="No job found for your query. Try a new query to see available jobs."
         refetch={refetch}
         rootUrl="/jobs"
         isFetching={isFetching}

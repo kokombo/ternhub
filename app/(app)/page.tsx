@@ -1,23 +1,18 @@
 "use client";
 
-import { BarsLoader } from "@/components";
+import { Loader } from "@/components";
 import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 
 export default function Home() {
   const { status } = useSession();
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      redirect("/jobs");
-    }
-  }, [status]);
-
-  if (status === "loading") return <BarsLoader />;
-
-  if (status === "unauthenticated")
+  if (status === "loading") {
+    return <Loader />;
+  } else if (status === "authenticated") {
+    redirect("/jobs");
+  } else {
     return (
       <div className="flex flex-col w-full">
         <Hero />
@@ -26,4 +21,5 @@ export default function Home() {
         <Faqs />
       </div>
     );
+  }
 }

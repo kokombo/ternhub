@@ -1,9 +1,9 @@
 "use client";
 
-import { Loader } from "@/components";
+import { RotatingLinesLoader } from "@/components";
 
 const Loading = () => {
-  return <Loader />;
+  return <RotatingLinesLoader />;
 };
 
 export default Loading;

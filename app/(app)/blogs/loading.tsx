@@ -1,9 +1,9 @@
 "use client";
 
-import { Loader } from "@/components";
+import { BarsLoader } from "@/components";
 
 const Loading = () => {
-  return <Loader />;
+  return <BarsLoader />;
 };
 
 export default Loading;
