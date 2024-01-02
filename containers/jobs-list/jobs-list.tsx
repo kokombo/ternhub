@@ -23,7 +23,7 @@ type Props = {
 
 const JobsList = (props: Props) => {
   return (
-    <section className="flex flex-col items-center justify-between min-h-screen  ">
+    <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
         <div className="job_list_grid w-full">
           {[...Array(10)].map((_, index) => (

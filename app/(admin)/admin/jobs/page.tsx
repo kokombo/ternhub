@@ -8,7 +8,7 @@ import { illustrations } from "@/constants";
 const AdminJobsListPage = () => {
   const initialQueryTerms = {
     pageNumber: 1,
-    limit: 14,
+    limit: 20,
   };
 
   const [queryTerms, setQueryTerms] = useState(initialQueryTerms);

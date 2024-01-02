@@ -35,7 +35,7 @@ const JobsSearchResults = () => {
     jobModeFilterTerm: jobModeTermFromLocalStorage || "",
     jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
     pageNumber: pageFromLocalStorage || 1,
-    limit: 40,
+    limit: 30,
     jobCategoryFilterTerm: jobCategoryTermFromLocalStorage || "",
   };
 
