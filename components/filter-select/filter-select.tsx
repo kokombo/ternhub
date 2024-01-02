@@ -18,7 +18,9 @@ type Props = {
 const FilterSelect = (props: Props) => {
   return (
     <div className="select_container">
-      <p className="filter_text">{props.label}: </p>
+      <span>
+        <p className="filter_text">{props.label}: </p>
+      </span>
 
       <div className="select_wrapper ">
         <select

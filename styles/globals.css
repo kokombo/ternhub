@@ -114,7 +114,7 @@ h4 {
 }
 
 .select_container {
-  @apply flex items-center gap-[10px];
+  @apply flex items-center lg:gap-[10px] gap-[6px];
 }
 
 .job_tab_link {
