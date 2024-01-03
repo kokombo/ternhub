@@ -127,15 +127,15 @@ const JobsListPage = () => {
         totalCount={data?.numOfJobs as number}
         noDataIllustration={illustrations.no_search_result}
         onClickPrevButton={() =>
-          setQueryTerms((prev) => ({
-            ...prev,
-            pageNumber: Math.max(prev.pageNumber - 1, 1),
+          setQueryTerms((queryTerms) => ({
+            ...queryTerms,
+            pageNumber: Math.max(queryTerms.pageNumber - 1, 1),
           }))
         }
         onClickNextButton={() =>
-          setQueryTerms((prev) => ({
-            ...prev,
-            pageNumber: prev.pageNumber + 1,
+          setQueryTerms((queryTerms) => ({
+            ...queryTerms,
+            pageNumber: queryTerms.pageNumber + 1,
           }))
         }
       />

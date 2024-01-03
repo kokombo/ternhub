@@ -12,6 +12,12 @@ body {
   min-width: 375px;
   overflow-x: scroll;
   box-sizing: border-box;
+  top: 0;
+  left: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 h3,

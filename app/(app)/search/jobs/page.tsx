@@ -12,7 +12,7 @@ import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStora
 import { v4 as uuidv4 } from "uuid";
 import { illustrations } from "@/constants";
 
-type Data = {
+type JobsResults = {
   jobs: JobType[];
   numOfJobs: number;
 };
@@ -80,7 +80,9 @@ const JobsSearchResults = () => {
     .replace(`&limit=${limit}`, "")
     .replace("search", "query")}&ref_ctx_id=${search_id}`;
 
-  const fetchJobsInSearchRequest = async (): Promise<Data | undefined> => {
+  const fetchJobsInSearchRequest = async (): Promise<
+    JobsResults | undefined
+  > => {
     router.push(urlWithQueryStrings);
 
     const res = await axios.get("/api/job?" + queryStrings);
@@ -120,11 +122,11 @@ const JobsSearchResults = () => {
   };
 
   useEffect(() => {
-    const refetchDataAfterLocationFilterTermChanges = async () => {
+    const refetchDataAfterFilterTermChanges = async () => {
       await refetch();
     };
 
-    refetchDataAfterLocationFilterTermChanges();
+    refetchDataAfterFilterTermChanges();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
@@ -195,15 +197,15 @@ const JobsSearchResults = () => {
         totalCount={data?.numOfJobs as number}
         noDataIllustration={illustrations.no_search_result}
         onClickPrevButton={() =>
-          setQueryTerms((prev) => ({
-            ...prev,
-            pageNumber: Math.max(prev.pageNumber - 1, 1),
+          setQueryTerms((queryTerms) => ({
+            ...queryTerms,
+            pageNumber: Math.max(queryTerms.pageNumber - 1, 1),
           }))
         }
         onClickNextButton={() =>
-          setQueryTerms((prev) => ({
-            ...prev,
-            pageNumber: prev.pageNumber + 1,
+          setQueryTerms((queryTerms) => ({
+            ...queryTerms,
+            pageNumber: queryTerms.pageNumber + 1,
           }))
         }
       />
