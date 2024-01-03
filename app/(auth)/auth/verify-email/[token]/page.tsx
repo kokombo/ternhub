@@ -17,6 +17,7 @@ const VerifyEmailPage = () => {
   };
 
   let errorResponse: any;
+
   const { mutateAsync, data, error, isLoading, isError } = useMutation(
     ["verifyEmail", token],
 

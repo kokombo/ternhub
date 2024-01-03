@@ -1,18 +1,17 @@
 import User from "@/models/user";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { NextResponse } from "next/server";
+import crypto from "node:crypto";
 
 export const PUT = async (req: Request, { params }: { params: Params }) => {
   try {
     const token = params.token;
 
-    const { createHash } = await import("node:crypto");
-
-    const hashedToken = createHash("sha256").update(token).digest("hex");
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     const user = await User.findOne({
       emailVerificationToken: hashedToken,
-      emailVerificationExpires: { $gt: Date.now() },
+      emailVerificationTokenExpires: { $gt: Date.now() },
     });
 
     if (!user) {
@@ -23,7 +22,7 @@ export const PUT = async (req: Request, { params }: { params: Params }) => {
 
     user.emailVerificationToken = undefined;
 
-    user.emailVerificationExpires = undefined;
+    user.emailVerificationTokenExpires = undefined;
 
     await user.save();
 
