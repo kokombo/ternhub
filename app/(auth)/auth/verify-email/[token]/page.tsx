@@ -2,10 +2,11 @@
 
 import { useParams } from "next/navigation";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 import { redirect } from "next/navigation";
 import { RotatingLinesLoader } from "@/components";
+import { useEffect } from "react";
 
 const VerifyEmailPage = () => {
   const { token } = useParams();
@@ -16,7 +17,7 @@ const VerifyEmailPage = () => {
   };
 
   let errorResponse: any;
-  const { data, error, isLoading, isError } = useQuery(
+  const { mutateAsync, data, error, isLoading, isError } = useMutation(
     ["verifyEmail", token],
 
     verifyEmailRequest,
@@ -34,8 +35,16 @@ const VerifyEmailPage = () => {
 
   if (error) errorResponse = error;
 
+  useEffect(() => {
+    const verifyUserEmail = async () => {
+      await mutateAsync();
+    };
+
+    verifyUserEmail();
+  }, []);
+
   return (
-    <div>
+    <>
       {isLoading ? (
         <RotatingLinesLoader />
       ) : isError ? (
@@ -47,7 +56,7 @@ const VerifyEmailPage = () => {
           <p>{data?.message} </p>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
