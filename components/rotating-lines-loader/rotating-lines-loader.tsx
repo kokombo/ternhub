@@ -2,10 +2,10 @@ import { RotatingLines } from "react-loader-spinner";
 
 const RotatingLinesLoader = () => {
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen self-center">
       <RotatingLines
         visible={true}
-        width="100"
+        width="50"
         strokeColor="#5627FF"
         ariaLabel="tail-spin-loading"
       />

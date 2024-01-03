@@ -10,6 +10,7 @@ type Props = {
   isError?: boolean;
   error?: any;
   refetch?: any;
+  rootUrl: string;
 };
 
 const BlogInfoPage = (props: Props) => {
@@ -27,20 +28,22 @@ const BlogInfoPage = (props: Props) => {
       {props.isLoading ? (
         <div className="min-h-screen"></div>
       ) : props.isError ? (
-        <Message
-          message={props.error?.response?.data?.message}
-          isError={props.isError}
-          onClickButton={async () => await props.refetch()}
-          buttonLabel="Try again"
-          illustration={illustrations.error_2}
-        />
+        <div className="flex_center">
+          <Message
+            message={props.error?.response?.data?.message}
+            isError={props.isError}
+            onClickButton={async () => await props.refetch()}
+            buttonLabel="Try again"
+            illustration={illustrations.error_2}
+          />
+        </div>
       ) : (
         <div className="py-6 lg:py-[60px] sm:px-[6.94%] px-5 flex_center lg:gap-[75px] gap-10">
           <BlogInfopageHeader props={props.data} />
 
           <BlogInfopageBody props={props.data} />
 
-          <RelatedBlogs relatedBlogs={relatedBlogs} />
+          <RelatedBlogs relatedBlogs={relatedBlogs} rootUrl={props.rootUrl} />
         </div>
       )}
     </>

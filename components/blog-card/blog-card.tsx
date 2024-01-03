@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { BlogReadTime } from "..";
 import { BsArrowRight } from "react-icons/bs";
 import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";

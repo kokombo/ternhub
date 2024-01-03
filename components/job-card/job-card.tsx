@@ -1,14 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const JobCard = ({
   props: job,
@@ -21,8 +18,6 @@ const JobCard = ({
 
   const router = useRouter();
 
-  const { isLoading } = getJobById(job._id);
-
   const viewJobDetails = () => {
     if (!session?.user) {
       router.push("/auth/signin");
@@ -31,9 +26,7 @@ const JobCard = ({
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
-      if (!isLoading) {
-        router.push(`${rootUrl}/${job._id}`);
-      }
+      router.push(`${rootUrl}/${job._id}`);
     }
   };
 

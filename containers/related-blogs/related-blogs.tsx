@@ -3,6 +3,7 @@ import { GroteskBold } from "@/app/font";
 
 type Props = {
   relatedBlogs: BlogType[] | undefined;
+  rootUrl: string;
 };
 
 const RelatedBlogs = (props: Props) => {
@@ -16,7 +17,7 @@ const RelatedBlogs = (props: Props) => {
 
           <div className="blog_list_grid">
             {props.relatedBlogs.map((blog) => (
-              <BlogCard key={blog._id} props={blog} rootUrl="/" />
+              <BlogCard key={blog._id} props={blog} rootUrl={props.rootUrl} />
             ))}
           </div>
         </section>

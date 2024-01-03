@@ -1,5 +1,3 @@
-"use client";
-
 import "@/styles/globals.css";
 
 export default function AuthLayout({
@@ -7,5 +5,5 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return <>{children}</>;
 }

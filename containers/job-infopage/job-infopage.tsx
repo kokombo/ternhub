@@ -1,9 +1,13 @@
-import { JobInfopageHeader, JobInfopageBody, Message } from "@/components";
+import {
+  JobInfopageHeader,
+  JobInfopageBody,
+  Message,
+  RotatingLinesLoader,
+} from "@/components";
 import { RelatedJobs } from "..";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { illustrations } from "@/constants";
-import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 
 type Props = {
   data: JobType | undefined;
@@ -26,7 +30,7 @@ const JobInfopage = (props: Props) => {
   return (
     <>
       {props.isLoading ? (
-        <div className="min-h-screen"></div>
+        <RotatingLinesLoader />
       ) : props.isError ? (
         <div className="flex_center justify-center">
           <Message

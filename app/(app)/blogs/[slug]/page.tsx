@@ -17,6 +17,7 @@ const BlogPage = () => {
         isLoading={isLoading}
         error={error}
         refetch={refetch}
+        rootUrl="/blogs"
       />
     </div>
   );

@@ -26,6 +26,7 @@ const AdminBlogInfoPage = () => {
         isLoading={isLoading}
         error={error}
         refetch={refetch}
+        rootUrl="/admin/blogs"
       />
     </div>
   );
