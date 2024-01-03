@@ -1,3 +1,5 @@
+"use client";
+
 import { useParams } from "next/navigation";
 import axios from "axios";
 import { useQuery } from "react-query";
