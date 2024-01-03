@@ -15,11 +15,6 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-      />
-
       <title>
         The Tern Hub - Discover Tech internship Opportunties and Junior Roles
       </title>
