@@ -75,16 +75,16 @@ UserSchema.methods.comparePassword = async function (password: string) {
 };
 
 UserSchema.methods.createEmailVerificationToken = async function () {
-  const emailToken = crypto.randomBytes(32).toString("hex");
+  const token = crypto.randomBytes(32).toString("hex");
 
   this.emailVerificationToken = crypto
     .createHash("sha256")
-    .update(emailToken)
+    .update(token)
     .digest("hex");
 
   this.emailVerificationTokenExpires = Date.now() + 30 * 60 * 1000; //Email verification expires token/link in 30 minutes.
 
-  return emailToken;
+  return token;
 };
 
 const User = models.User || model("User", UserSchema);

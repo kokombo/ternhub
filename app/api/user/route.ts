@@ -5,7 +5,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
 import emailValidator from "node-email-verifier";
 import { sendEmail } from "@/utilities/auth/sendEmail";
-import crypto from "node:crypto";
 
 export const POST = async (req: Request) => {
   const body = await req.json();
@@ -41,17 +40,17 @@ export const POST = async (req: Request) => {
       authMethod: "credentials",
     });
 
-    const token = crypto.randomBytes(32).toString("hex");
+    const token = await user.createEmailVerificationToken();
+
+    await user.save();
 
     const data: EmailInfoType = {
       from: "TheTernHub",
       to: email,
       text: "Verify your email address",
       subject: "Email verification link - TheTernHub",
-      html: `Hi ${user.name}, follow this link to verify your email address. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" >Verify Email</a>`,
+      html: `Hi ${user.name}, <br/> Follow this link to verify your email address and continue using TheTernHub. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" > Click Here To Verify</a>.`,
     };
-
-    console.log("B");
 
     sendEmail(data);
 

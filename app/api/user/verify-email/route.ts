@@ -27,7 +27,7 @@ export const POST = async (req: Request, res: Response) => {
       );
     }
 
-    const token = user.createEmailVerificationToken();
+    const token = await user.createEmailVerificationToken();
 
     await user.save();
 
