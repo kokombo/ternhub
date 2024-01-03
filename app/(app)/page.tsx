@@ -14,7 +14,7 @@ export default function Home() {
     redirect("/jobs");
   } else {
     return (
-      <div className="flex flex-col w-full">
+      <div className="w-full">
         <Hero />
         <TrendingJobs />
         <LandingPageBlogs />

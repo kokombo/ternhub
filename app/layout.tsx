@@ -1,6 +1,6 @@
 "use client";
 
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import { NextAuthProvider, ReactQueryProvider } from "@/components";
 import { Sans } from "./font";
 import { Provider } from "react-redux";
