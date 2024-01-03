@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 type Props = {
   linkLabel: string;
@@ -8,10 +7,8 @@ type Props = {
 };
 
 const NotFoundComponent = (props: Props) => {
-  const router = useRouter();
-
   return (
-    <section className="flex flex-col items-center justify-center text-center gap-5 h-screen px-5 ">
+    <section className="flex flex-col items-center justify-center text-center gap-5 h-full px-5 ">
       <h1 className="lg:text-[280px] lg:leading-[200px] text-[140px] leading-[100px] text-purple">
         404
       </h1>
@@ -32,14 +29,6 @@ const NotFoundComponent = (props: Props) => {
         >
           {props.linkLabel}
         </Link>
-
-        <button
-          onClick={() => router.back()}
-          aria-label="Page not found,return to the previous page"
-          className="px-6 py-[8px] lg:px-8 lg:py-3 text-sm lg:text-base font-semibold bg-purple hover:bg-blue text-white rounded-[10px]"
-        >
-          Return to your previous page
-        </button>
       </div>
     </section>
   );
