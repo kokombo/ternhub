@@ -49,10 +49,10 @@ export const POST = async (req: Request) => {
       to: email,
       text: "Verify your email address",
       subject: "Email verification link - TheTernHub",
-      html: `Hi ${user.name}, <br/> Follow this link to verify your email address and continue using TheTernHub. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" > Click Here To Verify</a>.`,
+      html: `Hi ${user.name}, <br/> <p>Follow this link to verify your email address and continue using TheTernHub. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" > Click Here To Verify</a>.</p>`,
     };
 
-    sendEmail(data);
+    await sendEmail(data);
 
     return NextResponse.json({
       message:

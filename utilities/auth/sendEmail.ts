@@ -11,7 +11,7 @@ export const sendEmail = async (data: EmailInfoType) => {
     },
   });
 
-  await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: data.from,
     to: data.to,
     html: data.html,
