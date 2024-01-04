@@ -15,10 +15,7 @@ export const PUT = async (req: Request, { params }: { params: Params }) => {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { message: "Invalid link. Email verification link must have expired." },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "Invalid link." }, { status: 401 });
     }
 
     user.emailVerified = true;

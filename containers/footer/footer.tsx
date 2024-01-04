@@ -9,6 +9,8 @@ const Footer = () => {
 
   if (status === "loading") return <div></div>;
 
+  console.log(session?.user);
+
   return (
     <footer className="footer">
       <div className="footer_text_wrapper">

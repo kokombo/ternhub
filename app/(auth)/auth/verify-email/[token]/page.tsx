@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { RotatingLinesLoader } from "@/components";
 import { useEffect } from "react";
 
+//A user will be redirected to this screen after clicking "verify email" in the email sent to their inbox.
+
 const VerifyEmailPage = () => {
   const { token } = useParams();
 
@@ -49,7 +51,7 @@ const VerifyEmailPage = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex flex-col justify-center gap-1">
+        <div className="flex flex-col justify-center items-center gap-1">
           <p>Verifying...</p>
           <RotatingLinesLoader />
         </div>

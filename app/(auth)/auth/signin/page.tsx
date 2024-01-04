@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -19,6 +19,7 @@ import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
+import { useSession } from "next-auth/react";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -27,9 +28,9 @@ const userLoginData: UserLoginDataType = {
 
 const validationSchema = Yup.object({
   email: Yup.string()
-    .email("Invalid email format")
-    .required("Email address is required!"),
-  password: Yup.string().required("Password is required to sign in!"),
+    .email("Invalid email format.")
+    .required("Enter your email."),
+  password: Yup.string().required("Enter your password."),
 });
 
 const SignInPage = () => {
@@ -43,6 +44,7 @@ const SignInPage = () => {
 
   const signAUserIn = async (
     values: UserLoginDataType,
+
     onSubmitProps: FormikHelpers<UserLoginDataType>
   ) => {
     try {

@@ -5,24 +5,22 @@ import { sendEmail } from "@/utilities/auth/sendEmail";
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    const { email } = await req.json();
-
-    const emailValid = await emailValidator(email);
+    const email = await req.json();
 
     const refinedEmail = email.toLowerCase();
-
-    if (!emailValid) {
-      return NextResponse.json(
-        { message: "Please provide a valid email address." },
-        { status: 401 }
-      );
-    }
 
     const user = await User.findOne({ email: refinedEmail });
 
     if (!user) {
       return NextResponse.json(
         { message: "No user found for this email" },
+        { status: 401 }
+      );
+    }
+
+    if (user.emailVerified) {
+      return NextResponse.json(
+        { message: "User email has already been verified." },
         { status: 401 }
       );
     }
@@ -41,10 +39,13 @@ export const POST = async (req: Request, res: Response) => {
 
     await sendEmail(data);
 
-    return NextResponse.json({
-      message:
-        "An Email verification link has been sent to your email address.",
-    });
+    return NextResponse.json(
+      {
+        message:
+          "An Email verification link has been sent to your email address.",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong, please try again." },

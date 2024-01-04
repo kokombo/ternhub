@@ -55,6 +55,7 @@ const SignUpPage = () => {
     formData: UserSignupDataType
   ): Promise<Data | undefined> => {
     const res = await axios.post("/api/user", formData);
+
     return res.data;
   };
 
@@ -67,24 +68,28 @@ const SignUpPage = () => {
 
   const createUserAccount = async (
     values: UserSignupDataType,
+
     onSubmitProps: FormikHelpers<UserSignupDataType>
   ) => {
     await mutateAsync(values, {
-      // onSuccess: async () => {
-      //   const email = values.email;
-      //   const password = values.password;
-      //   await signIn("credentials", {
-      //     email,
-      //     password,
-      //     callbackUrl: "/jobs",
-      //     redirect: false,
-      //   }).then((res) => {
-      //     if (res?.ok) {
-      //       router.push("/jobs");
-      //       onSubmitProps.resetForm();
-      //     }
-      //   });
-      // },
+      onSuccess: async () => {
+        const email = values.email;
+
+        const password = values.password;
+
+        await signIn("credentials", {
+          email,
+          password,
+          callbackUrl: "/auth/email-verification",
+          redirect: false,
+        }).then((res) => {
+          if (res?.ok) {
+            router.push("/auth/email-verification");
+
+            onSubmitProps.resetForm();
+          }
+        });
+      },
     });
   };
 

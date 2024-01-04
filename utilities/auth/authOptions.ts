@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ account, token, profile, user }) {
+    async jwt({ account, token, user }) {
       if (account) {
         const accountUser = await User.findOne({ email: user?.email });
 
@@ -64,10 +64,11 @@ export const authOptions: NextAuthOptions = {
 
         token.role = accountUser.role;
 
-        token.image = profile?.image || accountUser.image;
+        token.emailVerified = accountUser.emailVerified;
 
-        token.emailVerified =
-          profile?.email_verified || accountUser.emailVerified;
+        token.authMethod = accountUser.authMethod;
+
+        token.image = accountUser.image;
       }
 
       return token;
@@ -83,6 +84,8 @@ export const authOptions: NextAuthOptions = {
       session.user.image = token.image;
 
       session.user.emailVerified = token.emailVerified;
+
+      session.user.authMethod = token.authMethod;
 
       return session;
     },
@@ -105,6 +108,7 @@ export const authOptions: NextAuthOptions = {
             password: uuidv4(),
             role: profile?.role,
             authMethod: account?.provider,
+            emailVerified: profile?.email_verified,
           });
         }
       }

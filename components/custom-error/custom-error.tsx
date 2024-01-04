@@ -7,7 +7,9 @@ type Props = {
 
 const CustomError = (props: Props) => {
   return (
-    <>{!props.loading && <p className="text-red text-sm">{props.message}</p>}</>
+    <>
+      <p className="text-red text-sm">{props.message}</p>
+    </>
   );
 };
 
