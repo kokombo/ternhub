@@ -38,6 +38,9 @@ const RadioButtonOptions = (props: Props) => {
                       name={props.name}
                       value={option.value}
                       className="radio_button "
+                      defaultChecked={
+                        field.value ? field.value === option.value : undefined
+                      }
                     />
 
                     <label htmlFor={option.value}>{option.label} </label>

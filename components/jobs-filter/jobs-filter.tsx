@@ -1,7 +1,8 @@
 "use client";
 
-import { Dispatch, SetStateAction, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { FilterSelect } from "..";
+import { jobCategoryOptions } from "@/constants/data";
 
 type Props = {
   onchangeJobModeFilterTerm: (e: ChangeEvent<HTMLSelectElement>) => void;
@@ -12,7 +13,7 @@ type Props = {
   onChangeJobCategoryFilterTerm: (e: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const sortByOptions = [{ key: "Recommended", value: "recommended" }];
+const sortByOptions = [{ key: "", value: "" }];
 
 const jobModeOptions = [
   { key: "All", value: "all" },
@@ -28,21 +29,6 @@ const jobTypeOptions = [
   { key: "Contract", value: "contract" },
 ];
 
-const jobCategoryOptions = [
-  { key: "All", value: "all" },
-  { key: "Frontend Development", value: "Frontend Development" },
-  { key: "Backend  Development", value: "Backend Development" },
-  { key: "Fullstack Development", value: "Fullstack Development" },
-  { key: "Product Design", value: "Product Design" },
-  { key: "UI/UX", value: "UI/UX" },
-  { key: "Product Management", value: "Product Management" },
-  { key: "DevOps", value: "DevOps" },
-  { key: "Technical Writing", value: "Technical Writing" },
-  { key: "Cybersecurity", value: "Cybersecurity" },
-  { key: "Mobile Development", value: "Mobile Development" },
-  { key: "Others", value: "Others" },
-];
-
 const JobsFilter = (props: Props) => {
   return (
     <div className="flex items-center lg:gap-[26px] lg:justify-start gap-[13px] w-full flex-wrap">
@@ -52,6 +38,8 @@ const JobsFilter = (props: Props) => {
         onChange={() => {}}
         label="Sort by"
         name=""
+        firstOptionKey="Recommended"
+        firstOptionValue="recommended"
       />
 
       <FilterSelect
@@ -60,6 +48,8 @@ const JobsFilter = (props: Props) => {
         onChange={props.onchangeJobModeFilterTerm}
         label="Mode"
         name="jobModeFilterTerm"
+        firstOptionKey="All"
+        firstOptionValue="all"
       />
 
       <FilterSelect
@@ -68,6 +58,8 @@ const JobsFilter = (props: Props) => {
         onChange={props.onchangeJobTypeFilterTerm}
         label="Type"
         name="jobTypeFilterTerm"
+        firstOptionKey="All"
+        firstOptionValue="all"
       />
 
       <FilterSelect
@@ -76,6 +68,8 @@ const JobsFilter = (props: Props) => {
         onChange={props.onChangeJobCategoryFilterTerm}
         label="Category"
         name="jobCategoryFilterTerm"
+        firstOptionKey="All"
+        firstOptionValue="all"
       />
     </div>
   );

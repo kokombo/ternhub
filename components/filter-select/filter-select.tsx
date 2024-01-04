@@ -13,6 +13,8 @@ type Props = {
   data: Option[];
   label: string;
   name: string;
+  firstOptionKey: string;
+  firstOptionValue: string;
 };
 
 const FilterSelect = (props: Props) => {
@@ -29,6 +31,7 @@ const FilterSelect = (props: Props) => {
           onChange={props.onChange}
           className="select"
         >
+          <option value={props.firstOptionValue}>{props.firstOptionKey}</option>
           {props.data.map((item, index) => {
             return (
               <option key={index} value={item.value}>

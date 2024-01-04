@@ -10,18 +10,18 @@ export const professions = [
   { label: "Cybersecurity Expert" },
 ];
 
-export const jobCategories = [
-  { label: "Frontend Development" },
-  { label: "Backend  Development" },
-  { label: "Fullstack Development" },
-  { label: "Product Design" },
-  { label: "UI/UX" },
-  { label: "Product Management" },
-  { label: "DevOps" },
-  { label: "Technical Writing" },
-  { label: "Cybersecurity" },
-  { label: "Mobile Development" },
-  { label: "Others" },
+export const jobCategoryOptions = [
+  { key: "Frontend Development", value: "Frontend-Development" },
+  { key: "Backend  Development", value: "Backend-Development" },
+  { key: "Fullstack Development", value: "Fullstack-Development" },
+  { key: "Product Design", value: "Product-Design" },
+  { key: "UI/UX", value: "UI/UX" },
+  { key: "Product Management", value: "Product-Management" },
+  { key: "DevOps", value: "DevOps" },
+  { key: "Technical Writing", value: "Technical-Writing" },
+  { key: "Cybersecurity", value: "Cybersecurity" },
+  { key: "Mobile Development", value: "Mobile-Development" },
+  { key: "Others", value: "Others" },
 ];
 
 export const blogCategories = [

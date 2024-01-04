@@ -1,6 +1,6 @@
 "use client";
 import { Formik, Form, FormikHelpers } from "formik";
-import { jobCategories } from "@/constants/data";
+import { jobCategoryOptions } from "@/constants/data";
 import {
   InputField,
   TextEditor,
@@ -112,7 +112,7 @@ const JobForm = (props: Props) => {
                   label="Job Category *"
                   name="category"
                   id="category"
-                  data={jobCategories}
+                  data={jobCategoryOptions}
                 />
 
                 <InputField

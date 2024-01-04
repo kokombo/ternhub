@@ -17,7 +17,7 @@ const EditJobInfo = () => {
 
   const queryClient = useQueryClient();
 
-  let jobByIdErrorRes: any;
+  let jobByIdErrorResponse: any;
 
   const {
     job,
@@ -27,7 +27,7 @@ const EditJobInfo = () => {
     error: jobByIdError,
   } = getJobById(jobId);
 
-  if (isJobByIdError) jobByIdErrorRes = jobByIdError;
+  if (isJobByIdError) jobByIdErrorResponse = jobByIdError;
 
   const initialFormValues: JobFormType = {
     title: job?.title as string,
@@ -73,7 +73,7 @@ const EditJobInfo = () => {
       ) : isJobByIdError ? (
         <div className="flex_center w-full">
           <Message
-            message={jobByIdErrorRes?.response?.data?.message}
+            message={jobByIdErrorResponse?.response?.data?.message}
             isError={isJobByIdError}
             buttonLabel="Try again"
             onClickButton={async () => await refetchJobById()}
