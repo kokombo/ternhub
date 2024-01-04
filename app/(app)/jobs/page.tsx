@@ -8,14 +8,21 @@ import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStora
 import { illustrations } from "@/constants";
 import { useRouter } from "next/navigation";
 
-const initialQueryTerms = {
-  jobModeFilterTerm: "",
-  jobTypeFilterTerm: "",
-  pageNumber: 1,
-  jobCategoryFilterTerm: "",
-};
+const {
+  pageFromLocalStorage,
+  jobModeTermFromLocalStorage,
+  jobTypeTermFromLocalStorage,
+  jobCategoryTermFromLocalStorage,
+} = valuesFromLocalStorage("userQueriesInJobsPage"); //Getting filter queries from localstorage as the component mounts.
 
 const JobsListPage = () => {
+  const initialQueryTerms = {
+    jobModeFilterTerm: jobModeTermFromLocalStorage || "",
+    jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
+    pageNumber: pageFromLocalStorage || 1,
+    jobCategoryFilterTerm: jobCategoryTermFromLocalStorage || "",
+  };
+
   const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
 
   const {
@@ -78,7 +85,7 @@ const JobsListPage = () => {
     refetchDataAfterFilterTermChanges();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
-  //Retrieving user's filter queries stored in logal storage when page reloads or route changes.
+  //Retrieving user's filter queries and updating state when route changes after component has already mounted.
   useEffect(() => {
     const {
       pageFromLocalStorage,
@@ -103,7 +110,7 @@ const JobsListPage = () => {
       { key: "jobTypeFilterTerm", value: jobTypeFilterTerm },
       { key: "jobCategoryFilterTerm", value: jobCategoryFilterTerm },
     ];
-  }, [pageNumber, jobModeFilterTerm, jobTypeFilterTerm, jobCategoryFilterTerm]);
+  }, [queryTerms]);
 
   useEffect(() => {
     localStorage.setItem(
