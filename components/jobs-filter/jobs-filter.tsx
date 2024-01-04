@@ -16,14 +16,12 @@ type Props = {
 const sortByOptions = [{ key: "", value: "" }];
 
 const jobModeOptions = [
-  { key: "All", value: "all" },
   { key: "Remote", value: "remote" },
   { key: "Onsite", value: "onsite" },
   { key: "Hybrid", value: "hybrid" },
 ];
 
 const jobTypeOptions = [
-  { key: "All", value: "all" },
   { key: "Part-time", value: "part-time" },
   { key: "Full-time", value: "full-time" },
   { key: "Contract", value: "contract" },
@@ -34,7 +32,7 @@ const JobsFilter = (props: Props) => {
     <div className="flex items-center lg:gap-[26px] lg:justify-start gap-[13px] w-full flex-wrap">
       <FilterSelect
         data={sortByOptions}
-        value=""
+        value="recommended"
         onChange={() => {}}
         label="Sort by"
         name=""
