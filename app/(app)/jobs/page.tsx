@@ -6,16 +6,15 @@ import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
-import { usePathname } from "next/navigation";
-
-const {
-  pageFromLocalStorage,
-  jobModeTermFromLocalStorage,
-  jobTypeTermFromLocalStorage,
-  jobCategoryTermFromLocalStorage,
-} = valuesFromLocalStorage("userQueriesInJobsPage"); //Getting filter queries from localstorage as the component mounts.
 
 const JobsListPage = () => {
+  const {
+    pageFromLocalStorage,
+    jobModeTermFromLocalStorage,
+    jobTypeTermFromLocalStorage,
+    jobCategoryTermFromLocalStorage,
+  } = valuesFromLocalStorage("userQueriesInJobsPage"); //Getting filter queries from localstorage as the component mounts.
+
   const initialQueryTerms = {
     jobModeFilterTerm: jobModeTermFromLocalStorage || "",
     jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
@@ -31,8 +30,6 @@ const JobsListPage = () => {
     pageNumber,
     jobCategoryFilterTerm,
   } = queryTerms;
-
-  const pathname = usePathname();
 
   const limit = 30;
 
@@ -85,24 +82,6 @@ const JobsListPage = () => {
     refetchDataAfterFilterTermChanges();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
-  //Retrieving user's filter queries and updating state when route changes after component has already mounted.
-  useEffect(() => {
-    const {
-      pageFromLocalStorage,
-      jobModeTermFromLocalStorage,
-      jobTypeTermFromLocalStorage,
-      jobCategoryTermFromLocalStorage,
-    } = valuesFromLocalStorage("userQueriesInJobsPage");
-
-    setQueryTerms((prev) => ({
-      ...prev,
-      jobModeFilterTerm: jobModeTermFromLocalStorage,
-      jobTypeFilterTerm: jobTypeTermFromLocalStorage,
-      pageNumber: pageFromLocalStorage,
-      jobCategoryFilterTerm: jobCategoryTermFromLocalStorage,
-    }));
-  }, [pathname]);
-
   //Storing a user's search queries in local storage to ensure persistence after page reload and router change.
   const userSearchQueriesArray = useMemo(() => {
     return [
@@ -111,7 +90,7 @@ const JobsListPage = () => {
       { key: "jobTypeFilterTerm", value: jobTypeFilterTerm },
       { key: "jobCategoryFilterTerm", value: jobCategoryFilterTerm },
     ];
-  }, [pageNumber, jobModeFilterTerm, jobTypeFilterTerm, jobCategoryFilterTerm]);
+  }, [queryTerms]);
 
   useEffect(() => {
     localStorage.setItem(
