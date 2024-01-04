@@ -94,12 +94,13 @@ const JobsListPage = () => {
       jobCategoryTermFromLocalStorage,
     } = valuesFromLocalStorage("userQueriesInJobsPage");
 
-    setQueryTerms({
+    setQueryTerms((prev) => ({
+      ...prev,
       jobModeFilterTerm: jobModeTermFromLocalStorage,
       jobTypeFilterTerm: jobTypeTermFromLocalStorage,
       pageNumber: pageFromLocalStorage,
       jobCategoryFilterTerm: jobCategoryTermFromLocalStorage,
-    });
+    }));
   }, [pathname]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload and router change.
@@ -110,7 +111,7 @@ const JobsListPage = () => {
       { key: "jobTypeFilterTerm", value: jobTypeFilterTerm },
       { key: "jobCategoryFilterTerm", value: jobCategoryFilterTerm },
     ];
-  }, [queryTerms]);
+  }, [pageNumber, jobModeFilterTerm, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   useEffect(() => {
     localStorage.setItem(
