@@ -6,6 +6,7 @@ import slugify from "slugify";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
+import cloudinary from "@/utilities/general/cloudinary";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   validateMongoDBId(params.id);
@@ -36,6 +37,8 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const body = await req.json();
 
+  const { description, site, email, logo } = body;
+
   const session = await getServerSession(authOptions);
 
   if (!session?.user || session?.user.role !== "admin") {
@@ -43,6 +46,35 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
     );
+  }
+
+  if (!description) {
+    return NextResponse.json(
+      {
+        message:
+          "Please provide some details about the job in the job description box.",
+      },
+      { status: 401 }
+    );
+  }
+
+  if (!site && !email) {
+    return NextResponse.json(
+      {
+        message: "Please add either the job's application link or apply email.",
+      },
+      { status: 401 }
+    );
+  }
+
+  if (logo) {
+    const uploadedImageResponse = await cloudinary.v2.uploader.upload(logo, {
+      folder: "company_logos",
+      resource_type: "image",
+      quality_analysis: true,
+    });
+
+    body.logo = uploadedImageResponse.secure_url;
   }
 
   validateMongoDBId(params.id);

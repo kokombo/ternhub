@@ -5,6 +5,7 @@ import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import slugify from "slugify";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
+import cloudinary from "@/utilities/general/cloudinary";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
@@ -40,6 +41,26 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
     );
+  }
+
+  const { image, content } = body;
+
+  if (!content) {
+    return NextResponse.json(
+      { message: "Blog content not found." },
+      { status: 401 }
+    );
+  }
+
+  if (image) {
+    const uploadedImageResponse = await cloudinary.v2.uploader.upload(image, {
+      folder: "blog_images",
+      resource_type: "image",
+      quality_analysis: true,
+      format: "png",
+    });
+
+    body.image = uploadedImageResponse.secure_url;
   }
 
   try {
