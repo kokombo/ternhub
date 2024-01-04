@@ -8,14 +8,14 @@ import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStora
 import { illustrations } from "@/constants";
 import { useRouter } from "next/navigation";
 
-const JobsListPage = () => {
-  const initialQueryTerms = {
-    jobModeFilterTerm: "",
-    jobTypeFilterTerm: "",
-    pageNumber: 1,
-    jobCategoryFilterTerm: "",
-  };
+const initialQueryTerms = {
+  jobModeFilterTerm: "",
+  jobTypeFilterTerm: "",
+  pageNumber: 1,
+  jobCategoryFilterTerm: "",
+};
 
+const JobsListPage = () => {
   const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
 
   const {
@@ -95,7 +95,7 @@ const JobsListPage = () => {
     });
   }, [router]);
 
-  //Storing a user's search queries in local storage to ensure persistence after page reload.
+  //Storing a user's search queries in local storage to ensure persistence after page reload and router change.
   const userSearchQueriesArray = useMemo(() => {
     return [
       { key: "pageNumber", value: pageNumber },
