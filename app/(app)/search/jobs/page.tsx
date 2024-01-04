@@ -62,7 +62,7 @@ const JobsSearchResults = () => {
 
   if (jobTypeFilterTerm) params.append("type", jobTypeFilterTerm);
 
-  if (jobCategoryFilterTerm) params.append("type", jobCategoryFilterTerm);
+  if (jobCategoryFilterTerm) params.append("category", jobCategoryFilterTerm);
 
   params.append("page", pageNumber.toString());
 
