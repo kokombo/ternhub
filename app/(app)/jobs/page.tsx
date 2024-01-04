@@ -6,7 +6,7 @@ import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const {
   pageFromLocalStorage,
@@ -32,7 +32,7 @@ const JobsListPage = () => {
     jobCategoryFilterTerm,
   } = queryTerms;
 
-  const router = useRouter();
+  const pathname = usePathname();
 
   const limit = 30;
 
@@ -100,7 +100,7 @@ const JobsListPage = () => {
       pageNumber: pageFromLocalStorage,
       jobCategoryFilterTerm: jobCategoryTermFromLocalStorage,
     });
-  }, [router]);
+  }, [pathname]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload and router change.
   const userSearchQueriesArray = useMemo(() => {
