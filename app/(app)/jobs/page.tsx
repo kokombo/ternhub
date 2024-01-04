@@ -6,21 +6,14 @@ import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
-
-const {
-  pageFromLocalStorage,
-  jobModeTermFromLocalStorage,
-  jobTypeTermFromLocalStorage,
-  jobCategoryTermFromLocalStorage,
-} = valuesFromLocalStorage("userQueriesInJobsPage"); //Retrieving user's filter queries stored in logal storage
+import { useRouter } from "next/navigation";
 
 const JobsListPage = () => {
   const initialQueryTerms = {
-    jobModeFilterTerm: jobModeTermFromLocalStorage || "",
-    jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
-    pageNumber: pageFromLocalStorage || 1,
-    limit: 30,
-    jobCategoryFilterTerm: jobCategoryTermFromLocalStorage || "",
+    jobModeFilterTerm: "",
+    jobTypeFilterTerm: "",
+    pageNumber: 1,
+    jobCategoryFilterTerm: "",
   };
 
   const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
@@ -29,9 +22,12 @@ const JobsListPage = () => {
     jobModeFilterTerm,
     jobTypeFilterTerm,
     pageNumber,
-    limit,
     jobCategoryFilterTerm,
   } = queryTerms;
+
+  const router = useRouter();
+
+  const limit = 30;
 
   const params = new URLSearchParams();
 
@@ -81,6 +77,23 @@ const JobsListPage = () => {
 
     refetchDataAfterFilterTermChanges();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
+
+  //Retrieving user's filter queries stored in logal storage when page reloads or route changes.
+  useEffect(() => {
+    const {
+      pageFromLocalStorage,
+      jobModeTermFromLocalStorage,
+      jobTypeTermFromLocalStorage,
+      jobCategoryTermFromLocalStorage,
+    } = valuesFromLocalStorage("userQueriesInJobsPage");
+
+    setQueryTerms({
+      jobModeFilterTerm: jobModeTermFromLocalStorage,
+      jobTypeFilterTerm: jobTypeTermFromLocalStorage,
+      pageNumber: pageFromLocalStorage,
+      jobCategoryFilterTerm: jobCategoryTermFromLocalStorage,
+    });
+  }, [router]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
   const userSearchQueriesArray = useMemo(() => {
