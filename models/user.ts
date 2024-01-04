@@ -50,7 +50,7 @@ const UserSchema = new Schema(
 
     passwordResetToken: String,
 
-    passwordResetExpires: Date,
+    passwordResetTokenExpires: Date,
 
     emailVerificationToken: String,
 
@@ -83,6 +83,19 @@ UserSchema.methods.createEmailVerificationToken = async function () {
     .digest("hex");
 
   this.emailVerificationTokenExpires = Date.now() + 30 * 60 * 1000; //Email verification expires token/link in 30 minutes.
+
+  return token;
+};
+
+UserSchema.methods.createPasswordResetToken = async function () {
+  const token = crypto.randomBytes(32).toString("hex");
+
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(token)
+    .digest("hex");
+
+  this.passwordResetTokenExpires = Date.now() + 15 * 60 * 1000; //Email verification expires token/link in 15 minutes.
 
   return token;
 };

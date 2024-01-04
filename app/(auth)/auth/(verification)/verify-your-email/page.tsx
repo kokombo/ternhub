@@ -22,7 +22,7 @@ const VerifyYourEmail = () => {
     };
 
     sendEmail();
-  }, []); //Email verification link will be sent to user as the page loads.
+  }, [mutateAsync]); //Email verification link will be sent to user as the page loads.
 
   useEffect(() => {
     if (status === "unauthenticated") {

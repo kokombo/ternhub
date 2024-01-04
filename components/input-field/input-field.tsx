@@ -13,6 +13,7 @@ type Props = {
   togglePasswordIcon?: () => void;
   setPasswordVisibile?: boolean;
   passwordField?: boolean;
+  autoComplete?: string;
 };
 
 const InputField = (props: Props) => {
@@ -46,6 +47,7 @@ const InputField = (props: Props) => {
                   type={props.type}
                   maxLength={props.maxLength}
                   placeholder={props.placeholder}
+                  autoComplete={props.autoComplete}
                 />
               );
             }}

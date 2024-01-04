@@ -117,7 +117,7 @@ const SignUpPage = () => {
           </div>
         </div>
 
-        <div>
+        <>
           <Formik
             initialValues={userData}
             onSubmit={createUserAccount}
@@ -164,7 +164,7 @@ const SignUpPage = () => {
               </div>
             </Form>
           </Formik>
-        </div>
+        </>
 
         <div className="w-full flex flex-col items-center gap-5">
           <AuthCTA
@@ -178,7 +178,7 @@ const SignUpPage = () => {
       <section className="h-full w-full lg:inline hidden">
         <Image
           src={images.signupscreenimage}
-          alt="signup page image"
+          alt="signup page cover image"
           className="object-cover h-full w-full"
           placeholder="blur"
           loading="eager"

@@ -5,7 +5,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
 
 export const PUT = async (req: Request) => {
-  const { profession } = await req.json();
+  const profession = await req.json();
 
   const session = await getServerSession(authOptions);
 
@@ -25,9 +25,12 @@ export const PUT = async (req: Request) => {
     if (user) {
       user.profession = profession;
 
-      const updatedProfession = await user.save();
+      await user.save();
 
-      return NextResponse.json(updatedProfession);
+      return NextResponse.json(
+        { message: "You have updated your profession successfully!" },
+        { status: 200 }
+      );
     } else {
       return NextResponse.json(user);
     }

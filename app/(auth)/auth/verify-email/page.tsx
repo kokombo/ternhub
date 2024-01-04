@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import axios from "axios";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
@@ -11,19 +10,22 @@ import { useEffect } from "react";
 //A user will be redirected to this screen after clicking "verify email" in the email sent to their inbox.
 
 const VerifyEmailPage = () => {
-  const { token } = useParams();
+  const params = new URLSearchParams();
+
+  const token = params.get("token");
 
   const router = useRouter();
 
   const verifyEmailRequest = async () => {
-    const res = await axios.put(`/api/user/verify-email/${token}`);
+    const res = await axios.put(`/api/user/verify-email?token=${token}`);
+
     return res.data;
   };
 
   let errorResponse: any;
 
   const { mutateAsync, data, error, isLoading, isError } = useMutation(
-    ["verifyEmail", token],
+    ["verifyEmail"],
 
     verifyEmailRequest,
 
@@ -46,7 +48,7 @@ const VerifyEmailPage = () => {
     };
 
     verifyUserEmail();
-  }, []);
+  }, [mutateAsync]);
 
   return (
     <>

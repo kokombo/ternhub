@@ -25,8 +25,8 @@ const EmailVerification = () => {
   return (
     <div>
       <p>
-        We've sent an email verification link to your email. Please verify your
-        email address to continue using TheTernHub.
+        We have sent an email verification link to your email. Please verify
+        your email address to continue using TheTernHub.
       </p>
 
       <div>

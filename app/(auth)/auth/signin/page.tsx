@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -19,7 +19,6 @@ import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
-import { useSession } from "next-auth/react";
 
 const userLoginData: UserLoginDataType = {
   email: "",
@@ -96,7 +95,7 @@ const SignInPage = () => {
           </div>
         </div>
 
-        <div>
+        <>
           <Formik
             initialValues={userLoginData}
             onSubmit={signAUserIn}
@@ -117,7 +116,7 @@ const SignInPage = () => {
               />
 
               <Link
-                href={"/forgot-password"}
+                href={"/auth/forgot-password"}
                 aria-label="link to reset password page"
                 className="text-purple text-[15px] font-sans font-[400] self-end"
               >
@@ -139,7 +138,7 @@ const SignInPage = () => {
               </span>
             </Form>
           </Formik>
-        </div>
+        </>
 
         <div className="w-full flex flex-col items-center gap-5">
           <AuthCTA
@@ -153,7 +152,7 @@ const SignInPage = () => {
       <section className="h-full w-full lg:inline hidden">
         <Image
           src={images.loginscreenimage}
-          alt="login page image"
+          alt="login page cover image"
           className="object-cover h-full w-full"
           placeholder="blur"
           loading="eager"
