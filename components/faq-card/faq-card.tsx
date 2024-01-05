@@ -45,17 +45,11 @@ const FaqCard = ({
           <button type="button">{showAnswer ? <BiMinus /> : <BiPlus />}</button>
         </div>
 
-        {showAnswer && (
-          <div
-            className={`${
-              showAnswer ? "translate-y-0" : "translate-y-[100%]"
-            } transition-all duration-200`}
-          >
-            <p className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
-              {parse(faq.answer)}
-            </p>
-          </div>
-        )}
+        <div className={`${showAnswer ? "block" : "hidden"}`}>
+          <p className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
+            {parse(faq.answer)}
+          </p>
+        </div>
       </div>
 
       {showEditIcon && (

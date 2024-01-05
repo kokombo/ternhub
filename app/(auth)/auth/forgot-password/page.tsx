@@ -64,7 +64,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="grid lg:grid-cols-2">
-      <section className="flex flex-col md:px-[13.8%] px-5 py-4 gap-8 lg:gap-[50px] mt-3 lg:mt-6">
+      <section className="flex flex-col md:px-[13.8%] px-5 py-4 gap-8 lg:gap-[50px]">
         <Logo />
 
         <h1 className="text-2xl lg:text-[40px]" style={GroteskNormal.style}>
