@@ -7,6 +7,7 @@ import { icons } from "@/constants";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useScreenSize } from "@/utilities/hooks";
+import { toast } from "react-toastify";
 
 type Props = {
   sidebarIsOpen: boolean;
@@ -45,10 +46,18 @@ const Sidebar = (props: Props) => {
           <ul className="flex flex-col gap-3 ">
             <li className="list-none">
               <Link
-                href="/jobs"
+                href={`${session?.user ? "/jobs" : "/auth/signin"}`}
                 aria-label="internships page link from sidebar"
-                onClick={() => props.closeSidebar()}
                 className="hover:text-purple"
+                onClick={() => {
+                  props.closeSidebar();
+
+                  session?.user
+                    ? undefined
+                    : toast.error("Please sign in to continue using TernHub.", {
+                        position: toast.POSITION.TOP_RIGHT,
+                      });
+                }}
               >
                 Jobs
               </Link>
