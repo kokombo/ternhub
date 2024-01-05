@@ -1,13 +1,13 @@
 export const professions = [
-  { label: "Software Engineer" },
-  { label: "Backend Developer" },
-  { label: "Frontend Developer" },
-  { label: "Product Designer" },
-  { label: "UI/UX Designer" },
-  { label: "Product Manager" },
-  { label: "DevOps Engineer" },
-  { label: "Technical Writer" },
-  { label: "Cybersecurity Expert" },
+  { key: "Software Engineer", value: "Software Engineer" },
+  { key: "Backend Developer", value: "Backend Developer" },
+  { key: "Frontend Developer", value: "Frontend Developer" },
+  { key: "Product Designer", value: "Product Designer" },
+  { key: "UI/UX Designer", value: "UI/UX Designer" },
+  { key: "Product Manager", value: "Product Manager" },
+  { key: "DevOps Engineer", value: "DevOps Engineer" },
+  { key: "Technical Writer", value: "Technical Writer" },
+  { key: "Cybersecurity Expert", value: "Cybersecurity Expert" },
 ];
 
 export const jobCategoryOptions = [
