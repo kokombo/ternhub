@@ -141,7 +141,24 @@ const SignUpPage = () => {
                 data={professions}
               />
 
-              <div className="w-full flex flex-col items-center gap-5">
+              <span className="relative flex flex-col items-center">
+                {isLoading ? (
+                  <SubmitFormLoader />
+                ) : (
+                  <SubmitButton label="Log in" />
+                )}
+
+                {isError && (
+                  <span className="absolute bottom-[-28px]">
+                    <CustomError
+                      message={errorResponse?.response?.data?.message}
+                      loading={isLoading}
+                    />
+                  </span>
+                )}
+              </span>
+
+              {/* <div className="w-full flex flex-col items-center gap-5">
                 {isError && (
                   <CustomError
                     message={errorResponse?.response?.data?.message}
@@ -156,7 +173,7 @@ const SignUpPage = () => {
                     <SubmitButton label="Sign up" />
                   )}
                 </>
-              </div>
+              </div> */}
             </Form>
           </Formik>
         </>

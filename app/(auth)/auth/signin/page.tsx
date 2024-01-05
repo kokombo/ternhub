@@ -123,7 +123,7 @@ const SignInPage = () => {
                 Forgot Password?
               </Link>
 
-              <span className="relative flex flex-col items-center">
+              <div className="relative flex flex-col items-center">
                 {loading ? (
                   <SubmitFormLoader />
                 ) : (
@@ -135,7 +135,7 @@ const SignInPage = () => {
                     <CustomError message={error} loading={loading} />
                   </span>
                 )}
-              </span>
+              </div>
             </Form>
           </Formik>
         </>
