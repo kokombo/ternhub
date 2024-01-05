@@ -75,11 +75,13 @@ const SignUpPage = () => {
         await signIn("credentials", {
           email,
           password,
-          callbackUrl: "/auth/email-verification",
+          callbackUrl: "/jobs",
           redirect: false,
         }).then((res) => {
           if (res?.ok) {
-            router.push("/auth/email-verification");
+            router.push("/jobs");
+
+            // /auth/email-verification
 
             onSubmitProps.resetForm();
           }
@@ -157,23 +159,6 @@ const SignUpPage = () => {
                   </span>
                 )}
               </span>
-
-              {/* <div className="w-full flex flex-col items-center gap-5">
-                {isError && (
-                  <CustomError
-                    message={errorResponse?.response?.data?.message}
-                    loading={isLoading}
-                  />
-                )}
-
-                <>
-                  {isLoading ? (
-                    <SubmitFormLoader />
-                  ) : (
-                    <SubmitButton label="Sign up" />
-                  )}
-                </>
-              </div> */}
             </Form>
           </Formik>
         </>
