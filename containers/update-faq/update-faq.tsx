@@ -68,6 +68,7 @@ const UpdateFaq = (props: Props) => {
       {prevFaqFetchingIsError && (
         <CustomError
           message={prevFaqFetchingErrorResponse?.response?.data?.message}
+          loading={prevFaqFetchingLoading}
         />
       )}
 
