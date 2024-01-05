@@ -38,12 +38,7 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email("Please provide a valid email address.")
     .required("Email address is required."),
-  password: Yup.string()
-    .required("Please type in your password.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "At least eight characters, one letter, one number and one special character"
-    ),
+  password: Yup.string().required("Please type in your password."),
 });
 
 const SignUpPage = () => {
