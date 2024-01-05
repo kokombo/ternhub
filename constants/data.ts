@@ -25,11 +25,11 @@ export const jobCategoryOptions = [
 ];
 
 export const blogCategories = [
-  { label: "General" },
-  { label: "Software Engineering" },
-  { label: "Product Design" },
-  { label: "Product Management" },
-  { label: "DevOps" },
-  { label: "Technical Writing" },
-  { label: "Cybersecurity" },
+  { key: "General", value: "General" },
+  { key: "Software Engineering", value: "Software Engineering" },
+  { key: "Product Design", value: "Product Design" },
+  { key: "Product Management", value: "Product Management" },
+  { key: "DevOps", value: "DevOps" },
+  { key: "Technical Writing", value: "Technical Writing" },
+  { key: "Cybersecurity", value: "Cybersecurity" },
 ];
