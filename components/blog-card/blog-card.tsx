@@ -58,7 +58,7 @@ const BlogCard = ({
           <BlogReadTime props={blog} className="text-sm" />
         </article>
 
-        <p className="text-sm lg:text-base tracking-[1%] my-1 lg:h-[84px] h-[44px] flex-wrap overflow-hidden font-normal">
+        <p className="text-sm lg:text-base leading-[22px] lg:leading-7 tracking-[1%] my-1 lg:h-[84px] h-[44px] flex-wrap overflow-hidden font-normal text-greyblack">
           {blog.metaDescription}...
         </p>
 
