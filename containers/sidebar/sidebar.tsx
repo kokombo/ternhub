@@ -7,7 +7,6 @@ import { icons } from "@/constants";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useScreenSize } from "@/utilities/hooks";
-import { useRouter } from "next/navigation";
 
 type Props = {
   sidebarIsOpen: boolean;
@@ -18,8 +17,6 @@ const Sidebar = (props: Props) => {
   const { data: session } = useSession();
 
   const { screenSize } = useScreenSize();
-
-  const router = useRouter();
 
   useEffect(() => {
     if (screenSize && screenSize >= 1024) {

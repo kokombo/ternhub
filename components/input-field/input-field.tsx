@@ -66,6 +66,7 @@ const InputField = (props: Props) => {
                     alt="hide password icon"
                     height={24}
                     width={24}
+                    priority={true}
                   />
                 ) : (
                   <Image
@@ -73,6 +74,7 @@ const InputField = (props: Props) => {
                     alt="show password icon"
                     height={24}
                     width={24}
+                    priority={true}
                   />
                 )}
               </button>

@@ -29,6 +29,7 @@ const LandingPageBlogs = () => {
         arialabel="Landing page link to all blogs page"
         url="/blogs"
         extraClasses="self-center blue_button"
+        prefetch={true}
       />
     </section>
   );

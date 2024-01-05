@@ -5,7 +5,7 @@ import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
@@ -17,15 +17,15 @@ type JobsResults = {
   numOfJobs: number;
 };
 
-const {
-  pageFromLocalStorage,
-  jobModeTermFromLocalStorage,
-  searchTermFromLocalStorage,
-  jobTypeTermFromLocalStorage,
-  jobCategoryTermFromLocalStorage,
-} = valuesFromLocalStorage("userQueriesInSearch"); //Retrieving user's search/filter queries stored in logal storage
-
 const JobsSearchResults = () => {
+  const {
+    pageFromLocalStorage,
+    jobModeTermFromLocalStorage,
+    searchTermFromLocalStorage,
+    jobTypeTermFromLocalStorage,
+    jobCategoryTermFromLocalStorage,
+  } = valuesFromLocalStorage("userQueriesInSearch"); //Retrieving user's search/filter queries stored in logal storage
+
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
   ); //From global state manager - Redux Toolkit
@@ -51,6 +51,8 @@ const JobsSearchResults = () => {
   } = queryTerms;
 
   const router = useRouter();
+
+  const pathname = usePathname();
 
   const search_id = uuidv4();
 
@@ -172,11 +174,7 @@ const JobsSearchResults = () => {
             setQueryTerms((prev) => ({ ...prev, searchTerm: e.target.value }))
           }
           value={searchTerm}
-          onClickSearchButton={async () => {
-            localStorage.removeItem("userQueriesInSearch");
-
-            await refetch();
-          }}
+          onClickSearchButton={async () => await refetch()}
           lgFrameWidth={556}
           lgInputWidth={250}
         />
