@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -43,12 +44,9 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Choose a password."),
 });
 
-{
-  /* /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/ */
-}
-
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
+  const [redirecting, setRedirecting] = useState(false);
 
   const router = useRouter();
 
@@ -74,6 +72,8 @@ const SignUpPage = () => {
   ) => {
     await mutateAsync(values, {
       onSuccess: async () => {
+        setRedirecting(true);
+
         const email = values.email;
 
         const password = values.password;
@@ -83,15 +83,16 @@ const SignUpPage = () => {
           password,
           callbackUrl: "/jobs",
           redirect: false,
-        }).then((res) => {
-          if (res?.ok) {
-            router.push("/jobs");
-
-            // /auth/email-verification
-
-            onSubmitProps.resetForm();
-          }
-        });
+        })
+          .then((res) => {
+            if (res?.ok) {
+              router.push("/jobs");
+              // /auth/email-verification
+            }
+          })
+          .finally(() => {
+            setRedirecting(false);
+          });
       },
     });
   };
