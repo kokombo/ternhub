@@ -37,7 +37,7 @@ const NavigationBar = (props: Props) => {
               }}
               className="lg:inline hidden text-base text-greyblack"
             >
-              Sign Out
+              Sign out
             </button>
             <ProfilePicture />
           </div>
