@@ -154,7 +154,7 @@ const SignUpPage = () => {
                 {isLoading ? (
                   <SubmitFormLoader />
                 ) : (
-                  <SubmitButton label="Log in" />
+                  <SubmitButton label="Sign up" />
                 )}
 
                 {isError && (
