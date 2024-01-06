@@ -19,7 +19,7 @@ const CustomError = (props: Props) => {
   }, [props.message, props.loading]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setErrorMessage(""), 5000);
+    const timer = setTimeout(() => setErrorMessage(""), 10000);
 
     return () => clearTimeout(timer);
   }, [props.message, props.loading]);

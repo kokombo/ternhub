@@ -34,12 +34,18 @@ type Data = {
 };
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Please type in your full name."),
+  name: Yup.string()
+    .required("Please type in your full name.")
+    .matches(/^[A-Za-z\s]+$/, "Invalid characters in the name."),
   email: Yup.string()
     .email("Please provide a valid email address.")
     .required("Email address is required."),
   password: Yup.string().required("Please type in your password."),
 });
+
+{
+  /* /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/ */
+}
 
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
@@ -143,7 +149,7 @@ const SignUpPage = () => {
                 data={professions}
               />
 
-              <span className="relative flex flex-col items-center">
+              <span className="relative flex flex-col items-center gap-2">
                 {isLoading ? (
                   <SubmitFormLoader />
                 ) : (
@@ -151,12 +157,10 @@ const SignUpPage = () => {
                 )}
 
                 {isError && (
-                  <span className="absolute bottom-[-28px]">
-                    <CustomError
-                      message={errorResponse?.response?.data?.message}
-                      loading={isLoading}
-                    />
-                  </span>
+                  <CustomError
+                    message={errorResponse?.response?.data?.message}
+                    loading={isLoading}
+                  />
                 )}
               </span>
             </Form>
