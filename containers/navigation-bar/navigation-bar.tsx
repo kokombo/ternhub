@@ -1,7 +1,7 @@
 "use client";
 import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
@@ -29,7 +29,18 @@ const NavigationBar = (props: Props) => {
 
       <div className="flex items-center gap-[14px]">
         {status === "authenticated" ? (
-          <ProfilePicture />
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                signOut({ callbackUrl: "/auth/signin" });
+              }}
+              className="lg:inline hidden text-base text-greyblack"
+            >
+              Sign Out
+            </button>
+            <ProfilePicture />
+          </div>
         ) : (
           <div className="flex items-center gap-[10px] ">
             <Link
