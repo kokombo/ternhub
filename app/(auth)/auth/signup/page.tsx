@@ -35,12 +35,12 @@ type Data = {
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .required("Please type in your full name.")
-    .matches(/^[A-Za-z\s]+$/, "Invalid characters in the name."),
+    .required("Please enter your full name.")
+    .matches(/^[A-Za-z\s]+$/, "Invalid characters in name."),
   email: Yup.string()
     .email("Please provide a valid email address.")
     .required("Email address is required."),
-  password: Yup.string().required("Please type in your password."),
+  password: Yup.string().required("Choose a password."),
 });
 
 {
