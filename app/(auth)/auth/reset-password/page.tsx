@@ -89,7 +89,7 @@ const ResetPassword = () => {
               autoComplete="off"
             />
 
-            <span className="relative flex flex-col items-center">
+            <span className="relative flex flex-col items-center gap-2">
               {isLoading ? (
                 <SubmitFormLoader />
               ) : (
@@ -97,12 +97,10 @@ const ResetPassword = () => {
               )}
 
               {isError && (
-                <span className="absolute bottom-[-28px]">
-                  <CustomError
-                    message={errorResponse?.response?.data?.message}
-                    loading={isLoading}
-                  />
-                </span>
+                <CustomError
+                  message={errorResponse?.response?.data?.message}
+                  loading={isLoading}
+                />
               )}
             </span>
           </Form>

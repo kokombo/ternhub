@@ -85,7 +85,7 @@ const ForgotPassword = () => {
               placeholder="Enter the email associated with your TernHub account."
             />
 
-            <div className="relative flex flex-col items-center">
+            <div className="relative flex flex-col items-center gap-2">
               {isLoading ? (
                 <SubmitFormLoader />
               ) : (
@@ -93,12 +93,10 @@ const ForgotPassword = () => {
               )}
 
               {isError && (
-                <span className="absolute bottom-[-28px]">
-                  <CustomError
-                    message={errorResponse?.response?.data?.message}
-                    loading={isLoading}
-                  />
-                </span>
+                <CustomError
+                  message={errorResponse?.response?.data?.message}
+                  loading={isLoading}
+                />
               )}
             </div>
           </Form>
