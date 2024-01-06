@@ -15,9 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <title>
-        The Tern Hub - Discover Tech internship Opportunties and Junior Roles
-      </title>
+      <head>
+        <title>
+          The Tern Hub - Discover Tech internship Opportunties and Junior Roles
+        </title>
+
+        <link rel="icon" href="/public/theternhub-logo.png" sizes="any" />
+      </head>
+
       <body>
         <main className={Sans.className}>
           <NextAuthProvider>
