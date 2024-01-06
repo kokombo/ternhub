@@ -46,9 +46,9 @@ const FaqCard = ({
         </div>
 
         <div className={`${showAnswer ? "block" : "hidden"}`}>
-          <p className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
+          <span className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
             {parse(faq.answer)}
-          </p>
+          </span>
         </div>
       </div>
 

@@ -10,6 +10,7 @@ type Props = {
   onClickSearchButton: () => void;
   lgFrameWidth: number;
   lgInputWidth: number;
+  disabled?: boolean;
 };
 
 const Search = (props: Props) => {
@@ -33,6 +34,7 @@ const Search = (props: Props) => {
           name="searchTerm"
           id={props.value}
           autoComplete="off"
+          disabled={props.disabled}
         />
       </span>
 
