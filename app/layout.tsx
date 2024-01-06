@@ -20,7 +20,12 @@ export default function RootLayout({
           The Tern Hub - Discover Tech internship Opportunties and Junior Roles
         </title>
 
-        <link rel="icon" href="/public/theternhub-logo.png" sizes="any" />
+        <link
+          rel="icon"
+          href="/theternhub-logo.png"
+          type="image/png"
+          sizes="any"
+        />
       </head>
 
       <body>
