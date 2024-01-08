@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { RotatingLinesLoader } from "@/components";
 import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 //A user will be redirected to this screen after clicking "verify email" in the email sent to their inbox.
 
 const VerifyEmailPage = () => {
-  const params = new URLSearchParams();
+  const searchParams = useSearchParams();
 
-  const token = params.get("token");
+  const token = searchParams.get("token");
 
   const router = useRouter();
 

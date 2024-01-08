@@ -1,11 +1,13 @@
 "use client";
 
 import { JobInfopage } from "@/containers";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const JobPage = () => {
-  const { jobId } = useParams();
+  const searchParams = useSearchParams();
+
+  const jobId = searchParams.get("listing_id");
 
   const { job, isLoading, isError, error, refetch } = getJobById(jobId);
 

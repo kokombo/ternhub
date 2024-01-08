@@ -5,7 +5,7 @@ import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
@@ -52,8 +52,6 @@ const JobsSearchResults = () => {
 
   const router = useRouter();
 
-  const pathname = usePathname();
-
   const search_id = uuidv4();
 
   const params = new URLSearchParams();
@@ -87,7 +85,7 @@ const JobsSearchResults = () => {
   > => {
     router.push(urlWithQueryStrings);
 
-    const res = await axios.get("/api/job?" + queryStrings);
+    const res = await axios.get("/api/jobs?" + queryStrings);
 
     return res.data;
   };

@@ -26,7 +26,7 @@ const JobCard = ({
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
-      router.push(`${rootUrl}/${job._id}`);
+      router.push(`${rootUrl}/job?listing_id=${job._id}`);
     }
   };
 

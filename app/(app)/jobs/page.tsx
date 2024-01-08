@@ -90,7 +90,7 @@ const JobsListPage = () => {
       { key: "jobTypeFilterTerm", value: jobTypeFilterTerm },
       { key: "jobCategoryFilterTerm", value: jobCategoryFilterTerm },
     ];
-  }, [queryTerms]);
+  }, [pageNumber, jobModeFilterTerm, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   useEffect(() => {
     localStorage.setItem(

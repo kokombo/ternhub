@@ -12,7 +12,7 @@ const BlogListPage = () => {
       <section className="blog_list_header_wrapper">
         <BlogsListpageTitle />
 
-        <Search
+        {/* <Search
           buttonLabel="Search"
           placeholder="Search blog"
           onChange={() => {}}
@@ -20,7 +20,7 @@ const BlogListPage = () => {
           onClickSearchButton={() => {}}
           lgFrameWidth={458}
           lgInputWidth={250}
-        />
+        /> */}
       </section>
 
       <BlogsList

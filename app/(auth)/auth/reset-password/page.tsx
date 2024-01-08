@@ -15,7 +15,7 @@ import { GroteskNormal } from "@/app/font";
 import Image from "next/image";
 import { images } from "@/constants";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import * as Yup from "yup";
 
 const validatePasswordResetForm = Yup.object({
@@ -28,9 +28,9 @@ const validatePasswordResetForm = Yup.object({
 });
 
 const ResetPassword = () => {
-  const params = new URLSearchParams();
+  const searchParams = useSearchParams();
 
-  const token = params.get("token");
+  const token = searchParams.get("token");
 
   const router = useRouter();
 

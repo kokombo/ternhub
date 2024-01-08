@@ -16,7 +16,7 @@ const TrendingJobs = () => {
   const { data: session } = useSession();
 
   const fetchTrendingJobsRequest = async (): Promise<Data | undefined> => {
-    const res = await axios.get("/api/job");
+    const res = await axios.get("/api/jobs");
     return res.data;
   };
 

@@ -13,9 +13,7 @@ const SaveAJob = ({ props: job }: { props: JobType }) => {
 
   const { userSavedJobs } = useSelector((store: StateType) => store.job);
 
-  const { bookmarkAndUnbookmarkAJobFunction, error, isError } = bookmarkAJob(
-    job._id
-  );
+  const { bookmarkAndUnbookmarkAJobFunction } = bookmarkAJob(job._id);
 
   const alreadyBookmarkedJobsIds = userSavedJobs?.map((eachJob) => eachJob._id);
 

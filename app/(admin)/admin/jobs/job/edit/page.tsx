@@ -1,9 +1,8 @@
 "use client";
 
 import { JobForm, Message } from "@/components";
-import { FormikHelpers } from "formik";
 import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { getJobById } from "@/utilities/data-fetching/getJobById";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
@@ -11,7 +10,9 @@ import { useRouter } from "next/navigation";
 import { illustrations } from "@/constants";
 
 const EditJobInfo = () => {
-  const { jobId } = useParams();
+  const searchParams = useSearchParams();
+
+  const jobId = searchParams.get("listing_id");
 
   const router = useRouter();
 

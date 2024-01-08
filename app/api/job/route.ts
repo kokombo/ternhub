@@ -2,23 +2,58 @@ import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
+import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
 import cloudinary from "@/utilities/general/cloudinary";
 
-export const POST = async (req: Request) => {
+export const GET = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+
+  const jobId = searchParams.get("listing_id") as string;
+
+  validateMongoDBId(jobId);
+
+  try {
+    await connectDatabase();
+
+    const job = await Job.findById(jobId);
+
+    await Job.findByIdAndUpdate(
+      jobId,
+      { $inc: { numberOfViews: 1 } },
+      { new: true }
+    );
+
+    return NextResponse.json(job);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message:
+          "Something went wrong. We are having issues loading this page.",
+      },
+      { status: 500 }
+    );
+  }
+};
+
+export const PATCH = async (req: Request) => {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user || session.user.role !== "admin") {
+  if (!session?.user || session?.user.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
     );
   }
 
+  const { searchParams } = new URL(req.url);
+
+  const jobId = searchParams.get("listing_id") as string;
+
   const body = await req.json();
 
-  const { logo, site, email, description, title } = body;
+  const { description, site, email, logo } = body;
 
   if (!description) {
     return NextResponse.json(
@@ -49,14 +84,16 @@ export const POST = async (req: Request) => {
     body.logo = uploadedImageResponse.secure_url;
   }
 
+  validateMongoDBId(jobId);
+
   try {
     await connectDatabase();
 
-    if (title) {
-      body.slug = slugify(title, { lower: true });
+    if (body.title) {
+      body.slug = slugify(body.title, { lower: true });
     }
 
-    const job = await Job.create({ ...body });
+    const job = await Job.findByIdAndUpdate(jobId, body, { new: true });
 
     return NextResponse.json(job);
   } catch (error) {
@@ -67,84 +104,34 @@ export const POST = async (req: Request) => {
   }
 };
 
-export const GET = async (req: Request) => {
+export const DELETE = async (req: Request) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user || session?.user.role !== "admin") {
+    return NextResponse.json(
+      { message: "Oops! You are not authorized to perform action." },
+      { status: 401 }
+    );
+  }
+
+  const { searchParams } = new URL(req.url);
+
+  const jobId = searchParams.get("listing_id") as string;
+
+  validateMongoDBId(jobId);
+
   try {
     await connectDatabase();
 
-    const { searchParams } = new URL(req.url);
+    await Job.findByIdAndDelete(jobId);
 
-    const queryObject = Object.fromEntries(searchParams);
-
-    //Filtering job results
-
-    const excludeFields = ["page", "sort", "limit", "fields", "search"];
-
-    excludeFields.forEach((item) => delete queryObject[item]);
-
-    let numericQuery = JSON.stringify(queryObject);
-
-    numericQuery = numericQuery.replace(
-      /\b(gte|gt|lte|lt|eq)\b/g,
-      (match) => `$${match}`
+    return NextResponse.json(
+      { message: "Job deleted successfully!" },
+      { status: 200 }
     );
-
-    let result = Job.find(JSON.parse(numericQuery));
-
-    //Sorting job results
-
-    const sort = searchParams.get("sort");
-
-    if (sort) {
-      const sortBy = sort;
-
-      result = result.sort({ [sortBy]: "desc" });
-    } else {
-      result = result.sort("-createdAt");
-    }
-
-    //pagination
-
-    const queryPage = searchParams.get("page");
-
-    const limitQuery = searchParams.get("limit");
-
-    const page = Number(queryPage);
-
-    const limit = Number(limitQuery);
-
-    const skip = (page - 1) * limit;
-
-    result = result.skip(skip).limit(limit);
-
-    if (page) {
-      const jobCount = await Job.countDocuments();
-
-      if (skip >= jobCount) {
-        return NextResponse.json(
-          { message: "Oops! This page does not exist." },
-          { status: 401 }
-        );
-      }
-    }
-
-    //Search
-
-    const searchQuery = searchParams.get("search");
-
-    if (searchQuery) {
-      let queryToDatabase = { $text: { $search: searchQuery } };
-
-      result = result.find(queryToDatabase);
-    }
-
-    let jobs = await result;
-
-    return NextResponse.json({ jobs, numOfJobs: jobs.length });
   } catch (error) {
     return NextResponse.json(
-      {
-        message: "Something went wrong. Please try again.",
-      },
+      { message: "Unable to delete, please try again." },
       { status: 500 }
     );
   }

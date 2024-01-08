@@ -24,7 +24,7 @@ export const getAllJobs = (
       `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
     );
 
-    const res = await axios.get("/api/job?" + queryStrings);
+    const res = await axios.get("/api/jobs?" + queryStrings);
 
     return res.data;
   };

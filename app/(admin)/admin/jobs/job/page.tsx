@@ -1,12 +1,14 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { JobInfopage } from "@/containers";
 import { AdminToolBox } from "@/components";
 import { getJobById } from "@/utilities/data-fetching/getJobById";
 
 const AdminJobInfoPage = () => {
-  const { jobId } = useParams();
+  const searchParams = useSearchParams();
+
+  const jobId = searchParams.get("listing_id");
 
   const { job, isLoading, isError, error, refetch } = getJobById(jobId);
 
@@ -15,7 +17,7 @@ const AdminJobInfoPage = () => {
       <div className="flex flex-start">
         <AdminToolBox
           editButtonLabel="Edit Job"
-          editButtonUrl={`/admin/jobs/${jobId}/edit`}
+          editButtonUrl={`/admin/jobs/job/edit?listing_id=${jobId}`}
           deleteButtonLabel="Delete Job"
           deleteButtonOnclick={() => {}}
         />
