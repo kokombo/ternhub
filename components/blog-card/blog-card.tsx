@@ -11,11 +11,11 @@ const BlogCard = ({
   props: BlogType;
   rootUrl: string;
 }) => {
-  const router = useRouter();
-
   const postCreationDate = new Date(blog.createdAt).toDateString();
 
   const { isLoading } = getBlogBySlug(blog.slug);
+
+  const router = useRouter();
 
   const showBlogDetails = () => {
     if (!isLoading) {

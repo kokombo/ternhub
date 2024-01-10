@@ -29,7 +29,7 @@ export const POST = async (req: Request) => {
 
     if (userExists) {
       return NextResponse.json(
-        { message: "User already exist, please sign in." },
+        { message: "User account already exist, please sign in." },
         { status: 401 }
       );
     }
@@ -49,7 +49,7 @@ export const POST = async (req: Request) => {
       to: refinedEmail,
       text: "Verify your email address",
       subject: "Welcome to TheTernHub - Verify your email",
-      html: `Hi ${user.name}, <p>Thank you for joining TheTernHub.</p>  <p>Follow this link to verify your email address to continue using TheTernHub. Link expires in 30 minutes <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email/${token}" > Click Here To Verify</a>.</p> <p>TheTernHub team.</p>`,
+      html: `Hi ${user.name}, <p>Thank you for joining TheTernHub.</p>  <p>Follow this link to verify your email address to continue using TheTernHub. Link expires in 30 minutes. <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email?token=${token}" > Click Here To Verify</a>.</p> <p>TheTernHub team.</p>`,
     };
 
     await sendEmail(data);
@@ -75,6 +75,8 @@ export const GET = async (req: Request) => {
       { status: 401 }
     );
   }
+
+  await connectDatabase();
 
   const allUsers = await User.find();
 

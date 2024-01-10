@@ -62,6 +62,7 @@ const BlogForm = (props: Props) => {
                   type="text"
                   id="title"
                   maxLength={100}
+                  disabled={props.isLoading}
                 />
 
                 <UploadFile
@@ -88,6 +89,7 @@ const BlogForm = (props: Props) => {
                   type="text"
                   id="meta"
                   maxLength={150}
+                  disabled={props.isLoading}
                 />
 
                 <SelectField
@@ -95,6 +97,7 @@ const BlogForm = (props: Props) => {
                   name="category"
                   id="category"
                   data={blogCategories}
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -102,6 +105,7 @@ const BlogForm = (props: Props) => {
                   name="author.name"
                   type="text"
                   id="name"
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -110,6 +114,7 @@ const BlogForm = (props: Props) => {
                   type="text"
                   id="twitter"
                   placeholder="e.g. @theternhub"
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -118,6 +123,7 @@ const BlogForm = (props: Props) => {
                   type="text"
                   id="portfolio"
                   placeholder="e.g. www.myportfolio.com"
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -126,6 +132,7 @@ const BlogForm = (props: Props) => {
                   type="text"
                   id="linkedin"
                   placeholder="e.g. www.linkedin.com/theternhub"
+                  disabled={props.isLoading}
                 />
 
                 <div className="flex items-center justify-center relative">

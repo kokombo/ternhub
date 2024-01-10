@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utilities";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
+import { sendEmail } from "@/utilities/auth/sendEmail";
 
 export const GET = async (req: Request) => {
   const session = await getServerSession(authOptions);
@@ -53,6 +54,32 @@ export const PUT = async (req: Request) => {
     await connectDatabase();
 
     const user = await User.findById(userId);
+
+    if (!session?.user.emailVerified) {
+      const token = await user.createEmailVerificationToken();
+
+      await user.save();
+
+      const email = session?.user?.email as string;
+
+      const data: EmailInfoType = {
+        from: "TheTernHub",
+        to: email,
+        text: "Email verification",
+        subject: "Verify your TernHub account",
+        html: `Hi ${user.name}, <p>Follow this link to verify your email address to continue using TheTernHub. Link expires in 30 minutes. <a href = "${process.env.NEXTAUTH_URL}/auth/verify-email?token=${token}" >Click Here To Verify</a>.</p> <p>TheTernHub team.</p>`,
+      };
+
+      await sendEmail(data);
+
+      return NextResponse.json(
+        {
+          message:
+            "We've sent you a verification link. Please verify your email.",
+        },
+        { status: 401 }
+      );
+    }
 
     const alreadyBookmarked = user.savedJobs.find(
       (_id: string) => _id.toString() === jobId.toString()

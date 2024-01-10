@@ -103,7 +103,13 @@ const SignInPage = () => {
             validateOnBlur={false}
           >
             <Form className="flex flex-col gap-8 w-full">
-              <InputField label="Email" name="email" id="email" type="text" />
+              <InputField
+                label="Email"
+                name="email"
+                id="email"
+                type="text"
+                disabled={loading}
+              />
 
               <InputField
                 label="Password"
@@ -113,6 +119,7 @@ const SignInPage = () => {
                 setPasswordVisibile={showPassword}
                 togglePasswordIcon={onClickIcon}
                 passwordField={true}
+                disabled={loading}
               />
 
               <Link

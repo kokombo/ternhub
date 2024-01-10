@@ -14,6 +14,7 @@ type Props = {
   setPasswordVisibile?: boolean;
   passwordField?: boolean;
   autoComplete?: string;
+  disabled?: boolean;
 };
 
 const InputField = (props: Props) => {
@@ -48,6 +49,7 @@ const InputField = (props: Props) => {
                   maxLength={props.maxLength}
                   placeholder={props.placeholder}
                   autoComplete={props.autoComplete}
+                  disabled={props.disabled}
                 />
               );
             }}

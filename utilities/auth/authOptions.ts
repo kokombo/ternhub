@@ -54,23 +54,34 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ account, token, user }) {
-      if (account) {
-        const accountUser = await User.findOne({ email: user?.email });
+    async jwt({ account, token, user, trigger, session }) {
+      if (trigger === "signIn") {
+        if (account) {
+          await connectDatabase();
 
-        token.id = accountUser._id.toString();
+          const accountUser = await User.findOne({ email: user?.email });
 
-        token.accessToken = account?.access_token;
+          token.id = accountUser._id.toString();
 
-        token.role = accountUser.role;
+          token.accessToken = account?.access_token;
 
-        token.emailVerified = accountUser.emailVerified;
+          token.role = accountUser.role;
 
-        token.authMethod = accountUser.authMethod;
+          token.authMethod = accountUser.authMethod;
 
-        token.image = accountUser.image;
+          token.image = accountUser.image;
+
+          token.emailVerified = accountUser.emailVerified;
+        }
       }
 
+      if (trigger === "update") {
+        await connectDatabase();
+
+        const accountUser = await User.findOne({ email: token?.email });
+
+        token.emailVerified = accountUser.emailVerified;
+      }
       return token;
     },
 

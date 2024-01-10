@@ -19,6 +19,15 @@ export const GET = async (req: Request) => {
 
     const job = await Job.findById(jobId);
 
+    if (!job) {
+      return NextResponse.json(
+        {
+          message: "Job not found.",
+        },
+        { status: 404 }
+      );
+    }
+
     await Job.findByIdAndUpdate(
       jobId,
       { $inc: { numberOfViews: 1 } },

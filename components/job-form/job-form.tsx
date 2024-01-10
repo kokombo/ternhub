@@ -78,6 +78,7 @@ const JobForm = (props: Props) => {
                   type="text"
                   id="title"
                   maxLength={50}
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -86,6 +87,7 @@ const JobForm = (props: Props) => {
                   type="text"
                   id="company"
                   maxLength={40}
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -94,6 +96,7 @@ const JobForm = (props: Props) => {
                   type="text"
                   id="location"
                   maxLength={30}
+                  disabled={props.isLoading}
                 />
 
                 <TextEditor
@@ -113,6 +116,7 @@ const JobForm = (props: Props) => {
                   name="category"
                   id="category"
                   data={jobCategoryOptions}
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -121,6 +125,7 @@ const JobForm = (props: Props) => {
                   type="text"
                   id="site"
                   placeholder="e.g. www.theternhub.com/careers/junior-backend-engineer"
+                  disabled={props.isLoading}
                 />
 
                 <InputField
@@ -129,6 +134,7 @@ const JobForm = (props: Props) => {
                   type="email"
                   id="email"
                   placeholder="Please specify the application email if above is not applicable."
+                  disabled={props.isLoading}
                 />
 
                 <RadioButtonOptions
@@ -148,6 +154,7 @@ const JobForm = (props: Props) => {
                   name="salary"
                   type="number"
                   id="salary"
+                  disabled={props.isLoading}
                 />
 
                 <UploadFile

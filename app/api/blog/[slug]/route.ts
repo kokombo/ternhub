@@ -13,6 +13,15 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 
     const blog = await Blog.findOne({ slug: params.slug });
 
+    if (!blog) {
+      return NextResponse.json(
+        {
+          message: "Blog not found.",
+        },
+        { status: 404 }
+      );
+    }
+
     await Blog.findOneAndUpdate(
       { slug: params.slug },
       { $inc: { numberOfViews: 1 } },

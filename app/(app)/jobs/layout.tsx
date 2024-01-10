@@ -3,26 +3,17 @@
 import "@/styles/globals.css";
 import { JobsListPageHeader } from "@/containers";
 import { Loader, JobsPageNavigationLink } from "@/components";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 const JobsPageLayout = ({ children }: { children: React.ReactNode }) => {
-  const { status } = useSession();
-
-  const router = useRouter();
+  const { status } = useSession({ required: true });
 
   const pathname = usePathname();
 
   const displaySharedLayout = Boolean(
     pathname === "/jobs" || pathname === "/jobs/saved-jobs"
   );
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/");
-    }
-  }, [status, router]);
 
   if (status === "loading") return <Loader />;
 

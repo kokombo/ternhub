@@ -6,6 +6,7 @@ type Props = {
   name: string;
   id: string;
   data: any[];
+  disabled?: boolean;
 };
 
 const SelectField = (props: Props) => {
@@ -29,6 +30,7 @@ const SelectField = (props: Props) => {
               <select
                 onMouseEnter={showOutline}
                 onMouseLeave={closeOutline}
+                disabled={props.disabled}
                 {...field}
                 className={`select_field ${
                   outline ? "border-purple" : "border-gray"

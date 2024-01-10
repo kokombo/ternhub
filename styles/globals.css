@@ -47,6 +47,10 @@ h4 {
 }
 
 /* Tailwind styles */
+.padding {
+  @apply py-11 lg:py-[100px] sm:px-[6.94%] px-5;
+}
+
 .container {
   @apply sm:px-[6.94%] px-5 min-w-full  flex flex-col items-center py-11 lg:py-[100px] gap-9 lg:gap-[50px];
 }

@@ -35,6 +35,7 @@ const FaqCard = ({
     >
       <div
         onClick={showAndHideAnswer}
+        data-testid="faq-card"
         className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-full p-6"
       >
         <div className="flex justify-between">
@@ -55,6 +56,7 @@ const FaqCard = ({
       {showEditIcon && (
         <button
           type="button"
+          data-testid="edit-faq-button"
           onClick={() => onClickFaqEditButton(faq._id)}
           className="text-2xl text-textblack"
         >

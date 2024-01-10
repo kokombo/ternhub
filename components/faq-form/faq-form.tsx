@@ -37,6 +37,7 @@ const FaqForm = (props: Props) => {
               name="question"
               id="question"
               type="text"
+              disabled={props.isLoading}
             />
 
             <TextEditor

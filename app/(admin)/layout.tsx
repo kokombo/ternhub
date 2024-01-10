@@ -13,17 +13,13 @@ export default function AdminLayout({
 }) {
   const router = useRouter();
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession({ required: true });
 
   useEffect(() => {
-    if (
-      status === "unauthenticated" ||
-      (session?.user && session?.user.role !== "admin")
-    )
-      router.push("/");
-  }, [status, session?.user, router]);
+    if (session?.user.role !== "admin") router.push("/");
+  }, [session?.user, router]);
 
-  if (status === "authenticated" && session?.user.role == "admin")
+  if (session?.user.role == "admin")
     return (
       <section>
         <AdminSegmentNavbar />

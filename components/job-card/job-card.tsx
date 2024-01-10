@@ -6,6 +6,7 @@ import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { sendEmailVerificationLink } from "@/utilities/auth/sendEmailVerificationLink";
 
 const JobCard = ({
   props: job,
@@ -22,7 +23,13 @@ const JobCard = ({
     if (!session?.user) {
       router.push("/auth/signin");
 
-      toast.error("Please sign in to continue using TernHub.", {
+      toast.error("Please sign in to continue using TheTernHub.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else if (!session?.user?.emailVerified) {
+      sendEmailVerificationLink(session?.user?.email!);
+
+      toast.info("Please verify your email adress.", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {

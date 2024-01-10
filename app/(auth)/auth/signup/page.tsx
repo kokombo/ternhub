@@ -81,13 +81,12 @@ const SignUpPage = () => {
         await signIn("credentials", {
           email,
           password,
-          callbackUrl: "/jobs",
+          callbackUrl: "/auth/email-verification",
           redirect: false,
         })
           .then((res) => {
             if (res?.ok) {
-              router.push("/jobs");
-              // /auth/email-verification
+              router.push("/auth/email-verification");
             }
           })
           .finally(() => {
@@ -129,9 +128,21 @@ const SignUpPage = () => {
             validateOnBlur={false}
           >
             <Form className="flex flex-col gap-8 w-full">
-              <InputField label="Fullname" name="name" id="name" type="text" />
+              <InputField
+                label="Fullname"
+                name="name"
+                id="name"
+                type="text"
+                disabled={isLoading}
+              />
 
-              <InputField label="Email" name="email" id="email" type="text" />
+              <InputField
+                label="Email"
+                name="email"
+                id="email"
+                type="text"
+                disabled={isLoading}
+              />
 
               <InputField
                 label="Password"
@@ -141,6 +152,7 @@ const SignUpPage = () => {
                 setPasswordVisibile={showPassword}
                 togglePasswordIcon={onClickIcon}
                 passwordField={true}
+                disabled={isLoading}
               />
 
               <SelectField
@@ -148,6 +160,7 @@ const SignUpPage = () => {
                 name="profession"
                 id="profession"
                 data={professions}
+                disabled = {isLoading}
               />
 
               <span className="relative flex flex-col items-center gap-2">
