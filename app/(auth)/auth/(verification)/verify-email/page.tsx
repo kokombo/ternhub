@@ -70,6 +70,8 @@ const VerifyEmailPage = () => {
             height={150}
             width={150}
             quality={100}
+            priority
+            loading="eager"
           />
 
           <p className="text-base lg:text-lg text-greyblack">
@@ -84,6 +86,8 @@ const VerifyEmailPage = () => {
             height={150}
             width={150}
             quality={100}
+            priority
+            loading="eager"
           />
 
           <p className="text-base lg:text-lg text-greyblack">

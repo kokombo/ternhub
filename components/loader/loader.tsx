@@ -9,7 +9,7 @@ const Loader = () => {
       <ThreeDots
         height="70"
         width="90"
-        radius="9"
+        radius="6"
         color="#5627FF"
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}

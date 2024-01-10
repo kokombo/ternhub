@@ -18,7 +18,7 @@ const EmailVerification = () => {
 
   const { mutateAsync } = sendEmailVerificationLink(email); //A user can resend verification link email by calling mutateAsync.
 
-  const { newTime, setTime } = useCountdownTimer(60);
+  const { newTime, setTime } = useCountdownTimer(0);
 
   useEffect(() => {
     if (status === "unauthenticated") {
