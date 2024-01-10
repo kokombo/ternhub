@@ -17,7 +17,7 @@ export default function RootLayout({
     <html>
       <head>
         <title>
-          The Tern Hub - Discover Tech internship Opportunties and Junior Roles
+          The Tern Hub - Tech internship Opportunties and Junior Roles
         </title>
 
         <link
