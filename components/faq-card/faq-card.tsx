@@ -3,7 +3,6 @@
 import { useState } from "react";
 import parse from "html-react-parser";
 import { BiMinus, BiPlus, BiEdit } from "react-icons/bi";
-import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 
 const FaqCard = ({
@@ -17,15 +16,11 @@ const FaqCard = ({
 
   const pathname = usePathname();
 
-  const { data: session } = useSession();
-
   const showAndHideAnswer = () => {
     setShowAnswer((prev) => !prev);
   };
 
-  const showEditIcon = Boolean(
-    pathname === "/admin/faqs" && session?.user.role === "admin"
-  );
+  const showEditIcon = Boolean(pathname === "/admin/faqs");
 
   return (
     <div

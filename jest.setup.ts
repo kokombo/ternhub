@@ -1,7 +1,26 @@
 import "@testing-library/jest-dom";
+import { TextEncoder, TextDecoder } from "util";
+import { SessionProvider } from "next-auth/react";
 
-import { server } from "./mocks/server";
+// import { server } from "./mocks/server";
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+global.TextEncoder = TextEncoder;
+
+jest.mock("next-auth/react", () => {
+  const originalModule = jest.requireActual("next-auth/react");
+  const mockSession = {
+    expires: new Date(Date.now() + 2 * 86400).toISOString(),
+    user: { name: "admin" },
+  };
+  return {
+    __esModule: true,
+    ...originalModule,
+    useSession: jest.fn(() => {
+      return { data: mockSession, status: "authenticated" };
+    }),
+  };
+});
+
+// beforeAll(() => server.listen());
+// afterEach(() => server.resetHandlers());
+// afterAll(() => server.close());
