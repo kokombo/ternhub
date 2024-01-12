@@ -74,7 +74,9 @@ export const GET = async (req: Request) => {
 
     let jobs = await result;
 
-    return NextResponse.json({ jobs, numOfJobs: jobs.length });
+    const allAvailableJobs = await Job.find({});
+
+    return NextResponse.json({ jobs, numOfJobs: allAvailableJobs.length });
   } catch (error) {
     return NextResponse.json(
       {

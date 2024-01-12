@@ -22,6 +22,12 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
+  console.log(Math.round(props.pageNumber * props.limit));
+
+  console.log(props.totalCount);
+
+  console.log(props.isPreviousData);
+
   return (
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
