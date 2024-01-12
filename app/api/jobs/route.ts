@@ -1,10 +1,6 @@
 import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
-import slugify from "slugify";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utilities";
-import cloudinary from "@/utilities/general/cloudinary";
 
 export const GET = async (req: Request) => {
   try {
