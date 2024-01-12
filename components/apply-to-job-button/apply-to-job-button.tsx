@@ -14,14 +14,27 @@ const ApplyToJobButton = ({ props: job }: { props: JobType | undefined }) => {
   }
 
   return (
-    <Link
-      href={`https://${applyLink}`}
-      aria-label="Llink to a job's application page."
-      target="_href"
-      className="apply_button"
-    >
-      Apply
-    </Link>
+    <>
+      {job?.site ? (
+        <Link
+          href={`https://${applyLink}`}
+          aria-label="link to a job's application page via url"
+          target="_href"
+          className="apply_button"
+        >
+          Apply
+        </Link>
+      ) : job?.email ? (
+        <Link
+          href={`mailto:${job?.email}`}
+          aria-label="link to apply to a job via email"
+          className="apply_button"
+          target="_href"
+        >
+          Apply
+        </Link>
+      ) : null}
+    </>
   );
 };
 
