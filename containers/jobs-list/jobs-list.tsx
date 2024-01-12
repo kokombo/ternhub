@@ -22,12 +22,6 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
-  console.log(Math.round(props.pageNumber * props.limit));
-
-  console.log(props.totalCount);
-
-  console.log(props.isPreviousData);
-
   return (
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
@@ -84,7 +78,8 @@ const JobsList = (props: Props) => {
         ) : null}
 
         {!props.isPreviousData &&
-        Math.round(props.pageNumber * props.limit) <= props.totalCount ? (
+        props.pageNumber * props.limit <=
+          Math.max(props.pageNumber - 1, 1) * props.limit + props.totalCount ? (
           <button
             type="button"
             onClick={() => {
