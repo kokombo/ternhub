@@ -46,6 +46,7 @@ const validationSchema = Yup.object({
 
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
+
   const [redirecting, setRedirecting] = useState(false);
 
   const router = useRouter();
@@ -133,7 +134,7 @@ const SignUpPage = () => {
                 name="name"
                 id="name"
                 type="text"
-                disabled={isLoading}
+                disabled={isLoading || redirecting}
               />
 
               <InputField
@@ -141,7 +142,7 @@ const SignUpPage = () => {
                 name="email"
                 id="email"
                 type="text"
-                disabled={isLoading}
+                disabled={isLoading || redirecting}
               />
 
               <InputField
@@ -152,7 +153,7 @@ const SignUpPage = () => {
                 setPasswordVisibile={showPassword}
                 togglePasswordIcon={onClickIcon}
                 passwordField={true}
-                disabled={isLoading}
+                disabled={isLoading || redirecting}
               />
 
               <SelectField
@@ -160,11 +161,11 @@ const SignUpPage = () => {
                 name="profession"
                 id="profession"
                 data={professions}
-                disabled = {isLoading}
+                disabled={isLoading || redirecting}
               />
 
               <span className="relative flex flex-col items-center gap-2">
-                {isLoading ? (
+                {isLoading || redirecting ? (
                   <SubmitFormLoader />
                 ) : (
                   <SubmitButton label="Sign up" />
