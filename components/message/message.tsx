@@ -19,6 +19,7 @@ const Message = (props: Props) => {
           className=" object-contain"
           priority
           fill
+          sizes="any"
         />
       </div>
 

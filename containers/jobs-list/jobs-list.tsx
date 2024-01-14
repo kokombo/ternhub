@@ -77,7 +77,7 @@ const JobsList = (props: Props) => {
           </span>
         ) : null}
 
-        {!props.isPreviousData && props.totalCount >= props.limit ? (
+        {!props.isPreviousData && props.totalCount === props.limit ? (
           <button
             type="button"
             onClick={() => {
