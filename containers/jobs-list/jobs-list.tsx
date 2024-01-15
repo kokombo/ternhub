@@ -2,6 +2,7 @@ import { JobCard, Message } from "@/components";
 import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
 
 type Props = {
   data: JobType[] | undefined;
@@ -15,7 +16,8 @@ type Props = {
   isPreviousData: boolean;
   pageNumber: number;
   limit: number;
-  totalCount: number;
+  resultsCountPerQuery: number;
+  totalJobs: number;
   noDataIllustration: string | StaticImport;
   onClickNextButton: () => void;
   onClickPrevButton: () => void;
@@ -57,7 +59,7 @@ const JobsList = (props: Props) => {
 
       {/*  Rendering pagination buttons */}
 
-      <div className="flex items-center gap-4 mt-10 lg:mt-14">
+      <div className="flex items-center justify-center gap-4 mt-10 lg:mt-14">
         {props?.pageNumber <= 1 ? null : (
           <button
             type="button"
@@ -67,17 +69,17 @@ const JobsList = (props: Props) => {
               props.onClickPrevButton();
             }}
           >
-            Prev
+            <FaChevronCircleLeft size={20} color={"#5627FF"} />
           </button>
         )}
 
         {props.data && props.data.length > 0 ? (
           <span className="font-semibold text-base ">
-            Page: {props?.pageNumber}
+            Page {props?.pageNumber}
           </span>
         ) : null}
 
-        {!props.isPreviousData && props.totalCount === props.limit ? (
+        {!props.isPreviousData && props.resultsCountPerQuery === props.limit ? (
           <button
             type="button"
             onClick={() => {
@@ -87,7 +89,7 @@ const JobsList = (props: Props) => {
             }}
             className=""
           >
-            Next
+            <FaChevronCircleRight size={20} color={"#5627FF"} />
           </button>
         ) : null}
       </div>

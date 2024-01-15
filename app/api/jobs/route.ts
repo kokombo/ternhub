@@ -37,13 +37,25 @@ export const GET = async (req: Request) => {
       result = result.sort("-createdAt");
     }
 
+    //Search
+
+    const searchQuery = searchParams.get("search");
+
+    if (searchQuery) {
+      let queryToDatabase = { $text: { $search: searchQuery } };
+
+      result = result.find(queryToDatabase);
+    }
+
+    const totalDocumentsCountBeforePagination = await Job.countDocuments();
+
     //pagination
 
-    const queryPage = searchParams.get("page");
+    const pageQuery = searchParams.get("page");
 
     const limitQuery = searchParams.get("limit");
 
-    const page = Number(queryPage);
+    const page = Number(pageQuery);
 
     const limit = Number(limitQuery);
 
@@ -62,19 +74,13 @@ export const GET = async (req: Request) => {
       }
     }
 
-    //Search
-
-    const searchQuery = searchParams.get("search");
-
-    if (searchQuery) {
-      let queryToDatabase = { $text: { $search: searchQuery } };
-
-      result = result.find(queryToDatabase);
-    }
-
     let jobs = await result;
 
-    return NextResponse.json({ jobs, numOfJobs: jobs.length });
+    return NextResponse.json({
+      jobs,
+      numOfJobsAfterQuery: jobs.length,
+      totalJobsCountBeforePagination: totalDocumentsCountBeforePagination,
+    });
   } catch (error) {
     return NextResponse.json(
       {

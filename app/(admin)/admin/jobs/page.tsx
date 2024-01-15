@@ -49,7 +49,8 @@ const AdminJobsListPage = () => {
         isPreviousData={isPreviousData}
         pageNumber={pageNumber}
         limit={limit}
-        totalCount={data?.numOfJobs as number}
+        resultsCountPerQuery={data?.numOfJobsAfterQuery as number}
+        totalJobs={data?.totalJobsCountBeforePagination as number}
         noDataIllustration={illustrations.no_search_result}
         onClickPrevButton={() =>
           setQueryTerms((prev) => ({

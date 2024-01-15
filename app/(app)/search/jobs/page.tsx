@@ -14,7 +14,8 @@ import { illustrations } from "@/constants";
 
 type JobsResults = {
   jobs: JobType[];
-  numOfJobs: number;
+  numOfJobsAfterQuery: number;
+  totalJobsCountBeforePagination: number;
 };
 
 const JobsSearchResults = () => {
@@ -190,7 +191,8 @@ const JobsSearchResults = () => {
         isPreviousData={isPreviousData}
         pageNumber={pageNumber}
         limit={limit}
-        totalCount={data?.numOfJobs as number}
+        resultsCountPerQuery={data?.numOfJobsAfterQuery as number}
+        totalJobs={data?.totalJobsCountBeforePagination as number}
         noDataIllustration={illustrations.no_search_result}
         onClickPrevButton={() =>
           setQueryTerms((queryTerms) => ({

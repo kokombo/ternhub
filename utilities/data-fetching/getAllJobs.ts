@@ -6,7 +6,8 @@ import { setAllJobs } from "@/redux-toolkit/slices/job";
 
 type Data = {
   jobs: JobType[];
-  numOfJobs: number;
+  numOfJobsAfterQuery: number;
+  totalJobsCountBeforePagination: number;
 };
 
 export const getAllJobs = (
