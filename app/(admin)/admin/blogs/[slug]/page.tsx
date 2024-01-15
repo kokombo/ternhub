@@ -11,7 +11,7 @@ const AdminBlogInfoPage = () => {
   const { blog, isLoading, isError, error, refetch } = getBlogBySlug(slug);
 
   return (
-    <div className="py-11 sm:px-[6.94%] px-5">
+    <div className="py-11">
       <div className="flex flex-start">
         <AdminToolBox
           editButtonLabel="Edit Blog"
@@ -20,6 +20,7 @@ const AdminBlogInfoPage = () => {
           deleteButtonOnclick={() => {}}
         />
       </div>
+
       <BlogInfoPage
         data={blog}
         isError={isError}

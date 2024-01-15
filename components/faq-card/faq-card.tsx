@@ -34,7 +34,7 @@ const FaqCard = ({
         className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-full p-6"
       >
         <div className="flex justify-between">
-          <h4 className="text-lg font-semibold tracking-[1%] text-textblack flex-wrap">
+          <h4 className="lg:text-lg text-base font-semibold tracking-[1%] text-textblack flex-wrap">
             {faq.question}
           </h4>
 
@@ -42,7 +42,7 @@ const FaqCard = ({
         </div>
 
         <div className={`${showAnswer ? "block" : "hidden"}`}>
-          <span className=" lg:text-lg font-normal tracking-[1%] text-greyblack">
+          <span className=" lg:text-lg text-base font-normal tracking-[1%] text-greyblack">
             {parse(faq.answer)}
           </span>
         </div>
