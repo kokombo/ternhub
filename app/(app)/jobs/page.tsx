@@ -6,6 +6,7 @@ import { JobsList } from "@/containers";
 import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
+import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 
 const JobsListPage = () => {
   const {
@@ -14,6 +15,8 @@ const JobsListPage = () => {
     jobTypeTermFromLocalStorage,
     jobCategoryTermFromLocalStorage,
   } = valuesFromLocalStorage("userQueriesInJobsPage"); //Getting filter queries from localstorage as the component mounts.
+
+  getUserSavedJobs();
 
   const initialQueryTerms = {
     jobModeFilterTerm: jobModeTermFromLocalStorage || "",
