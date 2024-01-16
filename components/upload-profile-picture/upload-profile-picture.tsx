@@ -8,7 +8,7 @@ import { TailSpin } from "react-loader-spinner";
 const UploadProfilePicture = () => {
   const { data: session, update } = useSession();
 
-  const [picture, setPicture] = useState<string | null | ArrayBuffer>("");
+  const [picture, setPicture] = useState<string | null | ArrayBuffer>(""); //new profile picture to upload.
 
   const uploadPictureRequest = async (
     picture: string | ArrayBuffer
@@ -57,6 +57,12 @@ const UploadProfilePicture = () => {
             sizes="100vw 80vw"
             className="rounded-full object-cover"
           />
+        </span>
+      ) : !session?.user?.image && !picture ? (
+        <span className="h-[200px] w-[200px] rounded-full bg-purple flex items-center justify-center">
+          <p className="text-6xl text-white uppercase">
+            {session?.user?.name?.substring(0, 1)}
+          </p>
         </span>
       ) : null}
 
