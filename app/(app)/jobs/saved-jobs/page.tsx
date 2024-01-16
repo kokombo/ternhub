@@ -27,7 +27,10 @@ const SavedJobsPage = () => {
           message={errorResponse.response?.data?.message}
           isError={isError}
           buttonLabel="Try again"
-          onClickButton={async () => await refetch()}
+          onClickButton={async () => {
+            await refetch();
+            window.location.reload();
+          }}
           illustration={illustrations.error_2}
         />
       ) : savedJobs && savedJobs.length < 1 ? (
