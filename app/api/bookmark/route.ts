@@ -21,7 +21,7 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId).populate("savedJobs");
+    const user = await User.findOne({ _id: userId }).populate("savedJobs");
 
     const userSavedJobs = user.savedJobs;
 

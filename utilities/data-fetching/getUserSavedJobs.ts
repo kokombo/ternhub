@@ -22,6 +22,10 @@ export const getUserSavedJobs = () => {
       dispatch(setUserSavedJobs(data));
     },
 
+    refetchOnWindowFocus: false,
+
+    keepPreviousData: true,
+
     retry: 1,
   });
 
