@@ -1,11 +1,15 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const ProfilePicture = () => {
   const { data: session } = useSession();
 
   return (
-    <div className="h-12 w-12 rounded-full bg-purple flex items-center justify-center">
+    <Link
+      href="/profile"
+      className="h-12 w-12 rounded-full bg-purple flex items-center justify-center"
+    >
       {session?.user?.image ? (
         <span className="block relative h-full w-full">
           <Image
@@ -22,7 +26,7 @@ const ProfilePicture = () => {
           {session?.user?.name?.substring(0, 1)}
         </p>
       )}
-    </div>
+    </Link>
   );
 };
 

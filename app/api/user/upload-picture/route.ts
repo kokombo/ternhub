@@ -36,7 +36,7 @@ export const PATCH = async (req: Request) => {
 
       user.image = uploadedPictureResponse.secure_url;
 
-      const updatedUser = await user.save();
+      await user.save();
 
       return NextResponse.json(uploadedPictureResponse.secure_url);
     } else {

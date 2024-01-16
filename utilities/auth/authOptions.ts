@@ -81,6 +81,8 @@ export const authOptions: NextAuthOptions = {
         const accountUser = await User.findOne({ email: token?.email });
 
         token.emailVerified = accountUser.emailVerified;
+
+        token.image = accountUser.image;
       }
       return token;
     },
