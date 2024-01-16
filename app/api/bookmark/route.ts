@@ -5,6 +5,7 @@ import { authOptions } from "@/utilities";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
+import mongoose from "mongoose";
 
 export const GET = async (req: Request) => {
   const session = await getServerSession(authOptions);
@@ -21,7 +22,9 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    const user = await User.findOne({ _id: userId }).populate("savedJobs");
+    const user = await User.findById(
+      new mongoose.Types.ObjectId(userId)
+    ).populate("savedJobs");
 
     const userSavedJobs = user.savedJobs;
 
