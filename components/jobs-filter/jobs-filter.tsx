@@ -1,5 +1,3 @@
-"use client";
-
 import { ChangeEvent } from "react";
 import { FilterSelect } from "..";
 import { jobCategoryOptions } from "@/constants/data";

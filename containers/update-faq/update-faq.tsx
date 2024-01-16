@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { CustomError, FaqForm, TailSpinLoader } from "@/components";
 import { getFaqById } from "@/utilities/data-fetching/getFaqById";

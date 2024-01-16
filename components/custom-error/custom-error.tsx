@@ -1,10 +1,8 @@
-"use client";
-
 import { useState, useEffect } from "react";
 
 type Props = {
   message: string;
-  loading: boolean;
+  loading?: boolean;
 };
 
 const CustomError = (props: Props) => {

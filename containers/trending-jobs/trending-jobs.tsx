@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionHeading, StyledLink, JobCard } from "@/components";
 import { useQuery } from "react-query";
 import axios from "axios";

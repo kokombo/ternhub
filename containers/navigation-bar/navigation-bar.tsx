@@ -1,4 +1,3 @@
-"use client";
 import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";

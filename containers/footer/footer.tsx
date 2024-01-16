@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { NavLinks, Copyright } from "@/components";
 import { useSession } from "next-auth/react";

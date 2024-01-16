@@ -1,4 +1,3 @@
-"use client";
 import { Formik, Form, FormikHelpers } from "formik";
 import { jobCategoryOptions } from "@/constants/data";
 import {

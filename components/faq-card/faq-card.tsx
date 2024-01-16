@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import parse from "html-react-parser";
 import { BiMinus, BiPlus, BiEdit } from "react-icons/bi";

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Logo } from "@/components";
 import { useSession, signOut } from "next-auth/react";

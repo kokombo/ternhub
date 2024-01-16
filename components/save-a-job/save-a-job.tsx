@@ -1,5 +1,3 @@
-"use client";
-
 import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { StateType } from "@/redux-toolkit/store";

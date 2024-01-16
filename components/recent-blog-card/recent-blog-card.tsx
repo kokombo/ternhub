@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { BlogReadTime, JobPostDuration } from "..";
 import Image from "next/image";
 import { GroteskNormal } from "@/app/font";
