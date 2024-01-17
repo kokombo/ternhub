@@ -22,9 +22,9 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(
-      new mongoose.Types.ObjectId(userId)
-    ).populate("savedJobs");
+    const user = await User.findOne({
+      _id: new mongoose.Types.ObjectId(userId),
+    }).populate("savedJobs");
 
     const userSavedJobs = user.savedJobs;
 
