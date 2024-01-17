@@ -26,6 +26,13 @@ export const GET = async (req: Request) => {
       _id: new mongoose.Types.ObjectId(userId),
     }).populate("savedJobs");
 
+    if (!user) {
+      return NextResponse.json(
+        { message: "User not found. please sign in again." },
+        { status: 401 }
+      );
+    }
+
     const userSavedJobs = user.savedJobs;
 
     return NextResponse.json(userSavedJobs);
