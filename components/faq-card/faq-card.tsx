@@ -49,9 +49,9 @@ const FaqCard = ({
       {showEditIcon && (
         <button
           type="button"
-          data-testid="edit-faq-button"
           onClick={() => onClickFaqEditButton(faq._id)}
           className="text-2xl text-textblack"
+          data-testid="edit-icon"
         >
           <BiEdit />
         </button>
