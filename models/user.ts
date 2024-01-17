@@ -101,4 +101,5 @@ UserSchema.methods.createPasswordResetToken = async function () {
 };
 
 const User = models.User || model("User", UserSchema);
+
 export default User;
