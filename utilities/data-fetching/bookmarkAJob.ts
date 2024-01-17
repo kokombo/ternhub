@@ -12,17 +12,23 @@ export const bookmarkAJob = (jobId: string) => {
     return res.data;
   };
 
-  const { mutateAsync, isError, error } = useMutation(bookmarkAJobRequest, {
-    onSuccess: () => {
-      queryClient.refetchQueries("getUserSavedJobs");
-    },
+  const { mutateAsync, isError, error } = useMutation(
+    "bookmarkAJob",
 
-    onError: (error: any) => {
-      toast.error(`${error?.response?.data?.message}`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    },
-  });
+    bookmarkAJobRequest,
+
+    {
+      onSuccess: () => {
+        queryClient.refetchQueries("getUserSavedJobs");
+      },
+
+      onError: (error: any) => {
+        toast.error(`${error?.response?.data?.message}`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      },
+    }
+  );
 
   const bookmarkAndUnbookmarkAJobFunction = async () => {
     await mutateAsync(jobId);

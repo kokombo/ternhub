@@ -76,11 +76,14 @@ export const GET = async (req: Request) => {
 
     let jobs = await result;
 
-    return NextResponse.json({
-      jobs,
-      numOfJobsAfterQuery: jobs.length,
-      totalJobsCountBeforePagination: totalDocumentsCountBeforePagination,
-    });
+    return NextResponse.json(
+      {
+        jobs,
+        numOfJobsAfterQuery: jobs.length,
+        totalJobsCountBeforePagination: totalDocumentsCountBeforePagination,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
       {

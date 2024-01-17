@@ -99,13 +99,7 @@ export const PUT = async (req: Request) => {
         { new: true }
       );
 
-      const userWithSavedJobsPopulated = await User.findById(userId).populate(
-        "savedJobs"
-      );
-
-      const userSavedJobs = userWithSavedJobsPopulated.savedJobs;
-
-      return NextResponse.json(userSavedJobs);
+      return NextResponse.json({ message: "Job removed!" }, { status: 200 });
     } else {
       const user = await User.findByIdAndUpdate(
         userId,
@@ -115,13 +109,7 @@ export const PUT = async (req: Request) => {
         { new: true }
       );
 
-      const userWithSavedJobsPopulated = await User.findById(userId).populate(
-        "savedJobs"
-      );
-
-      const userSavedJobs = userWithSavedJobsPopulated.savedJobs;
-
-      return NextResponse.json(userSavedJobs);
+      return NextResponse.json({ message: "Job bookmarked!" }, { status: 200 });
     }
   } catch (error) {
     return NextResponse.json(
