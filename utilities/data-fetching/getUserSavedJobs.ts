@@ -24,7 +24,7 @@ export const getUserSavedJobs = () => {
 
     refetchOnWindowFocus: false,
 
-    retry: 3,
+    retry: 1,
   });
 
   return { savedJobs, isLoading, isError, error, refetch };

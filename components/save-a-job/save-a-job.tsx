@@ -7,9 +7,9 @@ import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 const SaveAJob = ({ props: job }: { props: JobType }) => {
   const { data: session } = useSession();
 
-  getUserSavedJobs();
-
   const { userSavedJobs } = useSelector((state: StateType) => state.job);
+
+  getUserSavedJobs();
 
   const { bookmarkAndUnbookmarkAJobFunction } = bookmarkAJob(job._id);
 
