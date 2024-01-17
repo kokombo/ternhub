@@ -6,43 +6,6 @@ import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
 
-export const GET = async (req: Request) => {
-  const session = await getServerSession(authOptions);
-
-  const userId = session?.user?.id;
-
-  if (!session?.user) {
-    return NextResponse.json(
-      { message: "Oops! Please sign in to perform action." },
-      { status: 401 }
-    );
-  }
-
-  try {
-    await connectDatabase();
-
-    const user = await User.findById(userId).populate("savedJobs");
-
-    if (!user) {
-      return NextResponse.json(
-        { message: "User not found. please sign in again." },
-        { status: 401 }
-      );
-    }
-
-    const userSavedJobs = user.savedJobs;
-
-    return NextResponse.json(userSavedJobs);
-  } catch (error) {
-    console.error("Error during API call:", error);
-
-    return NextResponse.json(
-      { message: "Something went wrong, please try again." },
-      { status: 500 }
-    );
-  }
-};
-
 export const PUT = async (req: Request) => {
   const session = await getServerSession(authOptions);
 
@@ -120,6 +83,43 @@ export const PUT = async (req: Request) => {
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong. Please try again." },
+      { status: 500 }
+    );
+  }
+};
+
+export const GET = async (req: Request) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user) {
+    return NextResponse.json(
+      { message: "Oops! Please sign in to perform action." },
+      { status: 401 }
+    );
+  }
+
+  try {
+    await connectDatabase();
+
+    const user = await User.findOne({ email: session?.user?.email }).populate(
+      "savedJobs"
+    );
+
+    if (!user) {
+      return NextResponse.json(
+        { message: "User not found. please sign in again." },
+        { status: 401 }
+      );
+    }
+
+    const userSavedJobs = user.savedJobs;
+
+    return NextResponse.json(userSavedJobs);
+  } catch (error) {
+    console.error("Error during API call:", error);
+
+    return NextResponse.json(
+      { message: "Something went wrong, please try again." },
       { status: 500 }
     );
   }
