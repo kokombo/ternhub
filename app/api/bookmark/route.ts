@@ -5,7 +5,6 @@ import { authOptions } from "@/utilities";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
-import mongoose from "mongoose";
 
 export const GET = async (req: Request) => {
   const session = await getServerSession(authOptions);
@@ -22,9 +21,7 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    const user = await User.findOne({
-      _id: new mongoose.Types.ObjectId(userId),
-    }).populate("savedJobs");
+    const user = await User.findById(userId).populate("savedJobs");
 
     if (!user) {
       return NextResponse.json(
@@ -37,6 +34,8 @@ export const GET = async (req: Request) => {
 
     return NextResponse.json(userSavedJobs);
   } catch (error) {
+    console.error("Error during API call:", error);
+
     return NextResponse.json(
       { message: "Something went wrong, please try again." },
       { status: 500 }
