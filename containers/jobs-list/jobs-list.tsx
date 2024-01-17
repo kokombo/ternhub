@@ -3,7 +3,6 @@ import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
-import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 
 type Props = {
   data: JobType[] | undefined;
@@ -25,8 +24,6 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
-  getUserSavedJobs();
-
   return (
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
