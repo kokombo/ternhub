@@ -44,8 +44,6 @@ export const getAllJobs = (
     fetchJobsRequest,
 
     {
-      refetchOnWindowFocus: false,
-
       keepPreviousData: true,
 
       retry: 1,
