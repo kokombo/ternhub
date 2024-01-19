@@ -4,7 +4,6 @@ import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Message, JobCard } from "@/components";
 import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { illustrations } from "@/constants";
-import { useSession } from "next-auth/react";
 
 const SavedJobsPage = () => {
   const { savedJobs, isError, isLoading, error, refetch } = getUserSavedJobs();
@@ -12,10 +11,6 @@ const SavedJobsPage = () => {
   let errorResponse: any;
 
   if (error) errorResponse = error;
-
-  const { data: session } = useSession();
-
-  console.log(session);
 
   return (
     <div

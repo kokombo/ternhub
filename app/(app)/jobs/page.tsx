@@ -75,13 +75,13 @@ const JobsListPage = () => {
   };
 
   useEffect(() => {
-    const refetchDataAfterFilterTermChanges = async () => {
+    const refetchDataAfterFilterTermChanges = () => {
       setQueryTerms((queryTerms) => ({
         ...queryTerms,
         pageNumber: 1,
       }));
 
-      await refetch();
+      refetch();
     };
 
     refetchDataAfterFilterTermChanges();

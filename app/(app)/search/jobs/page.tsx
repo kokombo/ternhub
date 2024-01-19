@@ -123,11 +123,7 @@ const JobsSearchResults = () => {
   };
 
   useEffect(() => {
-    const refetchDataAfterFilterTermChanges = async () => {
-      await refetch();
-    };
-
-    refetchDataAfterFilterTermChanges();
+    refetch();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload.
@@ -173,7 +169,7 @@ const JobsSearchResults = () => {
             setQueryTerms((prev) => ({ ...prev, searchTerm: e.target.value }))
           }
           value={searchTerm}
-          onClickSearchButton={async () => await refetch()}
+          onClickSearchButton={refetch}
           lgFrameWidth={556}
           lgInputWidth={250}
         />
