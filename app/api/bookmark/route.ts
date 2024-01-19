@@ -36,7 +36,7 @@ export const GET = async (req: Request) => {
     return NextResponse.json(userSavedJobs);
   } catch (error) {
     return NextResponse.json(
-      { message: "Something went wrong, please try again." },
+      { message: "An error has occured, please try again." },
       { status: 500 }
     );
   }

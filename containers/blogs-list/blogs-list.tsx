@@ -58,7 +58,7 @@ const BlogsList = (props: Props) => {
                 message={props.error?.response?.data?.message}
                 isError={props.isError}
                 buttonLabel="Try again"
-                onClickButton={async () => await props.refetch()}
+                onClickButton={props.refetch}
                 illustration={illustrations.error_2}
               />
             </div>

@@ -32,7 +32,7 @@ const BlogInfoPage = (props: Props) => {
           <Message
             message={props.error?.response?.data?.message}
             isError={props.isError}
-            onClickButton={async () => await props.refetch()}
+            onClickButton={props.refetch}
             buttonLabel="Try again"
             illustration={illustrations.error_2}
           />

@@ -21,8 +21,6 @@ export const getUserSavedJobs = () => {
     onSuccess: (data) => {
       dispatch(setUserSavedJobs(data));
     },
-
-    retry: 1,
   });
 
   return { savedJobs, isLoading, isError, error, refetch };
