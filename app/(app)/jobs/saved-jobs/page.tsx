@@ -6,9 +6,9 @@ import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { illustrations } from "@/constants";
 
 const SavedJobsPage = () => {
-  let errorResponse: any;
-
   const { savedJobs, isError, isLoading, error, refetch } = getUserSavedJobs();
+
+  let errorResponse: any;
 
   if (error) errorResponse = error;
 

@@ -20,6 +20,7 @@ const Message = (props: Props) => {
           priority
           fill
           sizes="any"
+          loading="eager"
         />
       </div>
 
