@@ -46,6 +46,8 @@ export const getAllJobs = (
     {
       keepPreviousData: true,
 
+      refetchOnWindowFocus: false,
+
       retry: 1,
 
       onSuccess: (data) => {

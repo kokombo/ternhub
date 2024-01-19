@@ -21,6 +21,10 @@ export const getUserSavedJobs = () => {
     onSuccess: (data) => {
       dispatch(setUserSavedJobs(data));
     },
+
+    refetchOnWindowFocus: false,
+
+    refetchOnMount: "always",
   });
 
   return { savedJobs, isLoading, isError, error, refetch };
