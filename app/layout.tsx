@@ -11,14 +11,21 @@ import {
   initializeGA,
   logPageView,
 } from "@/components/google-analytics/google-analytics";
+import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  initializeGA();
-  logPageView();
+  useEffect(() => {
+    initializeGA();
+    logPageView();
+  }, []);
+
+  useEffect(() => {
+    logPageView();
+  });
 
   return (
     <html>
