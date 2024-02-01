@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import { store } from "@/redux-toolkit/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import ReactGA from "react-ga";
+
+const TRACKING_ID = "G-93C2BN5147";
+ReactGA.initialize(TRACKING_ID);
 
 export default function RootLayout({
   children,
