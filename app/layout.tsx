@@ -7,16 +7,19 @@ import { Provider } from "react-redux";
 import { store } from "@/redux-toolkit/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import ReactGA from "react-ga";
-
-const TRACKING_ID = "G-93C2BN5147";
-ReactGA.initialize(TRACKING_ID);
+import {
+  initializeGA,
+  logPageView,
+} from "@/components/google-analytics/google-analytics";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  initializeGA();
+  logPageView();
+
   return (
     <html>
       <head>
