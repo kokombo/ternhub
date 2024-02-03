@@ -7,26 +7,13 @@ import { Provider } from "react-redux";
 import { store } from "@/redux-toolkit/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import {
-  initializeGA,
-  logPageView,
-} from "@/components/google-analytics/google-analytics";
-import { useEffect } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    initializeGA();
-    logPageView();
-  }, []);
-
-  useEffect(() => {
-    logPageView();
-  });
-
   return (
     <html>
       <head>
@@ -57,6 +44,8 @@ export default function RootLayout({
           </NextAuthProvider>
         </main>
       </body>
+
+      <GoogleAnalytics gaId="G-93C2BN5147" />
     </html>
   );
 }
