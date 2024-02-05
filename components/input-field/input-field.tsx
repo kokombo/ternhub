@@ -11,7 +11,7 @@ type Props = {
   maxLength?: number;
   placeholder?: string;
   togglePasswordIcon?: () => void;
-  setPasswordVisibile?: boolean;
+  setPasswordVisible?: boolean;
   passwordField?: boolean;
   autoComplete?: string;
   disabled?: boolean;
@@ -62,7 +62,7 @@ const InputField = (props: Props) => {
                 onClick={props.togglePasswordIcon}
                 className="absolute right-3 top-4 "
               >
-                {props.setPasswordVisibile ? (
+                {props.setPasswordVisible ? (
                   <Image
                     src={icons.hidepassword}
                     alt="hide password icon"

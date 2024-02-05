@@ -1,23 +1,20 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utilities";
 import { NextResponse } from "next/server";
 import User from "@/models/user";
 import cloudinary from "@/utilities/general/cloudinary";
 import { connectDatabase } from "@/database/database";
+import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
 export const PATCH = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { sessionUser, userId } = await getSessionUser();
 
   const picture = await req.json();
 
-  if (!session?.user) {
+  if (!sessionUser) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
     );
   }
-
-  const userId = session?.user?.id;
 
   try {
     await connectDatabase();

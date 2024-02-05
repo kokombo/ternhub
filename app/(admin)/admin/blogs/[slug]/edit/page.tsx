@@ -1,7 +1,7 @@
 "use client";
 
 import { BlogForm } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 import { useMutation, useQueryClient } from "react-query";
@@ -18,24 +18,29 @@ const EditBlogInfo = () => {
   const { blog } = getBlogBySlug(slug);
 
   const initialFormValues: BlogFormType = {
-    title: blog?.title as string,
-    image: blog?.image as string,
-    metaDescription: blog?.metaDescription as string,
+    title: blog?.title !== undefined ? blog?.title : "",
+
+    image: blog?.image !== undefined ? blog?.image : "",
+
+    metaDescription:
+      blog?.metaDescription !== undefined ? blog?.metaDescription : "",
+
     author: {
-      name: blog?.author.name as string,
-      twitter: blog?.author.twitter as string,
-      portfolio: blog?.author.portfolio as string,
-      linkedin: blog?.author.linkedin as string,
+      name: blog?.author.name !== undefined ? blog?.author.name : "",
+
+      twitter: blog?.author.twitter !== undefined ? blog?.author.twitter : "",
+
+      portfolio:
+        blog?.author.portfolio !== undefined ? blog?.author.portfolio : "",
+
+      linkedin:
+        blog?.author.linkedin !== undefined ? blog?.author.linkedin : "",
     },
-  
-    category: blog?.category as string,
+
+    category: blog?.category !== undefined ? blog?.category : "",
   };
 
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    setContent(blog?.content as string);
-  }, [blog?.content]);
+  const [content, setContent] = useState(blog?.content || "");
 
   const updateBlogRequest = async (newBlogData: BlogData) => {
     return await axios.patch(`/api/blog/${slug}`, newBlogData);

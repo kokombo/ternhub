@@ -33,6 +33,7 @@ const BlogCard = ({
           fill
           className="rounded-t-[10px] object-fill"
           loading="lazy"
+          sizes="any"
         />
       </div>
 

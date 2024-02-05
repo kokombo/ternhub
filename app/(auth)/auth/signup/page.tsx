@@ -150,7 +150,7 @@ const SignUpPage = () => {
                 name="password"
                 id="password"
                 type={`${showPassword ? "text" : "password"}`}
-                setPasswordVisibile={showPassword}
+                setPasswordVisible={showPassword}
                 togglePasswordIcon={onClickIcon}
                 passwordField={true}
                 disabled={isLoading || redirecting}

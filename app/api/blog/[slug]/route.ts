@@ -3,9 +3,8 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import slugify from "slugify";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utilities";
 import cloudinary from "@/utilities/general/cloudinary";
+import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
 export const GET = async (req: Request, { params }: { params: Params }) => {
   try {
@@ -43,9 +42,9 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
 export const PATCH = async (req: Request, { params }: { params: Params }) => {
   const body = await req.json();
 
-  const session = await getServerSession(authOptions);
+  const { sessionUser } = await getSessionUser();
 
-  if (!session?.user || session?.user.role !== "admin") {
+  if (!sessionUser || sessionUser.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
@@ -97,9 +96,9 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
 };
 
 export const DELETE = async (req: Request, { params }: { params: Params }) => {
-  const session = await getServerSession(authOptions);
+  const { sessionUser } = await getSessionUser();
 
-  if (!session?.user || session?.user.role !== "admin") {
+  if (!sessionUser || sessionUser.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }

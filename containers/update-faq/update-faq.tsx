@@ -73,14 +73,14 @@ const UpdateFaq = (props: Props) => {
       <FaqForm
         title="Edit Faq"
         initialValues={{
-          question: faq?.question as string,
+          question: faq?.question !== undefined ? faq?.question : "",
         }}
         submitForm={initiateUpdateFaqData}
         isLoading={updateFaqLoading}
         error={faqUpdateError}
         buttonLabel="Update Faq"
         textEditorOnchange={setFaqAnswer}
-        textEditorValue={faqAnswer}
+        textEditorValue={faqAnswer !== undefined ? faqAnswer : ""}
         isError={isFaqUpdateError}
       />
     </div>

@@ -116,7 +116,7 @@ const SignInPage = () => {
                 name="password"
                 id="password"
                 type={`${showPassword ? "text" : "password"}`}
-                setPasswordVisibile={showPassword}
+                setPasswordVisible={showPassword}
                 togglePasswordIcon={onClickIcon}
                 passwordField={true}
                 disabled={loading}

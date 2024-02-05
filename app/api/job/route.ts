@@ -3,14 +3,13 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
 import slugify from "slugify";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utilities";
 import cloudinary from "@/utilities/general/cloudinary";
+import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
 export const POST = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { sessionUser } = await getSessionUser();
 
-  if (!session?.user || session.user.role !== "admin") {
+  if (!sessionUser || sessionUser.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
@@ -108,9 +107,9 @@ export const GET = async (req: Request) => {
 };
 
 export const PATCH = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { sessionUser } = await getSessionUser();
 
-  if (!session?.user || session?.user.role !== "admin") {
+  if (!sessionUser || sessionUser.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
@@ -175,9 +174,9 @@ export const PATCH = async (req: Request) => {
 };
 
 export const DELETE = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { sessionUser } = await getSessionUser();
 
-  if (!session?.user || session?.user.role !== "admin") {
+  if (!sessionUser || sessionUser.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }

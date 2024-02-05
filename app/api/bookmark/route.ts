@@ -1,18 +1,14 @@
 import User from "@/models/user";
-import Job from "@/models/job";
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utilities";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
+import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
 export const GET = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { userId, sessionUser } = await getSessionUser();
 
-  const userId = session?.user?.id;
-
-  if (!session?.user) {
+  if (!sessionUser) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
@@ -43,11 +39,9 @@ export const GET = async (req: Request) => {
 };
 
 export const PUT = async (req: Request) => {
-  const session = await getServerSession(authOptions);
+  const { userId, sessionUser } = await getSessionUser();
 
-  const userId = session?.user?.id;
-
-  if (!session?.user) {
+  if (!sessionUser) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
@@ -63,12 +57,12 @@ export const PUT = async (req: Request) => {
 
     const user = await User.findById(userId);
 
-    if (!session?.user.emailVerified) {
+    if (!user.emailVerified) {
       const token = await user.createEmailVerificationToken();
 
       await user.save();
 
-      const email = session?.user?.email as string;
+      const email = user?.email as string;
 
       const data: EmailInfoType = {
         from: "TheTernHub",

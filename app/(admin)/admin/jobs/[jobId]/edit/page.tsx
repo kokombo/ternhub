@@ -31,19 +31,19 @@ const EditJobInfo = () => {
   if (isJobByIdError) jobByIdErrorResponse = jobByIdError;
 
   const initialFormValues: JobFormType = {
-    title: job?.title as string,
-    company: job?.company as string,
-    location: job?.location as string,
-    category: job?.category as string,
-    site: job?.site as string,
-    mode: job?.mode as string,
-    logo: job?.logo as string,
-    salary: job?.salary as number,
-    slug: job?.slug as string,
-    type: job?.type as string,
+    title: job?.title !== undefined ? job?.title : "",
+    company: job?.company !== undefined ? job?.company : "",
+    location: job?.location !== undefined ? job?.location : "",
+    category: job?.category !== undefined ? job?.category : "",
+    site: job?.site !== undefined ? job?.site : "",
+    mode: job?.mode !== undefined ? job?.mode : "",
+    logo: job?.logo !== undefined ? job?.logo : "",
+    salary: job?.salary !== undefined ? job?.salary : 0,
+    slug: job?.slug !== undefined ? job?.slug : "",
+    type: job?.type !== undefined ? job?.type : "",
   };
 
-  const [description, setDescription] = useState(job?.description as string);
+  const [description, setDescription] = useState(job?.description || "");
 
   const updateJobRequest = async (newJobData: JobData) => {
     return await axios.patch(`/api/job/${jobId}`, newJobData);

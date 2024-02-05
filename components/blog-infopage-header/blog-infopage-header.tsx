@@ -19,6 +19,7 @@ const BlogInfopageHeader = ({
               fill
               priority
               className="rounded-[10px] object-fill"
+              sizes="any"
             />
           </div>
 
