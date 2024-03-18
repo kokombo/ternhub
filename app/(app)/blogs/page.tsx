@@ -2,10 +2,10 @@
 
 import { BlogsList } from "@/containers";
 import { BlogsListpageTitle, Search } from "@/components";
-import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
+import { useGetAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 const BlogListPage = () => {
-  const { blogs, isLoading, isError, error, refetch } = getAllBlogs();
+  const { blogs, isLoading, isError, error, refetch } = useGetAllBlogs();
 
   return (
     <div className="flex flex-col py-11 lg:py-[100px] sm:px-[6.94%] px-5 w-full">

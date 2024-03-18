@@ -9,7 +9,7 @@ import {
   Logo,
   AuthCTA,
 } from "@/components";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import * as Yup from "yup";
 import { GroteskNormal } from "@/app/font";
@@ -17,17 +17,10 @@ import Image from "next/image";
 import { images } from "@/constants";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-
-const validateForgetPasswordForm = Yup.object({
-  email: Yup.string()
-    .email("Enter a valid email.")
-    .required("Enter the email associated with your account."),
-});
+import { forgotPasswordFormValidationSchema } from "@/utilities/validation/form-validations";
 
 const ForgotPassword = () => {
   const router = useRouter();
-
-  let errorResponse: any;
 
   const passwordResetLinkRequest = async (email: string) => {
     const res = await axios.post(
@@ -38,23 +31,23 @@ const ForgotPassword = () => {
     return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    string
+  >(
     "sendPasswordResetLink",
 
     passwordResetLinkRequest,
 
     {
       onSuccess: (data) => {
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+        toast.success(`${data.message}`);
 
         router.push("/");
       },
     }
   );
-
-  if (error) errorResponse = error;
 
   const sendPasswordResetLink = async (values: { email: string }) => {
     const { email } = values;
@@ -74,7 +67,7 @@ const ForgotPassword = () => {
         <Formik
           initialValues={{ email: "" }}
           onSubmit={sendPasswordResetLink}
-          validationSchema={validateForgetPasswordForm}
+          validationSchema={forgotPasswordFormValidationSchema}
         >
           <Form className="flex flex-col gap-9 w-full">
             <InputField
@@ -94,7 +87,7 @@ const ForgotPassword = () => {
 
               {isError && (
                 <CustomError
-                  message={errorResponse?.response?.data?.message}
+                  message={error?.response?.data?.message}
                   loading={isLoading}
                 />
               )}

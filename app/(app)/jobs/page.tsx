@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo, ChangeEvent } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
-import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
+import { useGetAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
 
@@ -63,7 +63,7 @@ const JobsListPage = () => {
     refetch,
     isFetching,
     isPreviousData,
-  } = getAllJobs(pageNumber, queryStrings, limit, baseUrl);
+  } = useGetAllJobs(pageNumber, queryStrings, limit, baseUrl);
 
   //Onchange handler for filter terms.
   const filterTermOnchange = (e: ChangeEvent<HTMLSelectElement>) => {

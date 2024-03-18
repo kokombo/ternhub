@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { sendEmailVerificationLink } from "@/utilities/auth/sendEmailVerificationLink";
+import { useSendEmailVerificationLink } from "@/utilities/auth/sendEmailVerificationLink";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
@@ -16,7 +16,7 @@ const EmailVerification = () => {
 
   const email = session?.user?.email as string;
 
-  const { mutateAsync } = sendEmailVerificationLink(email); //A user can resend verification link email by calling mutateAsync.
+  const { sendEmailVerificationLink } = useSendEmailVerificationLink(email); //A user can resend verification link email by calling mutateAsync.
 
   const { newTime, setTime } = useCountdownTimer(0);
 
@@ -49,7 +49,7 @@ const EmailVerification = () => {
             onClick={async () => {
               setTime(60);
 
-              await mutateAsync();
+              sendEmailVerificationLink();
             }}
             className="blue_button"
           >

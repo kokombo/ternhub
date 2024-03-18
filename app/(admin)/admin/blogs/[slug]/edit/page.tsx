@@ -3,9 +3,9 @@
 import { BlogForm } from "@/components";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const EditBlogInfo = () => {
@@ -15,7 +15,7 @@ const EditBlogInfo = () => {
 
   const queryClient = useQueryClient();
 
-  const { blog } = getBlogBySlug(slug);
+  const { blog } = useGetBlogBySlug(slug);
 
   const initialFormValues: BlogFormType = {
     title: blog?.title !== undefined ? blog?.title : "",
@@ -43,10 +43,15 @@ const EditBlogInfo = () => {
   const [content, setContent] = useState(blog?.content || "");
 
   const updateBlogRequest = async (newBlogData: BlogData) => {
-    return await axios.patch(`/api/blog/${slug}`, newBlogData);
+    const res = await axios.patch(`/api/blog/${slug}`, newBlogData);
+    return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    BlogData
+  >(
     updateBlogRequest,
 
     {

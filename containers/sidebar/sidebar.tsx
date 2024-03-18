@@ -52,9 +52,7 @@ const Sidebar = (props: Props) => {
 
                   session?.user
                     ? undefined
-                    : toast.error("Please sign in to continue using TernHub.", {
-                        position: toast.POSITION.TOP_RIGHT,
-                      });
+                    : toast.error("Please sign in to continue using TernHub.");
                 }}
               >
                 Jobs

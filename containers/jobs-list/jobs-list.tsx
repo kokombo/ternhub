@@ -1,6 +1,7 @@
 import { JobCard, Message } from "@/components";
 import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
+import { AxiosError } from "axios";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
 
@@ -8,7 +9,7 @@ type Props = {
   data: JobType[] | undefined;
   isLoading: boolean;
   isError: boolean;
-  error: any;
+  error: AxiosError<ErrorResponse> | null;
   noDataLabel: string;
   refetch?: any;
   rootUrl: string;

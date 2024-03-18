@@ -9,7 +9,7 @@ import {
   Logo,
   AuthCTA,
 } from "@/components";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { GroteskNormal } from "@/app/font";
 import Image from "next/image";
@@ -17,15 +17,7 @@ import { images } from "@/constants";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as Yup from "yup";
-
-const validatePasswordResetForm = Yup.object({
-  password: Yup.string()
-    .required("Password field cannot be empty.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-      "At least 8 characters, a letter, a number and a special character."
-    ),
-});
+import { resetPasswordFormValidationSchema } from "@/utilities/validation/form-validations";
 
 const ResetPassword = () => {
   const searchParams = useSearchParams();
@@ -33,8 +25,6 @@ const ResetPassword = () => {
   const token = searchParams.get("token");
 
   const router = useRouter();
-
-  let errorResponse: any;
 
   const passwordResetRequest = async (password: string) => {
     const res = await axios.put(
@@ -45,21 +35,17 @@ const ResetPassword = () => {
     return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
-    "resetPassword",
-    passwordResetRequest,
-    {
-      onSuccess: (data) => {
-        toast.success(`${data.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    string
+  >("resetPassword", passwordResetRequest, {
+    onSuccess: (data) => {
+      toast.success(`${data.message}`);
 
-        router.push("/auth/signin");
-      },
-    }
-  );
-
-  if (error) errorResponse = error;
+      router.push("/auth/signin");
+    },
+  });
 
   const resetPassword = async (values: { password: string }) => {
     const { password } = values;
@@ -78,7 +64,7 @@ const ResetPassword = () => {
         <Formik
           initialValues={{ password: "" }}
           onSubmit={resetPassword}
-          validationSchema={validatePasswordResetForm}
+          validationSchema={resetPasswordFormValidationSchema}
         >
           <Form className="flex flex-col gap-9 w-full">
             <InputField
@@ -98,7 +84,7 @@ const ResetPassword = () => {
 
               {isError && (
                 <CustomError
-                  message={errorResponse?.response?.data?.message}
+                  message={error?.response?.data?.message}
                   loading={isLoading}
                 />
               )}

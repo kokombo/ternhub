@@ -1,8 +1,10 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { toast } from "react-toastify";
 
-export const sendEmailVerificationLink = (email: string) => {
+export const useSendEmailVerificationLink = (
+  email: string | null | undefined
+) => {
   const emailVerificationLinkRequest = async () => {
     const res = await axios.post(
       "/api/user/verify-email",
@@ -12,7 +14,11 @@ export const sendEmailVerificationLink = (email: string) => {
     return res.data;
   };
 
-  const { mutateAsync, error } = useMutation(
+  const { mutateAsync, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    string | null | undefined
+  >(
     ["sendEmailVerificationLink"],
 
     emailVerificationLinkRequest,
@@ -21,18 +27,18 @@ export const sendEmailVerificationLink = (email: string) => {
       retry: 0,
 
       onSuccess: (data) => {
-        toast.info(`${data?.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+        toast.info(`${data?.message}`);
       },
 
-      onError: (error: any) => {
-        toast.error(`${error?.response?.data?.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+      onError: (error) => {
+        toast.error(`${error?.response?.data?.message}`);
       },
     }
   );
 
-  return { mutateAsync, error };
+  const sendEmailVerificationLink = async () => {
+    await mutateAsync(email);
+  };
+
+  return { sendEmailVerificationLink, error };
 };

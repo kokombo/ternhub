@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { BlogReadTime } from "..";
 import { BsArrowRight } from "react-icons/bs";
-import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 import { useRouter } from "next/navigation";
 
 const BlogCard = ({
@@ -13,7 +13,7 @@ const BlogCard = ({
 }) => {
   const postCreationDate = new Date(blog.createdAt).toDateString();
 
-  const { isLoading } = getBlogBySlug(blog.slug);
+  const { isLoading } = useGetBlogBySlug(blog.slug);
 
   const router = useRouter();
 

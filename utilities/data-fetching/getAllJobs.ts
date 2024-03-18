@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ type Data = {
   totalJobsCountBeforePagination: number;
 };
 
-export const getAllJobs = (
+export const useGetAllJobs = (
   pageNumber: number,
   queryStrings: string,
   limit: number,
@@ -20,7 +20,7 @@ export const getAllJobs = (
 
   const dispatch = useDispatch();
 
-  const fetchJobsRequest = async (): Promise<Data | undefined> => {
+  const fetchJobsRequest = async () => {
     router.push(
       `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
     );
@@ -38,7 +38,7 @@ export const getAllJobs = (
     refetch,
     isFetching,
     isPreviousData,
-  } = useQuery(
+  } = useQuery<Data, AxiosError<ErrorResponse>>(
     ["fetchJobs", pageNumber],
 
     fetchJobsRequest,

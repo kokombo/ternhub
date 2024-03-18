@@ -12,37 +12,20 @@ import {
   CustomError,
   SocialAuthFrame,
 } from "@/components";
-import * as Yup from "yup";
 import Image from "next/image";
 import { images, icons } from "@/constants";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
-
-const userData: UserSignupDataType = {
-  email: "",
-  password: "",
-  profession: "",
-  name: "",
-};
+import { signupFormValidationSchema } from "@/utilities/validation/form-validations";
 
 type Data = {
   user: User;
 };
-
-const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Please enter your full name.")
-    .matches(/^[A-Za-z\s]+$/, "Invalid characters in name."),
-  email: Yup.string()
-    .email("Please provide a valid email address.")
-    .required("Email address is required."),
-  password: Yup.string().required("Choose a password."),
-});
 
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
@@ -51,20 +34,17 @@ const SignUpPage = () => {
 
   const router = useRouter();
 
-  const signupFormRequest = async (
-    formData: UserSignupDataType
-  ): Promise<Data | undefined> => {
+  const signupFormRequest = async (formData: UserSignupDataType) => {
     const res = await axios.post("/api/user", formData);
 
     return res.data;
   };
 
-  let errorResponse: any;
-
-  const { mutateAsync, isLoading, isError, error } =
-    useMutation(signupFormRequest);
-
-  if (error) errorResponse = error;
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    Data,
+    AxiosError<ErrorResponse>,
+    UserSignupDataType
+  >("signup", signupFormRequest);
 
   const createUserAccount = async (
     values: UserSignupDataType,
@@ -92,6 +72,7 @@ const SignUpPage = () => {
           })
           .finally(() => {
             setRedirecting(false);
+            onSubmitProps.resetForm();
           });
       },
     });
@@ -123,9 +104,14 @@ const SignUpPage = () => {
 
         <>
           <Formik
-            initialValues={userData}
+            initialValues={{
+              email: "",
+              password: "",
+              profession: "",
+              name: "",
+            }}
             onSubmit={createUserAccount}
-            validationSchema={validationSchema}
+            validationSchema={signupFormValidationSchema}
             validateOnBlur={false}
           >
             <Form className="flex flex-col gap-8 w-full">
@@ -173,7 +159,7 @@ const SignUpPage = () => {
 
                 {isError && (
                   <CustomError
-                    message={errorResponse?.response?.data?.message}
+                    message={error?.response?.data?.message}
                     loading={isLoading}
                   />
                 )}

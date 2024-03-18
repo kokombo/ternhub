@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { RotatingLinesLoader } from "@/components";
@@ -12,10 +12,6 @@ import { illustrations } from "@/constants";
 
 //A user will be redirected to this screen after clicking "verify email" in the email sent to their inbox.
 
-type Data = {
-  message: string;
-};
-
 const VerifyEmailPage = () => {
   const searchParams = useSearchParams();
 
@@ -25,22 +21,18 @@ const VerifyEmailPage = () => {
 
   const { update } = useSession();
 
-  const verifyEmailRequest = async (): Promise<Data | undefined> => {
+  const verifyEmailRequest = async () => {
     const res = await axios.put(`/api/user/verify-email?token=${token}`);
 
     return res.data;
   };
 
-  let errorResponse: any;
-
   const { mutateAsync, data, error, isLoading, isError, isSuccess } =
-    useMutation(
+    useMutation<MessageResponse, AxiosError<ErrorResponse>>(
       ["verifyEmail"],
 
       verifyEmailRequest
     );
-
-  if (error) errorResponse = error;
 
   useEffect(() => {
     const verifyUserEmail = async () => {
@@ -75,7 +67,7 @@ const VerifyEmailPage = () => {
           />
 
           <p className="text-base lg:text-lg text-greyblack">
-            {errorResponse?.response?.data?.message}
+            {error?.response?.data?.message}
           </p>
         </div>
       ) : isSuccess ? (

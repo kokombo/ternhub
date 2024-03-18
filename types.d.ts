@@ -1,4 +1,5 @@
 declare module "node-email-verifier";
+declare module "react-quill";
 
 type User = {
   id: string;
@@ -108,4 +109,12 @@ type EmailInfoType = {
   subject: string;
   text: string;
   html: string;
+};
+
+type ErrorResponse = {
+  message: string;
+};
+
+type MessageResponse = {
+  message: string;
 };

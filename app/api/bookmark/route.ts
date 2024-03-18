@@ -98,7 +98,10 @@ export const PUT = async (req: Request) => {
         { new: true }
       );
 
-      return NextResponse.json({ message: "Job removed!" }, { status: 200 });
+      return NextResponse.json(
+        { message: "Job unbookmarked!" },
+        { status: 200 }
+      );
     } else {
       const user = await User.findByIdAndUpdate(
         userId,

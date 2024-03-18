@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { setUserSavedJobs } from "@/redux-toolkit/slices/job";
 
-export const getUserSavedJobs = () => {
+export const useGetUserSavedJobs = () => {
   const dispatch = useDispatch();
 
-  const getUserSavedJobsRequest = async (): Promise<JobType[] | undefined> => {
+  const getUserSavedJobsRequest = async () => {
     const res = await axios.get("/api/bookmark");
     return res.data;
   };
@@ -17,15 +17,19 @@ export const getUserSavedJobs = () => {
     isError,
     error,
     refetch,
-  } = useQuery("getUserSavedJobs", getUserSavedJobsRequest, {
-    onSuccess: (data) => {
-      dispatch(setUserSavedJobs(data));
-    },
+  } = useQuery<JobType[], AxiosError<ErrorResponse>>(
+    "getUserSavedJobs",
+    getUserSavedJobsRequest,
+    {
+      onSuccess: (data) => {
+        dispatch(setUserSavedJobs(data));
+      },
 
-    refetchOnWindowFocus: false,
+      refetchOnWindowFocus: false,
 
-    refetchOnMount: "always",
-  });
+      refetchOnMount: "always",
+    }
+  );
 
   return { savedJobs, isLoading, isError, error, refetch };
 };

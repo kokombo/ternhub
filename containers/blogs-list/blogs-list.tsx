@@ -3,12 +3,13 @@ import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 import RecentBlogSkeletonLoader from "@/utilities/skeletons/recent-blog-skeleton-loader";
 import { GroteskBold } from "@/app/font";
 import { illustrations } from "@/constants";
+import { AxiosError } from "axios";
 
 type Props = {
   data: BlogType[] | undefined;
   isLoading: boolean;
   isError: boolean;
-  error: any;
+  error: AxiosError<ErrorResponse> | null;
   noDataLabel: string;
   refetch?: any;
   rootUrl: string;
@@ -31,13 +32,15 @@ const BlogsList = (props: Props) => {
               Recent Post
             </h2>
 
-            {props.data.slice(0, 1).map((blog) => (
-              <RecentBlogCard
-                key={blog._id}
-                props={blog}
-                rootUrl={props.rootUrl}
-              />
-            ))}
+            {props.data.slice(0, 1).map((blog) => {
+              return (
+                <RecentBlogCard
+                  key={blog._id}
+                  props={blog}
+                  rootUrl={props.rootUrl}
+                />
+              );
+            })}
           </div>
         ) : null}
       </section>

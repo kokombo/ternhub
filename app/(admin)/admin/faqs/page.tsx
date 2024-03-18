@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
+import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
 import { UniversalModal, FaqCard } from "@/components";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import { UpdateFaq } from "@/containers";
 const AdminAllFaqsPage = () => {
   const dispatch = useDispatch();
 
-  const { isLoading, isError, faqs } = getAllFaqs();
+  const { isLoading, isError, faqs } = useGetAllFaqs();
 
   const { modalVisible } = useSelector((state: StateType) => state.modal);
 

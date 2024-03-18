@@ -1,6 +1,6 @@
 import { SectionHeading, StyledLink, JobCard } from "@/components";
 import { useQuery } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
@@ -13,20 +13,19 @@ type Data = {
 const TrendingJobs = () => {
   const { data: session } = useSession();
 
-  const fetchTrendingJobsRequest = async (): Promise<Data | undefined> => {
+  const fetchTrendingJobsRequest = async () => {
     const res = await axios.get("/api/jobs");
     return res.data;
   };
 
-  const { data, isLoading, isError } = useQuery(
-    "fetchTrendingJobs",
-    fetchTrendingJobsRequest,
-    {
-      refetchOnWindowFocus: false,
+  const { data, isLoading, isError } = useQuery<
+    Data,
+    AxiosError<ErrorResponse>
+  >("fetchTrendingJobs", fetchTrendingJobsRequest, {
+    refetchOnWindowFocus: false,
 
-      staleTime: 60 * 60 * 1000,
-    }
-  );
+    staleTime: 60 * 60 * 1000,
+  });
 
   return (
     <section className="container">
@@ -55,7 +54,7 @@ const TrendingJobs = () => {
           session?.user
             ? undefined
             : toast.error("Please sign in to continue using TernHub.", {
-                position: toast.POSITION.TOP_RIGHT,
+                position: "top-right",
               })
         }
         extraClasses="self-center blue_button"

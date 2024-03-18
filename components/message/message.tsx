@@ -2,7 +2,7 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 
 type Props = {
-  message: string;
+  message: string | undefined;
   buttonLabel?: string;
   onClickButton?: () => void;
   isError?: boolean;
@@ -24,9 +24,11 @@ const Message = (props: Props) => {
         />
       </div>
 
-      <p className="text-greyblack text-lg text-center font-semibold">
-        {props.message}
-      </p>
+      {props.isError && (
+        <p className="text-greyblack text-lg text-center font-semibold">
+          {props.message}
+        </p>
+      )}
 
       {props.isError && (
         <button

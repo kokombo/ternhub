@@ -1,6 +1,7 @@
 import { Formik, Form, FormikHelpers } from "formik";
 import { CustomError, InputField, SubmitFormLoader, TextEditor } from "..";
 import { Dispatch, SetStateAction } from "react";
+import { AxiosError } from "axios";
 
 type Props = {
   title: string;
@@ -11,7 +12,7 @@ type Props = {
   ) => Promise<void>;
   isLoading: boolean;
   isError: boolean;
-  error: any;
+  error: AxiosError<ErrorResponse> | null;
   buttonLabel: string;
   textEditorValue: string;
   textEditorOnchange: Dispatch<SetStateAction<string>>;
@@ -38,14 +39,14 @@ const FaqForm = (props: Props) => {
               disabled={props.isLoading}
             />
 
-            <TextEditor
+            {/* <TextEditor
               label="Answer"
               name="answer"
               id="answer"
               value={props.textEditorValue}
               onChange={props.textEditorOnchange}
               lgWidth={600}
-            />
+            /> */}
 
             <div className="sm:mt-14 mt-16 relative flex items-center justify-center w-full">
               <span className="absolute">

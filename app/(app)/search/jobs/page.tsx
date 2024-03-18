@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, ChangeEvent } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -81,9 +81,7 @@ const JobsSearchResults = () => {
     .replace(`&limit=${limit}`, "")
     .replace("search", "query")}&ref_ctx_id=${search_id}`;
 
-  const fetchJobsInSearchRequest = async (): Promise<
-    JobsResults | undefined
-  > => {
+  const fetchJobsInSearchRequest = async () => {
     router.push(urlWithQueryStrings);
 
     const res = await axios.get("/api/jobs?" + queryStrings);
@@ -99,7 +97,7 @@ const JobsSearchResults = () => {
     refetch,
     isFetching,
     isPreviousData,
-  } = useQuery(
+  } = useQuery<JobsResults, AxiosError<ErrorResponse>>(
     ["fetchJobsInSearch", pageNumber],
 
     fetchJobsInSearchRequest,

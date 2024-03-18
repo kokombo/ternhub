@@ -12,25 +12,13 @@ import {
   SubmitFormLoader,
 } from "@/components";
 import Link from "next/link";
-import * as Yup from "yup";
 import Image from "next/image";
 import { icons, images } from "@/constants";
 import { signIn } from "next-auth/react";
 import useShowPassword from "@/utilities/hooks/useShowPassword";
 import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
-
-const userLoginData: UserLoginDataType = {
-  email: "",
-  password: "",
-};
-
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email format.")
-    .required("Enter your email."),
-  password: Yup.string().required("Enter your password."),
-});
+import { loginFormValidationSchema } from "@/utilities/validation/form-validations";
 
 const SignInPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
@@ -97,9 +85,12 @@ const SignInPage = () => {
 
         <>
           <Formik
-            initialValues={userLoginData}
+            initialValues={{
+              email: "",
+              password: "",
+            }}
             onSubmit={signAUserIn}
-            validationSchema={validationSchema}
+            validationSchema={loginFormValidationSchema}
             validateOnBlur={false}
           >
             <Form className="flex flex-col gap-8 w-full">

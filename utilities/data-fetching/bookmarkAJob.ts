@@ -1,18 +1,20 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 
-export const bookmarkAJob = (jobId: string) => {
+export const useBookmarkAJob = (jobId: string) => {
   const queryClient = useQueryClient();
 
-  const bookmarkAJobRequest = async (
-    jobId: string
-  ): Promise<JobType[] | undefined> => {
+  const bookmarkAJobRequest = async (jobId: string) => {
     const res = await axios.put("/api/bookmark", JSON.stringify(jobId));
     return res.data;
   };
 
-  const { mutateAsync, isError, error } = useMutation(
+  const { mutateAsync, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    string
+  >(
     "bookmarkAJob",
 
     bookmarkAJobRequest,
@@ -22,10 +24,8 @@ export const bookmarkAJob = (jobId: string) => {
         queryClient.refetchQueries("getUserSavedJobs");
       },
 
-      onError: (error: any) => {
-        toast.error(`${error?.response?.data?.message}`, {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+      onError: (error) => {
+        toast.error(`${error.response?.data.message}`);
       },
     }
   );

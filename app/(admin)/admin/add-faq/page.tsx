@@ -1,7 +1,7 @@
 "use client";
 import { FaqForm } from "@/components";
 import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,10 +17,17 @@ const AddFaqPage = () => {
   const queryClient = useQueryClient();
 
   const addFaqRequest = async (faqData: FaqData) => {
-    return await axios.post("/api/faq", faqData);
+    const res = await axios.post("/api/faq", faqData);
+    return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    FaqType,
+    AxiosError<ErrorResponse>,
+    FaqData
+  >(
+    "addAFaq",
+
     addFaqRequest,
 
     {

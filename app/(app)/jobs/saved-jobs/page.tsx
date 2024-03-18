@@ -2,15 +2,12 @@
 
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Message, JobCard } from "@/components";
-import { getUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
+import { useGetUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { illustrations } from "@/constants";
 
 const SavedJobsPage = () => {
-  const { savedJobs, isError, isLoading, error, refetch } = getUserSavedJobs();
-
-  let errorResponse: any;
-
-  if (error) errorResponse = error;
+  const { savedJobs, isError, isLoading, error, refetch } =
+    useGetUserSavedJobs();
 
   return (
     <div
@@ -24,7 +21,7 @@ const SavedJobsPage = () => {
         [...Array(6)].map((_, index) => <JobSkeletonLoader key={index} />)
       ) : isError ? (
         <Message
-          message={errorResponse.response?.data?.message}
+          message={error?.response?.data?.message}
           isError={isError}
           buttonLabel="Try again"
           onClickButton={refetch}

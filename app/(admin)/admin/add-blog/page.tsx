@@ -2,7 +2,7 @@
 
 import { BlogForm } from "@/components";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/navigation";
 
@@ -27,19 +27,21 @@ const AddABlog = () => {
   const queryClient = useQueryClient();
 
   const addABlogRequest = async (blogData: BlogData) => {
-    return await axios.post("/api/blog", blogData);
+    const res = await axios.post("/api/blog", blogData);
+    return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
-    addABlogRequest,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetchBlogs");
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    BlogType,
+    AxiosError<ErrorResponse>,
+    BlogData
+  >("addABlog", addABlogRequest, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("fetchBlogs");
 
-        router.push("/admin/blogs");
-      },
-    }
-  );
+      router.push("/admin/blogs");
+    },
+  });
 
   const addABlog = async (values: BlogFormType) => {
     const blogData = { ...values, content };

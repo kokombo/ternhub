@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
-export const getBlogBySlug = (slug: string | string[]) => {
-  const getBlogBySlugRequest = async (): Promise<BlogType | undefined> => {
+export const useGetBlogBySlug = (slug: string | string[]) => {
+  const getBlogBySlugRequest = async () => {
     const res = await axios.get(`/api/blog/${slug}`);
     return res.data;
   };
@@ -14,7 +14,7 @@ export const getBlogBySlug = (slug: string | string[]) => {
     error,
     refetch,
     isSuccess,
-  } = useQuery(
+  } = useQuery<BlogType, AxiosError<ErrorResponse>>(
     ["getBlogBySlug", slug],
 
     getBlogBySlugRequest,

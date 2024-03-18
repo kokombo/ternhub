@@ -2,15 +2,15 @@
 
 import { BlogInfoPage } from "@/containers";
 import { useParams } from "next/navigation";
-import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 
 const BlogPage = () => {
   const { slug } = useParams();
 
-  const { blog, isError, isLoading, error, refetch } = getBlogBySlug(slug);
+  const { blog, isError, isLoading, error, refetch } = useGetBlogBySlug(slug);
 
   return (
-    <div>
+    <>
       <BlogInfoPage
         data={blog}
         isError={isError}
@@ -19,7 +19,7 @@ const BlogPage = () => {
         refetch={refetch}
         rootUrl="/blogs"
       />
-    </div>
+    </>
   );
 };
 

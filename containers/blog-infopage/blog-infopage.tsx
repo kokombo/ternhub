@@ -1,20 +1,20 @@
 import { BlogInfopageHeader, BlogInfopageBody, Message } from "@/components";
 import { illustrations } from "@/constants";
 import RelatedBlogs from "../related-blogs/related-blogs";
-
-import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
+import { AxiosError } from "axios";
+import { useGetAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 type Props = {
   data: BlogType | undefined;
-  isLoading?: boolean;
-  isError?: boolean;
-  error?: any;
+  isLoading: boolean;
+  isError: boolean;
+  error: AxiosError<ErrorResponse> | null;
   refetch?: any;
   rootUrl: string;
 };
 
 const BlogInfoPage = (props: Props) => {
-  const { blogs } = getAllBlogs();
+  const { blogs } = useGetAllBlogs();
 
   const relatedBlogs = blogs
     ?.filter(

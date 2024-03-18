@@ -3,12 +3,12 @@
 import { useParams } from "next/navigation";
 import { BlogInfoPage } from "@/containers";
 import { AdminToolBox } from "@/components";
-import { getBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
+import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 
 const AdminBlogInfoPage = () => {
   const { slug } = useParams();
 
-  const { blog, isLoading, isError, error, refetch } = getBlogBySlug(slug);
+  const { blog, isLoading, isError, error, refetch } = useGetBlogBySlug(slug);
 
   return (
     <div className="py-11 ">

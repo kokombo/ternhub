@@ -1,9 +1,9 @@
 import { SectionHeading, BlogCard, StyledLink } from "@/components";
 import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
-import { getAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
+import { useGetAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
 
 const LandingPageBlogs = () => {
-  const { blogs, isLoading, isError } = getAllBlogs();
+  const { blogs, isLoading, isError } = useGetAllBlogs();
 
   return (
     <section className="container">

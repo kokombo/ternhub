@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
-export const getJobById = (jobId: string | null) => {
-  const getJobByIdRequest = async (): Promise<JobType | undefined> => {
+export const useGetJobById = (jobId: string | null) => {
+  const getJobByIdRequest = async () => {
     const res = await axios.get(`/api/job?listing_id=${jobId}`);
     return res.data;
   };
@@ -14,7 +14,7 @@ export const getJobById = (jobId: string | null) => {
     error,
     refetch,
     isSuccess,
-  } = useQuery(
+  } = useQuery<JobType, AxiosError<ErrorResponse>>(
     ["getJobById", jobId],
 
     getJobByIdRequest,

@@ -1,12 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { setAllBlogs } from "@/redux-toolkit/slices/blog";
 import { useDispatch } from "react-redux";
 
-export const getAllBlogs = () => {
+export const useGetAllBlogs = () => {
   const dispatch = useDispatch();
 
-  const fetchBlogsRequest = async (): Promise<BlogType[] | undefined> => {
+  const fetchBlogsRequest = async () => {
     const res = await axios.get("/api/blog");
     return res.data;
   };
@@ -17,7 +17,7 @@ export const getAllBlogs = () => {
     isError,
     error,
     refetch,
-  } = useQuery(
+  } = useQuery<BlogType[], AxiosError<ErrorResponse>>(
     "fetchBlogs",
 
     fetchBlogsRequest,

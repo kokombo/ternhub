@@ -3,9 +3,9 @@
 import { JobForm, Message } from "@/components";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { getJobById } from "@/utilities/data-fetching/getJobById";
+import { useGetJobById } from "@/utilities/data-fetching/getJobById";
 import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { illustrations } from "@/constants";
 
@@ -18,17 +18,13 @@ const EditJobInfo = () => {
 
   const queryClient = useQueryClient();
 
-  let jobByIdErrorResponse: any;
-
   const {
     job,
     isError: isJobByIdError,
     isLoading: isJobByIdLoading,
     refetch: refetchJobById,
     error: jobByIdError,
-  } = getJobById(jobId);
-
-  if (isJobByIdError) jobByIdErrorResponse = jobByIdError;
+  } = useGetJobById(jobId);
 
   const initialFormValues: JobFormType = {
     title: job?.title !== undefined ? job?.title : "",
@@ -46,10 +42,17 @@ const EditJobInfo = () => {
   const [description, setDescription] = useState(job?.description || "");
 
   const updateJobRequest = async (newJobData: JobData) => {
-    return await axios.patch(`/api/job/${jobId}`, newJobData);
+    const res = await axios.patch(`/api/job/${jobId}`, newJobData);
+    return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    JobData
+  >(
+    "updateJob",
+
     updateJobRequest,
 
     {
@@ -74,7 +77,7 @@ const EditJobInfo = () => {
       ) : isJobByIdError ? (
         <div className="flex_center w-full">
           <Message
-            message={jobByIdErrorResponse?.response?.data?.message}
+            message={jobByIdError?.response?.data?.message}
             isError={isJobByIdError}
             buttonLabel="Try again"
             onClickButton={async () => await refetchJobById()}

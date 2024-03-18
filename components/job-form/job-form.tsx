@@ -11,6 +11,7 @@ import {
 } from "..";
 import { Dispatch, SetStateAction } from "react";
 import * as Yup from "yup";
+import { jobFormValidationSchema } from "@/utilities/validation/form-validations";
 
 type Props = {
   title: string;
@@ -26,22 +27,6 @@ type Props = {
   error: any;
   buttonLabel: string;
 };
-
-const validateJobForm = Yup.object({
-  title: Yup.string()
-    .required("Job title is required.")
-    .max(50, "Maximum length of 50 characters."),
-  company: Yup.string()
-    .required("Company name is required.")
-    .max(40, "Maximum length of 40 characters."),
-  location: Yup.string()
-    .required("Company location is required.")
-    .max(30, "Maximum length of 30 characters."),
-  category: Yup.string().required("Job category is required."),
-  mode: Yup.string().required("Please specify job mode."),
-  type: Yup.string().required("Please specify job type."),
-  email: Yup.string().email("Invalid email format."),
-});
 
 const jobModeOptions: RadioOption[] = [
   { value: "remote", label: "Remote" },
@@ -65,7 +50,7 @@ const JobForm = (props: Props) => {
         <Formik
           initialValues={props.initialFormValues}
           onSubmit={props.submitForm}
-          validationSchema={validateJobForm}
+          validationSchema={jobFormValidationSchema}
           enableReinitialize
           validateOnBlur={false}
         >
@@ -99,14 +84,14 @@ const JobForm = (props: Props) => {
                   disabled={props.isLoading}
                 />
 
-                <TextEditor
+                {/* <TextEditor
                   label="Job Description *"
                   name="description"
                   id="description"
                   value={props.textEditorValue}
                   onChange={props.textEditorOnchange}
                   lgWidth={820}
-                />
+                /> */}
 
                 {/* the below div is needed because the React Quill text editor caused an overlap */}
                 <div className="sm:mt-4 mt-8"></div>

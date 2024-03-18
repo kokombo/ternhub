@@ -2,7 +2,7 @@
 
 import { JobsList } from "@/containers";
 import { useState } from "react";
-import { getAllJobs } from "@/utilities/data-fetching/getAllJobs";
+import { useGetAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { illustrations } from "@/constants";
 
 const AdminJobsListPage = () => {
@@ -31,7 +31,7 @@ const AdminJobsListPage = () => {
     refetch,
     isFetching,
     isPreviousData,
-  } = getAllJobs(pageNumber, queryStrings, limit, baseUrl);
+  } = useGetAllJobs(pageNumber, queryStrings, limit, baseUrl);
 
   return (
     <div className="py-11 lg:py-[50px] sm:px-[6.94%] px-5 flex flex-col gap-[25px]">

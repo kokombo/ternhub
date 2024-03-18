@@ -1,9 +1,9 @@
 import { SectionHeading, FaqCard } from "@/components";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
-import { getAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
+import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 
 const Faqs = () => {
-  const { faqs, isLoading, isError } = getAllFaqs();
+  const { faqs, isLoading, isError } = useGetAllFaqs();
 
   return (
     <section className="container bg-background">

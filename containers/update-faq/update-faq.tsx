@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { CustomError, FaqForm, TailSpinLoader } from "@/components";
-import { getFaqById } from "@/utilities/data-fetching/getFaqById";
+import { useGetFaqById } from "@/utilities/data-fetching/getFaqById";
 import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
 
@@ -22,18 +22,17 @@ const UpdateFaq = (props: Props) => {
     faq,
     isError: prevFaqFetchingIsError,
     error: prevFaqFetchingError,
-  } = getFaqById(props.faqId);
-
-  if (prevFaqFetchingError) prevFaqFetchingErrorResponse = prevFaqFetchingError;
+  } = useGetFaqById(props.faqId);
 
   const [faqAnswer, setFaqAnswer] = useState("");
 
   useEffect(() => {
     setFaqAnswer(faq?.answer as string);
-  }, [faq?._id]);
+  }, [faq?._id, faq?.answer]);
 
   const updateFaqRequest = async (faqData: FaqData) => {
-    return await axios.patch(`/api/faq/${props.faqId}`, faqData);
+    const res = await axios.patch(`/api/faq/${props.faqId}`, faqData);
+    return res.data;
   };
 
   const {
@@ -41,13 +40,19 @@ const UpdateFaq = (props: Props) => {
     mutateAsync,
     isError: isFaqUpdateError,
     error: faqUpdateError,
-  } = useMutation(updateFaqRequest, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("getAllFaqs");
+  } = useMutation<MessageResponse, AxiosError<ErrorResponse>, FaqData>(
+    "udateFaq",
 
-      dispatch(setModalVisible(false));
-    },
-  });
+    updateFaqRequest,
+
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("getAllFaqs");
+
+        dispatch(setModalVisible(false));
+      },
+    }
+  );
 
   const initiateUpdateFaqData = async (values: FaqFormType) => {
     const newFaqData = { ...values, answer: faqAnswer };
@@ -65,7 +70,7 @@ const UpdateFaq = (props: Props) => {
 
       {prevFaqFetchingIsError && (
         <CustomError
-          message={prevFaqFetchingErrorResponse?.response?.data?.message}
+          message={prevFaqFetchingError?.response?.data?.message}
           loading={prevFaqFetchingLoading}
         />
       )}

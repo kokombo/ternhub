@@ -8,8 +8,9 @@ import {
   SelectField,
 } from "..";
 import { Dispatch, SetStateAction } from "react";
-import * as Yup from "yup";
 import { blogCategories } from "@/constants/data";
+import { blogFormValidationSchema } from "@/utilities/validation/form-validations";
+import { AxiosError } from "axios";
 
 type Props = {
   title: string;
@@ -22,23 +23,9 @@ type Props = {
   textEditorOnchange: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
   isError: boolean;
-  error: any;
+  error: AxiosError<ErrorResponse> | null;
   buttonLabel: string;
 };
-
-const validateBlogForm = Yup.object({
-  title: Yup.string()
-    .required("Blog title is required.")
-    .max(100, "Maximum length of 100 characters."),
-  metaDescription: Yup.string()
-    .required("Blog meta description is required.")
-    .max(150, "Maximum length of 150 characters."),
-  author: Yup.object().shape({
-    name: Yup.string().required("Blog author is required."),
-  }),
-  image: Yup.string().required("Upload blog cover image."),
-  category: Yup.string().required("Please select blog category."),
-});
 
 const BlogForm = (props: Props) => {
   return (
@@ -49,118 +36,114 @@ const BlogForm = (props: Props) => {
         <Formik
           initialValues={props.initialFormValues}
           onSubmit={props.submitForm}
-          validationSchema={validateBlogForm}
+          validationSchema={blogFormValidationSchema}
           enableReinitialize
           validateOnBlur={false}
         >
-          {(formik) => {
-            return (
-              <Form className="flex flex-col gap-8 ">
-                <InputField
-                  label="Blog Title *"
-                  name="title"
-                  type="text"
-                  id="title"
-                  maxLength={100}
-                  disabled={props.isLoading}
-                />
+          <Form className="flex flex-col gap-8 ">
+            <InputField
+              label="Blog Title *"
+              name="title"
+              type="text"
+              id="title"
+              maxLength={100}
+              disabled={props.isLoading}
+            />
 
-                <UploadFile
-                  name="image"
-                  label="Upload A Cover Image *"
-                  fileToUpload="cover image"
-                />
+            <UploadFile
+              name="image"
+              label="Upload A Cover Image *"
+              fileToUpload="cover image"
+            />
 
-                <TextEditor
-                  label="Blog Copy *"
-                  name="content"
-                  id="content"
-                  value={props.textEditorValue}
-                  onChange={props.textEditorOnchange}
-                  lgWidth={820}
-                />
+            {/* <TextEditor
+              label="Blog Copy *"
+              name="content"
+              id="content"
+              value={props.textEditorValue}
+              onChange={props.textEditorOnchange}
+              lgWidth={820}
+            /> */}
 
-                {/* the below div is needed because the React Quill text editor caused an overlap */}
-                <div className="sm:mt-4 mt-8"></div>
+            {/* the below div is needed because the React Quill text editor caused an overlap */}
+            <div className="sm:mt-4 mt-8"></div>
 
-                <InputField
-                  label="Meta Description*"
-                  name="metaDescription"
-                  type="text"
-                  id="meta"
-                  maxLength={150}
-                  disabled={props.isLoading}
-                />
+            <InputField
+              label="Meta Description*"
+              name="metaDescription"
+              type="text"
+              id="meta"
+              maxLength={150}
+              disabled={props.isLoading}
+            />
 
-                <SelectField
-                  label="Blog Category *"
-                  name="category"
-                  id="category"
-                  data={blogCategories}
-                  disabled={props.isLoading}
-                />
+            <SelectField
+              label="Blog Category *"
+              name="category"
+              id="category"
+              data={blogCategories}
+              disabled={props.isLoading}
+            />
 
-                <InputField
-                  label="Author *"
-                  name="author.name"
-                  type="text"
-                  id="name"
-                  disabled={props.isLoading}
-                />
+            <InputField
+              label="Author *"
+              name="author.name"
+              type="text"
+              id="name"
+              disabled={props.isLoading}
+            />
 
-                <InputField
-                  label="Twitter (optional)"
-                  name="author.twitter"
-                  type="text"
-                  id="twitter"
-                  placeholder="e.g. @theternhub"
-                  disabled={props.isLoading}
-                />
+            <InputField
+              label="Twitter (optional)"
+              name="author.twitter"
+              type="text"
+              id="twitter"
+              placeholder="e.g. @theternhub"
+              disabled={props.isLoading}
+            />
 
-                <InputField
-                  label="Portfolio (optional)"
-                  name="author.portfolio"
-                  type="text"
-                  id="portfolio"
-                  placeholder="e.g. www.myportfolio.com"
-                  disabled={props.isLoading}
-                />
+            <InputField
+              label="Portfolio (optional)"
+              name="author.portfolio"
+              type="text"
+              id="portfolio"
+              placeholder="e.g. www.myportfolio.com"
+              disabled={props.isLoading}
+            />
 
-                <InputField
-                  label="Linkedin (optional)"
-                  name="author.linkedin"
-                  type="text"
-                  id="linkedin"
-                  placeholder="e.g. www.linkedin.com/theternhub"
-                  disabled={props.isLoading}
-                />
+            <InputField
+              label="Linkedin (optional)"
+              name="author.linkedin"
+              type="text"
+              id="linkedin"
+              placeholder="e.g. www.linkedin.com/theternhub"
+              disabled={props.isLoading}
+            />
 
-                <div className="flex items-center justify-center relative">
-                  <span className="absolute">
-                    {props.isError && (
-                      <CustomError
-                        message={props.error?.response?.data?.message}
-                        loading={props.isLoading}
-                      />
-                    )}
-                  </span>
+            <div className="flex items-center justify-center relative">
+              <span className="absolute">
+                {props.isError && (
+                  <CustomError
+                    message={props.error?.response?.data?.message}
+                    loading={props.isLoading}
+                  />
+                )}
+              </span>
+            </div>
+
+            <div className="flex self-end">
+              {props.isLoading ? (
+                <div className="w-40 h-[56px]">
+                  {" "}
+                  <SubmitFormLoader />
                 </div>
-
-                <div className="flex self-end">
-                  {props.isLoading ? (
-                    <div className="w-40 h-[56px]">
-                      {" "}
-                      <SubmitFormLoader />
-                    </div>
-                  ) : (
-                    <button type="submit" className="form_submit_button ">
-                      {props.buttonLabel}
-                    </button>
-                  )}
-                </div>
-              </Form>
-            );
-          }}
+              ) : (
+                <button type="submit" className="form_submit_button ">
+                  {props.buttonLabel}
+                </button>
+              )}
+            </div>
+          </Form>
         </Formik>
       </div>
     </div>

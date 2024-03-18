@@ -38,6 +38,7 @@ export default function RootLayout({
                   autoClose={5000}
                   theme="colored"
                   className="toast_message"
+                  position="top-right"
                 />
               </ReactQueryProvider>
             </Provider>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 type Props = {
-  message: string;
+  message: string | undefined;
   loading?: boolean;
 };
 
 const CustomError = (props: Props) => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>("");
 
   useEffect(() => {
     if (props.loading) {

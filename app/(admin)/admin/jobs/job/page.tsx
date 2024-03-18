@@ -3,14 +3,14 @@
 import { useSearchParams } from "next/navigation";
 import { JobInfopage } from "@/containers";
 import { AdminToolBox } from "@/components";
-import { getJobById } from "@/utilities/data-fetching/getJobById";
+import { useGetJobById } from "@/utilities/data-fetching/getJobById";
 
 const AdminJobInfoPage = () => {
   const searchParams = useSearchParams();
 
   const jobId = searchParams.get("listing_id");
 
-  const { job, isLoading, isError, error, refetch } = getJobById(jobId);
+  const { job, isLoading, isError, error, refetch } = useGetJobById(jobId);
 
   return (
     <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-4">

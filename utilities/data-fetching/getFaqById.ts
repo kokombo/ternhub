@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
-export const getFaqById = (faqId: string | string[]) => {
-  const getFaqByIdRequest = async (): Promise<FaqType | undefined> => {
+export const useGetFaqById = (faqId: string | string[]) => {
+  const getFaqByIdRequest = async () => {
     const res = await axios.get(`/api/faq/${faqId}`);
     return res.data;
   };
@@ -13,7 +13,7 @@ export const getFaqById = (faqId: string | string[]) => {
     isError,
     error,
     isSuccess,
-  } = useQuery(
+  } = useQuery<FaqType, AxiosError<ErrorResponse>>(
     ["getFaqById", faqId],
 
     getFaqByIdRequest,

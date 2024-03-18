@@ -68,7 +68,7 @@ const TextEditor = (props: Props) => {
         onMouseLeave={closeOutline}
         className="rounded-[5px]"
       >
-        <ReactQuill
+        {/* <ReactQuill
           value={props.value}
           onChange={props.onChange}
           id={props.id}
@@ -77,7 +77,7 @@ const TextEditor = (props: Props) => {
           className={`h-[277px] w-[86vw] lg:w-[${props.lgWidth}px]`}
           theme="snow"
           placeholder="write the job description here..."
-        />
+        /> */}
       </div>
     </div>
   );

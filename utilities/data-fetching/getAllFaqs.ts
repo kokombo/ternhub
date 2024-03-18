@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 
-export const getAllFaqs = () => {
-  const fetchFaqsRequest = async (): Promise<FaqType[] | undefined> => {
+export const useGetAllFaqs = () => {
+  const fetchFaqsRequest = async () => {
     const res = await axios.get("/api/faq");
     return res.data;
   };
@@ -11,11 +11,15 @@ export const getAllFaqs = () => {
     data: faqs,
     isLoading,
     isError,
-  } = useQuery("getAllFaqs", fetchFaqsRequest, {
-    refetchOnWindowFocus: false,
+  } = useQuery<FaqType[], AxiosError<ErrorResponse>>(
+    "getAllFaqs",
+    fetchFaqsRequest,
+    {
+      refetchOnWindowFocus: false,
 
-    staleTime: 60 * 60 * 60 * 1000,
-  });
+      staleTime: 60 * 60 * 60 * 1000,
+    }
+  );
 
   return { faqs, isLoading, isError };
 };
