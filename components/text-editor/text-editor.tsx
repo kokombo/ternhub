@@ -2,6 +2,7 @@ import "quill/dist/quill.snow.css";
 import { Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 import { useOutline } from "@/utilities/hooks";
+import ReactQuill from "react-quill";
 
 type Props = {
   label: string;
@@ -12,7 +13,7 @@ type Props = {
   onChange: Dispatch<SetStateAction<string>>;
 };
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 const TextEditor = (props: Props) => {
   const { outline, showOutline, closeOutline } = useOutline();

@@ -1,9 +1,14 @@
 "use client";
 
-import { TipTapEditor } from "@/components";
+import DraftEditor from "@/components/draft-editor/draft-editor";
 
 const Admin = () => {
-  return <div>Adminn</div>;
+  return (
+    <div>
+      Adminn
+      <DraftEditor />
+    </div>
+  );
 };
 
 export default Admin;

@@ -48,7 +48,6 @@ import Loader from "./loader/loader";
 import UploadProfilePicture from "./upload-profile-picture/upload-profile-picture";
 import UniversalModal from "./universal-modal/universal-modal";
 import TailSpinLoader from "./tail-spin-loader/tail-spin-loader";
-import TipTapEditor from "./tiptap-editor/tiptap-editor";
 import BarsLoader from "./bars-loader.tsx/bars-loader";
 import ColorRingLoader from "./color-ring-loader/color-ring-loader";
 import RotatingLinesLoader from "./rotating-lines-loader/rotating-lines-loader";
@@ -107,7 +106,6 @@ export {
   UploadProfilePicture,
   UniversalModal,
   TailSpinLoader,
-  TipTapEditor,
   BarsLoader,
   RotatingLinesLoader,
   RotatingSquareLoader,

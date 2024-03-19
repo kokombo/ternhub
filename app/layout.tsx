@@ -15,9 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html id="root">
       <head>
         <title>TheTernHub - Tech jobs and internships.</title>
+
+        <meta charSet="utf-8" />
 
         <link
           rel="icon"
