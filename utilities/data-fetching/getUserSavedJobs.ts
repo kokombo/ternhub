@@ -2,9 +2,12 @@ import axios, { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { setUserSavedJobs } from "@/redux-toolkit/slices/job";
+import { useSession } from "next-auth/react";
 
 export const useGetUserSavedJobs = () => {
   const dispatch = useDispatch();
+
+  const { data: session } = useSession();
 
   const getUserSavedJobsRequest = async () => {
     const res = await axios.get("/api/bookmark");
@@ -28,6 +31,8 @@ export const useGetUserSavedJobs = () => {
       refetchOnWindowFocus: false,
 
       refetchOnMount: "always",
+
+      enabled: Boolean(session),
     }
   );
 

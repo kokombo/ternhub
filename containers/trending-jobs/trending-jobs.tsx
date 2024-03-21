@@ -18,7 +18,7 @@ const TrendingJobs = () => {
     return res.data;
   };
 
-  const { data, isLoading, isError } = useQuery<
+  const { data, isLoading, isError, error } = useQuery<
     Data,
     AxiosError<ErrorResponse>
   >("fetchTrendingJobs", fetchTrendingJobsRequest, {
