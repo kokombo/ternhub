@@ -28,11 +28,9 @@ export const useGetUserSavedJobs = () => {
         dispatch(setUserSavedJobs(data));
       },
 
-      refetchOnWindowFocus: false,
+      refetchOnMount: true,
 
-      refetchOnMount: "always",
-
-      enabled: Boolean(session),
+      enabled: !!Boolean(session),
     }
   );
 
