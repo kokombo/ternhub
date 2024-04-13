@@ -18,7 +18,7 @@ export const GET = async (req: Request) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId).populate("savedJobs");
+    const user = await User.findById(userId).populate({ path: "savedJobs" });
 
     if (!user) {
       return NextResponse.json(
