@@ -23,6 +23,11 @@ const Sidebar = (props: Props) => {
     }
   }, [screenSize]);
 
+  const closeAside = () => {
+    props.closeSidebar();
+    document.body.style.overflow = "auto";
+  };
+
   return (
     <aside
       className={` ${
@@ -31,13 +36,13 @@ const Sidebar = (props: Props) => {
     >
       <div>
         <span className="float_right">
-          <button type="button" onClick={() => props.closeSidebar()}>
+          <button type="button" onClick={closeAside}>
             <Image src={icons.close} alt="toggle icon" height={24} width={24} />
           </button>
         </span>
 
         <div className="py-10 gap-4 flex flex-col">
-          <div onClick={() => props.closeSidebar()}>
+          <div onClick={closeAside}>
             <Logo />
           </div>
 
@@ -48,7 +53,7 @@ const Sidebar = (props: Props) => {
                 aria-label="internships page link from sidebar"
                 className="hover:text-purple"
                 onClick={() => {
-                  props.closeSidebar();
+                  closeAside();
 
                   session?.user
                     ? undefined
@@ -63,7 +68,7 @@ const Sidebar = (props: Props) => {
               <Link
                 href="/blogs"
                 aria-label="blogs page link from sidebar"
-                onClick={() => props.closeSidebar()}
+                onClick={closeAside}
                 className="hover:text-purple"
               >
                 Blogs
@@ -79,7 +84,7 @@ const Sidebar = (props: Props) => {
             type="button"
             onClick={() => {
               signOut({ callbackUrl: "/auth/signin" });
-              props.closeSidebar();
+              closeAside();
             }}
             className="signup_button self-center"
           >

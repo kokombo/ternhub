@@ -62,7 +62,10 @@ const NavigationBar = (props: Props) => {
 
           <button
             type="button"
-            onClick={props.openSidebar}
+            onClick={() => {
+              props.openSidebar();
+              document.body.style.overflow = "hidden";
+            }}
             className="nav_toggle"
           >
             <Image
