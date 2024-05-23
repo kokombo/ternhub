@@ -24,59 +24,53 @@ const NavigationBar = (props: Props) => {
         </span>
       )}
 
-      {status === "loading" ? (
-        <div />
-      ) : (
-        <div className="flex items-center gap-[14px]">
-          {status === "authenticated" ? (
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  signOut({ callbackUrl: "/auth/signin" });
-                }}
-                className="lg:inline hidden text-base text-greyblack"
-              >
-                Sign out
-              </button>
-              <ProfilePicture />
-            </div>
-          ) : (
-            <div className="flex items-center gap-[10px] ">
-              <Link
-                href="/auth/signin"
-                arial-label="Link to the signin page"
-                className="text-base font-semibold text-purple hidden lg:inline"
-              >
-                Log in
-              </Link>
+      <div className="flex items-center gap-[14px]">
+        {status === "loading" ? (
+          <div />
+        ) : status === "authenticated" ? (
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                signOut({ callbackUrl: "/auth/signin" });
+              }}
+              className="lg:inline hidden text-base text-greyblack"
+            >
+              Sign out
+            </button>
+            <ProfilePicture />
+          </div>
+        ) : (
+          <div className="flex items-center gap-[10px] ">
+            <Link
+              href="/auth/signin"
+              arial-label="Link to the signin page"
+              className="text-base font-semibold text-purple hidden lg:inline"
+            >
+              Log in
+            </Link>
 
-              <StyledLink
-                label="Sign up"
-                url="/auth/signup"
-                arialabel="Link to the signup page"
-                extraClasses="signup_button"
-              />
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={() => {
-              props.openSidebar();
-              document.body.style.overflow = "hidden";
-            }}
-            className="nav_toggle"
-          >
-            <Image
-              src={icons.toggle}
-              alt="toggle icon"
-              height={24}
-              width={24}
+            <StyledLink
+              label="Sign up"
+              url="/auth/signup"
+              arialabel="Link to the signup page"
+              extraClasses="signup_button"
             />
-          </button>
-        </div>
-      )}
+          </div>
+        )}
+
+        <button
+          type="button"
+          onClick={() => {
+            props.openSidebar();
+            document.body.style.overflow = "hidden";
+          }}
+          disabled={status === "loading"}
+          className="nav_toggle"
+        >
+          <Image src={icons.toggle} alt="toggle icon" height={24} width={24} />
+        </button>
+      </div>
     </nav>
   );
 };
