@@ -4,26 +4,34 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { twMerge } from "tailwind-merge";
 
 const NavLinks = () => {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <ul className="flex flex-col md:flex-row items-center gap-[38px]">
       <li>
         <Link
-          href={`${session?.user ? "/jobs" : "/auth/signin"}`}
+          href={`${
+            status === "authenticated"
+              ? "/jobs"
+              : status === "unauthenticated"
+              ? "/auth/signin"
+              : "#"
+          }`}
           aria-label="internships page link"
-          className={`${
-            pathname.includes("/jobs") ? "text-purple" : ""
-          } text-sm lg:text-base tracking-[0.5%]`}
-          prefetch={false}
-          onClick={() =>
-            session?.user
+          className={twMerge(
+            pathname.includes("/jobs") && "text-purple",
+            "text-sm lg:text-base tracking-[0.5%]",
+            status === "loading" && "pointer-events-none"
+          )}
+          onClick={() => {
+            session
               ? undefined
-              : toast.error("Please sign in to continue using TernHub.")
-          }
+              : toast.error("Please sign in to continue using TernHub.");
+          }}
         >
           Jobs
         </Link>
@@ -31,12 +39,13 @@ const NavLinks = () => {
 
       <li>
         <Link
-          href={"/blogs"}
+          href={status === "loading" ? "#" : "/blogs"}
           aria-label="blogs page link"
-          className={`${
-            pathname.includes("/blogs") ? "text-purple" : ""
-          } text-sm lg:text-base tracking-[0.5%] font-sans `}
-          prefetch={false}
+          className={twMerge(
+            pathname.includes("/blogs") && "text-purple",
+            "text-sm lg:text-base tracking-[0.5%]",
+            status === "loading" && "pointer-events-none"
+          )}
         >
           Blogs
         </Link>

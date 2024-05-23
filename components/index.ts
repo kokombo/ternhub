@@ -54,6 +54,7 @@ import RotatingLinesLoader from "./rotating-lines-loader/rotating-lines-loader";
 import RotatingSquareLoader from "./rotating-square-loader/rotating-square-loader";
 import FilterSelect from "./filter-select/filter-select";
 import EmailVerificationSegmentNavbar from "./email-verification-segment-navbar/email-verification-segment-navbar";
+import ProtectRoute from "./protect-route/protect-route";
 
 export {
   BlogCard,
@@ -112,4 +113,5 @@ export {
   ColorRingLoader,
   FilterSelect,
   EmailVerificationSegmentNavbar,
+  ProtectRoute,
 };

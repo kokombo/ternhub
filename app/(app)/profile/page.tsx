@@ -4,10 +4,10 @@ import { useSession } from "next-auth/react";
 import { UploadProfilePicture } from "@/components";
 
 const Profile = () => {
-  const { data: session } = useSession({ required: true });
+  const { data: session } = useSession();
 
   return (
-    <div className="padding grid place-items-center">
+    <main className="padding grid place-items-center">
       <section className="flex_center gap-8">
         <UploadProfilePicture />
 
@@ -35,7 +35,7 @@ const Profile = () => {
           </span>
         </div>
       </section>
-    </div>
+    </main>
   );
 };
 

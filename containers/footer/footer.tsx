@@ -5,15 +5,11 @@ import { useSession } from "next-auth/react";
 const Footer = () => {
   const { data: session, status } = useSession();
 
-  if (status === "loading") return <div></div>;
-
   return (
     <footer className="footer">
       <div className="footer_text_wrapper">
         <article className="footer_container_1">
           <h3 className="text-[20px] lg:text-[32px] text-white">TheTernHub</h3>
-
-          {/* <Logo /> */}
 
           <p className="footer_text font-sans">
             Explore a world of thrilling internships in the tech industry and
@@ -28,6 +24,7 @@ const Footer = () => {
             <Link
               href="/admin"
               className="hover:text-purple lg:text-base text-sm text-white"
+              aria-disabled={status === "loading"}
             >
               Admin
             </Link>

@@ -14,11 +14,9 @@ const NavigationBar = (props: Props) => {
 
   const pathname = usePathname();
 
-  if (status === "loading") return <div></div>;
-
   return (
     <nav className="nav_container">
-      <Logo />
+      <Logo disabled={status === "loading"} />
 
       {pathname.includes("/search") ? null : (
         <span className="text-greyblack hidden lg:inline ">
@@ -26,47 +24,56 @@ const NavigationBar = (props: Props) => {
         </span>
       )}
 
-      <div className="flex items-center gap-[14px]">
-        {status === "authenticated" ? (
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                signOut({ callbackUrl: "/auth/signin" });
-              }}
-              className="lg:inline hidden text-base text-greyblack"
-            >
-              Sign out
-            </button>
-            <ProfilePicture />
-          </div>
-        ) : (
-          <div className="flex items-center gap-[10px] ">
-            <Link
-              href="/auth/signin"
-              arial-label="Link to the signin page"
-              className="text-base font-semibold text-purple hidden lg:inline"
-            >
-              Log in
-            </Link>
+      {status === "loading" ? (
+        <div />
+      ) : (
+        <div className="flex items-center gap-[14px]">
+          {status === "authenticated" ? (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  signOut({ callbackUrl: "/auth/signin" });
+                }}
+                className="lg:inline hidden text-base text-greyblack"
+              >
+                Sign out
+              </button>
+              <ProfilePicture />
+            </div>
+          ) : (
+            <div className="flex items-center gap-[10px] ">
+              <Link
+                href="/auth/signin"
+                arial-label="Link to the signin page"
+                className="text-base font-semibold text-purple hidden lg:inline"
+              >
+                Log in
+              </Link>
 
-            <StyledLink
-              label="Sign up"
-              url="/auth/signup"
-              arialabel="Link to the signup page"
-              extraClasses="signup_button"
+              <StyledLink
+                label="Sign up"
+                url="/auth/signup"
+                arialabel="Link to the signup page"
+                extraClasses="signup_button"
+              />
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={props.openSidebar}
+            className="nav_toggle"
+          >
+            <Image
+              src={icons.toggle}
+              alt="toggle icon"
+              height={24}
+              width={24}
             />
-          </div>
-        )}
-
-        <button
-          type="button"
-          onClick={props.openSidebar}
-          className="nav_toggle"
-        >
-          <Image src={icons.toggle} alt="toggle icon" height={24} width={24} />
-        </button>
-      </div>
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
