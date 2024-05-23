@@ -26,7 +26,7 @@ const Search = (props: Props) => {
         />
 
         <input
-          type="submit"
+          type="search"
           placeholder={props.placeholder}
           className={`lg:w-[${props.lgInputWidth}px] md:w-[300px] min-w-full h-7 outline-none text-lightGrey`}
           onChange={props.onChange}
