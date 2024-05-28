@@ -21,6 +21,7 @@ const Sidebar = (props: Props) => {
     if (screenSize && screenSize >= 1024) {
       props.closeSidebar();
     }
+    //eslint-disable-next-line
   }, [screenSize]);
 
   const closeAside = () => {
@@ -95,6 +96,7 @@ const Sidebar = (props: Props) => {
             href="/auth/signin"
             aria-label="sign in page link from sidebar"
             className="signup_button self-center"
+            onClick={closeAside}
           >
             Sign in
           </Link>
