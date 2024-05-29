@@ -43,6 +43,7 @@ const SocialAuths = (props: Props) => {
                 authName={provider.name}
                 label={props.label}
                 icon={icons.google}
+                disabled={false}
               />
             );
           })}
