@@ -29,9 +29,7 @@ type Data = {
 
 const SignUpPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
-
   const [redirecting, setRedirecting] = useState(false);
-
   const router = useRouter();
 
   const signupFormRequest = async (formData: UserSignupDataType) => {
@@ -95,6 +93,7 @@ const SignUpPage = () => {
             authName="Google"
             label="Sign up"
             icon={icons.google}
+            disabled={isLoading || redirecting}
           />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">

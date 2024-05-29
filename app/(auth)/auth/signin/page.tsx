@@ -22,11 +22,8 @@ import { loginFormValidationSchema } from "@/utilities/validation/form-validatio
 
 const SignInPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
-
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState<string | null | undefined>(null);
-
   const router = useRouter();
 
   const signAUserIn = async (
@@ -76,6 +73,7 @@ const SignInPage = () => {
             authName="Google"
             label="Log in"
             icon={icons.google}
+            disabled={loading}
           />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">
