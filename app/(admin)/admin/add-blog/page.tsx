@@ -27,7 +27,12 @@ const AddABlog = () => {
   const queryClient = useQueryClient();
 
   const addABlogRequest = async (blogData: BlogData) => {
-    const res = await axios.post("/api/blog", blogData);
+    const res = await axios.post("/api/blog", blogData, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 

@@ -7,7 +7,11 @@ export const useGetAllBlogs = () => {
   const dispatch = useDispatch();
 
   const fetchBlogsRequest = async () => {
-    const res = await axios.get("/api/blog");
+    const res = await axios.get("/api/blog", {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 

@@ -28,7 +28,12 @@ const PostAJob = () => {
   const queryClient = useQueryClient();
 
   const postAJobRequest = async (jobData: JobData) => {
-    return await axios.post("/api/job", jobData);
+    return await axios.post("/api/job", jobData, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const { mutateAsync, isLoading, isError, error } = useMutation(

@@ -6,7 +6,12 @@ export const useBookmarkAJob = (jobId: string) => {
   const queryClient = useQueryClient();
 
   const bookmarkAJobRequest = async (jobId: string) => {
-    const res = await axios.put("/api/bookmark", JSON.stringify(jobId));
+    const res = await axios.put("/api/bookmark", JSON.stringify(jobId), {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 

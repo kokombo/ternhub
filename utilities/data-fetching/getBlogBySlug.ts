@@ -3,7 +3,11 @@ import { useQuery } from "react-query";
 
 export const useGetBlogBySlug = (slug: string | string[]) => {
   const getBlogBySlugRequest = async () => {
-    const res = await axios.get(`/api/blog/${slug}`);
+    const res = await axios.get(`/api/blog/${slug}`, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 

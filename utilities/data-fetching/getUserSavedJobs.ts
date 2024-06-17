@@ -10,7 +10,11 @@ export const useGetUserSavedJobs = () => {
   const { data: session } = useSession();
 
   const getUserSavedJobsRequest = async () => {
-    const res = await axios.get("/api/bookmark");
+    const res = await axios.get("/api/bookmark", {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 

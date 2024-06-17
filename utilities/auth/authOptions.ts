@@ -25,10 +25,19 @@ export const authOptions: NextAuthOptions = {
         const password = credentials?.password;
 
         return await axios
-          .post(`${process.env.NEXTAUTH_URL}/api/signin`, {
-            email,
-            password,
-          })
+          .post(
+            `${process.env.NEXTAUTH_URL}/api/signin`,
+            {
+              email,
+              password,
+            },
+            {
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }
+          )
           .then((res) => {
             const user = res.data;
 

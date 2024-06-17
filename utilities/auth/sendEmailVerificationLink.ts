@@ -8,7 +8,13 @@ export const useSendEmailVerificationLink = (
   const emailVerificationLinkRequest = async () => {
     const res = await axios.post(
       "/api/user/verify-email",
-      JSON.stringify(email)
+      JSON.stringify(email),
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return res.data;

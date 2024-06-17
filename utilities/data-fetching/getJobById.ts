@@ -3,7 +3,11 @@ import { useQuery } from "react-query";
 
 export const useGetJobById = (jobId: string | null) => {
   const getJobByIdRequest = async () => {
-    const res = await axios.get(`/api/job?listing_id=${jobId}`);
+    const res = await axios.get(`/api/job?listing_id=${jobId}`, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 

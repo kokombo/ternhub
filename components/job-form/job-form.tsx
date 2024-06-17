@@ -10,7 +10,6 @@ import {
   RadioButtonOptions,
 } from "..";
 import { Dispatch, SetStateAction } from "react";
-import * as Yup from "yup";
 import { jobFormValidationSchema } from "@/utilities/validation/form-validations";
 
 type Props = {

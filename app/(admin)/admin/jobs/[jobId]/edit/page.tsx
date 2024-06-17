@@ -42,7 +42,12 @@ const EditJobInfo = () => {
   const [description, setDescription] = useState(job?.description || "");
 
   const updateJobRequest = async (newJobData: JobData) => {
-    const res = await axios.patch(`/api/job/${jobId}`, newJobData);
+    const res = await axios.patch(`/api/job/${jobId}`, newJobData, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 

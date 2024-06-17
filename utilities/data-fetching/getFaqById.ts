@@ -3,7 +3,11 @@ import { useQuery } from "react-query";
 
 export const useGetFaqById = (faqId: string | string[]) => {
   const getFaqByIdRequest = async () => {
-    const res = await axios.get(`/api/faq/${faqId}`);
+    const res = await axios.get(`/api/faq/${faqId}`, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 

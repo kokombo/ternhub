@@ -25,7 +25,11 @@ export const useGetAllJobs = (
       `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
     );
 
-    const res = await axios.get("/api/jobs?" + queryStrings);
+    const res = await axios.get("/api/jobs?" + queryStrings, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
 
     return res.data;
   };

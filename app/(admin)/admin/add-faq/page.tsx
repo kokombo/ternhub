@@ -17,7 +17,12 @@ const AddFaqPage = () => {
   const queryClient = useQueryClient();
 
   const addFaqRequest = async (faqData: FaqData) => {
-    const res = await axios.post("/api/faq", faqData);
+    const res = await axios.post("/api/faq", faqData, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 
