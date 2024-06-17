@@ -16,7 +16,7 @@ const UserProfileBox = () => {
       <button
         type="button"
         onClick={() => {
-          signOut({ callbackUrl: "/auth/signin" });
+          signOut({ callbackUrl: "/" });
         }}
         className="signup_button"
       >

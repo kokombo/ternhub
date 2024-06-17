@@ -32,7 +32,7 @@ const NavigationBar = (props: Props) => {
             <button
               type="button"
               onClick={() => {
-                signOut({ callbackUrl: "/auth/signin" });
+                signOut({ callbackUrl: "/" });
               }}
               className="lg:inline hidden text-base text-greyblack"
             >
