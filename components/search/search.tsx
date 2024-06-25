@@ -1,6 +1,6 @@
 import { icons } from "@/constants";
 import Image from "next/image";
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEvent } from "react";
 
 type Props = {
   buttonLabel: string;
@@ -14,6 +14,14 @@ type Props = {
 };
 
 const Search = (props: Props) => {
+  const handleEnterKeyToTriggerSearch = (
+    e: KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (e.key === "Enter") {
+      props.onClickSearchButton();
+    }
+  };
+
   return (
     <div
       className={`w-full h-[64px] md:w-[500px] lg:w-[${props.lgFrameWidth}px] lg:h-[72px] max-w-full flex items-center justify-between border-[0.8px] border-grey px-4 py-3 rounded-[10px] hover:border-purple hover:border-[1px] `}
@@ -32,9 +40,10 @@ const Search = (props: Props) => {
           onChange={props.onChange}
           value={props.value}
           name="searchTerm"
-          id={props.value}
+          id="searchInput"
           autoComplete="off"
           disabled={props.disabled}
+          onKeyDown={handleEnterKeyToTriggerSearch}
         />
       </span>
 
