@@ -24,11 +24,12 @@ const Message = (props: Props) => {
         />
       </div>
 
-      {props.isError && (
-        <p className="text-greyblack text-lg text-center font-semibold">
-          {props.message}
-        </p>
-      )}
+      {props.isError ||
+        (props.message && (
+          <p className="text-greyblack text-lg text-center font-semibold">
+            {props.message}
+          </p>
+        ))}
 
       {props.isError && (
         <button
