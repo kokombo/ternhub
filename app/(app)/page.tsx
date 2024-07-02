@@ -4,7 +4,7 @@ import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-export default function Home() {
+const Home = () => {
   const { status } = useSession();
 
   if (status === "authenticated") {
@@ -19,4 +19,6 @@ export default function Home() {
       <Faqs />
     </div>
   );
-}
+};
+
+export default Home;

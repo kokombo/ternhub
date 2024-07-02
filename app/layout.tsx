@@ -1,13 +1,19 @@
-"use client";
-
 import "@/styles/globals.css";
-import { NextAuthProvider, ReactQueryProvider } from "@/components";
 import { Sans } from "./font";
-import { Provider } from "react-redux";
-import { store } from "@/redux-toolkit/store";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Providers } from "./(components)";
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TheTernHub",
+  description: "Discover new internship opportunities",
+  icons: {
+    icon: "/theternhub-logo.png",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -15,36 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html id="root">
-      <head>
-        <title>TheTernHub - Tech jobs and internships.</title>
-
-        <meta charSet="utf-8" />
-
-        <link
-          rel="icon"
-          href="/theternhub-logo.png"
-          type="image/png"
-          sizes="any"
-        />
-      </head>
-
+    <html id="root" suppressHydrationWarning>
       <body>
         <main className={Sans.className}>
-          <NextAuthProvider>
-            <Provider store={store}>
-              <ReactQueryProvider>
-                {children}
+          <Providers>
+            {children}
 
-                <ToastContainer
-                  autoClose={5000}
-                  theme="colored"
-                  className="toast_message"
-                  position="top-right"
-                />
-              </ReactQueryProvider>
-            </Provider>
-          </NextAuthProvider>
+            <ToastContainer
+              autoClose={5000}
+              theme="colored"
+              className="toast_message"
+              position="top-right"
+            />
+          </Providers>
         </main>
       </body>
 

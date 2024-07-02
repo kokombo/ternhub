@@ -7,7 +7,7 @@ import { useGetAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { illustrations } from "@/constants";
 
-const JobsListPage = () => {
+const JobsPage = () => {
   const {
     pageFromLocalStorage,
     jobModeTermFromLocalStorage,
@@ -149,4 +149,4 @@ const JobsListPage = () => {
   );
 };
 
-export default JobsListPage;
+export default JobsPage;

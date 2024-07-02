@@ -1,16 +1,20 @@
 import User from "@/models/user";
 import { connectDatabase } from "@/database/database";
 import { NextResponse } from "next/server";
+import { loginFormValidationSchema } from "@/utilities/validation/form-validations";
+import { ValidationError } from "yup";
 
 export const POST = async (req: Request, res: Response) => {
-  const { email, password } = await req.json();
+  const body = await req.json();
 
-  const refinedEmail = email.toLowerCase();
+  const { email, password } = body;
 
   try {
+    await loginFormValidationSchema.validate(body);
+
     await connectDatabase();
 
-    const user = await User.findOne({ email: refinedEmail });
+    const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
       return NextResponse.json(
@@ -32,6 +36,10 @@ export const POST = async (req: Request, res: Response) => {
       return NextResponse.json(user);
     }
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return NextResponse.json({ message: error.errors[0] }, { status: 500 });
+    }
+
     return NextResponse.json(
       { message: "Something went wrong, please try again." },
       { status: 500 }
