@@ -88,11 +88,6 @@ interface FaqType extends FaqFormType {
   _id: string;
   answer: string;
 }
-
-type Error = {
-  message: string;
-};
-
 type RadioOption = {
   value: string;
   label: string;
@@ -117,4 +112,10 @@ type ErrorResponse = {
 
 type MessageResponse = {
   message: string;
+};
+
+type JobsResponse = {
+  jobs: JobType[];
+  numOfJobsAfterQuery: number;
+  totalJobsCountBeforePagination: number;
 };

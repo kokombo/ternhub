@@ -8,40 +8,39 @@ const getUserQueriesFromLocalStorage = (storageName: string) => {
       const storedKeyValueArrays = JSON.parse(storedUserQueries);
 
       return storedKeyValueArrays;
-    } else {
-      return null;
     }
+    return null;
   }
 };
 
 export const valuesFromLocalStorage = (storageName: string) => {
-  const queryArrayFromLocalStorage: any[] =
+  const queryArrayFromLocalStorage =
     getUserQueriesFromLocalStorage(storageName);
 
-  const pageFromLocalStorage: number = getValueByKeyInArray(
+  const pageFromLocalStorage = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "pageNumber"
-  );
+  ) as number;
 
-  const jobModeTermFromLocalStorage: string = getValueByKeyInArray(
+  const jobModeTermFromLocalStorage = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "jobModeFilterTerm"
-  );
+  ) as string;
 
-  const jobTypeTermFromLocalStorage: string = getValueByKeyInArray(
+  const jobTypeTermFromLocalStorage = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "jobTypeFilterTerm"
-  );
+  ) as string;
 
-  const searchTermFromLocalStorage: string = getValueByKeyInArray(
+  const searchTermFromLocalStorage = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "searchTerm"
-  );
+  ) as string;
 
-  const jobCategoryTermFromLocalStorage: string = getValueByKeyInArray(
+  const jobCategoryTermFromLocalStorage = getValueByKeyInArray(
     queryArrayFromLocalStorage,
     "jobCategoryFilterTerm"
-  );
+  ) as string;
 
   return {
     pageFromLocalStorage,

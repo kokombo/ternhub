@@ -1,6 +1,6 @@
 import { icons } from "@/constants";
 import Image from "next/image";
-import { ChangeEventHandler, KeyboardEvent } from "react";
+import type { ChangeEventHandler, KeyboardEvent } from "react";
 
 type Props = {
   buttonLabel: string;

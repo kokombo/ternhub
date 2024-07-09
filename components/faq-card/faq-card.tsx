@@ -11,7 +11,6 @@ const FaqCard = ({
   onClickFaqEditButton: (id: string) => void;
 }) => {
   const [showAnswer, setShowAnswer] = useState(false);
-
   const pathname = usePathname();
 
   const showAndHideAnswer = () => {
@@ -28,6 +27,7 @@ const FaqCard = ({
     >
       <div
         onClick={showAndHideAnswer}
+        onKeyDown={showAndHideAnswer}
         data-testid="faq-card"
         className="flex flex-col gap-4 border-grey bg-white border-[0.8px] rounded-[10px] w-full p-6"
       >

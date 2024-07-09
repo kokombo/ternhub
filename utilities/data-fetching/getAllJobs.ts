@@ -1,14 +1,8 @@
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setAllJobs } from "@/redux-toolkit/slices/job";
-
-type Data = {
-  jobs: JobType[];
-  numOfJobsAfterQuery: number;
-  totalJobsCountBeforePagination: number;
-};
 
 export const useGetAllJobs = (
   pageNumber: number,
@@ -25,7 +19,7 @@ export const useGetAllJobs = (
       `${baseUrl}jobs?${queryStrings.replace(`&limit=${limit}`, "")}`
     );
 
-    const res = await axios.get("/api/jobs?" + queryStrings, {
+    const res = await axios.get(`/api/jobs?${queryStrings}`, {
       headers: {
         Accept: "application/json",
       },
@@ -42,7 +36,7 @@ export const useGetAllJobs = (
     refetch,
     isFetching,
     isPreviousData,
-  } = useQuery<Data, AxiosError<ErrorResponse>>(
+  } = useQuery<JobsResponse, AxiosError<ErrorResponse>>(
     ["fetchJobs", pageNumber],
 
     fetchJobsRequest,

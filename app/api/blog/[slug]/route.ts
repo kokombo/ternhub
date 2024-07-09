@@ -1,12 +1,14 @@
 import Blog from "@/models/blog";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { NextResponse, type NextRequest } from "next/server";
 import slugify from "slugify";
 import cloudinary from "@/utilities/general/cloudinary";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const GET = async (req: Request, { params }: { params: Params }) => {
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { slug: string } }
+) => {
   try {
     await connectDatabase();
 
@@ -39,7 +41,10 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
   }
 };
 
-export const PATCH = async (req: Request, { params }: { params: Params }) => {
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: { slug: string } }
+) => {
   const body = await req.json();
 
   const { sessionUser } = await getSessionUser();
@@ -95,7 +100,10 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
   }
 };
 
-export const DELETE = async (req: Request, { params }: { params: Params }) => {
+export const DELETE = async (
+  req: NextRequest,
+  { params }: { params: { slug: string } }
+) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {

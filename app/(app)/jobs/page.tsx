@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo, ChangeEvent } from "react";
+import { useEffect, useState, useMemo, type ChangeEvent } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
 import { useGetAllJobs } from "@/utilities/data-fetching/getAllJobs";
@@ -33,27 +33,18 @@ const JobsPage = () => {
 
   const limit = 30;
 
-  const params = new URLSearchParams();
-
-  if (jobModeFilterTerm) params.append("mode", jobModeFilterTerm);
-
-  if (jobTypeFilterTerm) params.append("type", jobTypeFilterTerm);
-
-  if (jobCategoryFilterTerm) params.append("category", jobCategoryFilterTerm);
-
-  params.append("page", pageNumber.toString());
-
-  params.append("limit", limit.toString());
-
-  if (jobModeFilterTerm == "all") params.delete("mode");
-
-  if (jobTypeFilterTerm == "all") params.delete("type");
-
-  if (jobCategoryFilterTerm == "all") params.delete("category");
-
-  const queryStrings = params.toString();
-
-  const baseUrl = "/";
+  const params = useMemo(() => {
+    const searchParams = new URLSearchParams();
+    if (jobModeFilterTerm && jobModeFilterTerm !== "all")
+      searchParams.append("mode", jobModeFilterTerm);
+    if (jobTypeFilterTerm && jobTypeFilterTerm !== "all")
+      searchParams.append("type", jobTypeFilterTerm);
+    if (jobCategoryFilterTerm && jobCategoryFilterTerm !== "all")
+      searchParams.append("category", jobCategoryFilterTerm);
+    searchParams.append("page", pageNumber.toString());
+    searchParams.append("limit", limit.toString());
+    return searchParams.toString();
+  }, [jobModeFilterTerm, jobTypeFilterTerm, jobCategoryFilterTerm, pageNumber]);
 
   const {
     data,
@@ -63,7 +54,7 @@ const JobsPage = () => {
     refetch,
     isFetching,
     isPreviousData,
-  } = useGetAllJobs(pageNumber, queryStrings, limit, baseUrl);
+  } = useGetAllJobs(pageNumber, params, limit, "/");
 
   //Onchange handler for filter terms.
   const filterTermOnchange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -74,17 +65,14 @@ const JobsPage = () => {
     }));
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
-    const refetchDataAfterFilterTermChanges = () => {
-      setQueryTerms((queryTerms) => ({
-        ...queryTerms,
-        pageNumber: 1,
-      }));
+    setQueryTerms((queryTerms) => ({
+      ...queryTerms,
+      pageNumber: 1,
+    }));
 
-      refetch();
-    };
-
-    refetchDataAfterFilterTermChanges();
+    refetch();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
 
   //Storing a user's search queries in local storage to ensure persistence after page reload and router change.

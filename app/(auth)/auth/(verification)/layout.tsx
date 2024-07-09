@@ -11,7 +11,7 @@ export default function EmailVerificationLayout({
 }) {
   const { status } = useSession();
 
-  if (status === "loading") return <div className="h-screen"></div>;
+  if (status === "loading") return <div className="h-screen" />;
 
   return (
     <>

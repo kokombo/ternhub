@@ -1,11 +1,11 @@
 import User from "@/models/user";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import emailValidator from "node-email-verifier";
 import { sendEmail } from "@/utilities/auth/sendEmail";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const POST = async (req: Request) => {
+export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
   const email = body.email;
@@ -65,7 +65,7 @@ export const POST = async (req: Request) => {
   }
 };
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {

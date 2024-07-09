@@ -1,15 +1,22 @@
 import { BlogInfopageHeader, BlogInfopageBody, Message } from "@/components";
 import { illustrations } from "@/constants";
 import RelatedBlogs from "../related-blogs/related-blogs";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { useGetAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
+import type {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 
 type Props = {
   data: BlogType | undefined;
   isLoading: boolean;
   isError: boolean;
   error: AxiosError<ErrorResponse> | null;
-  refetch?: any;
+  refetch?: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<BlogType, AxiosError<ErrorResponse>>>;
   rootUrl: string;
 };
 
@@ -26,7 +33,7 @@ const BlogInfoPage = (props: Props) => {
   return (
     <>
       {props.isLoading ? (
-        <div className="min-h-screen"></div>
+        <div className="min-h-screen" />
       ) : props.isError ? (
         <div className="flex_center">
           <Message

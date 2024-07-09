@@ -2,8 +2,8 @@
 
 import { ErrorComponent } from "@/components";
 
-const Error = () => {
+const ErrorPage = () => {
   return <ErrorComponent />;
 };
 
-export default Error;
+export default ErrorPage;

@@ -6,9 +6,9 @@ export const useCountdownTimer = (initialTime: number) => {
   const formatTime = ({ time }: { time: number }) => {
     if (time < 10) {
       return `0${time}`;
-    } else {
-      return time;
     }
+
+    return time;
   };
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export const useCountdownTimer = (initialTime: number) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [time]);
+  }, []);
 
   const newTime = formatTime({ time });
 

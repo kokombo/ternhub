@@ -7,7 +7,7 @@ const JobPostDuration = ({
   createdAt: Date | undefined;
   color: string;
 }) => {
-  let duration;
+  let duration = "";
 
   if (createdAt) {
     const time = new Date(createdAt);

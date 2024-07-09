@@ -3,8 +3,7 @@ import { Sans } from "./font";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Providers } from "./(components)";
-
+import { Providers } from "./_components";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html id="root" suppressHydrationWarning>
+    <html lang="en" id="root" suppressHydrationWarning>
       <body>
         <main className={Sans.className}>
           <Providers>

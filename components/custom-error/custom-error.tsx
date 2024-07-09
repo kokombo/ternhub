@@ -20,7 +20,7 @@ const CustomError = (props: Props) => {
     const timer = setTimeout(() => setErrorMessage(""), 10000);
 
     return () => clearTimeout(timer);
-  }, [props.message, props.loading]);
+  }, []);
 
   return (
     <>

@@ -3,7 +3,7 @@
 import { JobForm } from "@/components";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import axios, { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const initialFormValues: JobFormType = {
@@ -22,21 +22,25 @@ const initialFormValues: JobFormType = {
 
 const PostAJob = () => {
   const [description, setDescription] = useState("");
-
   const router = useRouter();
-
   const queryClient = useQueryClient();
 
   const postAJobRequest = async (jobData: JobData) => {
-    return await axios.post("/api/job", jobData, {
+    const res = await axios.post("/api/job", jobData, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     });
+
+    return res.data;
   };
 
-  const { mutateAsync, isLoading, isError, error } = useMutation(
+  const { mutateAsync, isLoading, isError, error } = useMutation<
+    MessageResponse,
+    AxiosError<ErrorResponse>,
+    JobData
+  >(
     postAJobRequest,
 
     {
@@ -63,7 +67,7 @@ const PostAJob = () => {
       textEditorOnchange={setDescription}
       isLoading={isLoading}
       isError={isError}
-      error={error}
+      error={error?.response?.data.message}
       buttonLabel="Post Job"
     />
   );

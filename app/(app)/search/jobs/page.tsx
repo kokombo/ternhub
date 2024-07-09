@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState, ChangeEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { StateType } from "@/redux-toolkit/store";
+import type { StateType } from "@/redux-toolkit/store";
 import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
 import { v4 as uuidv4 } from "uuid";
 import { illustrations } from "@/constants";
@@ -29,7 +29,7 @@ const JobsSearchResults = () => {
 
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
-  ); //From global state manager - Redux Toolkit
+  );
 
   const initialQueryTerms = {
     searchTerm: newJobSearchTerm || searchTermFromLocalStorage,
@@ -52,40 +52,36 @@ const JobsSearchResults = () => {
   } = queryTerms;
 
   const router = useRouter();
-
   const search_id = uuidv4();
 
-  const params = new URLSearchParams();
+  const params = useMemo(() => {
+    const searchParams = new URLSearchParams();
+    if (searchTerm) searchParams.append("search", searchTerm);
+    if (jobModeFilterTerm && jobModeFilterTerm !== "all")
+      searchParams.append("mode", jobModeFilterTerm);
+    if (jobTypeFilterTerm && jobTypeFilterTerm !== "all")
+      searchParams.append("type", jobTypeFilterTerm);
+    if (jobCategoryFilterTerm && jobCategoryFilterTerm !== "all")
+      searchParams.append("category", jobCategoryFilterTerm);
+    searchParams.append("page", pageNumber.toString());
+    searchParams.append("limit", limit.toString());
+    return searchParams.toString();
+  }, [
+    jobModeFilterTerm,
+    jobTypeFilterTerm,
+    searchTerm,
+    limit,
+    jobCategoryFilterTerm,
+    pageNumber,
+  ]);
 
-  if (searchTerm) params.append("search", searchTerm);
-
-  if (jobModeFilterTerm) params.append("mode", jobModeFilterTerm);
-
-  if (jobTypeFilterTerm) params.append("type", jobTypeFilterTerm);
-
-  if (jobCategoryFilterTerm) params.append("category", jobCategoryFilterTerm);
-
-  params.append("page", pageNumber.toString());
-
-  params.append("limit", limit.toString());
-
-  if (jobModeFilterTerm == "all") params.delete("mode");
-
-  if (jobTypeFilterTerm == "all") params.delete("type");
-
-  if (jobCategoryFilterTerm == "all") params.delete("category");
-
-  const queryStrings = params.toString();
-
-  const urlWithQueryStrings = `/search/jobs?${queryStrings
+  const urlWithQueryStrings = `/search/jobs?${params
     .replace(`&limit=${limit}`, "")
     .replace("search", "query")}&ref_ctx_id=${search_id}`;
 
   const fetchJobsInSearchRequest = async () => {
     router.push(urlWithQueryStrings);
-
-    const res = await axios.get("/api/jobs?" + queryStrings);
-
+    const res = await axios.get(`/api/jobs?${params}`);
     return res.data;
   };
 
@@ -104,9 +100,7 @@ const JobsSearchResults = () => {
 
     {
       refetchOnWindowFocus: false,
-
       keepPreviousData: true,
-
       retry: 1,
     }
   );
@@ -120,6 +114,7 @@ const JobsSearchResults = () => {
     }));
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     refetch();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);

@@ -19,7 +19,7 @@ export default function AdminLayout({
     if (session?.user.role !== "admin") router.push("/");
   }, [session?.user, router]);
 
-  if (session?.user.role == "admin")
+  if (session?.user.role === "admin")
     return (
       <section>
         <AdminSegmentNavbar />

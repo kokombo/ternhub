@@ -9,9 +9,8 @@ import {
   Logo,
   AuthCTA,
 } from "@/components";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
-import * as Yup from "yup";
 import { GroteskNormal } from "@/app/font";
 import Image from "next/image";
 import { images } from "@/constants";

@@ -2,7 +2,7 @@
 
 import { BlogForm } from "@/components";
 import { useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation, useQueryClient } from "react-query";
 import { useRouter } from "next/navigation";
 
@@ -21,9 +21,7 @@ const initialFormValues: BlogFormType = {
 
 const AddABlog = () => {
   const [content, setContent] = useState("");
-
   const router = useRouter();
-
   const queryClient = useQueryClient();
 
   const addABlogRequest = async (blogData: BlogData) => {

@@ -1,13 +1,14 @@
 import { FaTimesCircle } from "react-icons/fa";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
 import { useDispatch } from "react-redux";
+import type { DispatchType } from "@/redux-toolkit/store";
 
 type Props = {
   children: React.ReactNode;
 };
 
 const UniversalModal = (props: Props) => {
-  const dispatch = useDispatch();
+  const dispatch: DispatchType = useDispatch();
 
   return (
     <div className="fixed top-0 left-0 flex items-center md:justify-center w-full h-full bg-black md:px-0 px-5 z-[1000] bg-modalblack">

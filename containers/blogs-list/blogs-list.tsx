@@ -3,7 +3,13 @@ import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 import RecentBlogSkeletonLoader from "@/utilities/skeletons/recent-blog-skeleton-loader";
 import { GroteskBold } from "@/app/font";
 import { illustrations } from "@/constants";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
+import type {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
+import { v4 as uuid } from "uuid";
 
 type Props = {
   data: BlogType[] | undefined;
@@ -11,7 +17,9 @@ type Props = {
   isError: boolean;
   error: AxiosError<ErrorResponse> | null;
   noDataLabel: string;
-  refetch?: any;
+  refetch?: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<BlogType[], AxiosError<ErrorResponse>>>;
   rootUrl: string;
 };
 
@@ -51,8 +59,8 @@ const BlogsList = (props: Props) => {
         <>
           {props.isLoading ? (
             <div className="w-full blog_list_grid">
-              {[...Array(8)].map((_, index) => (
-                <BlogSkeletonLoader key={index} />
+              {[...Array(8)].map((_) => (
+                <BlogSkeletonLoader key={uuid()} />
               ))}
             </div>
           ) : props.isError ? (
@@ -96,7 +104,10 @@ const BlogsList = (props: Props) => {
         {/* Rendering infinite load more button  */}
 
         {props.data && props.data.length > 9 ? (
-          <button className="bg-purple hover:bg-blue text-white rounded-[10px] font-semibold lg:text-base text-sm w-[140px] h-12 mt-[50px] self-center">
+          <button
+            type="button"
+            className="bg-purple hover:bg-blue text-white rounded-[10px] font-semibold lg:text-base text-sm w-[140px] h-12 mt-[50px] self-center"
+          >
             Load more
           </button>
         ) : null}

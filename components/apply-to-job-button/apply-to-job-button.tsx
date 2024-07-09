@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const ApplyToJobButton = ({ props: job }: { props: JobType | undefined }) => {
-  let applyLink;
+  let applyLink = "";
 
   if (job?.site) {
     if (job.site.includes("https://")) {

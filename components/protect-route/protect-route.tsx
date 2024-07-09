@@ -1,21 +1,18 @@
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { Fragment } from "react";
+import { useRouter } from "next/navigation";
 import BarsLoader from "../bars-loader.tsx/bars-loader";
 
 const ProtectRoute = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
+
   const { status } = useSession({
     required: true,
     onUnauthenticated: () => {
-      redirect("/auth/signin");
+      router.push("/auth/signin");
     },
   });
 
-  return status === "loading" ? (
-    <BarsLoader />
-  ) : (
-    <Fragment>{children}</Fragment>
-  );
+  return status === "loading" ? <BarsLoader /> : children;
 };
 
 export default ProtectRoute;

@@ -15,11 +15,13 @@ const Profile = () => {
           <span className="flex gap-4 items-center max-w-[90vw]">
             <label className="lg:text-lg text-base text-textblack">Name:</label>
 
-            <input
-              defaultValue={session?.user?.name!}
-              disabled
-              className="w-[525px] py-[14px] px-4 rounded-[5px] border-[1px] border-gray outline-none"
-            />
+            {session?.user.name && (
+              <input
+                defaultValue={session.user.name}
+                disabled
+                className="w-[525px] py-[14px] px-4 rounded-[5px] border-[1px] border-gray outline-none"
+              />
+            )}
           </span>
 
           <span className="flex gap-4 items-center max-w-[90vw]">
@@ -27,11 +29,13 @@ const Profile = () => {
               Email:
             </label>
 
-            <input
-              defaultValue={session?.user?.email!}
-              disabled
-              className="w-[525px] py-[14px] px-4 rounded-[5px] border-[1px] border-gray outline-none"
-            />
+            {session?.user.email && (
+              <input
+                defaultValue={session.user.email}
+                disabled
+                className="w-[525px] py-[14px] px-4 rounded-[5px] border-[1px] border-gray outline-none"
+              />
+            )}
           </span>
         </div>
       </section>

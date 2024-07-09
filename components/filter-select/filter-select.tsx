@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { icons } from "@/constants";
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 
 type Option = {
   value: string;
@@ -34,7 +34,7 @@ const FilterSelect = (props: Props) => {
           <option value={props.firstOptionValue}>{props.firstOptionKey}</option>
           {props.data.map((item, index) => {
             return (
-              <option key={index} value={item.value}>
+              <option key={`${index}-${item.key}`} value={item.value}>
                 {item.key}
               </option>
             );

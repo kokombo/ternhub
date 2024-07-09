@@ -1,6 +1,6 @@
 import cloudinary from "./cloudinary";
 import DataURIParser from "datauri/parser";
-import path from "path";
+import path from "node:path";
 
 const parser = new DataURIParser();
 

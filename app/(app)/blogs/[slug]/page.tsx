@@ -10,16 +10,14 @@ const BlogPage = () => {
   const { blog, isError, isLoading, error, refetch } = useGetBlogBySlug(slug);
 
   return (
-    <>
-      <BlogInfoPage
-        data={blog}
-        isError={isError}
-        isLoading={isLoading}
-        error={error}
-        refetch={refetch}
-        rootUrl="/blogs"
-      />
-    </>
+    <BlogInfoPage
+      data={blog}
+      isError={isError}
+      isLoading={isLoading}
+      error={error}
+      refetch={refetch}
+      rootUrl="/blogs"
+    />
   );
 };
 

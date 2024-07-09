@@ -1,6 +1,6 @@
 "use client";
 
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
 import { RotatingLinesLoader } from "@/components";
@@ -87,6 +87,7 @@ const VerifyEmailPage = () => {
           </p>
 
           <button
+            type="button"
             onClick={continueBackToApp}
             className="underline text-base lg:text-lg text-purple"
           >

@@ -9,14 +9,13 @@ import {
   Logo,
   AuthCTA,
 } from "@/components";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { GroteskNormal } from "@/app/font";
 import Image from "next/image";
 import { images } from "@/constants";
 import { toast } from "react-toastify";
 import { useRouter, useSearchParams } from "next/navigation";
-import * as Yup from "yup";
 import { resetPasswordFormValidationSchema } from "@/utilities/validation/form-validations";
 
 const ResetPassword = () => {

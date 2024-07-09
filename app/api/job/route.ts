@@ -1,12 +1,12 @@
 import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import slugify from "slugify";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import cloudinary from "@/utilities/general/cloudinary";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const POST = async (req: Request) => {
+export const POST = async (req: NextRequest) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {
@@ -67,7 +67,7 @@ export const POST = async (req: Request) => {
   }
 };
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
   const jobId = searchParams.get("listing_id") as string;
@@ -106,7 +106,7 @@ export const GET = async (req: Request) => {
   }
 };
 
-export const PATCH = async (req: Request) => {
+export const PATCH = async (req: NextRequest) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {
@@ -173,7 +173,7 @@ export const PATCH = async (req: Request) => {
   }
 };
 
-export const DELETE = async (req: Request) => {
+export const DELETE = async (req: NextRequest) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {

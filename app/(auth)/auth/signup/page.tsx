@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import {
   SubmitButton,
   AuthCTA,
@@ -14,7 +14,7 @@ import {
 } from "@/components";
 import Image from "next/image";
 import { images, icons } from "@/constants";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { signIn } from "next-auth/react";
 import { professions } from "@/constants/data";
@@ -97,7 +97,7 @@ const SignUpPage = () => {
           />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">
-            <hr className="w-full"></hr> or <hr className="w-full"></hr>
+            <hr className="w-full" /> or <hr className="w-full" />
           </div>
         </div>
 

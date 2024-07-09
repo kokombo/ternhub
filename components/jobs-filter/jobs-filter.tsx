@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
 import { FilterSelect } from "..";
 import { jobCategoryOptions } from "@/constants/data";
 

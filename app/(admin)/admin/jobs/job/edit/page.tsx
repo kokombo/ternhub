@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useGetJobById } from "@/utilities/data-fetching/getJobById";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { illustrations } from "@/constants";
 
@@ -76,9 +76,9 @@ const EditJobInfo = () => {
   };
 
   return (
-    <div>
+    <>
       {isJobByIdLoading ? (
-        <div className="h-screen"></div>
+        <div className="h-screen" />
       ) : isJobByIdError ? (
         <div className="flex_center w-full">
           <Message
@@ -98,11 +98,11 @@ const EditJobInfo = () => {
           textEditorOnchange={setDescription}
           isLoading={isLoading}
           isError={isError}
-          error={error}
+          error={error?.response?.data.message}
           buttonLabel="Update Job"
         />
       )}
-    </div>
+    </>
   );
 };
 

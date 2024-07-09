@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -21,9 +21,11 @@ const UploadProfilePicture = () => {
     return res.data;
   };
 
-  let errorResponse: any;
-
-  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation(
+  const { mutateAsync, isLoading, isError, error, isSuccess } = useMutation<
+    string | undefined,
+    AxiosError<ErrorResponse>,
+    string | ArrayBuffer
+  >(
     "uploadProfilePicture",
 
     uploadPictureRequest,
@@ -36,8 +38,6 @@ const UploadProfilePicture = () => {
       },
     }
   );
-
-  if (error) errorResponse = error;
 
   const initiatePictureUpload = async () => {
     const imagetoUpload = picture as string | ArrayBuffer;
@@ -107,6 +107,7 @@ const UploadProfilePicture = () => {
               </button>
 
               <button
+                type="button"
                 onClick={() => setPicture("")}
                 className="text-base text-red"
               >
@@ -150,7 +151,7 @@ const UploadProfilePicture = () => {
 
           <span>
             {isError
-              ? `${errorResponse?.response?.data?.message}`
+              ? `${error?.response?.data?.message}`
               : isSuccess
               ? "Image uploaded successfully."
               : null}

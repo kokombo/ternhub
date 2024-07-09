@@ -1,5 +1,5 @@
 import "quill/dist/quill.snow.css";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";
 import { useOutline } from "@/utilities/hooks";
 import ReactQuill from "react-quill";
@@ -33,25 +33,25 @@ const TextEditor = (props: Props) => {
     ],
   };
 
-  var formats = [
-    "height",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "color",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "align",
-    "size",
-    "direction",
-    "script",
-    "background",
-  ];
+  // var formats = [
+  //   "height",
+  //   "bold",
+  //   "italic",
+  //   "underline",
+  //   "strike",
+  //   "blockquote",
+  //   "list",
+  //   "color",
+  //   "bullet",
+  //   "indent",
+  //   "link",
+  //   "image",
+  //   "align",
+  //   "size",
+  //   "direction",
+  //   "script",
+  //   "background",
+  // ];
 
   return (
     <div className="flex flex-col items-start gap-3">

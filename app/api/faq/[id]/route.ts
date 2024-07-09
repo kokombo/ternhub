@@ -1,11 +1,13 @@
 import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { NextResponse, type NextRequest } from "next/server";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const GET = async (req: Request, { params }: { params: Params }) => {
+export const GET = async (
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {
@@ -31,7 +33,10 @@ export const GET = async (req: Request, { params }: { params: Params }) => {
   }
 };
 
-export const PATCH = async (req: Request, { params }: { params: Params }) => {
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {
@@ -68,7 +73,10 @@ export const PATCH = async (req: Request, { params }: { params: Params }) => {
   }
 };
 
-export const DELETE = async (req: Request, { params }: { params: Params }) => {
+export const DELETE = async (
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {

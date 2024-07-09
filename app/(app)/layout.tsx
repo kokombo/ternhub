@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { NavAndSidebarWrapper, Footer } from "../(components)";
+import { NavAndSidebarWrapper, Footer } from "../_components";
 
 export default function RootLayout({
   children,

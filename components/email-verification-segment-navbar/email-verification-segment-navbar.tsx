@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 const EmailVerificationSegmentNavbar = () => {
   const { status, data: session } = useSession();
 
-  if (status === "loading") return <div></div>;
+  if (status === "loading") return <div />;
 
   return (
     <nav className="nav_container">

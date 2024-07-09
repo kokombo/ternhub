@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { setUserSavedJobs } from "@/redux-toolkit/slices/job";
@@ -34,7 +34,7 @@ export const useGetUserSavedJobs = () => {
 
       refetchOnMount: true,
 
-      enabled: !!Boolean(session),
+      enabled: !!session,
     }
   );
 

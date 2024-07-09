@@ -1,9 +1,15 @@
 import { JobCard, Message } from "@/components";
 import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
-import { AxiosError } from "axios";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import type { AxiosError } from "axios";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useId } from "react";
 import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
+import type {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from "react-query";
 
 type Props = {
   data: JobType[] | undefined;
@@ -11,7 +17,9 @@ type Props = {
   isError: boolean;
   error: AxiosError<ErrorResponse> | null;
   noDataLabel: string;
-  refetch?: any;
+  refetch?: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<JobsResponse, AxiosError<ErrorResponse>>>;
   rootUrl: string;
   isFetching: boolean;
   isPreviousData: boolean;
@@ -25,12 +33,14 @@ type Props = {
 };
 
 const JobsList = (props: Props) => {
+  const id = useId();
+
   return (
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
         <div className="job_list_grid w-full">
-          {[...Array(10)].map((_, index) => (
-            <JobSkeletonLoader key={index} />
+          {[...Array(10)].map((_) => (
+            <JobSkeletonLoader key={id} />
           ))}
         </div>
       ) : props.isError ? (

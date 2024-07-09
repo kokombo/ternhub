@@ -1,4 +1,4 @@
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import {
   CustomError,
   InputField,
@@ -7,10 +7,10 @@ import {
   UploadFile,
   SelectField,
 } from "..";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { blogCategories } from "@/constants/data";
 import { blogFormValidationSchema } from "@/utilities/validation/form-validations";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 
 type Props = {
   title: string;
@@ -66,7 +66,7 @@ const BlogForm = (props: Props) => {
             /> */}
 
             {/* the below div is needed because the React Quill text editor caused an overlap */}
-            <div className="sm:mt-4 mt-8"></div>
+            <div className="sm:mt-4 mt-8" />
 
             <InputField
               label="Meta Description*"

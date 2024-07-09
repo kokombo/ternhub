@@ -39,7 +39,7 @@ const BlogInfopageHeader = ({
             </p>
           </article>
 
-          <div className="border-grey border-[0.01px] w-full mt-[25px]"></div>
+          <div className="border-grey border-[0.01px] w-full mt-[25px]" />
         </section>
       )}
     </>

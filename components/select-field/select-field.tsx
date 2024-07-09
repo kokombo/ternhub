@@ -1,11 +1,11 @@
-import { Field, ErrorMessage, FieldProps } from "formik";
+import { Field, ErrorMessage, type FieldProps } from "formik";
 import { useOutline } from "@/utilities/hooks";
 
 type Props = {
   label: string;
   name: string;
   id: string;
-  data: any[];
+  data: { key: string; value: string | number }[];
   disabled?: boolean;
 };
 
@@ -36,9 +36,9 @@ const SelectField = (props: Props) => {
                   outline ? "border-purple" : "border-gray"
                 } `}
               >
-                <option></option>
-                {props.data?.map((item: any, index) => (
-                  <option key={index} value={item.value}>
+                <option />
+                {props.data?.map((item, index) => (
+                  <option key={`${index}-${item.value}`} value={item.value}>
                     {item.key}
                   </option>
                 ))}

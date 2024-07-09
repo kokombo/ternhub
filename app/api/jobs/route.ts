@@ -1,8 +1,8 @@
 import Job from "@/models/job";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   try {
     await connectDatabase();
 
@@ -14,7 +14,9 @@ export const GET = async (req: Request) => {
 
     const excludeFields = ["page", "sort", "limit", "fields", "search"];
 
-    excludeFields.forEach((item) => delete queryObject[item]);
+    for (const field of excludeFields) {
+      delete queryObject[field];
+    }
 
     let numericQuery = JSON.stringify(queryObject);
 
@@ -42,7 +44,7 @@ export const GET = async (req: Request) => {
     const searchQuery = searchParams.get("search");
 
     if (searchQuery) {
-      let queryToDatabase = { $text: { $search: searchQuery } };
+      const queryToDatabase = { $text: { $search: searchQuery } };
 
       result = result.find(queryToDatabase);
     }
@@ -74,7 +76,7 @@ export const GET = async (req: Request) => {
       }
     }
 
-    let jobs = await result;
+    const jobs = await result;
 
     return NextResponse.json(
       {

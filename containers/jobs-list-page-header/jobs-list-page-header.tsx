@@ -1,15 +1,13 @@
 import { Search } from "@/components";
 import { GroteskNormal } from "@/app/font";
 import { useSelector, useDispatch } from "react-redux";
-import { StateType } from "@/redux-toolkit/store";
+import type { StateType } from "@/redux-toolkit/store";
 import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
 import { useRouter } from "next/navigation";
 
 const JobsListPageHeader = () => {
   const dispatch = useDispatch();
-
   const router = useRouter();
-
   const { jobSearchTerm } = useSelector((store: StateType) => store.search);
 
   return (

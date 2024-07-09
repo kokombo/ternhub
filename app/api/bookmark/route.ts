@@ -1,11 +1,11 @@
 import User from "@/models/user";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   const { userId, sessionUser } = await getSessionUser();
 
   if (!sessionUser) {
@@ -38,7 +38,7 @@ export const GET = async (req: Request) => {
   }
 };
 
-export const PUT = async (req: Request) => {
+export const PUT = async (req: NextRequest) => {
   const { userId, sessionUser } = await getSessionUser();
 
   if (!sessionUser) {
@@ -88,7 +88,7 @@ export const PUT = async (req: Request) => {
     );
 
     if (alreadyBookmarked) {
-      const user = await User.findByIdAndUpdate(
+      await User.findByIdAndUpdate(
         userId,
 
         {
@@ -102,17 +102,17 @@ export const PUT = async (req: Request) => {
         { message: "Job unbookmarked!" },
         { status: 200 }
       );
-    } else {
-      const user = await User.findByIdAndUpdate(
-        userId,
-
-        { $push: { savedJobs: jobId } },
-
-        { new: true }
-      );
-
-      return NextResponse.json({ message: "Job bookmarked!" }, { status: 200 });
     }
+
+    await User.findByIdAndUpdate(
+      userId,
+
+      { $push: { savedJobs: jobId } },
+
+      { new: true }
+    );
+
+    return NextResponse.json({ message: "Job bookmarked!" }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong. Please try again." },

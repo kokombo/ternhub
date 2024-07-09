@@ -1,7 +1,7 @@
 "use client";
 import { FaqForm } from "@/components";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -11,9 +11,7 @@ const initialValues: FaqFormType = {
 
 const AddFaqPage = () => {
   const [answer, setAnswer] = useState("");
-
   const router = useRouter();
-
   const queryClient = useQueryClient();
 
   const addFaqRequest = async (faqData: FaqData) => {

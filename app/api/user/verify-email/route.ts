@@ -1,10 +1,10 @@
 import User from "@/models/user";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { sendEmail } from "@/utilities/auth/sendEmail";
 import crypto from "node:crypto";
 import { connectDatabase } from "@/database/database";
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: NextRequest) => {
   const email = await req.json();
 
   const refinedEmail = email.toLowerCase();
@@ -60,7 +60,7 @@ export const POST = async (req: Request, res: Response) => {
   }
 };
 
-export const PUT = async (req: Request) => {
+export const PUT = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
 
   const token = searchParams.get("token") as string;

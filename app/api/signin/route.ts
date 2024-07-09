@@ -1,10 +1,10 @@
 import User from "@/models/user";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { loginFormValidationSchema } from "@/utilities/validation/form-validations";
 import { ValidationError } from "yup";
 
-export const POST = async (req: Request, res: Response) => {
+export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
   const { email, password } = body;
@@ -32,9 +32,9 @@ export const POST = async (req: Request, res: Response) => {
         { message: "Invalid password, please check and try again." },
         { status: 401 }
       );
-    } else {
-      return NextResponse.json(user);
     }
+
+    return NextResponse.json(user);
   } catch (error) {
     if (error instanceof ValidationError) {
       return NextResponse.json({ message: error.errors[0] }, { status: 500 });

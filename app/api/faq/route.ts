@@ -1,9 +1,9 @@
 import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const POST = async (req: Request) => {
+export const POST = async (req: NextRequest) => {
   const { sessionUser } = await getSessionUser();
 
   if (!sessionUser || sessionUser.role !== "admin") {
@@ -38,7 +38,7 @@ export const POST = async (req: Request) => {
   }
 };
 
-export const GET = async (req: Request) => {
+export const GET = async (req: NextRequest) => {
   try {
     await connectDatabase();
 

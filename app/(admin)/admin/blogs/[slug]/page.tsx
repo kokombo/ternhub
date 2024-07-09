@@ -7,7 +7,6 @@ import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 
 const AdminBlogInfoPage = () => {
   const { slug } = useParams();
-
   const { blog, isLoading, isError, error, refetch } = useGetBlogBySlug(slug);
 
   return (

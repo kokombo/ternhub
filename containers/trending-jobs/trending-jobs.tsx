@@ -1,9 +1,10 @@
 import { SectionHeading, StyledLink, JobCard } from "@/components";
 import { useQuery } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import { useId } from "react";
 
 type Data = {
   jobs: JobType[];
@@ -12,6 +13,7 @@ type Data = {
 
 const TrendingJobs = () => {
   const { data: session } = useSession();
+  const id = useId();
 
   const fetchTrendingJobsRequest = async () => {
     const res = await axios.get("/api/jobs");
@@ -36,7 +38,7 @@ const TrendingJobs = () => {
 
       <div className="landing_page_internships_container ">
         {isLoading || isError
-          ? [...Array(10)].map((_, index) => <JobSkeletonLoader key={index} />)
+          ? [...Array(10)].map((_, index) => <JobSkeletonLoader key={id} />)
           : data?.jobs &&
             data.jobs.length > 1 &&
             data.jobs

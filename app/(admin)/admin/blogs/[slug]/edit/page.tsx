@@ -5,38 +5,28 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 import { useGetBlogBySlug } from "@/utilities/data-fetching/getBlogBySlug";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const EditBlogInfo = () => {
   const { slug } = useParams();
-
   const router = useRouter();
-
   const queryClient = useQueryClient();
-
   const { blog } = useGetBlogBySlug(slug);
 
   const initialFormValues: BlogFormType = {
     title: blog?.title !== undefined ? blog?.title : "",
-
     image: blog?.image !== undefined ? blog?.image : "",
-
     metaDescription:
       blog?.metaDescription !== undefined ? blog?.metaDescription : "",
-
     author: {
       name: blog?.author.name !== undefined ? blog?.author.name : "",
-
       twitter: blog?.author.twitter !== undefined ? blog?.author.twitter : "",
-
       portfolio:
         blog?.author.portfolio !== undefined ? blog?.author.portfolio : "",
-
       linkedin:
         blog?.author.linkedin !== undefined ? blog?.author.linkedin : "",
     },
-
     category: blog?.category !== undefined ? blog?.category : "",
   };
 

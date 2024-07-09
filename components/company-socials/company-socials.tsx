@@ -1,5 +1,5 @@
 const CompanySocials = () => {
-  return <div></div>;
+  return <div />;
 };
 
 export default CompanySocials;

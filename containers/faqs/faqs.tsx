@@ -1,6 +1,7 @@
 import { SectionHeading, FaqCard } from "@/components";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
 import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
+import { v4 as uuid } from "uuid";
 
 const Faqs = () => {
   const { faqs, isLoading, isError } = useGetAllFaqs();
@@ -14,9 +15,8 @@ const Faqs = () => {
 
       <div className="grid grid-cols-1 lg:gap-10 gap-6 w-full place-items-center max-w-[630px]">
         {isLoading || isError
-          ? [...Array(4)].map((_, index) => <FaqSkeletonLoader key={index} />)
-          : faqs &&
-            faqs.map((faq) => (
+          ? [...Array(4)].map((_) => <FaqSkeletonLoader key={uuid()} />)
+          : faqs?.map((faq) => (
               <FaqCard
                 key={faq._id}
                 props={faq}

@@ -13,7 +13,7 @@ const JobsPageNavigationLink = () => {
           </Link>
 
           {pathname === "/jobs" && (
-            <div className="bg-purple h-[1px] w-full absolute lg:top-[30px] top-[28px]"></div>
+            <div className="bg-purple h-[1px] w-full absolute lg:top-[30px] top-[28px]" />
           )}
         </span>
       </li>
@@ -25,7 +25,7 @@ const JobsPageNavigationLink = () => {
           </Link>
 
           {pathname === "/jobs/saved-jobs" && (
-            <div className="bg-purple h-[1px] w-full absolute lg:top-[30px] top-[28px]"></div>
+            <div className="bg-purple h-[1px] w-full absolute lg:top-[30px] top-[28px]" />
           )}
         </span>
       </li>

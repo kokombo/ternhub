@@ -1,4 +1,4 @@
-import { Field, ErrorMessage, FieldProps } from "formik";
+import { Field, ErrorMessage, type FieldProps } from "formik";
 import { useOutline } from "@/utilities/hooks";
 import Image from "next/image";
 import { icons } from "@/constants";

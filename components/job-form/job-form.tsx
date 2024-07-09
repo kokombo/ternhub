@@ -1,4 +1,4 @@
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import { jobCategoryOptions } from "@/constants/data";
 import {
   InputField,
@@ -9,7 +9,7 @@ import {
   CustomError,
   RadioButtonOptions,
 } from "..";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { jobFormValidationSchema } from "@/utilities/validation/form-validations";
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
   textEditorOnchange: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
   isError: boolean;
-  error: any;
+  error: string | undefined;
   buttonLabel: string;
 };
 
@@ -93,7 +93,7 @@ const JobForm = (props: Props) => {
                 /> */}
 
                 {/* the below div is needed because the React Quill text editor caused an overlap */}
-                <div className="sm:mt-4 mt-8"></div>
+                <div className="sm:mt-4 mt-8" />
 
                 <SelectField
                   label="Job Category *"
@@ -149,9 +149,9 @@ const JobForm = (props: Props) => {
 
                 <div className="flex items-center justify-center relative">
                   <span className="absolute">
-                    {props.isError && (
+                    {props.isError && props.error && (
                       <CustomError
-                        message={props.error?.response?.data?.message}
+                        message={props.error}
                         loading={props.isLoading}
                       />
                     )}

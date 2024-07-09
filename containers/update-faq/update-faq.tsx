@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { CustomError, FaqForm, TailSpinLoader } from "@/components";
 import { useGetFaqById } from "@/utilities/data-fetching/getFaqById";
 import { useMutation, useQueryClient } from "react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
+import type { DispatchType } from "@/redux-toolkit/store";
 
 type Props = {
   faqId: string;
@@ -12,10 +13,7 @@ type Props = {
 
 const UpdateFaq = (props: Props) => {
   const queryClient = useQueryClient();
-
-  const dispatch = useDispatch();
-
-  let prevFaqFetchingErrorResponse: any;
+  const dispatch: DispatchType = useDispatch();
 
   const {
     isLoading: prevFaqFetchingLoading,
@@ -28,7 +26,7 @@ const UpdateFaq = (props: Props) => {
 
   useEffect(() => {
     setFaqAnswer(faq?.answer as string);
-  }, [faq?._id, faq?.answer]);
+  }, [faq?.answer]);
 
   const updateFaqRequest = async (faqData: FaqData) => {
     const res = await axios.patch(`/api/faq/${props.faqId}`, faqData);
@@ -48,7 +46,6 @@ const UpdateFaq = (props: Props) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("getAllFaqs");
-
         dispatch(setModalVisible(false));
       },
     }
@@ -56,7 +53,6 @@ const UpdateFaq = (props: Props) => {
 
   const initiateUpdateFaqData = async (values: FaqFormType) => {
     const newFaqData = { ...values, answer: faqAnswer };
-
     await mutateAsync(newFaqData);
   };
 

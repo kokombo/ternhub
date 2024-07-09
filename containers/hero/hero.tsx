@@ -2,7 +2,7 @@ import { HeroTitle, Tags, Search } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setJobSearchTerm } from "@/redux-toolkit/slices/search";
-import { StateType } from "@/redux-toolkit/store";
+import type { StateType } from "@/redux-toolkit/store";
 
 const Hero = () => {
   const dispatch = useDispatch();

@@ -1,4 +1,4 @@
-import { Field, FieldProps, ErrorMessage } from "formik";
+import { Field, type FieldProps, ErrorMessage } from "formik";
 import { useOutline } from "@/utilities/hooks";
 
 type Props = {
@@ -27,7 +27,7 @@ const RadioButtonOptions = (props: Props) => {
               {props.data.map((option, index) => {
                 return (
                   <span
-                    key={index}
+                    key={`${index}-${option.label}`}
                     className="flex flex-row gap-2"
                     onMouseEnter={showOutline}
                     onMouseLeave={closeOutline}

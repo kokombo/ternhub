@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import User from "@/models/user";
 import cloudinary from "@/utilities/general/cloudinary";
 import { connectDatabase } from "@/database/database";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const PATCH = async (req: Request) => {
+export const PATCH = async (req: NextRequest) => {
   const { sessionUser, userId } = await getSessionUser();
 
   const picture = await req.json();
@@ -36,12 +36,12 @@ export const PATCH = async (req: Request) => {
       await user.save();
 
       return NextResponse.json(uploadedPictureResponse.secure_url);
-    } else {
-      return NextResponse.json(
-        { message: "Please select a valid image." },
-        { status: 401 }
-      );
     }
+
+    return NextResponse.json(
+      { message: "Please select a valid image." },
+      { status: 401 }
+    );
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong, please try again." },

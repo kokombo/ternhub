@@ -16,7 +16,7 @@ const Tags = () => {
       {tags.map((item, index) => {
         return (
           <span
-            key={index}
+            key={`${index}-${item.tag}`}
             className="text-greyblack px-[10px] py-[6px] border-[0.8px] border-grey capitalize lg:text-base text-sm tracking-[1%]"
           >
             {item.tag}

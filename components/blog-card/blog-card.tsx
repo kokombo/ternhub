@@ -12,9 +12,7 @@ const BlogCard = ({
   rootUrl: string;
 }) => {
   const postCreationDate = new Date(blog.createdAt).toDateString();
-
   const { isLoading } = useGetBlogBySlug(blog.slug);
-
   const router = useRouter();
 
   const showBlogDetails = () => {

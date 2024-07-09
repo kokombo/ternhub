@@ -1,9 +1,9 @@
 import User from "@/models/user";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
 import { getSessionUser } from "@/utilities/auth/getSessionUser";
 
-export const PUT = async (req: Request) => {
+export const PUT = async (req: NextRequest) => {
   const profession = await req.json();
 
   const { sessionUser, userId } = await getSessionUser();
@@ -28,9 +28,9 @@ export const PUT = async (req: Request) => {
         { message: "You have updated your profession successfully!" },
         { status: 200 }
       );
-    } else {
-      return NextResponse.json(user);
     }
+
+    return NextResponse.json(user);
   } catch (error) {
     return NextResponse.json(
       { message: "Something went wrong, please try again." },

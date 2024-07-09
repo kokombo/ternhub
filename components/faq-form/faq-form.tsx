@@ -1,7 +1,7 @@
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import { CustomError, InputField, SubmitFormLoader, TextEditor } from "..";
-import { Dispatch, SetStateAction } from "react";
-import { AxiosError } from "axios";
+import type { Dispatch, SetStateAction } from "react";
+import type { AxiosError } from "axios";
 
 type Props = {
   title: string;

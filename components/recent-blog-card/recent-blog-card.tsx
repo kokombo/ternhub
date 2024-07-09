@@ -59,7 +59,7 @@ const RecentBlogCard = ({
           </button>
         </article>
 
-        <div className="border-grey border-[0.01px] w-full"></div>
+        <div className="border-grey border-[0.01px] w-full" />
 
         <article className=" mt-8">
           <BlogReadTime props={blog} className={"text-lg"} />

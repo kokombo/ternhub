@@ -2,11 +2,11 @@ import { SocialAuthFrame } from "@/components";
 import { icons } from "@/constants";
 import {
   signIn,
-  LiteralUnion,
-  ClientSafeProvider,
+  type LiteralUnion,
+  type ClientSafeProvider,
   getProviders,
 } from "next-auth/react";
-import { BuiltInProviderType } from "next-auth/providers/index";
+import type { BuiltInProviderType } from "next-auth/providers/index";
 import { useEffect, useState } from "react";
 
 type Props = {
