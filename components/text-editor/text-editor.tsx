@@ -1,3 +1,4 @@
+"use client";
 import "quill/dist/quill.snow.css";
 import type { Dispatch, SetStateAction } from "react";
 import dynamic from "next/dynamic";

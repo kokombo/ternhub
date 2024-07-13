@@ -1,19 +1,21 @@
+"use client";
 import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import Sidebar from "../sidebar/sidebar";
 
-type Props = {
-  openSidebar: () => void;
-};
-
-const NavigationBar = (props: Props) => {
+const NavigationBar = () => {
   const { status } = useSession();
-
   const pathname = usePathname();
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+
+  const openSidebar = () => setSidebarIsOpen(true);
+
+  const closeSidebar = () => setSidebarIsOpen(false);
 
   return (
     <Fragment>
@@ -64,7 +66,7 @@ const NavigationBar = (props: Props) => {
           <button
             type="button"
             onClick={() => {
-              props.openSidebar();
+              openSidebar();
               document.body.style.overflow = "hidden";
             }}
             disabled={status === "loading"}
@@ -79,6 +81,8 @@ const NavigationBar = (props: Props) => {
           </button>
         </div>
       </nav>
+
+      <Sidebar sidebarIsOpen={sidebarIsOpen} closeSidebar={closeSidebar} />
     </Fragment>
   );
 };

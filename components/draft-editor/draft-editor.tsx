@@ -1,3 +1,4 @@
+"use client";
 import { useState, type FC } from "react";
 import { EditorState } from "draft-js";
 import Editor from "@draft-js-plugins/editor";

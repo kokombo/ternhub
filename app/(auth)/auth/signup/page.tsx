@@ -6,12 +6,12 @@ import {
   SubmitButton,
   AuthCTA,
   Logo,
-  SubmitFormLoader,
   InputField,
   SelectField,
   CustomError,
   SocialAuthFrame,
 } from "@/components";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import Image from "next/image";
 import { images, icons } from "@/constants";
 import axios, { type AxiosError } from "axios";
@@ -34,7 +34,6 @@ const SignUpPage = () => {
 
   const signupFormRequest = async (formData: UserSignupDataType) => {
     const res = await axios.post("/api/user", formData);
-
     return res.data;
   };
 
@@ -46,15 +45,12 @@ const SignUpPage = () => {
 
   const createUserAccount = async (
     values: UserSignupDataType,
-
     onSubmitProps: FormikHelpers<UserSignupDataType>
   ) => {
     await mutateAsync(values, {
       onSuccess: async () => {
         setRedirecting(true);
-
         const email = values.email;
-
         const password = values.password;
 
         await signIn("credentials", {

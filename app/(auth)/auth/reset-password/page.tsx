@@ -1,14 +1,13 @@
 "use client";
-
 import { Form, Formik } from "formik";
 import {
   InputField,
   SubmitButton,
   CustomError,
-  SubmitFormLoader,
   Logo,
   AuthCTA,
 } from "@/components";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { GroteskNormal } from "@/app/font";

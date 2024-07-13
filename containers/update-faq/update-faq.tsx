@@ -1,5 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
-import { CustomError, FaqForm, TailSpinLoader } from "@/components";
+import { CustomError, FaqForm } from "@/components";
+import { TailSpinLoader } from "@/components/loaders/loaders";
 import { useGetFaqById } from "@/utilities/data-fetching/getFaqById";
 import { useMutation, useQueryClient } from "react-query";
 import axios, { type AxiosError } from "axios";

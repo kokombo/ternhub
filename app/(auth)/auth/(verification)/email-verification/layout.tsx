@@ -10,5 +10,5 @@ export default function EmailVerificationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

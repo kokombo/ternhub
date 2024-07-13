@@ -1,12 +1,7 @@
+"use client";
 import { Formik, Form, type FormikHelpers } from "formik";
-import {
-  CustomError,
-  InputField,
-  SubmitFormLoader,
-  TextEditor,
-  UploadFile,
-  SelectField,
-} from "..";
+import { CustomError, InputField, UploadFile, SelectField } from "..";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import type { Dispatch, SetStateAction } from "react";
 import { blogCategories } from "@/constants/data";
 import { blogFormValidationSchema } from "@/utilities/validation/form-validations";

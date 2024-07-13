@@ -1,3 +1,4 @@
+"use client";
 import { useSession } from "next-auth/react";
 import { useBookmarkAJob } from "@/utilities/data-fetching/bookmarkAJob";
 import { useSelector } from "react-redux";

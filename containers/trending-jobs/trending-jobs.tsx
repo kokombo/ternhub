@@ -4,28 +4,30 @@ import axios, { type AxiosError } from "axios";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import { useId } from "react";
+import { v4 as uuid } from "uuid";
 
 type Data = {
-  jobs: JobType[];
+  jobs: JobType[] | undefined;
   numOfJobs: number;
 };
 
 const TrendingJobs = () => {
   const { data: session } = useSession();
-  const id = useId();
 
   const fetchTrendingJobsRequest = async () => {
-    const res = await axios.get("/api/jobs");
+    const res = await axios.get("/api/jobs", {
+      headers: {
+        Accept: "application/json",
+      },
+    });
     return res.data;
   };
 
-  const { data, isLoading, isError, error } = useQuery<
+  const { data, isLoading, isError } = useQuery<
     Data,
     AxiosError<ErrorResponse>
   >("fetchTrendingJobs", fetchTrendingJobsRequest, {
     refetchOnWindowFocus: false,
-
     staleTime: 60 * 60 * 1000,
   });
 
@@ -38,7 +40,7 @@ const TrendingJobs = () => {
 
       <div className="landing_page_internships_container ">
         {isLoading || isError
-          ? [...Array(10)].map((_, index) => <JobSkeletonLoader key={id} />)
+          ? [...Array(10)].map((_) => <JobSkeletonLoader key={uuid()} />)
           : data?.jobs &&
             data.jobs.length > 1 &&
             data.jobs
@@ -60,7 +62,6 @@ const TrendingJobs = () => {
               })
         }
         extraClasses="self-center blue_button"
-        prefetch={true}
       />
     </section>
   );

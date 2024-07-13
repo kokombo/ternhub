@@ -1,5 +1,4 @@
 "use client";
-
 import DraftEditor from "@/components/draft-editor/draft-editor";
 
 const Admin = () => {

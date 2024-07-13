@@ -1,5 +1,4 @@
 "use client";
-
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Message, JobCard } from "@/components";
 import { useGetUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";

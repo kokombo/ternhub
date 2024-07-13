@@ -1,6 +1,3 @@
-"use client";
-
-import { ProtectRoute } from "@/components";
 import "@/styles/globals.css";
 
 export default function ProfileLayout({
@@ -8,5 +5,5 @@ export default function ProfileLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <ProtectRoute>{children}</ProtectRoute>;
+  return children;
 }

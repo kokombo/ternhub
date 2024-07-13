@@ -1,19 +1,14 @@
 import "@/styles/globals.css";
+import { NavigationBar, Footer } from "@/app/client-components-import";
 
-import { NavAndSidebarWrapper, Footer } from "../_components";
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col justify-between">
-      <NavAndSidebarWrapper />
-
+    <>
+      <NavigationBar />
       <div className="min-h-screen">{children}</div>
-
       <Footer />
-    </div>
+    </>
   );
-}
+};
+
+export default Layout;

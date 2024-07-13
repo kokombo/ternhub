@@ -1,3 +1,4 @@
+"use client";
 import { Field, type FieldProps } from "formik";
 import { icons } from "@/constants";
 import Image from "next/image";

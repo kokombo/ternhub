@@ -1,9 +1,8 @@
 "use client";
-
 import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { useRouter } from "next/navigation";
-import { RotatingLinesLoader } from "@/components";
+import { RotatingLinesLoader } from "@/components/loaders/loaders";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";

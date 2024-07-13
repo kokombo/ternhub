@@ -1,3 +1,4 @@
+"use client";
 import { SocialAuthFrame } from "@/components";
 import { icons } from "@/constants";
 import {

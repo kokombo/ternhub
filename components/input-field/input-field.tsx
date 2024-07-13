@@ -1,3 +1,4 @@
+"use client";
 import { Field, ErrorMessage, type FieldProps } from "formik";
 import { useOutline } from "@/utilities/hooks";
 import Image from "next/image";

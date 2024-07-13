@@ -1,3 +1,4 @@
+"use client";
 import { FaTimesCircle } from "react-icons/fa";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
 import { useDispatch } from "react-redux";

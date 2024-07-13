@@ -1,14 +1,15 @@
+"use client";
 import { Formik, Form, type FormikHelpers } from "formik";
 import { jobCategoryOptions } from "@/constants/data";
 import {
   InputField,
   TextEditor,
   UploadFile,
-  SubmitFormLoader,
   SelectField,
   CustomError,
   RadioButtonOptions,
 } from "..";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import type { Dispatch, SetStateAction } from "react";
 import { jobFormValidationSchema } from "@/utilities/validation/form-validations";
 

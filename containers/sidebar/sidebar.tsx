@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { Logo } from "@/components";
 import { useSession, signOut } from "next-auth/react";
@@ -22,7 +23,7 @@ const Sidebar = (props: Props) => {
       props.closeSidebar();
     }
     //eslint-disable-next-line
-  }, [screenSize]);
+  }, [screenSize, props.closeSidebar]);
 
   const closeAside = () => {
     props.closeSidebar();
@@ -43,9 +44,9 @@ const Sidebar = (props: Props) => {
         </span>
 
         <div className="py-10 gap-4 flex flex-col">
-          <div onClick={closeAside}>
+          <button type="button" onClick={closeAside}>
             <Logo />
-          </div>
+          </button>
 
           <ul className="flex flex-col gap-3 ">
             <li className="list-none">

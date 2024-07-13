@@ -1,5 +1,7 @@
+"use client";
 import { Formik, Form, type FormikHelpers } from "formik";
-import { CustomError, InputField, SubmitFormLoader, TextEditor } from "..";
+import { CustomError, InputField, TextEditor } from "..";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import type { Dispatch, SetStateAction } from "react";
 import type { AxiosError } from "axios";
 

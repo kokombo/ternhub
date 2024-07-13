@@ -14,15 +14,11 @@ import ProfilePicture from "./profile-picture/profile-picture";
 import SubmitButton from "./submit-button/submit-button";
 import AuthCTA from "./auth-cta/auth-cta";
 import SocialAuthFrame from "./social-auth-frame/social-auth-frame";
-import ButtonLoader from "./button-loader/button-loader";
-import SubmitFormLoader from "./submit-form-loader/submit-form-loader";
 import InputField from "./input-field/input-field";
 import TextEditor from "./text-editor/text-editor";
 import JobForm from "./job-form/job-form";
 import UploadFile from "./upload-file/upload-file";
 import BlogForm from "./blog-form/blog-form";
-import NextAuthProvider from "./next-auth-provider/next-auth-provider";
-import ReactQueryProvider from "./react-query-provider/react-query-provider";
 import SelectField from "./select-field/select-field";
 import JobsFilter from "./jobs-filter/jobs-filter";
 import JobsPageNavigationLink from "./jobs-page-navigation-link/jobs-page-navigation-link";
@@ -44,17 +40,10 @@ import AdminToolBox from "./admin-tool-box/admin-tool-box";
 import NotFoundComponent from "./not-found/not-found";
 import ErrorComponent from "./error-component/error-component";
 import RadioButtonOptions from "./radio-button-options/radio-button-options";
-import Loader from "./loader/loader";
 import UploadProfilePicture from "./upload-profile-picture/upload-profile-picture";
 import UniversalModal from "./universal-modal/universal-modal";
-import TailSpinLoader from "./tail-spin-loader/tail-spin-loader";
-import BarsLoader from "./bars-loader.tsx/bars-loader";
-import ColorRingLoader from "./color-ring-loader/color-ring-loader";
-import RotatingLinesLoader from "./rotating-lines-loader/rotating-lines-loader";
-import RotatingSquareLoader from "./rotating-square-loader/rotating-square-loader";
 import FilterSelect from "./filter-select/filter-select";
 import EmailVerificationSegmentNavbar from "./email-verification-segment-navbar/email-verification-segment-navbar";
-import ProtectRoute from "./protect-route/protect-route";
 
 export {
   BlogCard,
@@ -68,20 +57,16 @@ export {
   Search,
   SectionHeading,
   Tags,
-  NextAuthProvider,
   StyledLink,
   ProfilePicture,
   SubmitButton,
   AuthCTA,
   SocialAuthFrame,
-  ButtonLoader,
-  SubmitFormLoader,
   InputField,
   TextEditor,
   JobForm,
   UploadFile,
   BlogForm,
-  ReactQueryProvider,
   SelectField,
   JobsFilter,
   JobsPageNavigationLink,
@@ -103,15 +88,8 @@ export {
   NotFoundComponent,
   ErrorComponent,
   RadioButtonOptions,
-  Loader,
   UploadProfilePicture,
   UniversalModal,
-  TailSpinLoader,
-  BarsLoader,
-  RotatingLinesLoader,
-  RotatingSquareLoader,
-  ColorRingLoader,
   FilterSelect,
   EmailVerificationSegmentNavbar,
-  ProtectRoute,
 };

@@ -1,14 +1,13 @@
 "use client";
-
 import { Formik, Form } from "formik";
 import {
   InputField,
-  SubmitFormLoader,
   SubmitButton,
   CustomError,
   Logo,
   AuthCTA,
 } from "@/components";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { GroteskNormal } from "@/app/font";
@@ -26,7 +25,6 @@ const ForgotPassword = () => {
       "/api/user/reset-password",
       JSON.stringify(email)
     );
-
     return res.data;
   };
 
@@ -34,23 +32,15 @@ const ForgotPassword = () => {
     MessageResponse,
     AxiosError<ErrorResponse>,
     string
-  >(
-    "sendPasswordResetLink",
-
-    passwordResetLinkRequest,
-
-    {
-      onSuccess: (data) => {
-        toast.success(`${data.message}`);
-
-        router.push("/");
-      },
-    }
-  );
+  >("sendPasswordResetLink", passwordResetLinkRequest, {
+    onSuccess: (data) => {
+      toast.success(`${data.message}`);
+      router.push("/");
+    },
+  });
 
   const sendPasswordResetLink = async (values: { email: string }) => {
     const { email } = values;
-
     await mutateAsync(email);
   };
 

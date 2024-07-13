@@ -10,5 +10,5 @@ export default function ForgotPasswordLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

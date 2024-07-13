@@ -1,9 +1,5 @@
-import {
-  JobInfopageHeader,
-  JobInfopageBody,
-  Message,
-  RotatingLinesLoader,
-} from "@/components";
+import { JobInfopageHeader, JobInfopageBody, Message } from "@/components";
+import { RotatingLinesLoader } from "@/components/loaders/loaders";
 import { RelatedJobs } from "..";
 import { useSelector } from "react-redux";
 import type { StateType } from "@/redux-toolkit/store";

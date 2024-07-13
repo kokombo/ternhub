@@ -1,3 +1,4 @@
+"use client";
 import { HeroTitle, Tags, Search } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -6,9 +7,7 @@ import type { StateType } from "@/redux-toolkit/store";
 
 const Hero = () => {
   const dispatch = useDispatch();
-
   const router = useRouter();
-
   const { jobSearchTerm } = useSelector((store: StateType) => store.search);
 
   return (

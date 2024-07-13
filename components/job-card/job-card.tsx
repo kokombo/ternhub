@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { SaveAJob, JobCompanyLogo, JobPostDuration } from "..";

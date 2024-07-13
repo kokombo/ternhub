@@ -1,4 +1,5 @@
 "use client";
+
 import { RotatingLinesLoader } from "@/components/loaders/loaders";
 
 const Loading = () => {

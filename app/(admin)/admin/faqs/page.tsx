@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";

@@ -1,3 +1,4 @@
+"use client";
 import { Search } from "@/components";
 import { GroteskNormal } from "@/app/font";
 import { useSelector, useDispatch } from "react-redux";

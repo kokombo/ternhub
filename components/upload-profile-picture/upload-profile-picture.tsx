@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import axios, { type AxiosError } from "axios";
 import { useMutation } from "react-query";

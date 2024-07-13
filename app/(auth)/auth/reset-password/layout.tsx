@@ -10,5 +10,5 @@ export default function ResetPassword({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

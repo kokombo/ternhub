@@ -1,23 +1,18 @@
-"use client";
-
-import { Faqs, TrendingJobs, LandingPageBlogs, Hero } from "@/containers";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import {
+  Hero,
+  TrendingJobs,
+  LandingPageBlogs,
+  Faqs,
+} from "@/app/client-components-import";
 
 const Home = () => {
-  const { status } = useSession();
-
-  if (status === "authenticated") {
-    redirect("/jobs");
-  }
-
   return (
-    <div className="w-full">
+    <main className="w-full">
       <Hero />
       <TrendingJobs />
       <LandingPageBlogs />
       <Faqs />
-    </div>
+    </main>
   );
 };
 

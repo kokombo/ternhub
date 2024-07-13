@@ -10,5 +10,5 @@ export default function SignInLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return children;
 }

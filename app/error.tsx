@@ -1,5 +1,4 @@
 "use client";
-
 import { ErrorComponent } from "@/components";
 
 const ErrorPage = () => {

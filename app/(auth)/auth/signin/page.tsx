@@ -1,7 +1,6 @@
 "use client";
-
 import { useState } from "react";
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, type FormikHelpers } from "formik";
 import {
   SubmitButton,
   AuthCTA,
@@ -9,8 +8,8 @@ import {
   InputField,
   CustomError,
   SocialAuthFrame,
-  SubmitFormLoader,
 } from "@/components";
+import { SubmitFormLoader } from "@/components/loaders/loaders";
 import Link from "next/link";
 import Image from "next/image";
 import { icons, images } from "@/constants";
@@ -23,12 +22,11 @@ import { loginFormValidationSchema } from "@/utilities/validation/form-validatio
 const SignInPage = () => {
   const { showPassword, onClickIcon } = useShowPassword();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null | undefined>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
   const router = useRouter();
 
   const signAUserIn = async (
     values: UserLoginDataType,
-
     onSubmitProps: FormikHelpers<UserLoginDataType>
   ) => {
     try {
@@ -49,8 +47,8 @@ const SignInPage = () => {
       if (res?.error) {
         setError(res?.error);
       }
-    } catch (error: any) {
-      return setError(error || "Something went wrong, please try again!");
+    } catch (error) {
+      return setError("Something went wrong, please try again!");
     } finally {
       setLoading(false);
     }
@@ -77,7 +75,7 @@ const SignInPage = () => {
           />
 
           <div className="flex items-center gap-[10px] text-textblack text-base">
-            <hr className="w-full"></hr> or <hr className="w-full"></hr>
+            <hr className="w-full" /> or <hr className="w-full" />
           </div>
         </div>
 
