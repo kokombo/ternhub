@@ -1,22 +1,17 @@
-"use client";
-
 import "@/styles/globals.css";
 import { EmailVerificationSegmentNavbar } from "@/components";
-import { useSession } from "next-auth/react";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
-export default function EmailVerificationLayout({
+export default async function EmailVerificationLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { status } = useSession();
-
-  if (status === "loading") return <div className="h-screen" />;
+  const session = await getCurrentServerSession();
 
   return (
     <>
-      <EmailVerificationSegmentNavbar />
-
+      <EmailVerificationSegmentNavbar session={session} />
       {children}
     </>
   );

@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
@@ -25,7 +24,7 @@ const JobsSearchResults = () => {
     searchTermFromLocalStorage,
     jobTypeTermFromLocalStorage,
     jobCategoryTermFromLocalStorage,
-  } = valuesFromLocalStorage("userQueriesInSearch"); //Retrieving user's search/filter queries stored in logal storage
+  } = valuesFromLocalStorage("userQueriesInSearch");
 
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
@@ -75,13 +74,18 @@ const JobsSearchResults = () => {
     pageNumber,
   ]);
 
-  const urlWithQueryStrings = `/search/jobs?${params
-    .replace(`&limit=${limit}`, "")
-    .replace("search", "query")}&ref_ctx_id=${search_id}`;
+  const urlWithQueryStrings = useMemo(() => {
+    const query = `/search/jobs?${params
+      .replace(`&limit=${limit}`, "")
+      .replace("search", "query")}&ref_ctx_id=${search_id}`;
+    return query;
+  }, [params, limit, search_id]);
 
   const fetchJobsInSearchRequest = async () => {
     router.push(urlWithQueryStrings);
-    const res = await axios.get(`/api/jobs?${params}`);
+    const res = await axios.get(`/api/jobs?${params}`, {
+      headers: { Accept: "application/json" },
+    });
     return res.data;
   };
 

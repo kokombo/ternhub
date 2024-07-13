@@ -19,21 +19,15 @@ export const useBookmarkAJob = (jobId: string) => {
     MessageResponse,
     AxiosError<ErrorResponse>,
     string
-  >(
-    "bookmarkAJob",
+  >("bookmarkAJob", bookmarkAJobRequest, {
+    onSuccess: () => {
+      queryClient.refetchQueries("getUserSavedJobs");
+    },
 
-    bookmarkAJobRequest,
-
-    {
-      onSuccess: () => {
-        queryClient.refetchQueries("getUserSavedJobs");
-      },
-
-      onError: (error) => {
-        toast.error(`${error.response?.data.message}`);
-      },
-    }
-  );
+    onError: (error) => {
+      toast.error(`${error.response?.data.message}`);
+    },
+  });
 
   const bookmarkAndUnbookmarkAJobFunction = async () => {
     await mutateAsync(jobId);

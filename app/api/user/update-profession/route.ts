@@ -1,14 +1,13 @@
 import User from "@/models/user";
 import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
-import { getSessionUser } from "@/utilities/auth/getSessionUser";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 export const PUT = async (req: NextRequest) => {
   const profession = await req.json();
+  const session = await getCurrentServerSession();
 
-  const { sessionUser, userId } = await getSessionUser();
-
-  if (!sessionUser)
+  if (!session)
     return NextResponse.json(
       { message: "Oops! You cannot perform action." },
       { status: 401 }
@@ -17,7 +16,7 @@ export const PUT = async (req: NextRequest) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId);
+    const user = await User.findById(session.user.id);
 
     if (user) {
       user.profession = profession;

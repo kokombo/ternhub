@@ -1,11 +1,8 @@
-"use client";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import type { Session } from "next-auth";
 
-const ProfilePicture = () => {
-  const { data: session } = useSession();
-
+const ProfilePicture = ({ session }: { session: Session | null }) => {
   return (
     <Link
       href="/profile"
@@ -19,7 +16,7 @@ const ProfilePicture = () => {
             fill
             className="rounded-full object-cover"
             quality={100}
-            sizes="100vw 80vw"
+            sizes="any"
           />
         </span>
       ) : (

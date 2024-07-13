@@ -2,12 +2,18 @@
 import { useState } from "react";
 import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
-import { UniversalModal, FaqCard } from "@/components";
+import { FaqCard } from "@/components";
 import { useSelector, useDispatch } from "react-redux";
 import type { DispatchType, StateType } from "@/redux-toolkit/store";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
 import { UpdateFaq } from "@/containers";
 import { v4 as uuid } from "uuid";
+import dynamic from "next/dynamic";
+
+const UniversalModal = dynamic(
+  () => import("@/components/universal-modal/universal-modal"),
+  { ssr: false }
+);
 
 const AdminAllFaqsPage = () => {
   const dispatch: DispatchType = useDispatch();

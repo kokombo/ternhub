@@ -1,30 +1,15 @@
 "use client";
-
-import { useSession } from "next-auth/react";
 import { useSendEmailVerificationLink } from "@/utilities/auth/sendEmailVerificationLink";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { GroteskNormal } from "@/app/font";
 import { useCountdownTimer } from "@/utilities/hooks";
-
-//A new user will be redirected to this wait screen after signup. Email has been sent automatically after a success signup. The email contains a continue url back to the application.
+import { useCurrentClientSession } from "@/utilities/auth/useCurrentClientSession";
 
 const EmailVerification = () => {
-  const { data: session, status } = useSession();
-
-  const router = useRouter();
-
-  const email = session?.user?.email as string;
-
-  const { sendEmailVerificationLink } = useSendEmailVerificationLink(email); //A user can resend verification link email by calling mutateAsync.
-
+  const { session } = useCurrentClientSession();
+  const { sendEmailVerificationLink } = useSendEmailVerificationLink(
+    session?.user.email
+  );
   const { newTime, setTime } = useCountdownTimer(0);
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [status, router]);
 
   return (
     <div className="flex_center justify-center text-center gap-6 h-full padding">
@@ -48,7 +33,6 @@ const EmailVerification = () => {
             type="button"
             onClick={async () => {
               setTime(60);
-
               sendEmailVerificationLink();
             }}
             className="blue_button"

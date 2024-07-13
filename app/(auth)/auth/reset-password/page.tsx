@@ -19,15 +19,19 @@ import { resetPasswordFormValidationSchema } from "@/utilities/validation/form-v
 
 const ResetPassword = () => {
   const searchParams = useSearchParams();
-
   const token = searchParams.get("token");
-
   const router = useRouter();
 
   const passwordResetRequest = async (password: string) => {
     const res = await axios.put(
       `/api/user/reset-password?token=${token}`,
-      JSON.stringify(password)
+      JSON.stringify(password),
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return res.data;
@@ -40,14 +44,12 @@ const ResetPassword = () => {
   >("resetPassword", passwordResetRequest, {
     onSuccess: (data) => {
       toast.success(`${data.message}`);
-
       router.push("/auth/signin");
     },
   });
 
   const resetPassword = async (values: { password: string }) => {
     const { password } = values;
-
     await mutateAsync(password);
   };
 

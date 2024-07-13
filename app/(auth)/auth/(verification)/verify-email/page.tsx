@@ -5,31 +5,27 @@ import { useRouter } from "next/navigation";
 import { RotatingLinesLoader } from "@/components/loaders/loaders";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { illustrations } from "@/constants";
 
-//A user will be redirected to this screen after clicking "verify email" in the email sent to their inbox.
-
 const VerifyEmailPage = () => {
   const searchParams = useSearchParams();
-
   const token = searchParams.get("token");
-
   const router = useRouter();
 
-  const { update } = useSession();
-
   const verifyEmailRequest = async () => {
-    const res = await axios.put(`/api/user/verify-email?token=${token}`);
-
+    const res = await axios.put(`/api/user/verify-email?token=${token}`, {
+      headers: {
+        Accept: "applicaton/json",
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 
   const { mutateAsync, data, error, isLoading, isError, isSuccess } =
     useMutation<MessageResponse, AxiosError<ErrorResponse>>(
       ["verifyEmail"],
-
       verifyEmailRequest
     );
 
@@ -37,14 +33,8 @@ const VerifyEmailPage = () => {
     const verifyUserEmail = async () => {
       await mutateAsync();
     };
-
     verifyUserEmail();
   }, [mutateAsync]);
-
-  const continueBackToApp = () => {
-    update();
-    router.push("/");
-  };
 
   return (
     <section className="padding">
@@ -87,7 +77,7 @@ const VerifyEmailPage = () => {
 
           <button
             type="button"
-            onClick={continueBackToApp}
+            onClick={() => router.push("/")}
             className="underline text-base lg:text-lg text-purple"
           >
             Click here to continue back to TernHub

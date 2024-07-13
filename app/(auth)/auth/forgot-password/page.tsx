@@ -23,7 +23,13 @@ const ForgotPassword = () => {
   const passwordResetLinkRequest = async (email: string) => {
     const res = await axios.post(
       "/api/user/reset-password",
-      JSON.stringify(email)
+      JSON.stringify(email),
+      {
+        headers: {
+          "Content-Type": "applicaton/json",
+          Accept: "applicaton/json",
+        },
+      }
     );
     return res.data;
   };

@@ -41,7 +41,7 @@ const AdminSegmentNavbar = () => {
         </Link>
 
         <Link
-          href="/admin/add-new-blog"
+          href="/admin/add-blog"
           aria-label="admin link to add a blog page"
           className="bg-purple hover:bg-blue  lg:px-8 px-4 py-3 rounded-[10px] text-white font-semibold text-sm lg:text-base text-center"
         >
@@ -49,7 +49,7 @@ const AdminSegmentNavbar = () => {
         </Link>
 
         <Link
-          href="/admin/add-new-faq"
+          href="/admin/add-faq"
           aria-label="admin link to post a job page"
           className="bg-purple hover:bg-blue lg:px-8 px-4 py-3 rounded-[10px] text-white font-semibold text-sm lg:text-base text-center "
         >

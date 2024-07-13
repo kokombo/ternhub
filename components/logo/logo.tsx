@@ -1,23 +1,14 @@
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { twMerge } from "tailwind-merge";
+import { useCurrentClientSession } from "@/utilities/auth/useCurrentClientSession";
 
-type Props = {
-  disabled?: boolean;
-};
-
-const Logo = (props: Props) => {
-  const { data: session, status } = useSession();
-
+const Logo = () => {
+  const { session, sessionLoading } = useCurrentClientSession();
   return (
     <Link
       href={session?.user ? "/jobs" : "/"}
-      className={twMerge(
-        "text-[20px] lg:text-[32px] text-purple",
-        status === "loading" && "pointer-events-none"
-      )}
-      prefetch={false}
-      aria-disabled={props.disabled}
+      className={twMerge("text-[20px] lg:text-[32px] text-purple")}
+      aria-disabled={!!sessionLoading}
     >
       TheTernHub
     </Link>

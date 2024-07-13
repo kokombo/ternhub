@@ -2,15 +2,15 @@ import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
-import { getSessionUser } from "@/utilities/auth/getSessionUser";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 export const GET = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const { sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser || sessionUser.role !== "admin") {
+  if (!session || session.user.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
@@ -37,9 +37,9 @@ export const PATCH = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const { sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser || sessionUser.role !== "admin") {
+  if (!session || session.user.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }
@@ -77,9 +77,9 @@ export const DELETE = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const { sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser || sessionUser.role !== "admin") {
+  if (!session || session.user.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }

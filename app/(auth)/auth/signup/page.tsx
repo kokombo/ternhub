@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Formik, Form, type FormikHelpers } from "formik";
 import {
@@ -33,7 +32,11 @@ const SignUpPage = () => {
   const router = useRouter();
 
   const signupFormRequest = async (formData: UserSignupDataType) => {
-    const res = await axios.post("/api/user", formData);
+    const res = await axios.post("/api/user", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     return res.data;
   };
 

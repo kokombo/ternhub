@@ -3,12 +3,12 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
 import slugify from "slugify";
 import cloudinary from "@/utilities/general/cloudinary";
-import { getSessionUser } from "@/utilities/auth/getSessionUser";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 export const POST = async (req: NextRequest) => {
-  const { sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser || sessionUser.role !== "admin") {
+  if (!session || session.user.role !== "admin") {
     return NextResponse.json(
       { message: "Oops! You are not authorized to perform action." },
       { status: 401 }

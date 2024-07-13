@@ -2,14 +2,14 @@ import { NextResponse, type NextRequest } from "next/server";
 import User from "@/models/user";
 import cloudinary from "@/utilities/general/cloudinary";
 import { connectDatabase } from "@/database/database";
-import { getSessionUser } from "@/utilities/auth/getSessionUser";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 export const PATCH = async (req: NextRequest) => {
-  const { sessionUser, userId } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
   const picture = await req.json();
 
-  if (!sessionUser) {
+  if (!session) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
@@ -19,7 +19,7 @@ export const PATCH = async (req: NextRequest) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId);
+    const user = await User.findById(session.user.id);
 
     if (picture) {
       const uploadedPictureResponse = await cloudinary.v2.uploader.upload(

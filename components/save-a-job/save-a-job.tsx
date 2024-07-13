@@ -1,4 +1,3 @@
-"use client";
 import { useSession } from "next-auth/react";
 import { useBookmarkAJob } from "@/utilities/data-fetching/bookmarkAJob";
 import { useSelector } from "react-redux";
@@ -7,13 +6,9 @@ import { useGetUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs"
 
 const SaveAJob = ({ props: job }: { props: JobType }) => {
   const { data: session } = useSession();
-
   const { userSavedJobs } = useSelector((state: StateType) => state.job);
-
   useGetUserSavedJobs();
-
   const { bookmarkAndUnbookmarkAJobFunction } = useBookmarkAJob(job._id);
-
   const alreadyBookmarkedJobsIds = userSavedJobs?.map((eachJob) => eachJob._id);
 
   return (

@@ -3,12 +3,12 @@ import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
-import { getSessionUser } from "@/utilities/auth/getSessionUser";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 export const GET = async (req: NextRequest) => {
-  const { userId, sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser) {
+  if (!session) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
@@ -18,7 +18,9 @@ export const GET = async (req: NextRequest) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId).populate({ path: "savedJobs" });
+    const user = await User.findById(session.user.id).populate({
+      path: "savedJobs",
+    });
 
     if (!user) {
       return NextResponse.json(
@@ -39,9 +41,9 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const PUT = async (req: NextRequest) => {
-  const { userId, sessionUser } = await getSessionUser();
+  const session = await getCurrentServerSession();
 
-  if (!sessionUser) {
+  if (!session) {
     return NextResponse.json(
       { message: "Oops! Please sign in to perform action." },
       { status: 401 }
@@ -55,7 +57,7 @@ export const PUT = async (req: NextRequest) => {
   try {
     await connectDatabase();
 
-    const user = await User.findById(userId);
+    const user = await User.findById(session.user.id);
 
     if (!user.emailVerified) {
       const token = await user.createEmailVerificationToken();
@@ -89,7 +91,7 @@ export const PUT = async (req: NextRequest) => {
 
     if (alreadyBookmarked) {
       await User.findByIdAndUpdate(
-        userId,
+        session.user.id,
 
         {
           $pull: { savedJobs: jobId },
@@ -105,7 +107,7 @@ export const PUT = async (req: NextRequest) => {
     }
 
     await User.findByIdAndUpdate(
-      userId,
+      session.user.id,
 
       { $push: { savedJobs: jobId } },
 

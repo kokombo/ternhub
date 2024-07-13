@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Formik, Form, type FormikHelpers } from "formik";
 import {
   SubmitButton,
@@ -79,7 +79,7 @@ const SignInPage = () => {
           </div>
         </div>
 
-        <>
+        <Fragment>
           <Formik
             initialValues={{
               email: "",
@@ -128,7 +128,7 @@ const SignInPage = () => {
               </div>
             </Form>
           </Formik>
-        </>
+        </Fragment>
 
         <div className="w-full flex flex-col items-center gap-5">
           <AuthCTA

@@ -15,9 +15,7 @@ const JobCard = ({
   rootUrl: string;
 }) => {
   const { data: session } = useSession();
-
   const router = useRouter();
-
   const { sendEmailVerificationLink } = useSendEmailVerificationLink(
     session?.user?.email
   );
@@ -25,11 +23,9 @@ const JobCard = ({
   const viewJobDetails = () => {
     if (!session) {
       router.push("/auth/signin");
-
       toast.error("Please sign in to continue using TheTernHub.");
     } else if (!session?.user?.emailVerified) {
       sendEmailVerificationLink();
-
       toast.info("Please verify your email adress.");
     } else {
       router.push(`${rootUrl}/job?listing_id=${job._id}`);

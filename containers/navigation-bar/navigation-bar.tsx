@@ -1,26 +1,25 @@
 "use client";
 import { Logo, NavLinks, StyledLink, ProfilePicture } from "@/components";
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { icons } from "@/constants";
 import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
 import Sidebar from "../sidebar/sidebar";
+import type { Session } from "next-auth";
 
-const NavigationBar = () => {
-  const { status } = useSession();
+const NavigationBar = ({ session }: { session: Session | null }) => {
   const pathname = usePathname();
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
   const openSidebar = () => setSidebarIsOpen(true);
-
   const closeSidebar = () => setSidebarIsOpen(false);
 
   return (
     <Fragment>
       <nav className="nav_container">
-        <Logo disabled={status === "loading"} />
+        <Logo />
 
         {pathname.includes("/search") ? null : (
           <span className="text-greyblack hidden lg:inline ">
@@ -29,9 +28,7 @@ const NavigationBar = () => {
         )}
 
         <div className="flex items-center gap-[14px]">
-          {status === "loading" ? (
-            <div />
-          ) : status === "authenticated" ? (
+          {session ? (
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -42,7 +39,7 @@ const NavigationBar = () => {
               >
                 Sign out
               </button>
-              <ProfilePicture />
+              <ProfilePicture session={session} />
             </div>
           ) : (
             <div className="flex items-center gap-[10px] ">
@@ -69,7 +66,6 @@ const NavigationBar = () => {
               openSidebar();
               document.body.style.overflow = "hidden";
             }}
-            disabled={status === "loading"}
             className="nav_toggle"
           >
             <Image
