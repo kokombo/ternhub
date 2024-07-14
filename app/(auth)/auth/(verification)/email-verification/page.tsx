@@ -2,10 +2,10 @@
 import { useSendEmailVerificationLink } from "@/utilities/auth/sendEmailVerificationLink";
 import { GroteskNormal } from "@/app/font";
 import { useCountdownTimer } from "@/utilities/hooks";
-import { useCurrentClientSession } from "@/utilities/auth/useCurrentClientSession";
+import { useSession } from "next-auth/react";
 
 const EmailVerification = () => {
-  const { session } = useCurrentClientSession();
+  const { data: session } = useSession();
   const { sendEmailVerificationLink } = useSendEmailVerificationLink(
     session?.user.email
   );

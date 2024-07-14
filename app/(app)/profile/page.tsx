@@ -1,10 +1,8 @@
-"use client";
+import { UploadProfilePicture } from "@/app/client-components-import";
+import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
-import { useSession } from "next-auth/react";
-import { UploadProfilePicture } from "@/components";
-
-const Profile = () => {
-  const { data: session } = useSession();
+const Profile = async () => {
+  const session = await getCurrentServerSession();
 
   return (
     <main className="padding grid place-items-center">

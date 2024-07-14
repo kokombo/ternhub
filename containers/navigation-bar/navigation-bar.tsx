@@ -39,7 +39,7 @@ const NavigationBar = ({ session }: { session: Session | null }) => {
               >
                 Sign out
               </button>
-              <ProfilePicture session={session} />
+              <ProfilePicture />
             </div>
           ) : (
             <div className="flex items-center gap-[10px] ">

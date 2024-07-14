@@ -1,8 +1,11 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Session } from "next-auth";
 
-const ProfilePicture = ({ session }: { session: Session | null }) => {
+const ProfilePicture = () => {
+  const { data: session } = useSession();
+
   return (
     <Link
       href="/profile"

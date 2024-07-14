@@ -7,11 +7,13 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { illustrations } from "@/constants";
+import { useSession } from "next-auth/react";
 
 const VerifyEmailPage = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const router = useRouter();
+  const { update } = useSession();
 
   const verifyEmailRequest = async () => {
     const res = await axios.put(`/api/user/verify-email?token=${token}`, {
@@ -77,7 +79,10 @@ const VerifyEmailPage = () => {
 
           <button
             type="button"
-            onClick={() => router.push("/")}
+            onClick={() => {
+              update();
+              router.push("/");
+            }}
             className="underline text-base lg:text-lg text-purple"
           >
             Click here to continue back to TernHub

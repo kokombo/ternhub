@@ -51,7 +51,9 @@ const JobsSearchResults = () => {
   } = queryTerms;
 
   const router = useRouter();
-  const search_id = uuidv4();
+  const search_id = useMemo(() => {
+    return uuidv4();
+  }, []);
 
   const params = useMemo(() => {
     const searchParams = new URLSearchParams();

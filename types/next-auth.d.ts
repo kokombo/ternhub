@@ -20,8 +20,12 @@ declare module "next-auth" {
   }
 
   interface User {
+    _id?: string;
+    accessToken?: string;
     role?: string;
-    // emailVerified?: boolean;
+    emailVerified?: boolean;
+    authMethod?: string;
+    image?: string;
   }
 }
 

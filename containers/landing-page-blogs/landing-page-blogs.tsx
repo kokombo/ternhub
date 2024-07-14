@@ -1,7 +1,6 @@
 import { SectionHeading, BlogCard, StyledLink } from "@/components";
 import BlogSkeletonLoader from "@/utilities/skeletons/blog-skeleton-loader";
 import { useGetAllBlogs } from "@/utilities/data-fetching/getAllBlogs";
-import { v4 as uuid } from "uuid";
 
 const LandingPageBlogs = () => {
   const { blogs, isLoading, isError } = useGetAllBlogs();
@@ -15,7 +14,9 @@ const LandingPageBlogs = () => {
 
       <div className="landing_page_blog_container">
         {isLoading || isError
-          ? [...Array(4)].map((_) => <BlogSkeletonLoader key={uuid()} />)
+          ? [...Array(4)].map((_, index) => (
+              <BlogSkeletonLoader key={index.toString()} />
+            ))
           : blogs &&
             blogs.length > 1 &&
             blogs

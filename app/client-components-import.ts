@@ -8,6 +8,7 @@ import {
   TrendingJobs,
 } from "@/containers";
 import Providers from "@/components/providers/providers";
+import { UploadProfilePicture } from "@/components";
 
 export {
   NavigationBar,
@@ -17,4 +18,5 @@ export {
   Faqs,
   Hero,
   TrendingJobs,
+  UploadProfilePicture,
 };

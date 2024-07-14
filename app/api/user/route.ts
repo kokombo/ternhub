@@ -7,11 +7,8 @@ import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSessio
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
-
   const email = body.email;
-
   const refinedEmail = email.toLowerCase();
-
   const emailValid = await emailValidator(email);
 
   if (!emailValid) {

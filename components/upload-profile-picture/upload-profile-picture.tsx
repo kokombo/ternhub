@@ -8,17 +8,21 @@ import { TailSpin } from "react-loader-spinner";
 
 const UploadProfilePicture = () => {
   const { data: session, update } = useSession();
-
-  const [picture, setPicture] = useState<string | null | ArrayBuffer>(""); //new profile picture to upload.
+  const [picture, setPicture] = useState<string | null | ArrayBuffer>("");
 
   const uploadPictureRequest = async (
     picture: string | ArrayBuffer
   ): Promise<string | undefined> => {
     const res = await axios.patch(
       "/api/user/upload-picture",
-      JSON.stringify(picture)
+      JSON.stringify(picture),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
     );
-
     return res.data;
   };
 
@@ -26,23 +30,15 @@ const UploadProfilePicture = () => {
     string | undefined,
     AxiosError<ErrorResponse>,
     string | ArrayBuffer
-  >(
-    "uploadProfilePicture",
-
-    uploadPictureRequest,
-
-    {
-      onSuccess: () => {
-        setPicture("");
-
-        update();
-      },
-    }
-  );
+  >("uploadProfilePicture", uploadPictureRequest, {
+    onSuccess: () => {
+      setPicture("");
+      update();
+    },
+  });
 
   const initiatePictureUpload = async () => {
     const imagetoUpload = picture as string | ArrayBuffer;
-
     await mutateAsync(imagetoUpload);
   };
 

@@ -5,7 +5,7 @@ import no_saved_jobs from "../public/assets/illustrations/no_saved_jobs.png";
 import no_search_result from "../public/assets/illustrations/no_search_result.png";
 import success from "../public/assets/illustrations/success.jpg";
 
-export default {
+const illustrations = {
   vector,
   error,
   error_2,
@@ -13,3 +13,5 @@ export default {
   no_search_result,
   success,
 };
+
+export default illustrations;

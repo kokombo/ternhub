@@ -11,7 +11,6 @@ export const useGetAllJobs = (
   baseUrl: string
 ) => {
   const router = useRouter();
-
   const dispatch = useDispatch();
 
   const fetchJobsRequest = async () => {
@@ -24,7 +23,6 @@ export const useGetAllJobs = (
         Accept: "application/json",
       },
     });
-
     return res.data;
   };
 
@@ -38,16 +36,11 @@ export const useGetAllJobs = (
     isPreviousData,
   } = useQuery<JobsResponse, AxiosError<ErrorResponse>>(
     ["fetchJobs", pageNumber],
-
     fetchJobsRequest,
-
     {
       keepPreviousData: true,
-
       refetchOnWindowFocus: false,
-
       retry: 1,
-
       onSuccess: (data) => {
         dispatch(setAllJobs(data?.jobs));
       },

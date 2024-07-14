@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import type { DispatchType, StateType } from "@/redux-toolkit/store";
 import { setModalVisible } from "@/redux-toolkit/slices/modal";
 import { UpdateFaq } from "@/containers";
-import { v4 as uuid } from "uuid";
 import dynamic from "next/dynamic";
 
 const UniversalModal = dynamic(
@@ -39,7 +38,9 @@ const AdminAllFaqsPage = () => {
       <div className="flex items-center justify-center w-full py-11 lg:py-[100px]">
         <div className="grid grid-cols-1 lg:gap-10 gap-6 w-full place-items-center max-w-[630px]">
           {isLoading || isError
-            ? [...Array(4)].map((_) => <FaqSkeletonLoader key={uuid()} />)
+            ? [...Array(4)].map((_, index) => (
+                <FaqSkeletonLoader key={index.toString()} />
+              ))
             : faqs?.map((faq) => (
                 <FaqCard
                   key={faq._id}

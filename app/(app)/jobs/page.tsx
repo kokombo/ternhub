@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState, useMemo, type ChangeEvent } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";

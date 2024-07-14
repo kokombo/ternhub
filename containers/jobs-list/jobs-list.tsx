@@ -9,7 +9,6 @@ import type {
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
-import { v4 as uuid } from "uuid";
 
 type Props = {
   data: JobType[] | undefined;
@@ -37,8 +36,8 @@ const JobsList = (props: Props) => {
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
         <div className="job_list_grid w-full">
-          {[...Array(10)].map((_) => (
-            <JobSkeletonLoader key={uuid()} />
+          {[...Array(10)].map((_, index) => (
+            <JobSkeletonLoader key={index.toString()} />
           ))}
         </div>
       ) : props.isError ? (

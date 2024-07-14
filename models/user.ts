@@ -17,7 +17,7 @@ const UserSchema = new Schema(
 
     password: {
       type: String,
-      required: [true, "Please provide your email address"],
+      required: false,
     },
 
     profession: {
@@ -45,15 +45,10 @@ const UserSchema = new Schema(
     savedJobs: [{ type: Schema.Types.ObjectId, ref: "Job" }],
 
     refreshToken: String,
-
     passwordChangedAt: Date,
-
     passwordResetToken: String,
-
     passwordResetTokenExpires: Date,
-
     emailVerificationToken: String,
-
     emailVerificationTokenExpires: Date,
   },
   {
@@ -66,7 +61,7 @@ UserSchema.pre("save", async function (next) {
     return next();
   }
   const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  if (this.password) this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 

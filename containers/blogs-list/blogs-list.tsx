@@ -9,7 +9,6 @@ import type {
   RefetchOptions,
   RefetchQueryFilters,
 } from "react-query";
-import { v4 as uuid } from "uuid";
 
 type Props = {
   data: BlogType[] | undefined;
@@ -59,8 +58,8 @@ const BlogsList = (props: Props) => {
         <>
           {props.isLoading ? (
             <div className="w-full blog_list_grid">
-              {[...Array(8)].map((_) => (
-                <BlogSkeletonLoader key={uuid()} />
+              {[...Array(8)].map((_, index) => (
+                <BlogSkeletonLoader key={index.toString()} />
               ))}
             </div>
           ) : props.isError ? (

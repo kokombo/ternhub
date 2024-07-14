@@ -23,15 +23,14 @@ export const useBookmarkAJob = (jobId: string) => {
     onSuccess: () => {
       queryClient.refetchQueries("getUserSavedJobs");
     },
-
     onError: (error) => {
       toast.error(`${error.response?.data.message}`);
     },
   });
 
-  const bookmarkAndUnbookmarkAJobFunction = async () => {
+  const bookmarkAndUnbookmarkAJob = async () => {
     await mutateAsync(jobId);
   };
 
-  return { isError, error, bookmarkAndUnbookmarkAJobFunction };
+  return { isError, error, bookmarkAndUnbookmarkAJob };
 };

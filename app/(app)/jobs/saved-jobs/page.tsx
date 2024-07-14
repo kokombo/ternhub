@@ -3,7 +3,6 @@ import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import { Message, JobCard } from "@/components";
 import { useGetUserSavedJobs } from "@/utilities/data-fetching/getUserSavedJobs";
 import { illustrations } from "@/constants";
-import { v4 as uuid } from "uuid";
 
 const SavedJobsPage = () => {
   const { savedJobs, isError, isLoading, error, refetch } =
@@ -12,8 +11,8 @@ const SavedJobsPage = () => {
   if (isLoading) {
     return (
       <div className="w-full job_list_grid">
-        {[...Array(6)].map((_) => (
-          <JobSkeletonLoader key={uuid()} />
+        {[...Array(6)].map((_, index) => (
+          <JobSkeletonLoader key={index.toString()} />
         ))}
       </div>
     );

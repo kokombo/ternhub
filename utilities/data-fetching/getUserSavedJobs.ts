@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 
 export const useGetUserSavedJobs = () => {
   const dispatch = useDispatch();
-
   const { data: session } = useSession();
 
   const getUserSavedJobsRequest = async () => {
@@ -31,9 +30,7 @@ export const useGetUserSavedJobs = () => {
       onSuccess: (data) => {
         dispatch(setUserSavedJobs(data));
       },
-
-      refetchOnMount: true,
-
+      refetchOnMount: "always",
       enabled: !!session,
     }
   );

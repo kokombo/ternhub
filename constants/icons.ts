@@ -10,7 +10,7 @@ import tickcircle from "../public/assets/icons/tickcircle.png";
 import hidepassword from "../public/assets/icons/hidepassword.png";
 import showpassword from "../public/assets/icons/showpassword.png";
 
-export default {
+const icons = {
   toggle,
   search,
   google,
@@ -23,3 +23,5 @@ export default {
   showpassword,
   hidepassword,
 };
+
+export default icons;
