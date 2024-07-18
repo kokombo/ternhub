@@ -3,7 +3,7 @@ import { Sans } from "./font";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Providers } from "@/app/client-components-import";
+import { Providers } from "@/app/imports";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

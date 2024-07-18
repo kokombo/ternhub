@@ -1,9 +1,4 @@
-import {
-  Hero,
-  TrendingJobs,
-  LandingPageBlogs,
-  Faqs,
-} from "@/app/client-components-import";
+import { Hero, TrendingJobs, LandingPageBlogs, Faqs } from "@/app/imports";
 
 const Home = () => {
   return (

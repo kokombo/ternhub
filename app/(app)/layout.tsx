@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { NavigationBar, Footer } from "@/app/client-components-import";
+import { NavigationBar, Footer } from "@/app/imports";
 import { Fragment } from "react";
 import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 

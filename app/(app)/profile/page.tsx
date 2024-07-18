@@ -1,4 +1,4 @@
-import { UploadProfilePicture } from "@/app/client-components-import";
+import { UploadProfilePicture } from "@/app/imports";
 import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
 
 const Profile = async () => {
