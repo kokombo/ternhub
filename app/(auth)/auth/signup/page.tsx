@@ -110,7 +110,8 @@ const SignUpPage = () => {
             }}
             onSubmit={createUserAccount}
             validationSchema={signupFormValidationSchema}
-            validateOnBlur={false}
+            validateOnBlur={true}
+            validateOnChange={true}
           >
             <Form className="flex flex-col gap-8 w-full">
               <InputField
