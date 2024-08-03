@@ -1,14 +1,12 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { FilterSelect } from "..";
 import { jobCategoryOptions } from "@/constants/data";
 
 type Props = {
-  onchangeJobModeFilterTerm: (e: ChangeEvent<HTMLSelectElement>) => void;
   jobModeFilterTerm: string;
-  onchangeJobTypeFilterTerm: (e: ChangeEvent<HTMLSelectElement>) => void;
   jobTypeFilterTerm: string;
   jobCategoryFilterTerm: string;
-  onChangeJobCategoryFilterTerm: (e: ChangeEvent<HTMLSelectElement>) => void;
+  setQueryTerms: Dispatch<SetStateAction<QueryTerms>>;
 };
 
 const sortByOptions = [{ key: "", value: "" }];
@@ -25,7 +23,20 @@ const jobTypeOptions = [
   { key: "Contract", value: "contract" },
 ];
 
-const JobsFilter = (props: Props) => {
+const JobsFilter = ({
+  setQueryTerms,
+  jobCategoryFilterTerm,
+  jobModeFilterTerm,
+  jobTypeFilterTerm,
+}: Props) => {
+  const filterTermOnchange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setQueryTerms((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="flex items-center lg:gap-[26px] lg:justify-start gap-[13px] w-full flex-wrap">
       <FilterSelect
@@ -40,8 +51,8 @@ const JobsFilter = (props: Props) => {
 
       <FilterSelect
         data={jobModeOptions}
-        value={props.jobModeFilterTerm}
-        onChange={props.onchangeJobModeFilterTerm}
+        value={jobModeFilterTerm}
+        onChange={filterTermOnchange}
         label="Mode"
         name="jobModeFilterTerm"
         firstOptionKey="All"
@@ -50,8 +61,8 @@ const JobsFilter = (props: Props) => {
 
       <FilterSelect
         data={jobTypeOptions}
-        value={props.jobTypeFilterTerm}
-        onChange={props.onchangeJobTypeFilterTerm}
+        value={jobTypeFilterTerm}
+        onChange={filterTermOnchange}
         label="Type"
         name="jobTypeFilterTerm"
         firstOptionKey="All"
@@ -60,8 +71,8 @@ const JobsFilter = (props: Props) => {
 
       <FilterSelect
         data={jobCategoryOptions}
-        value={props.jobCategoryFilterTerm}
-        onChange={props.onChangeJobCategoryFilterTerm}
+        value={jobCategoryFilterTerm}
+        onChange={filterTermOnchange}
         label="Category"
         name="jobCategoryFilterTerm"
         firstOptionKey="All"

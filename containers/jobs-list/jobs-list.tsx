@@ -3,6 +3,7 @@ import { illustrations } from "@/constants";
 import JobSkeletonLoader from "@/utilities/skeletons/job-skeleton-loader";
 import type { AxiosError } from "axios";
 import type { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { FaChevronCircleRight, FaChevronCircleLeft } from "react-icons/fa";
 import type {
   QueryObserverResult,
@@ -27,11 +28,24 @@ type Props = {
   resultsCountPerQuery: number;
   totalJobs: number;
   noDataIllustration: string | StaticImport;
-  onClickNextButton: () => void;
-  onClickPrevButton: () => void;
+  setQueryTerms: Dispatch<SetStateAction<QueryTerms>>;
 };
 
 const JobsList = (props: Props) => {
+  const handlePrevButtonClick = useCallback(() => {
+    props.setQueryTerms((queryTerms) => ({
+      ...queryTerms,
+      pageNumber: Math.max(queryTerms.pageNumber - 1, 1),
+    }));
+  }, [props]);
+
+  const handleNextButtonClick = useCallback(() => {
+    props.setQueryTerms((queryTerms) => ({
+      ...queryTerms,
+      pageNumber: queryTerms.pageNumber + 1,
+    }));
+  }, [props]);
+
   return (
     <section className="flex flex-col items-center justify-between min-h-screen ">
       {props.isLoading || props.isFetching ? (
@@ -73,8 +87,7 @@ const JobsList = (props: Props) => {
             type="button"
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-
-              props.onClickPrevButton();
+              handlePrevButtonClick();
             }}
           >
             <FaChevronCircleLeft size={20} color={"#5627FF"} />
@@ -92,8 +105,7 @@ const JobsList = (props: Props) => {
             type="button"
             onClick={() => {
               window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-
-              props.onClickNextButton();
+              handleNextButtonClick();
             }}
             className=""
           >

@@ -43,7 +43,7 @@ export const GET = async (req: NextRequest) => {
 
     const searchQuery = searchParams.get("search");
 
-    if (searchQuery) {
+    if (searchQuery && searchQuery.length > 0) {
       const queryToDatabase = { $text: { $search: searchQuery } };
 
       result = result.find(queryToDatabase);

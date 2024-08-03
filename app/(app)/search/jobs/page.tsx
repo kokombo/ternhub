@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { JobsFilter, Search } from "@/components";
 import { JobsList } from "@/containers";
 import axios, { type AxiosError } from "axios";
@@ -7,9 +7,10 @@ import { useQuery } from "react-query";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import type { StateType } from "@/redux-toolkit/store";
-import { valuesFromLocalStorage } from "@/utilities/general/valuesFromLocalStorage";
+import { useJobQueriesFromLocalStorage } from "@/utilities/general/useJobQueriesFromLocalStorage";
 import { v4 as uuidv4 } from "uuid";
 import { illustrations } from "@/constants";
+import { useSetToLocalStorage } from "@/utilities/hooks";
 
 type JobsResults = {
   jobs: JobType[];
@@ -18,28 +19,26 @@ type JobsResults = {
 };
 
 const JobsSearchResults = () => {
-  const {
-    pageFromLocalStorage,
-    jobModeTermFromLocalStorage,
-    searchTermFromLocalStorage,
-    jobTypeTermFromLocalStorage,
-    jobCategoryTermFromLocalStorage,
-  } = valuesFromLocalStorage("userQueriesInSearch");
+  const { page, mode, searchQuery, type, category } =
+    useJobQueriesFromLocalStorage("userQueriesInSearch");
 
   const { jobSearchTerm: newJobSearchTerm } = useSelector(
     (state: StateType) => state.search
   );
 
-  const initialQueryTerms = {
-    searchTerm: newJobSearchTerm || searchTermFromLocalStorage,
-    jobModeFilterTerm: jobModeTermFromLocalStorage || "",
-    jobTypeFilterTerm: jobTypeTermFromLocalStorage || "",
-    pageNumber: pageFromLocalStorage || 1,
-    limit: 30,
-    jobCategoryFilterTerm: jobCategoryTermFromLocalStorage || "",
-  };
+  const initialQueryTerms = useMemo(
+    () => ({
+      searchTerm: newJobSearchTerm || searchQuery,
+      jobModeFilterTerm: mode || "",
+      jobTypeFilterTerm: type || "",
+      pageNumber: page || 1,
+      limit: 30,
+      jobCategoryFilterTerm: category || "",
+    }),
+    [page, newJobSearchTerm, mode, type, category, searchQuery]
+  );
 
-  const [queryTerms, setQueryTerms] = useState(initialQueryTerms);
+  const [queryTerms, setQueryTerms] = useState<QueryTerms>(initialQueryTerms);
 
   const {
     jobModeFilterTerm,
@@ -51,9 +50,7 @@ const JobsSearchResults = () => {
   } = queryTerms;
 
   const router = useRouter();
-  const search_id = useMemo(() => {
-    return uuidv4();
-  }, []);
+  const search_id = uuidv4();
 
   const params = useMemo(() => {
     const searchParams = new URLSearchParams();
@@ -111,16 +108,7 @@ const JobsSearchResults = () => {
     }
   );
 
-  //Onchange handler for filter terms.
-  const onChangeFilterTerm = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setQueryTerms((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies:
+  // biome-ignore lint:
   useEffect(() => {
     refetch();
   }, [jobModeFilterTerm, refetch, jobTypeFilterTerm, jobCategoryFilterTerm]);
@@ -142,23 +130,16 @@ const JobsSearchResults = () => {
     jobCategoryFilterTerm,
   ]);
 
-  useEffect(() => {
-    localStorage.setItem(
-      "userQueriesInSearch",
-      JSON.stringify(userSearchQueriesArray)
-    );
-  }, [userSearchQueriesArray]);
+  useSetToLocalStorage("userQueriesInSearch", userSearchQueriesArray);
 
   return (
     <main className="py-6 md:py-11 sm:px-[6.94%] px-5 flex flex-col gap-4 lg:gap-6 md:gap-11 w-full">
       <div className="flex flex-col-reverse lg:flex-row items-center lg:justify-between lg:gap-0 gap-4 sticky w-full top-0 left-0 bg-white z-[100] py-3">
         <JobsFilter
-          onchangeJobModeFilterTerm={onChangeFilterTerm}
           jobModeFilterTerm={jobModeFilterTerm}
           jobTypeFilterTerm={jobTypeFilterTerm}
-          onchangeJobTypeFilterTerm={onChangeFilterTerm}
           jobCategoryFilterTerm={jobCategoryFilterTerm}
-          onChangeJobCategoryFilterTerm={onChangeFilterTerm}
+          setQueryTerms={setQueryTerms}
         />
 
         <Search
@@ -189,18 +170,7 @@ const JobsSearchResults = () => {
         resultsCountPerQuery={data?.numOfJobsAfterQuery as number}
         totalJobs={data?.totalJobsCountBeforePagination as number}
         noDataIllustration={illustrations.no_search_result}
-        onClickPrevButton={() =>
-          setQueryTerms((queryTerms) => ({
-            ...queryTerms,
-            pageNumber: Math.max(queryTerms.pageNumber - 1, 1),
-          }))
-        }
-        onClickNextButton={() =>
-          setQueryTerms((queryTerms) => ({
-            ...queryTerms,
-            pageNumber: queryTerms.pageNumber + 1,
-          }))
-        }
+        setQueryTerms={setQueryTerms}
       />
     </main>
   );

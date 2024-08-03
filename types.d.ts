@@ -119,3 +119,12 @@ type JobsResponse = {
   numOfJobsAfterQuery: number;
   totalJobsCountBeforePagination: number;
 };
+
+type QueryTerms = {
+  jobModeFilterTerm: string;
+  jobTypeFilterTerm: string;
+  pageNumber: number;
+  jobCategoryFilterTerm: string;
+  limit: number;
+  searchTerm: string;
+};
