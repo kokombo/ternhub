@@ -9,7 +9,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <Fragment>
       <NavigationBar session={session} />
-      <div className="min-h-screen">{children}</div>
+      <main className="min-h-screen">{children}</main>
       <Footer />
     </Fragment>
   );
