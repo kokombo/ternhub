@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useGetAllFaqs } from "@/utilities/data-fetching/getAllFaqs";
 import FaqSkeletonLoader from "@/utilities/skeletons/faq-skeleton-loader";
 import { FaqCard } from "@/components";
@@ -23,12 +23,11 @@ const AdminAllFaqsPage = () => {
 
   const startFaqEdit = (id: string) => {
     dispatch(setModalVisible(true));
-
     setCurrentFaqId(id);
   };
 
   return (
-    <>
+    <Fragment>
       {modalVisible && (
         <UniversalModal>
           <UpdateFaq faqId={currentFaqId} />
@@ -50,7 +49,7 @@ const AdminAllFaqsPage = () => {
               ))}
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 

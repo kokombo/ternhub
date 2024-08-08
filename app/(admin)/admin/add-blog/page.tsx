@@ -41,14 +41,12 @@ const AddABlog = () => {
   >("addABlog", addABlogRequest, {
     onSuccess: () => {
       queryClient.invalidateQueries("fetchBlogs");
-
       router.push("/admin/blogs");
     },
   });
 
   const addABlog = async (values: BlogFormType) => {
     const blogData = { ...values, content };
-
     await mutateAsync(blogData);
   };
 

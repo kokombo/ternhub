@@ -2,13 +2,13 @@ import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const GET = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(
@@ -37,7 +37,7 @@ export const PATCH = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(
@@ -77,7 +77,7 @@ export const DELETE = async (
   req: NextRequest,
   { params }: { params: { id: string } }
 ) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(

@@ -11,11 +11,8 @@ import { illustrations } from "@/constants";
 
 const EditJobInfo = () => {
   const searchParams = useSearchParams();
-
   const jobId = searchParams.get("listing_id");
-
   const router = useRouter();
-
   const queryClient = useQueryClient();
 
   const {
@@ -55,23 +52,15 @@ const EditJobInfo = () => {
     MessageResponse,
     AxiosError<ErrorResponse>,
     JobData
-  >(
-    "updateJob",
-
-    updateJobRequest,
-
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetchJobs");
-
-        router.push("/admin/jobs");
-      },
-    }
-  );
+  >("updateJob", updateJobRequest, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("fetchJobs");
+      router.push("/admin/jobs");
+    },
+  });
 
   const updateJob = async (values: JobFormType) => {
     const newJobData = { ...values, description };
-
     await mutateAsync(newJobData);
   };
 

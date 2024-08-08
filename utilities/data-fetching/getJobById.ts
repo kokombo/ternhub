@@ -20,12 +20,9 @@ export const useGetJobById = (jobId: string | null) => {
     isSuccess,
   } = useQuery<JobType, AxiosError<ErrorResponse>>(
     ["getJobById", jobId],
-
     getJobByIdRequest,
-
     {
       refetchOnWindowFocus: false,
-
       retry: 0,
     }
   );

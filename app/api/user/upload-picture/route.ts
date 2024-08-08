@@ -2,10 +2,10 @@ import { NextResponse, type NextRequest } from "next/server";
 import User from "@/models/user";
 import cloudinary from "@/utilities/general/cloudinary";
 import { connectDatabase } from "@/database/database";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const PATCH = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   const picture = await req.json();
 

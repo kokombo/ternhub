@@ -28,23 +28,15 @@ const AddFaqPage = () => {
     FaqType,
     AxiosError<ErrorResponse>,
     FaqData
-  >(
-    "addAFaq",
-
-    addFaqRequest,
-
-    {
-      onSuccess: () => {
-        queryClient.refetchQueries("getAllFaqs");
-
-        router.push("/admin/faqs");
-      },
-    }
-  );
+  >("addAFaq", addFaqRequest, {
+    onSuccess: () => {
+      queryClient.refetchQueries("getAllFaqs");
+      router.push("/admin/faqs");
+    },
+  });
 
   const submitFAQ = async (values: FaqFormType) => {
     const faqData = { ...values, answer };
-
     await mutateAsync(faqData);
   };
 

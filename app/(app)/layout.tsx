@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
 import { NavigationBar, Footer } from "@/app/imports";
 import { Fragment } from "react";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   return (
     <Fragment>

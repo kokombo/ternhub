@@ -20,12 +20,9 @@ export const useGetBlogBySlug = (slug: string | string[]) => {
     isSuccess,
   } = useQuery<BlogType, AxiosError<ErrorResponse>>(
     ["getBlogBySlug", slug],
-
     getBlogBySlugRequest,
-
     {
       refetchOnWindowFocus: false,
-
       retry: 0,
     }
   );

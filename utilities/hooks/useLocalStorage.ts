@@ -18,7 +18,6 @@ export const useRetrieveFromLocalStorage = (key: string) => {
 
     if (data) {
       const parsedData = JSON.parse(data);
-
       return parsedData;
     }
     return null;

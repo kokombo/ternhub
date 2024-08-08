@@ -23,16 +23,12 @@ export const useGetAllBlogs = () => {
     refetch,
   } = useQuery<BlogType[], AxiosError<ErrorResponse>>(
     "fetchBlogs",
-
     fetchBlogsRequest,
-
     {
       onSuccess: (data) => {
         dispatch(setAllBlogs(data));
       },
-
       refetchOnWindowFocus: false,
-
       staleTime: 60 * 60 * 1000,
     }
   );

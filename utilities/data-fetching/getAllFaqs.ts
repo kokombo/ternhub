@@ -20,7 +20,6 @@ export const useGetAllFaqs = () => {
     fetchFaqsRequest,
     {
       refetchOnWindowFocus: false,
-
       staleTime: 60 * 60 * 60 * 1000,
     }
   );

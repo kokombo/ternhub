@@ -24,23 +24,15 @@ export const useSendEmailVerificationLink = (
     MessageResponse,
     AxiosError<ErrorResponse>,
     string | null | undefined
-  >(
-    ["sendEmailVerificationLink"],
-
-    emailVerificationLinkRequest,
-
-    {
-      retry: 0,
-
-      onSuccess: (data) => {
-        toast.info(`${data?.message}`);
-      },
-
-      onError: (error) => {
-        toast.error(`${error?.response?.data?.message}`);
-      },
-    }
-  );
+  >(["sendEmailVerificationLink"], emailVerificationLinkRequest, {
+    retry: 0,
+    onSuccess: (data) => {
+      toast.info(`${data?.message}`);
+    },
+    onError: (error) => {
+      toast.error(`${error?.response?.data?.message}`);
+    },
+  });
 
   const sendEmailVerificationLink = async () => {
     await mutateAsync(email);

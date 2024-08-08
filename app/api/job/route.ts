@@ -4,10 +4,10 @@ import { NextResponse, type NextRequest } from "next/server";
 import slugify from "slugify";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import cloudinary from "@/utilities/general/cloudinary";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const POST = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(
@@ -107,7 +107,7 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const PATCH = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(
@@ -174,7 +174,7 @@ export const PATCH = async (req: NextRequest) => {
 };
 
 export const DELETE = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(

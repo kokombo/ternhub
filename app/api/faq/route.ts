@@ -1,10 +1,10 @@
 import Faq from "@/models/faq";
 import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const POST = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(

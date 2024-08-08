@@ -19,9 +19,7 @@ export const useGetFaqById = (faqId: string | string[]) => {
     isSuccess,
   } = useQuery<FaqType, AxiosError<ErrorResponse>>(
     ["getFaqById", faqId],
-
     getFaqByIdRequest,
-
     {
       refetchOnWindowFocus: false,
     }

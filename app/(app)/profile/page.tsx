@@ -1,8 +1,8 @@
 import { UploadProfilePicture } from "@/app/imports";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 const Profile = async () => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   return (
     <main className="padding grid place-items-center">

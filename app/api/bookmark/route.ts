@@ -3,10 +3,10 @@ import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
 import { validateMongoDBId } from "@/utilities/general/validateMongoDBId";
 import { sendEmail } from "@/utilities/auth/sendEmail";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const GET = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session) {
     return NextResponse.json(
@@ -41,7 +41,7 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const PUT = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session) {
     return NextResponse.json(

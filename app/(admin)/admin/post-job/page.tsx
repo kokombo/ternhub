@@ -1,4 +1,5 @@
 "use client";
+
 import { JobForm } from "@/components";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
@@ -39,21 +40,15 @@ const PostAJob = () => {
     MessageResponse,
     AxiosError<ErrorResponse>,
     JobData
-  >(
-    postAJobRequest,
-
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("fetchJobs");
-
-        router.push("/admin/jobs");
-      },
-    }
-  );
+  >(postAJobRequest, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("fetchJobs");
+      router.push("/admin/jobs");
+    },
+  });
 
   const postAJob = async (values: JobFormType) => {
     const jobData = { ...values, description };
-
     await mutateAsync(jobData);
   };
 

@@ -3,7 +3,7 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
 import emailValidator from "node-email-verifier";
 import { sendEmail } from "@/utilities/auth/sendEmail";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
@@ -63,7 +63,7 @@ export const POST = async (req: NextRequest) => {
 };
 
 export const GET = async (req: NextRequest) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(

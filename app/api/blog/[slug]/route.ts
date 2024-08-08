@@ -3,7 +3,7 @@ import { connectDatabase } from "@/database/database";
 import { NextResponse, type NextRequest } from "next/server";
 import slugify from "slugify";
 import cloudinary from "@/utilities/general/cloudinary";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const GET = async (
   req: NextRequest,
@@ -47,7 +47,7 @@ export const PATCH = async (
 ) => {
   const body = await req.json();
 
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(
@@ -104,7 +104,7 @@ export const DELETE = async (
   req: NextRequest,
   { params }: { params: { slug: string } }
 ) => {
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session || session.user.role !== "admin") {
     return NextResponse.json(

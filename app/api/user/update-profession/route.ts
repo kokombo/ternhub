@@ -1,11 +1,11 @@
 import User from "@/models/user";
 import { NextResponse, type NextRequest } from "next/server";
 import { connectDatabase } from "@/database/database";
-import { getCurrentServerSession } from "@/utilities/auth/getCurrentServerSession";
+import { getServerSession } from "@/utilities/auth/getServerSession";
 
 export const PUT = async (req: NextRequest) => {
   const profession = await req.json();
-  const session = await getCurrentServerSession();
+  const session = await getServerSession();
 
   if (!session)
     return NextResponse.json(
