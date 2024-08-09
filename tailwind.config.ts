@@ -6,6 +6,7 @@ const config: Config = {
     "./containers/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{ts,tsx}",
   ],
   safelist: ["outline-purple, text-red, lg:w-[556px] lg:w-[300px]"],
   theme: {
