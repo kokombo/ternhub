@@ -1,17 +1,19 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { JobsFilter } from "@/components";
 import { JobsList } from "@/containers";
 import { useGetAllJobs } from "@/utilities/data-fetching/getAllJobs";
 import { useJobQueriesFromLocalStorage } from "@/utilities/general/useJobQueriesFromLocalStorage";
 import { illustrations } from "@/constants";
 import { useSetToLocalStorage } from "@/utilities/hooks";
+import { useSearchParams } from "next/navigation";
 
 const JobsPage = () => {
   const { page, mode, type, category } = useJobQueriesFromLocalStorage(
     "userQueriesInJobsPage"
   );
+  const searchParams = useSearchParams();
 
   const initialQueryTerms = useMemo(
     () => ({
