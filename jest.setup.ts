@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { TextEncoder, TextDecoder } from "util";
+import { TextEncoder, TextDecoder } from "node:util";
 // import { SessionProvider } from "next-auth/react";
 
 // import { server } from "./mocks/server";
@@ -17,7 +17,6 @@ jest.mock("next-auth/react", () => {
   return {
     __esModule: true,
     ...originalModule,
-
     useSession: jest.fn(() => {
       return { data: mockSession, status: "authenticated" };
     }),

@@ -1,9 +1,6 @@
 import type { Config } from "jest";
 import nextJest from "next/jest.js";
 
-TextDecoder = require("util").TextDecoder;
-TextEncoder = require("util").TextEncoder;
-
 const createJestConfig = nextJest({
   dir: "./",
 });
