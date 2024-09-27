@@ -64,7 +64,7 @@ const TrendingJobs = () => {
                 position: "top-right",
               })
         }
-        extraClasses="self-center blue_button"
+        className="self-center blue_button"
       />
     </section>
   );

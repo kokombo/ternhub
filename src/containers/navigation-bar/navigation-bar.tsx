@@ -56,7 +56,7 @@ const NavigationBar = ({ session }: { session: Session | null }) => {
                 label="Sign up"
                 url="/auth/signup"
                 arialabel="Link to the signup page"
-                extraClasses="signup_button"
+                className="signup_button"
               />
             </div>
           )}

@@ -32,7 +32,7 @@ const LandingPageBlogs = () => {
         label="View more blogs"
         arialabel="Landing page link to all blogs page"
         url="/blogs"
-        extraClasses="self-center blue_button"
+        className="self-center blue_button"
         prefetch={true}
       />
     </section>

@@ -5,7 +5,7 @@ type Props = {
   label: string;
   arialabel: string;
   prefetch?: boolean;
-  extraClasses?: string;
+  className?: string;
   onClick?: () => void;
 };
 
@@ -14,7 +14,7 @@ const StyledLink = (props: Props) => {
     <Link
       href={props.url}
       aria-label={props.arialabel}
-      className={`${props.extraClasses}`}
+      className={className}
       prefetch={props.prefetch}
       onClick={props.onClick}
     >

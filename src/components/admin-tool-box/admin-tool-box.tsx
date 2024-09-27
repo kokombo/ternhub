@@ -16,7 +16,7 @@ const AdminToolBox = (props: Props) => {
         url={props.editButtonUrl}
         label={props.editButtonLabel}
         arialabel={props.editButtonLabel}
-        extraClasses="blue_button"
+        className="blue_button"
       />
 
       <button
