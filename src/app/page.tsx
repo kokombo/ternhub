@@ -12,14 +12,14 @@ const Home = async () => {
   const session = await getServerSession();
 
   return (
-    <main className="w-full">
+    <div className="w-full">
       <NavigationBar session={session} />
       <Hero />
       <TrendingJobs />
       <LandingPageBlogs />
       <Faqs />
       <Footer />
-    </main>
+    </div>
   );
 };
 

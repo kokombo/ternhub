@@ -4,9 +4,9 @@ import { AdminToolBox } from "@/components";
 const AdminJobInfoPage = ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) => {
-  const jobId = searchParams.listing_id as string;
+  const jobId = searchParams.listing_id 
 
   return (
     <div className="py-11 sm:px-[6.94%] px-5 flex flex-col gap-4">

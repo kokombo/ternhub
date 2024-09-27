@@ -8,9 +8,9 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <div>
       <AdminSegmentNavbar />
       {children}
-    </main>
+    </div>
   );
 }

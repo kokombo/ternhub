@@ -9,7 +9,7 @@ import { illustrations } from "@/constants";
 import { useGetJobById } from "@/utilities/data-fetching/getJobById";
 
 type Props = {
-  jobId: string;
+  jobId: string | undefined;
 };
 
 const JobInfopage = ({ jobId }: Props) => {

@@ -5,7 +5,7 @@ const Profile = async () => {
   const session = await getServerSession();
 
   return (
-    <main className="padding grid place-items-center">
+    <div className="padding grid place-items-center">
       <section className="flex_center gap-8">
         <UploadProfilePicture />
 
@@ -37,7 +37,7 @@ const Profile = async () => {
           </span>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 
