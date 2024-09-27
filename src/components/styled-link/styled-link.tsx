@@ -14,7 +14,7 @@ const StyledLink = (props: Props) => {
     <Link
       href={props.url}
       aria-label={props.arialabel}
-      className={className}
+      className={props.className}
       prefetch={props.prefetch}
       onClick={props.onClick}
     >
